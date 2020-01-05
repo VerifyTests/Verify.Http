@@ -8,6 +8,7 @@ using Xunit.Abstractions;
 public class MyControllerTests :
     VerifyBase
 {
+    #region MyControllerTest
     [Fact]
     public Task Test()
     {
@@ -28,6 +29,7 @@ public class MyControllerTests :
                 context
             });
     }
+    #endregion
 
     public MyControllerTests(ITestOutputHelper output) :
         base(output)

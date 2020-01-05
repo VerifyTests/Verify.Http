@@ -87,47 +87,31 @@ public class MyController :
 
 This test:
 
-<!-- snippet: MyControllerTests.cs -->
-<a id='snippet-MyControllerTests.cs'/></a>
+<!-- snippet: MyControllerTest -->
+<a id='snippet-mycontrollertest'/></a>
 ```cs
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using VerifyXunit;
-using Xunit;
-using Xunit.Abstractions;
-
-public class MyControllerTests :
-    VerifyBase
+[Fact]
+public Task Test()
 {
-    [Fact]
-    public Task Test()
+    var context = new ControllerContext
     {
-        var context = new ControllerContext
-        {
-            HttpContext = new DefaultHttpContext()
-        };
-        var controller = new MyController
-        {
-            ControllerContext = context
-        };
-
-        var result = controller.Method("inputValue");
-        return Verify(
-            new
-            {
-                result,
-                context
-            });
-    }
-
-    public MyControllerTests(ITestOutputHelper output) :
-        base(output)
+        HttpContext = new DefaultHttpContext()
+    };
+    var controller = new MyController
     {
-    }
+        ControllerContext = context
+    };
+
+    var result = controller.Method("inputValue");
+    return Verify(
+        new
+        {
+            result,
+            context
+        });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L1-L36' title='File snippet `MyControllerTests.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyControllerTests.cs' title='Navigate to start of snippet `MyControllerTests.cs`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L11-L32' title='File snippet `mycontrollertest` was extracted from'>snippet source</a> | <a href='#snippet-mycontrollertest' title='Navigate to start of snippet `mycontrollertest`'>anchor</a></sup>
 <!-- endsnippet -->
 
 Will result in the following verified file:
@@ -178,6 +162,7 @@ public class MyMiddleware
     {
         this.next = next;
     }
+
     public async Task Invoke(HttpContext context)
     {
         context.Response.Headers.Add("headerKey", "headerValue");
@@ -185,52 +170,37 @@ public class MyMiddleware
     }
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L17' title='File snippet `MyMiddleware.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddleware.cs' title='Navigate to start of snippet `MyMiddleware.cs`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L18' title='File snippet `MyMiddleware.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddleware.cs' title='Navigate to start of snippet `MyMiddleware.cs`'>anchor</a></sup>
 <!-- endsnippet -->
 
 This test:
 
-<!-- snippet: MyMiddlewareTests.cs -->
-<a id='snippet-MyMiddlewareTests.cs'/></a>
+<!-- snippet: MyMiddlewareTest -->
+<a id='snippet-mymiddlewaretest'/></a>
 ```cs
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using VerifyXunit;
-using Xunit;
-using Xunit.Abstractions;
-
-public class MyMiddlewareTests :
-    VerifyBase
+[Fact]
+public async Task Test()
 {
-    [Fact]
-    public async Task Test()
-    {
-        var nextCalled = false;
-        var middleware = new MyMiddleware(
-            _ =>
-            {
-                nextCalled = true;
-                return Task.CompletedTask;
-            });
+    var nextCalled = false;
+    var middleware = new MyMiddleware(
+        _ =>
+        {
+            nextCalled = true;
+            return Task.CompletedTask;
+        });
 
-        var context = new DefaultHttpContext();
-        await middleware.Invoke(context);
+    var context = new DefaultHttpContext();
+    await middleware.Invoke(context);
 
-        await Verify(
-            new
-            {
-                context.Response,
-                nextCalled
-            });
-    }
-
-    public MyMiddlewareTests(ITestOutputHelper output) :
-        base(output)
-    {
-    }
+    await Verify(
+        new
+        {
+            context.Response,
+            nextCalled
+        });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L1-L36' title='File snippet `MyMiddlewareTests.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.cs' title='Navigate to start of snippet `MyMiddlewareTests.cs`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L10-L32' title='File snippet `mymiddlewaretest` was extracted from'>snippet source</a> | <a href='#snippet-mymiddlewaretest' title='Navigate to start of snippet `mymiddlewaretest`'>anchor</a></sup>
 <!-- endsnippet -->
 
 Will result in the following verified file:

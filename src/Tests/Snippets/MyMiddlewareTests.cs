@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 public class MyMiddlewareTests :
     VerifyBase
 {
+    #region MyMiddlewareTest
     [Fact]
     public async Task Test()
     {
@@ -28,6 +29,7 @@ public class MyMiddlewareTests :
                 nextCalled
             });
     }
+    #endregion
 
     public MyMiddlewareTests(ITestOutputHelper output) :
         base(output)

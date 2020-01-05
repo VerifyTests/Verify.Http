@@ -31,7 +31,7 @@ snippet: MyController.cs
 
 This test:
 
-snippet: MyControllerTests.cs
+snippet: MyControllerTest
 
 Will result in the following verified file:
 
@@ -47,7 +47,7 @@ snippet: MyMiddleware.cs
 
 This test:
 
-snippet: MyMiddlewareTests.cs
+snippet: MyMiddlewareTest
 
 Will result in the following verified file:
 

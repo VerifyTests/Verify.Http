@@ -9,6 +9,7 @@ public class MyMiddleware
     {
         this.next = next;
     }
+
     public async Task Invoke(HttpContext context)
     {
         context.Response.Headers.Add("headerKey", "headerValue");
