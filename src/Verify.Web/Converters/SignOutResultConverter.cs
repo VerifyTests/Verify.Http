@@ -2,10 +2,10 @@
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 
-class ChallengeResultConverter :
-    ResultConverter<ChallengeResult>
+class SignOutResultConverter :
+    ResultConverter<SignOutResult>
 {
-    protected override void InnerWrite(JsonWriter writer, ChallengeResult result, JsonSerializer serializer)
+    protected override void InnerWrite(JsonWriter writer, SignOutResult result, JsonSerializer serializer)
     {
         if (result.AuthenticationSchemes.Count == 1)
         {
@@ -17,8 +17,12 @@ class ChallengeResultConverter :
             writer.WritePropertyName("Schemes");
             serializer.Serialize(writer, result.AuthenticationSchemes);
         }
-
-        writer.WritePropertyName("Properties");
-        serializer.Serialize(writer, result.Properties.Items);
+        //TODO: Claims
+        //serializer.Serialize(writer, result.Principal.Claims);
+        if (result.Properties.Items.Any())
+        {
+            writer.WritePropertyName("Properties");
+            serializer.Serialize(writer, result.Properties.Items);
+        }
     }
 }

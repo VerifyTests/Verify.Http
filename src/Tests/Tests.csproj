@@ -20,9 +20,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <None Update="Tests.Test.verified.txt">
-      <DependentUpon>Tests.cs</DependentUpon>
-    </None>
-  </ItemGroup>
 </Project>

@@ -73,7 +73,7 @@ PageResult
         return VerifyResult(result);
     }
 
-    private Task VerifyResult(ActionResult result)
+    Task VerifyResult(ActionResult result)
     {
         return Verify(
             new
