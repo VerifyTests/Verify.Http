@@ -5,9 +5,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Converters\PhysicalFileResultConverter.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Verify" Version="1.8.0" />
     <PackageReference Include="ProjectDefaults" Version="1.0.39" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
