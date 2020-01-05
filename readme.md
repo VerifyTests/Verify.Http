@@ -12,8 +12,6 @@ To change this file edit the source file and then run MarkdownSnippets.
 
 Extends [Verify](https://github.com/SimonCropp/Verify) to allow verification of web bits.
 
-Converts documents (pdf, docx, xslx, and pptx) to png for verification.
-
 
 <!-- toc -->
 ## Contents
