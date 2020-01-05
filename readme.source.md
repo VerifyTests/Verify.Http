@@ -38,6 +38,22 @@ Will result in the following verified file:
 snippet: MyControllerTests.Test.verified.txt
 
 
+
+### Middleware
+
+Given the following middleware:
+
+snippet: MyMiddleware.cs
+
+This test:
+
+snippet: MyMiddlewareTests.cs
+
+Will result in the following verified file:
+
+snippet: MyMiddlewareTests.Test.verified.txt
+
+
 ## Icon
 
 [Swirl](https://thenounproject.com/term/spider/904683/) designed by [marialuisa iborra](https://thenounproject.com/marialuisa.iborra/) from [The Noun Project](https://thenounproject.com/creativepriyanka).

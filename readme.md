@@ -19,7 +19,8 @@ Converts documents (pdf, docx, xslx, and pptx) to png for verification.
 ## Contents
 
   * [Usage](#usage)
-    * [Controller](#controller)<!-- endtoc -->
+    * [Controller](#controller)
+    * [Middleware](#middleware)<!-- endtoc -->
 
 
 ## NuGet package
@@ -158,6 +159,98 @@ Will result in the following verified file:
 <!-- endsnippet -->
 
 
+
+### Middleware
+
+Given the following middleware:
+
+<!-- snippet: MyMiddleware.cs -->
+<a id='snippet-MyMiddleware.cs'/></a>
+```cs
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+
+public class MyMiddleware
+{
+    RequestDelegate next;
+
+    public MyMiddleware(RequestDelegate next)
+    {
+        this.next = next;
+    }
+    public async Task Invoke(HttpContext context)
+    {
+        context.Response.Headers.Add("headerKey", "headerValue");
+        await next(context);
+    }
+}
+```
+<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L17' title='File snippet `MyMiddleware.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddleware.cs' title='Navigate to start of snippet `MyMiddleware.cs`'>anchor</a></sup>
+<!-- endsnippet -->
+
+This test:
+
+<!-- snippet: MyMiddlewareTests.cs -->
+<a id='snippet-MyMiddlewareTests.cs'/></a>
+```cs
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using VerifyXunit;
+using Xunit;
+using Xunit.Abstractions;
+
+public class MyMiddlewareTests :
+    VerifyBase
+{
+    [Fact]
+    public async Task Test()
+    {
+        var nextCalled = false;
+        var middleware = new MyMiddleware(
+            _ =>
+            {
+                nextCalled = true;
+                return Task.CompletedTask;
+            });
+
+        var context = new DefaultHttpContext();
+        await middleware.Invoke(context);
+
+        await Verify(
+            new
+            {
+                context.Response,
+                nextCalled
+            });
+    }
+
+    public MyMiddlewareTests(ITestOutputHelper output) :
+        base(output)
+    {
+    }
+}
+```
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L1-L36' title='File snippet `MyMiddlewareTests.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.cs' title='Navigate to start of snippet `MyMiddlewareTests.cs`'>anchor</a></sup>
+<!-- endsnippet -->
+
+Will result in the following verified file:
+
+<!-- snippet: MyMiddlewareTests.Test.verified.txt -->
+<a id='snippet-MyMiddlewareTests.Test.verified.txt'/></a>
+```txt
+{
+  Response: {
+    Headers: {
+      headerKey: 'headerValue'
+    }
+  },
+  nextCalled: true
+}
+```
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='File snippet `MyMiddlewareTests.Test.verified.txt` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.Test.verified.txt' title='Navigate to start of snippet `MyMiddlewareTests.Test.verified.txt`'>anchor</a></sup>
+<!-- endsnippet -->
+
+
 ## Icon
 
-[Swirl](https://thenounproject.com/term/swirl/1568686/) designed by [creativepriyanka](https://thenounproject.com/creativepriyanka) from [The Noun Project](https://thenounproject.com/creativepriyanka).
+[Swirl](https://thenounproject.com/term/spider/904683/) designed by [marialuisa iborra](https://thenounproject.com/marialuisa.iborra/) from [The Noun Project](https://thenounproject.com/creativepriyanka).

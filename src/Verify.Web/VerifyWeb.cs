@@ -9,10 +9,11 @@
                 settings.AddExtraSettings(serializer =>
                 {
                     var converters = serializer.Converters;
-                    converters.Add(new ControllerContextConverter());
+                    converters.Add(new HttpResponseConverter());
                     converters.Add(new ChallengeResultConverter());
                     converters.Add(new ActionResultConverter());
                     converters.Add(new ContentResultConverter());
+                    converters.Add(new ControllerContextConverter());
                     converters.Add(new EmptyResultConverter());
                     converters.Add(new FileContentResultConverter());
                     converters.Add(new FileStreamResultConverter());
