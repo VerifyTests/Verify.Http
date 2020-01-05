@@ -10,6 +10,7 @@
                 {
                     var converters = serializer.Converters;
                     converters.Add(new ControllerContextConverter());
+                    converters.Add(new ChallengeResultConverter());
                     converters.Add(new ActionResultConverter());
                 });
             });

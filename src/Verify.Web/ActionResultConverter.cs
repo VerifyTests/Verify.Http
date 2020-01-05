@@ -14,12 +14,9 @@ class ActionResultConverter :
             return;
         }
 
-        //writer.WriteStartObject();
         var property = action.GetType().GetProperty("Value", BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.Public);
         var value = property!.GetValue(action);
         serializer.Serialize(writer, value);
-
-        //writer.WriteEndObject();
     }
 
     public override bool CanConvert(Type type)
