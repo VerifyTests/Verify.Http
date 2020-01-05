@@ -15,5 +15,6 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <ProjectReference Include="..\Verify.Web\Verify.Web.csproj" />
     <PackageReference Include="ProjectDefaults" Version="1.0.39" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
   </ItemGroup>
 </Project>
