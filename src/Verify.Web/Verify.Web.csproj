@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
     <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Verify" Version="1.8.0" />
