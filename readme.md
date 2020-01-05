@@ -134,9 +134,27 @@ Will result in the following verified file:
 <!-- snippet: MyControllerTests.Test.verified.txt -->
 <a id='snippet-MyControllerTests.Test.verified.txt'/></a>
 ```txt
-
+{
+  result: [
+    {
+      Value: 'Value1'
+    },
+    {
+      Value: 'Value2'
+    }
+  ],
+  context: {
+    Headers: {
+      headerKey: 'headerValue',
+      receivedInput: 'inputValue'
+    },
+    Cookies: {
+      cookieKey: 'cookieValue'
+    }
+  }
+}
 ```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.Test.verified.txt#L1-L1' title='File snippet `MyControllerTests.Test.verified.txt` was extracted from'>snippet source</a> | <a href='#snippet-MyControllerTests.Test.verified.txt' title='Navigate to start of snippet `MyControllerTests.Test.verified.txt`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyControllerTests.Test.verified.txt#L1-L19' title='File snippet `MyControllerTests.Test.verified.txt` was extracted from'>snippet source</a> | <a href='#snippet-MyControllerTests.Test.verified.txt' title='Navigate to start of snippet `MyControllerTests.Test.verified.txt`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
