@@ -6,9 +6,9 @@
         {
             SharedVerifySettings.ModifySerialization(settings =>
             {
-                settings.AddExtraSettings(serializerSettings =>
+                settings.AddExtraSettings(serializer =>
                 {
-                    var converters = serializerSettings.Converters;
+                    var converters = serializer.Converters;
                     converters.Add(new ControllerContextConverter());
                     converters.Add(new ActionResultConverter());
                 });
