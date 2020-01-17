@@ -18,7 +18,8 @@ Extends [Verify](https://github.com/SimonCropp/Verify) to allow verification of 
 
   * [Usage](#usage)
     * [Controller](#controller)
-    * [Middleware](#middleware)<!-- endtoc -->
+    * [Middleware](#middleware)
+  * [Security contact information](#security-contact-information)<!-- endtoc -->
 
 
 ## NuGet package
@@ -217,6 +218,16 @@ Will result in the following verified file:
 ```
 <sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='File snippet `MyMiddlewareTests.Test.verified.txt` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.Test.verified.txt' title='Navigate to start of snippet `MyMiddlewareTests.Test.verified.txt`'>anchor</a></sup>
 <!-- endsnippet -->
+
+
+## Security contact information
+
+To report a security vulnerability, please use the [Tidelift security contact](https://tidelift.com/security). Tidelift will coordinate the fix and disclosure.
+
+
+## Release Notes
+
+See [closed milestones](../../milestones?state=closed).
 
 
 ## Icon
