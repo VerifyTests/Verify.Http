@@ -7,10 +7,10 @@ To change this file edit the source file and then run MarkdownSnippets.
 
 # <img src="/src/icon.png" height="30px"> Verify.Web
 
-[![Build status](https://ci.appveyor.com/api/projects/status/eedjhmx5o3082tyq?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-web)
+[![Build status](https://ci.appveyor.com/api/projects/status/eedjhmx5o3082tyq?svg=true)](https://ci.appveyor.com/project/VerifyTests/verify-web)
 [![NuGet Status](https://img.shields.io/nuget/v/Verify.Web.svg)](https://www.nuget.org/packages/Verify.Web/)
 
-Extends [Verify](https://github.com/SimonCropp/Verify) to allow verification of web bits.
+Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of web bits.
 
 Support is available via a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-verify.web?utm_source=nuget-verify.web&utm_medium=referral&utm_campaign=enterprise).
 
