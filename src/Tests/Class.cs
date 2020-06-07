@@ -1,10 +1,8 @@
 ﻿using Verify.Web;
-using Xunit;
 
-[GlobalSetUp]
-public static class GlobalSetup
+public static class ModuleInitializer
 {
-    public static void Setup()
+    public static void Initialize()
     {
         #region Enable
         VerifyWeb.Enable();

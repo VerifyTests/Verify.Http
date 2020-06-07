@@ -80,9 +80,4 @@ PageResult
                 result
             });
     }
-
-    public Tests(ITestOutputHelper output) :
-        base(output)
-    {
-    }
 }
