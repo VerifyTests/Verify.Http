@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using VerifyXunit;
-using Xunit;
-using Xunit.Abstractions;
+using VerifyNUnit;
+using NUnit.Framework;
 
-public class MyMiddlewareTests :
-    VerifyBase
+[TestFixture]
+public class MyMiddlewareTests
 {
     #region MyMiddlewareTest
-    [Fact]
+    [Test]
     public async Task Test()
     {
         var nextCalled = false;
@@ -22,7 +21,7 @@ public class MyMiddlewareTests :
         var context = new DefaultHttpContext();
         await middleware.Invoke(context);
 
-        await Verify(
+        await Verifier.Verify(
             new
             {
                 context.Response,
@@ -30,9 +29,4 @@ public class MyMiddlewareTests :
             });
     }
     #endregion
-
-    public MyMiddlewareTests(ITestOutputHelper output) :
-        base(output)
-    {
-    }
 }

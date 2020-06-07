@@ -2,12 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using VerifyXunit;
-using Xunit;
-using Xunit.Abstractions;
+using VerifyNUnit;
+using NUnit.Framework;
 
-public class Tests :
-    VerifyBase
+[TestFixture]
+public class Tests
 {
     /**
 
@@ -60,7 +59,7 @@ ViewComponentResult
 ViewResult
 PageResult
     **/
-    [Fact]
+    [Test]
     public Task ChallengeResult()
     {
         var result = new ChallengeResult(
@@ -75,7 +74,7 @@ PageResult
 
     Task VerifyResult(ActionResult result)
     {
-        return Verify(
+        return Verifier.Verify(
             new
             {
                 result
