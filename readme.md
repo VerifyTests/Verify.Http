@@ -37,7 +37,7 @@ Enable VerifyWeb once at assembly load time:
 ```cs
 VerifyWeb.Enable();
 ```
-<sup><a href='/src/Tests/Class.cs#L7-L9' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInitializer.cs#L7-L9' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
