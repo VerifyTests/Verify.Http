@@ -90,7 +90,7 @@ This test:
 <!-- snippet: MyControllerTest -->
 <a id='snippet-mycontrollertest'/></a>
 ```cs
-[Fact]
+[Test]
 public Task Test()
 {
     var context = new ControllerContext
@@ -103,7 +103,7 @@ public Task Test()
     };
 
     var result = controller.Method("inputValue");
-    return Verify(
+    return Verifier.Verify(
         new
         {
             result,
@@ -111,7 +111,7 @@ public Task Test()
         });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L11-L32' title='File snippet `mycontrollertest` was extracted from'>snippet source</a> | <a href='#snippet-mycontrollertest' title='Navigate to start of snippet `mycontrollertest`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L10-L31' title='File snippet `mycontrollertest` was extracted from'>snippet source</a> | <a href='#snippet-mycontrollertest' title='Navigate to start of snippet `mycontrollertest`'>anchor</a></sup>
 <!-- endsnippet -->
 
 Will result in the following verified file:
@@ -178,7 +178,7 @@ This test:
 <!-- snippet: MyMiddlewareTest -->
 <a id='snippet-mymiddlewaretest'/></a>
 ```cs
-[Fact]
+[Test]
 public async Task Test()
 {
     var nextCalled = false;
@@ -192,7 +192,7 @@ public async Task Test()
     var context = new DefaultHttpContext();
     await middleware.Invoke(context);
 
-    await Verify(
+    await Verifier.Verify(
         new
         {
             context.Response,
@@ -200,7 +200,7 @@ public async Task Test()
         });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L10-L32' title='File snippet `mymiddlewaretest` was extracted from'>snippet source</a> | <a href='#snippet-mymiddlewaretest' title='Navigate to start of snippet `mymiddlewaretest`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L9-L31' title='File snippet `mymiddlewaretest` was extracted from'>snippet source</a> | <a href='#snippet-mymiddlewaretest' title='Navigate to start of snippet `mymiddlewaretest`'>anchor</a></sup>
 <!-- endsnippet -->
 
 Will result in the following verified file:
