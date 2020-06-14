@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Newtonsoft.Json;
-using Verify;
+using VerifyTests;
 using Microsoft.AspNetCore.Mvc;
 
 class ActionResultConverter :

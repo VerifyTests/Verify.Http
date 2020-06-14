@@ -1,10 +1,12 @@
-﻿namespace Verify.Web
+﻿using VerifyTests;
+
+namespace Verify.Web
 {
     public static class VerifyWeb
     {
         public static void Enable()
         {
-            SharedVerifySettings.ModifySerialization(settings =>
+            VerifierSettings.ModifySerialization(settings =>
             {
                 settings.AddExtraSettings(serializer =>
                 {

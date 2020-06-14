@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
-using Verify;
+using VerifyTests;
 
 class HttpResponseConverter :
     WriteOnlyJsonConverter<HttpResponse>

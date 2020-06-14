@@ -12,7 +12,7 @@
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="19.0.0" PrivateAssets="all" />
     <PackageReference Include="NUnit" Version="3.13.0-dev-06803" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
-    <PackageReference Include="Verify.NUnit" Version="4.3.1" />
+    <PackageReference Include="Verify.NUnit" Version="5.0.0-beta.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <ProjectReference Include="..\Verify.Web\Verify.Web.csproj" />
     <PackageReference Include="ProjectDefaults" Version="1.0.43" PrivateAssets="All" />
