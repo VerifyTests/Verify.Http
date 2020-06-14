@@ -1,6 +1,4 @@
-﻿using VerifyTests;
-
-namespace Verify.Web
+﻿namespace VerifyTests
 {
     public static class VerifyWeb
     {

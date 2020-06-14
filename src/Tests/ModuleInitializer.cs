@@ -1,4 +1,4 @@
-﻿using Verify.Web;
+﻿using VerifyTests;
 
 public static class ModuleInitializer
 {
