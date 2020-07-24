@@ -5,7 +5,7 @@
 
 Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of web bits.
 
-Support is available via a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-verify.web?utm_source=nuget-verify.web&utm_medium=referral&utm_campaign=enterprise).
+Support is available via a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-verify?utm_source=nuget-verify&utm_medium=referral&utm_campaign=enterprise).
 
 toc
 
