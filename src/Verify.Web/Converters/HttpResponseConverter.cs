@@ -37,7 +37,7 @@ class HttpResponseConverter :
                 var stringSegment = x.Value.Single();
                 return SetCookieHeaderValue.Parse(stringSegment);
             })
-            .ToDictionary(x=>x.Name.Value,x=>x.Value.Value);
+            .ToDictionary(x => x.Name.Value, x => x.Value.Value);
         if (!cookies.Any())
         {
             return;
