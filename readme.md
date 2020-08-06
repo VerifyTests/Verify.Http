@@ -36,7 +36,7 @@ https://nuget.org/packages/Verify.Web/
 Enable VerifyWeb once at assembly load time:
 
 <!-- snippet: Enable -->
-<a id='snippet-enable'/></a>
+<a id='snippet-enable'></a>
 ```cs
 VerifyWeb.Enable();
 ```
@@ -49,7 +49,7 @@ VerifyWeb.Enable();
 Given the following controller:
 
 <!-- snippet: MyController.cs -->
-<a id='snippet-MyController.cs'/></a>
+<a id='snippet-MyController.cs'></a>
 ```cs
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -91,7 +91,7 @@ public class MyController :
 This test:
 
 <!-- snippet: MyControllerTest -->
-<a id='snippet-mycontrollertest'/></a>
+<a id='snippet-mycontrollertest'></a>
 ```cs
 [Test]
 public Task Test()
@@ -120,7 +120,7 @@ public Task Test()
 Will result in the following verified file:
 
 <!-- snippet: MyControllerTests.Test.verified.txt -->
-<a id='snippet-MyControllerTests.Test.verified.txt'/></a>
+<a id='snippet-MyControllerTests.Test.verified.txt'></a>
 ```txt
 {
   result: [
@@ -152,7 +152,7 @@ Will result in the following verified file:
 Given the following middleware:
 
 <!-- snippet: MyMiddleware.cs -->
-<a id='snippet-MyMiddleware.cs'/></a>
+<a id='snippet-MyMiddleware.cs'></a>
 ```cs
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -179,7 +179,7 @@ public class MyMiddleware
 This test:
 
 <!-- snippet: MyMiddlewareTest -->
-<a id='snippet-mymiddlewaretest'/></a>
+<a id='snippet-mymiddlewaretest'></a>
 ```cs
 [Test]
 public async Task Test()
@@ -209,7 +209,7 @@ public async Task Test()
 Will result in the following verified file:
 
 <!-- snippet: MyMiddlewareTests.Test.verified.txt -->
-<a id='snippet-MyMiddlewareTests.Test.verified.txt'/></a>
+<a id='snippet-MyMiddlewareTests.Test.verified.txt'></a>
 ```txt
 {
   Response: {
