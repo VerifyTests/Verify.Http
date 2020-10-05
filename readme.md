@@ -40,7 +40,7 @@ Enable VerifyWeb once at assembly load time:
 ```cs
 VerifyWeb.Enable();
 ```
-<sup><a href='/src/Tests/ModuleInitializer.cs#L7-L9' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInitializer.cs#L7-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -85,7 +85,7 @@ public class MyController :
     }
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyController.cs#L1-L33' title='File snippet `MyController.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyController.cs' title='Navigate to start of snippet `MyController.cs`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyController.cs#L1-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyController.cs' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 This test:
@@ -114,7 +114,7 @@ public Task Test()
         });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L10-L31' title='File snippet `mycontrollertest` was extracted from'>snippet source</a> | <a href='#snippet-mycontrollertest' title='Navigate to start of snippet `mycontrollertest`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L10-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-mycontrollertest' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Will result in the following verified file:
@@ -142,7 +142,7 @@ Will result in the following verified file:
   }
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.Test.verified.txt#L1-L19' title='File snippet `MyControllerTests.Test.verified.txt` was extracted from'>snippet source</a> | <a href='#snippet-MyControllerTests.Test.verified.txt' title='Navigate to start of snippet `MyControllerTests.Test.verified.txt`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyControllerTests.Test.verified.txt#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyControllerTests.Test.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -173,7 +173,7 @@ public class MyMiddleware
     }
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L18' title='File snippet `MyMiddleware.cs` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddleware.cs' title='Navigate to start of snippet `MyMiddleware.cs`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyMiddleware.cs' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 This test:
@@ -203,7 +203,7 @@ public async Task Test()
         });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L9-L31' title='File snippet `mymiddlewaretest` was extracted from'>snippet source</a> | <a href='#snippet-mymiddlewaretest' title='Navigate to start of snippet `mymiddlewaretest`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L9-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-mymiddlewaretest' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Will result in the following verified file:
@@ -220,7 +220,7 @@ Will result in the following verified file:
   nextCalled: true
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='File snippet `MyMiddlewareTests.Test.verified.txt` was extracted from'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.Test.verified.txt' title='Navigate to start of snippet `MyMiddlewareTests.Test.verified.txt`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.Test.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
