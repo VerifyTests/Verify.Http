@@ -36,11 +36,11 @@ https://nuget.org/packages/Verify.Web/
 Enable VerifyWeb once at assembly load time:
 
 <!-- snippet: Enable -->
-<a id='9905c339'></a>
+<a id='enable'></a>
 ```cs
 VerifyWeb.Enable();
 ```
-<sup><a href='/src/Tests/ModuleInitializer.cs#L7-L9' title='Snippet source file'>snippet source</a> | <a href='#9905c339' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInitializer.cs#L7-L9' title='Snippet source file'>snippet source</a> | <a href='#enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -49,7 +49,7 @@ VerifyWeb.Enable();
 Given the following controller:
 
 <!-- snippet: MyController.cs -->
-<a id='8ace12aa'></a>
+<a id='MyController.cs'></a>
 ```cs
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -85,13 +85,13 @@ public class MyController :
     }
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyController.cs#L1-L33' title='Snippet source file'>snippet source</a> | <a href='#8ace12aa' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyController.cs#L1-L33' title='Snippet source file'>snippet source</a> | <a href='#MyController.cs' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 This test:
 
 <!-- snippet: MyControllerTest -->
-<a id='bd260238'></a>
+<a id='mycontrollertest'></a>
 ```cs
 [Test]
 public Task Test()
@@ -114,13 +114,13 @@ public Task Test()
         });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L10-L31' title='Snippet source file'>snippet source</a> | <a href='#bd260238' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L10-L31' title='Snippet source file'>snippet source</a> | <a href='#mycontrollertest' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Will result in the following verified file:
 
 <!-- snippet: MyControllerTests.Test.verified.txt -->
-<a id='60361f00'></a>
+<a id='MyControllerTests.Test.verified.txt'></a>
 ```txt
 {
   result: [
@@ -142,7 +142,7 @@ Will result in the following verified file:
   }
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.Test.verified.txt#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#60361f00' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyControllerTests.Test.verified.txt#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#MyControllerTests.Test.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -152,7 +152,7 @@ Will result in the following verified file:
 Given the following middleware:
 
 <!-- snippet: MyMiddleware.cs -->
-<a id='f87a70c8'></a>
+<a id='MyMiddleware.cs'></a>
 ```cs
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -173,13 +173,13 @@ public class MyMiddleware
     }
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#f87a70c8' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#MyMiddleware.cs' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 This test:
 
 <!-- snippet: MyMiddlewareTest -->
-<a id='2c2b1204'></a>
+<a id='mymiddlewaretest'></a>
 ```cs
 [Test]
 public async Task Test()
@@ -203,13 +203,13 @@ public async Task Test()
         });
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L9-L31' title='Snippet source file'>snippet source</a> | <a href='#2c2b1204' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L9-L31' title='Snippet source file'>snippet source</a> | <a href='#mymiddlewaretest' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Will result in the following verified file:
 
 <!-- snippet: MyMiddlewareTests.Test.verified.txt -->
-<a id='2b8281d6'></a>
+<a id='MyMiddlewareTests.Test.verified.txt'></a>
 ```txt
 {
   Response: {
@@ -220,7 +220,7 @@ Will result in the following verified file:
   nextCalled: true
 }
 ```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#2b8281d6' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#MyMiddlewareTests.Test.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
