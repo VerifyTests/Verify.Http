@@ -1,9 +1,9 @@
 {
   result: {
-    ResultType: 'ChallengeResult',
-    Scheme: 'scheme',
+    ResultType: ChallengeResult,
+    Scheme: scheme,
     Properties: {
-      key: 'value'
+      key: value
     }
   }
 }

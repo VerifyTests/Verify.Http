@@ -1,19 +1,19 @@
 {
   result: [
     {
-      Value: 'Value1'
+      Value: Value1
     },
     {
-      Value: 'Value2'
+      Value: Value2
     }
   ],
   context: {
     Headers: {
-      headerKey: 'headerValue',
-      receivedInput: 'inputValue'
+      headerKey: headerValue,
+      receivedInput: inputValue
     },
     Cookies: {
-      cookieKey: 'cookieValue'
+      cookieKey: cookieValue
     }
   }
 }

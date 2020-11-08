@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using VerifyTests;
 using Microsoft.AspNetCore.Mvc;
 
 class ControllerContextConverter :
     WriteOnlyJsonConverter<ControllerContext>
 {
-    public override void WriteJson(JsonWriter writer, ControllerContext? context, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, ControllerContext? context, JsonSerializer serializer, IReadOnlyDictionary<string, object> verifyContext)
     {
         if (context == null)
         {
@@ -19,5 +20,4 @@ class ControllerContextConverter :
 
         writer.WriteEndObject();
     }
-
 }

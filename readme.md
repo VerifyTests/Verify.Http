@@ -33,7 +33,7 @@ Enable VerifyWeb once at assembly load time:
 ```cs
 VerifyWeb.Enable();
 ```
-<sup><a href='/src/Tests/ModuleInitializer.cs#L7-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInitializer.cs#L9-L11' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -118,19 +118,19 @@ Will result in the following verified file:
 {
   result: [
     {
-      Value: 'Value1'
+      Value: Value1
     },
     {
-      Value: 'Value2'
+      Value: Value2
     }
   ],
   context: {
     Headers: {
-      headerKey: 'headerValue',
-      receivedInput: 'inputValue'
+      headerKey: headerValue,
+      receivedInput: inputValue
     },
     Cookies: {
-      cookieKey: 'cookieValue'
+      cookieKey: cookieValue
     }
   }
 }
@@ -207,7 +207,7 @@ Will result in the following verified file:
 {
   Response: {
     Headers: {
-      headerKey: 'headerValue'
+      headerKey: headerValue
     }
   },
   nextCalled: true

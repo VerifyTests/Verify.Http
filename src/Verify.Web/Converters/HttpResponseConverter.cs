@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
@@ -7,7 +8,7 @@ using VerifyTests;
 class HttpResponseConverter :
     WriteOnlyJsonConverter<HttpResponse>
 {
-    public override void WriteJson(JsonWriter writer, HttpResponse? value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, HttpResponse? value, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
         if (value == null)
         {

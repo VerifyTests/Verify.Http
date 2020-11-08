@@ -65,7 +65,7 @@ PageResult
         var result = new ChallengeResult(
             "scheme",
             new AuthenticationProperties(
-                new Dictionary<string, string>
+                new Dictionary<string, string?>
                 {
                     {"key", "value"}
                 }));

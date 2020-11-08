@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Newtonsoft.Json;
 using VerifyTests;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 class ActionResultConverter :
     WriteOnlyJsonConverter
 {
-    public override void WriteJson(JsonWriter writer, object? action, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? action, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
         if (action == null)
         {
@@ -27,6 +28,6 @@ class ActionResultConverter :
         }
 
         var genericType = type.GetGenericTypeDefinition();
-        return genericType  == typeof(ActionResult<>);
+        return genericType == typeof(ActionResult<>);
     }
 }

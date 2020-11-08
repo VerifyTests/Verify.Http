@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using VerifyTests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ abstract class ResultConverter<T> :
     WriteOnlyJsonConverter<T>
     where T : ActionResult
 {
-    public override void WriteJson(JsonWriter writer, T? result, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, T? result, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
         if (result == null)
         {
