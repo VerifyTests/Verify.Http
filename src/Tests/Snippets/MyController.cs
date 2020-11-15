@@ -15,8 +15,8 @@ public class MyController :
 
         var items = new List<DataItem>
         {
-            new DataItem("Value1"),
-            new DataItem("Value2")
+            new("Value1"),
+            new("Value2")
         };
         return new ActionResult<List<DataItem>>(items);
     }
