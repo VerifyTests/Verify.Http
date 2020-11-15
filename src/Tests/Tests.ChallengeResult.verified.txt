@@ -1,9 +1,7 @@
 {
-  result: {
-    ResultType: ChallengeResult,
-    Scheme: scheme,
-    Properties: {
-      key: value
-    }
+  ResultType: ChallengeResult,
+  Scheme: scheme,
+  Properties: {
+    key: value
   }
 }

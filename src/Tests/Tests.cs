@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using VerifyNUnit;
 using NUnit.Framework;
+using VerifyTests;
 
 [TestFixture]
 public class Tests
@@ -69,15 +72,23 @@ PageResult
                 {
                     {"key", "value"}
                 }));
-        return VerifyResult(result);
+        return Verifier.Verify((ActionResult) result);
     }
 
-    Task VerifyResult(ActionResult result)
+    [Test]
+    public async Task HttpClientRecording()
     {
-        return Verifier.Verify(
-            new
-            {
-                result
-            });
+        var collection = new ServiceCollection();
+        var (builder, handler) = collection.AddRecordingHttpClient();
+
+        var serviceProvider = collection.BuildServiceProvider();
+
+        var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();
+
+        var client = httpClientFactory.CreateClient();
+
+        await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt");
+
+        await  Verifier.Verify(handler.Sends);
     }
 }
