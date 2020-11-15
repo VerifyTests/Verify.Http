@@ -89,6 +89,7 @@ PageResult
 
         await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt");
 
-        await  Verifier.Verify(handler.Sends);
+        await Verifier.Verify(handler.Sends)
+            .ModifySerialization(x=>x.IgnoreMember("X-Fastly-Request-ID"));
     }
 }

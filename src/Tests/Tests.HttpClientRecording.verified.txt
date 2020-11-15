@@ -1,6 +1,30 @@
 [
   {
-    RequestHeaders: [],
+    RequestUri: 'https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt',
+    RequestMethod: GET,
+    ResponseStatus: OK,
+    ResponseHeaders: {
+      Connection: keep-alive,
+      Cache-Control: max-age=300,
+      Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+      ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
+      Strict-Transport-Security: max-age=31536000,
+      X-Content-Type-Options: nosniff,
+      X-Frame-Options: DENY,
+      X-XSS-Protection: 1; mode=block,
+      Via: 1.1 varnish (Varnish/6.0)|1.1 varnish,
+      X-GitHub-Request-Id: 5EF2:462A:2BB76B:310F24:5FB10E08,
+      Accept-Ranges: bytes,
+      Date: Sun, 15 Nov 2020 12:27:37 GMT,
+      X-Served-By: cache-syd10128-SYD,
+      X-Cache: MISS, HIT,
+      X-Cache-Hits: 0, 1,
+      X-Timer: S1605443258.607468,VS0,VE0,
+      Vary: Authorization|Accept-Encoding|Accept-Encoding,
+      Access-Control-Allow-Origin: *,
+      X-Fastly-Request-ID: 333743be594046101e3653266e899e8e135cbe55,
+      Source-Age: 54
+    },
     ResponseContent: 
 MIT License
 
@@ -23,131 +47,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-,
-    ResponseHeaders: [
-      {
-        Key: Connection,
-        Value: [
-          keep-alive
-        ]
-      },
-      {
-        Key: Cache-Control,
-        Value: [
-          max-age=300
-        ]
-      },
-      {
-        Key: Content-Security-Policy,
-        Value: [
-          default-src 'none'; style-src 'unsafe-inline'; sandbox
-        ]
-      },
-      {
-        Key: ETag,
-        Value: [
-          "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35"
-        ]
-      },
-      {
-        Key: Strict-Transport-Security,
-        Value: [
-          max-age=31536000
-        ]
-      },
-      {
-        Key: X-Content-Type-Options,
-        Value: [
-          nosniff
-        ]
-      },
-      {
-        Key: X-Frame-Options,
-        Value: [
-          DENY
-        ]
-      },
-      {
-        Key: X-XSS-Protection,
-        Value: [
-          1; mode=block
-        ]
-      },
-      {
-        Key: Via,
-        Value: [
-          1.1 varnish (Varnish/6.0),
-          1.1 varnish
-        ]
-      },
-      {
-        Key: X-GitHub-Request-Id,
-        Value: [
-          5EF2:462A:2BB76B:310F24:5FB10E08
-        ]
-      },
-      {
-        Key: Accept-Ranges,
-        Value: [
-          bytes
-        ]
-      },
-      {
-        Key: Date,
-        Value: [
-          Sun, 15 Nov 2020 11:45:30 GMT
-        ]
-      },
-      {
-        Key: X-Served-By,
-        Value: [
-          cache-syd10161-SYD
-        ]
-      },
-      {
-        Key: X-Cache,
-        Value: [
-          MISS, HIT
-        ]
-      },
-      {
-        Key: X-Cache-Hits,
-        Value: [
-          0, 1
-        ]
-      },
-      {
-        Key: X-Timer,
-        Value: [
-          S1605440731.749404,VS0,VE0
-        ]
-      },
-      {
-        Key: Vary,
-        Value: [
-          Authorization,
-          Accept-Encoding,
-          Accept-Encoding
-        ]
-      },
-      {
-        Key: Access-Control-Allow-Origin,
-        Value: [
-          *
-        ]
-      },
-      {
-        Key: X-Fastly-Request-ID,
-        Value: [
-          24ace3751fcd5ed0e59e688841fa9d92b3be5572
-        ]
-      },
-      {
-        Key: Source-Age,
-        Value: [
-          56
-        ]
-      }
-    ]
+
   }
 ]

@@ -3,20 +3,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-static class Extensions
-{
-    public static bool IsText(this HttpContent content)
-    {
-        var contentType = content.Headers.ContentType;
-        if (contentType?.MediaType == null)
-        {
-            return false;
-        }
-
-        return contentType.MediaType.StartsWith("text");
-    }
-}
-
 namespace VerifyTests.Web
 {
     public class RecordingHandler :
@@ -45,7 +31,15 @@ namespace VerifyTests.Web
                 responseText = await responseContent.ReadAsStringAsync(cancellation);
             }
 
-            var item = new LoggedSend(requestText, request.Headers,responseText, response.Headers);
+            var item = new LoggedSend(
+                request.RequestUri,
+                request.Options,
+                request.Method.ToString(),
+                request.Headers.ToDictionary(),
+                requestText,
+                response.StatusCode,
+                response.Headers.ToDictionary(),
+                responseText);
             Sends.Enqueue(item);
 
             return response;
