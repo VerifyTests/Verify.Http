@@ -10,8 +10,24 @@ namespace VerifyTests.Web
     {
         public ConcurrentQueue<LoggedSend> Sends = new();
 
+        public void Start()
+        {
+            Recording = true;
+        }
+
+        public void Pause()
+        {
+            Recording = false;
+        }
+
+        public bool Recording { get; private set; } = true;
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
         {
+            if (!Recording)
+            {
+                return await base.SendAsync(request, cancellation);
+            }
             string? requestText = null;
             var requestContent = request.Content;
             if (requestContent != null)

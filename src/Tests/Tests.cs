@@ -79,25 +79,20 @@ PageResult
     public async Task HttpClientRecording()
     {
         var collection = new ServiceCollection();
+        // Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
         var (builder, sends) = collection.AddRecordingHttpClient();
 
-        await using var serviceProvider = collection.BuildServiceProvider();
-        var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();
+        await using var provider = collection.BuildServiceProvider();
 
-        var client = httpClientFactory.CreateClient();
+        // Resolve a HttpClient
+        // All http calls done at any resolved client will be added to `sends`
+        var client = provider.GetRequiredService<HttpClient>();
 
-        var response = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt");
+        // Some code that does some http calls
+        await client.GetAsync("https://httpbin.org/");
 
         await Verifier.Verify(sends)
-            .ModifySerialization(x =>
-                x.IgnoreMembers(
-                    "X-Fastly-Request-ID",
-                    "X-GitHub-Request-Id",
-                    "X-Served-By",
-                    "X-Cache",
-                    "X-Timer",
-                    "Source-Age",
-                    "Date"
-                ));
+            // Ignore some headers that change per request
+            .ModifySerialization(x => x.IgnoreMembers("Date"));
     }
 }
