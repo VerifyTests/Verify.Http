@@ -16,6 +16,7 @@ Part of the <a href='https://dotnetfoundation.org' alt=''>.NET Foundation</a>
   * [Usage](#usage)
     * [Controller](#controller)
     * [Middleware](#middleware)
+    * [HttpClient recording](#httpclient-recording)
   * [Security contact information](#security-contact-information)<!-- endToc -->
 
 
@@ -61,8 +62,8 @@ public class MyController :
 
         var items = new List<DataItem>
         {
-            new DataItem("Value1"),
-            new DataItem("Value2")
+            new("Value1"),
+            new("Value2")
         };
         return new ActionResult<List<DataItem>>(items);
     }
@@ -139,7 +140,6 @@ Will result in the following verified file:
 <!-- endSnippet -->
 
 
-
 ### Middleware
 
 Given the following middleware:
@@ -214,6 +214,114 @@ Will result in the following verified file:
 }
 ```
 <sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.Test.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### HttpClient recording
+
+For code that does web calls via HttpClient, these calls can be recorded and verified:
+
+<!-- snippet: HttpClientRecording -->
+<a id='snippet-httpclientrecording'></a>
+```cs
+var collection = new ServiceCollection();
+// Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
+var (builder, recording) = collection.AddRecordingHttpClient();
+
+await using var provider = collection.BuildServiceProvider();
+
+// Resolve a HttpClient
+// All http calls done at any resolved client will be added to `recording.Sends`
+var client = provider.GetRequiredService<HttpClient>();
+
+// Some code that does some http calls
+await client.GetAsync("https://httpbin.org/status/undefined");
+
+await Verifier.Verify(recording.Sends)
+    // Ignore some headers that change per request
+    .ModifySerialization(x => x.IgnoreMembers("Date"));
+```
+<sup><a href='/src/Tests/Tests.cs#L83-L100' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+Will result in the following verified file:
+
+<!-- snippet: Tests.HttpClientRecording.verified.txt -->
+<a id='snippet-Tests.HttpClientRecording.verified.txt'></a>
+```txt
+[
+  {
+    RequestUri: 'https://httpbin.org/status/undefined',
+    RequestMethod: GET,
+    ResponseStatus: BadRequest,
+    ResponseHeaders: {
+      Connection: keep-alive,
+      Server: gunicorn/19.9.0,
+      Access-Control-Allow-Origin: *,
+      Access-Control-Allow-Credentials: true
+    },
+    ResponseContent: Invalid status code
+  }
+]
+```
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+There a Pause/Resume semantics:
+
+<!-- snippet: HttpClientPauseResume -->
+<a id='snippet-httpclientpauseresume'></a>
+```cs
+var collection = new ServiceCollection();
+var (builder, recording) = collection.AddRecordingHttpClient();
+
+await using var provider = collection.BuildServiceProvider();
+
+var client = provider.GetRequiredService<HttpClient>();
+
+// Recording is enabled by default. So Pause to stop recording
+recording.Pause();
+await client.GetAsync("https://www.google.com/");
+
+// Resume recording
+recording.Resume();
+await client.GetAsync("https://httpbin.org/status/undefined");
+
+await Verifier.Verify(recording.Sends)
+    .ModifySerialization(x => x.IgnoreMembers("Date"));
+```
+<sup><a href='/src/Tests/Tests.cs#L106-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
+
+<!-- snippet: HttpClientRecordingExplicit -->
+<a id='snippet-httpclientrecordingexplicit'></a>
+```cs
+var collection = new ServiceCollection();
+
+var builder = collection.AddHttpClient("name");
+
+// Change to not recording at startup
+var recording = new RecordingHandler(recording: false);
+
+builder.AddHttpMessageHandler(() => recording);
+
+await using var provider = collection.BuildServiceProvider();
+
+var factory = provider.GetRequiredService<IHttpClientFactory>();
+
+var client = factory.CreateClient("name");
+
+await client.GetAsync("https://www.google.com/");
+
+recording.Resume();
+await client.GetAsync("https://httpbin.org/status/undefined");
+
+await Verifier.Verify(recording.Sends)
+    .ModifySerialization(x => x.IgnoreMembers("Date"));
+```
+<sup><a href='/src/Tests/Tests.cs#L130-L153' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

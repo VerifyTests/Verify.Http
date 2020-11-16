@@ -1,0 +1,14 @@
+[
+  {
+    RequestUri: 'https://httpbin.org/status/undefined',
+    RequestMethod: GET,
+    ResponseStatus: BadRequest,
+    ResponseHeaders: {
+      Connection: keep-alive,
+      Server: gunicorn/19.9.0,
+      Access-Control-Allow-Origin: *,
+      Access-Control-Allow-Credentials: true
+    },
+    ResponseContent: Invalid status code
+  }
+]

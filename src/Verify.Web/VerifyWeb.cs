@@ -1,7 +1,23 @@
-﻿namespace VerifyTests
+﻿using Microsoft.Extensions.DependencyInjection;
+using VerifyTests.Web;
+using Microsoft.Extensions.Options;
+
+namespace VerifyTests
 {
     public static class VerifyWeb
     {
+        public static (IHttpClientBuilder builder, RecordingHandler recording) AddRecordingHttpClient(
+            this ServiceCollection collection,
+            string? name = null)
+        {
+            name ??= Options.DefaultName;
+
+            var builder = collection.AddHttpClient(name);
+            var recording = new RecordingHandler();
+            builder.AddHttpMessageHandler(() => recording);
+            return (builder, recording);
+        }
+
         public static void Enable()
         {
             VerifierSettings.ModifySerialization(settings =>

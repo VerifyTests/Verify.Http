@@ -20,7 +20,7 @@ class RedirectToActionResultConverter :
         if (result.RouteValues.Any())
         {
             writer.WritePropertyName("RouteValues");
-            serializer.Serialize(writer, result.RouteValues.ToDictionary(x => x.Value, x => x.Value));
+            serializer.Serialize(writer, result.RouteValues.ToDictionary(x => x.Value!, x => x.Value));
         }
     }
 }
