@@ -81,13 +81,12 @@ PageResult
         var collection = new ServiceCollection();
         var (builder, sends) = collection.AddRecordingHttpClient();
 
-        var serviceProvider = collection.BuildServiceProvider();
-
+        await using var serviceProvider = collection.BuildServiceProvider();
         var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();
 
         var client = httpClientFactory.CreateClient();
 
-        await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt");
+        var response = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt");
 
         await Verifier.Verify(sends)
             .ModifySerialization(x =>

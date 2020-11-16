@@ -1,24 +1,25 @@
-[
-  {
-    RequestUri: 'https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt',
-    RequestMethod: GET,
-    ResponseStatus: OK,
-    ResponseHeaders: {
-      Connection: keep-alive,
-      Cache-Control: max-age=300,
-      Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
-      ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
-      Strict-Transport-Security: max-age=31536000,
-      X-Content-Type-Options: nosniff,
-      X-Frame-Options: DENY,
-      X-XSS-Protection: 1; mode=block,
-      Via: 1.1 varnish (Varnish/6.0)|1.1 varnish,
-      Accept-Ranges: bytes,
-      X-Cache-Hits: 0, 1,
-      Vary: Authorization|Accept-Encoding|Accept-Encoding,
-      Access-Control-Allow-Origin: *
-    },
-    ResponseContent: 
+{
+  sends: [
+    {
+      RequestUri: 'https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt',
+      RequestMethod: GET,
+      ResponseStatus: OK,
+      ResponseHeaders: {
+        Connection: keep-alive,
+        Cache-Control: max-age=300,
+        Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+        ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
+        Strict-Transport-Security: max-age=31536000,
+        X-Content-Type-Options: nosniff,
+        X-Frame-Options: DENY,
+        X-XSS-Protection: 1; mode=block,
+        Via: 1.1 varnish (Varnish/6.0)|1.1 varnish,
+        Accept-Ranges: bytes,
+        X-Cache-Hits: 0, 1,
+        Vary: Authorization|Accept-Encoding|Accept-Encoding,
+        Access-Control-Allow-Origin: *
+      },
+      ResponseContent: 
 MIT License
 
 Copyright (c) .NET Foundation and Contributors
@@ -41,5 +42,168 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+    }
+  ],
+  response: {
+    Version: 1.1,
+    Content: {
+      Headers: [
+        {
+          Key: Content-Length,
+          Value: [
+            1084
+          ]
+        },
+        {
+          Key: Content-Type,
+          Value: [
+            text/plain; charset=utf-8
+          ]
+        },
+        {
+          Key: Expires,
+          Value: [
+            Mon, 16 Nov 2020 09:21:51 GMT
+          ]
+        }
+      ]
+    },
+    StatusCode: OK,
+    ReasonPhrase: OK,
+    Headers: [
+      {
+        Key: Connection,
+        Value: [
+          keep-alive
+        ]
+      },
+      {
+        Key: Cache-Control,
+        Value: [
+          max-age=300
+        ]
+      },
+      {
+        Key: Content-Security-Policy,
+        Value: [
+          default-src 'none'; style-src 'unsafe-inline'; sandbox
+        ]
+      },
+      {
+        Key: ETag,
+        Value: [
+          "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35"
+        ]
+      },
+      {
+        Key: Strict-Transport-Security,
+        Value: [
+          max-age=31536000
+        ]
+      },
+      {
+        Key: X-Content-Type-Options,
+        Value: [
+          nosniff
+        ]
+      },
+      {
+        Key: X-Frame-Options,
+        Value: [
+          DENY
+        ]
+      },
+      {
+        Key: X-XSS-Protection,
+        Value: [
+          1; mode=block
+        ]
+      },
+      {
+        Key: Via,
+        Value: [
+          1.1 varnish (Varnish/6.0),
+          1.1 varnish
+        ]
+      },
+      {
+        Key: X-GitHub-Request-Id,
+        Value: [
+          AEFC:0448:34DE2B:3B47ED:5FB235FB
+        ]
+      },
+      {
+        Key: Accept-Ranges,
+        Value: [
+          bytes
+        ]
+      },
+      {
+        Key: Date,
+        Value: [
+          Mon, 16 Nov 2020 09:16:51 GMT
+        ]
+      },
+      {
+        Key: X-Served-By,
+        Value: [
+          cache-mel11243-MEL
+        ]
+      },
+      {
+        Key: X-Cache,
+        Value: [
+          MISS, HIT
+        ]
+      },
+      {
+        Key: X-Cache-Hits,
+        Value: [
+          0, 1
+        ]
+      },
+      {
+        Key: X-Timer,
+        Value: [
+          S1605518212.641529,VS0,VE298
+        ]
+      },
+      {
+        Key: Vary,
+        Value: [
+          Authorization,
+          Accept-Encoding,
+          Accept-Encoding
+        ]
+      },
+      {
+        Key: Access-Control-Allow-Origin,
+        Value: [
+          *
+        ]
+      },
+      {
+        Key: X-Fastly-Request-ID,
+        Value: [
+          d7684e6665d7ab10adbc0b1a652fae9460c89f88
+        ]
+      },
+      {
+        Key: Source-Age,
+        Value: [
+          0
+        ]
+      }
+    ],
+    TrailingHeaders: [],
+    RequestMessage: {
+      Version: 1.1,
+      Method: {
+        Method: GET
+      },
+      RequestUri: 'https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt',
+      Headers: []
+    },
+    IsSuccessStatusCode: true
   }
-]
+}

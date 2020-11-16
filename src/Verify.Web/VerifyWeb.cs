@@ -11,10 +11,7 @@ namespace VerifyTests
             this ServiceCollection collection,
             string? name = null)
         {
-            if (name == null)
-            {
-                name = Options.DefaultName;
-            }
+            name ??= Options.DefaultName;
 
             var builder = collection.AddHttpClient(name);
             var handler = new RecordingHandler();
