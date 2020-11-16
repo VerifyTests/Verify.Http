@@ -79,7 +79,7 @@ PageResult
     public async Task HttpClientRecording()
     {
         var collection = new ServiceCollection();
-        var (builder, handler) = collection.AddRecordingHttpClient();
+        var (builder, sends) = collection.AddRecordingHttpClient();
 
         var serviceProvider = collection.BuildServiceProvider();
 
@@ -89,7 +89,7 @@ PageResult
 
         await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt");
 
-        await Verifier.Verify(handler.Sends)
+        await Verifier.Verify(sends)
             .ModifySerialization(x=>x.IgnoreMember("X-Fastly-Request-ID"));
     }
 }
