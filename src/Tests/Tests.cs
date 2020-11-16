@@ -72,7 +72,7 @@ PageResult
                 {
                     {"key", "value"}
                 }));
-        return Verifier.Verify((ActionResult) result);
+        return Verifier.Verify(result);
     }
 
     [Test]
@@ -90,6 +90,15 @@ PageResult
         await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Web/master/license.txt");
 
         await Verifier.Verify(sends)
-            .ModifySerialization(x=>x.IgnoreMember("X-Fastly-Request-ID"));
+            .ModifySerialization(x =>
+                x.IgnoreMembers(
+                    "X-Fastly-Request-ID",
+                    "X-GitHub-Request-Id",
+                    "X-Served-By",
+                    "X-Cache",
+                    "X-Timer",
+                    "Source-Age",
+                    "Date"
+                ));
     }
 }
