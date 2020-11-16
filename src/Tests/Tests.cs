@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using VerifyNUnit;
 using NUnit.Framework;
 using VerifyTests;
+using VerifyTests.Web;
 
 [TestFixture]
 public class Tests
@@ -75,24 +76,80 @@ PageResult
         return Verifier.Verify(result);
     }
 
+
     [Test]
     public async Task HttpClientRecording()
     {
+        #region HttpClientRecording
         var collection = new ServiceCollection();
         // Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
-        var (builder, sends) = collection.AddRecordingHttpClient();
+        var (builder, recording) = collection.AddRecordingHttpClient();
 
         await using var provider = collection.BuildServiceProvider();
 
         // Resolve a HttpClient
-        // All http calls done at any resolved client will be added to `sends`
+        // All http calls done at any resolved client will be added to `recording.Sends`
         var client = provider.GetRequiredService<HttpClient>();
 
         // Some code that does some http calls
-        await client.GetAsync("https://httpbin.org/");
+        await client.GetAsync("https://httpbin.org/status/undefined");
 
-        await Verifier.Verify(sends)
+        await Verifier.Verify(recording.Sends)
             // Ignore some headers that change per request
             .ModifySerialization(x => x.IgnoreMembers("Date"));
+        #endregion
+    }
+
+    [Test]
+    public async Task PauseResume()
+    {
+        #region HttpClientPauseResume
+        var collection = new ServiceCollection();
+        var (builder, recording) = collection.AddRecordingHttpClient();
+
+        await using var provider = collection.BuildServiceProvider();
+
+        var client = provider.GetRequiredService<HttpClient>();
+
+        // Recording is enabled by default. So Pause to stop recording
+        recording.Pause();
+        await client.GetAsync("https://www.google.com/");
+
+        // Resume recording
+        recording.Resume();
+        await client.GetAsync("https://httpbin.org/status/undefined");
+
+        await Verifier.Verify(recording.Sends)
+            .ModifySerialization(x => x.IgnoreMembers("Date"));
+        #endregion
+    }
+
+    [Test]
+    public async Task RecordingFullControl()
+    {
+        #region HttpClientRecordingExplicit
+        var collection = new ServiceCollection();
+
+        var builder = collection.AddHttpClient("name");
+
+        // Change to not recording at startup
+        var recording = new RecordingHandler(recording: false);
+
+        builder.AddHttpMessageHandler(() => recording);
+
+        await using var provider = collection.BuildServiceProvider();
+
+        var factory = provider.GetRequiredService<IHttpClientFactory>();
+
+        var client = factory.CreateClient("name");
+
+        await client.GetAsync("https://www.google.com/");
+
+        recording.Resume();
+        await client.GetAsync("https://httpbin.org/status/undefined");
+
+        await Verifier.Verify(recording.Sends)
+            .ModifySerialization(x => x.IgnoreMembers("Date"));
+        #endregion
     }
 }

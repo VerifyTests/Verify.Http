@@ -10,7 +10,7 @@ namespace VerifyTests.Web
     {
         public ConcurrentQueue<LoggedSend> Sends = new();
 
-        public void Start()
+        public void Resume()
         {
             Recording = true;
         }
@@ -20,7 +20,12 @@ namespace VerifyTests.Web
             Recording = false;
         }
 
-        public bool Recording { get; private set; } = true;
+        public RecordingHandler(bool recording = true)
+        {
+            Recording = recording;
+        }
+
+        public bool Recording { get; private set; }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
         {

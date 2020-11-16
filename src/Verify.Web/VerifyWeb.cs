@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Web;
 using Microsoft.Extensions.Options;
 
@@ -7,16 +6,16 @@ namespace VerifyTests
 {
     public static class VerifyWeb
     {
-        public static (IHttpClientBuilder builder, IEnumerable<LoggedSend> sends) AddRecordingHttpClient(
+        public static (IHttpClientBuilder builder, RecordingHandler recording) AddRecordingHttpClient(
             this ServiceCollection collection,
             string? name = null)
         {
             name ??= Options.DefaultName;
 
             var builder = collection.AddHttpClient(name);
-            var handler = new RecordingHandler();
-            builder.AddHttpMessageHandler(() => handler);
-            return (builder, handler.Sends);
+            var recording = new RecordingHandler();
+            builder.AddHttpMessageHandler(() => recording);
+            return (builder, recording);
         }
 
         public static void Enable()
