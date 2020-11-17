@@ -1,6 +1,6 @@
 [
   {
-    RequestUri: 'https://httpbin.org/status/undefined',
+    RequestUri: https://httpbin.org/status/undefined,
     RequestMethod: GET,
     ResponseStatus: BadRequest,
     ResponseHeaders: {
