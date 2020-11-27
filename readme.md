@@ -251,7 +251,7 @@ Will result in the following verified file:
 ```txt
 [
   {
-    RequestUri: 'https://httpbin.org/status/undefined',
+    RequestUri: https://httpbin.org/status/undefined,
     RequestMethod: GET,
     ResponseStatus: BadRequest,
     ResponseHeaders: {
