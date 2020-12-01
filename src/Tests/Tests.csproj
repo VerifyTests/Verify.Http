@@ -10,7 +10,7 @@
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="21.7.1" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-    <PackageReference Include="Verify.NUnit" Version="8.9.0" />
+    <PackageReference Include="Verify.NUnit" Version="8.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
     <ProjectReference Include="..\Verify.Web\Verify.Web.csproj" />
     <PackageReference Include="ProjectDefaults" Version="1.0.48" PrivateAssets="All" />
