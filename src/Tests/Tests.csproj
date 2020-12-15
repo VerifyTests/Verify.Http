@@ -13,6 +13,6 @@
     <PackageReference Include="Verify.NUnit" Version="8.12.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <ProjectReference Include="..\Verify.Web\Verify.Web.csproj" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.49" PrivateAssets="All" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.50" PrivateAssets="All" />
   </ItemGroup>
 </Project>
