@@ -13,9 +13,15 @@ namespace VerifyTests
             name ??= Options.DefaultName;
 
             var builder = collection.AddHttpClient(name);
+            var recording = AddRecording(builder);
+            return (builder, recording);
+        }
+
+        public static RecordingHandler AddRecording(this IHttpClientBuilder builder)
+        {
             var recording = new RecordingHandler();
             builder.AddHttpMessageHandler(() => recording);
-            return (builder, recording);
+            return recording;
         }
 
         public static void Enable()

@@ -39,7 +39,7 @@ namespace VerifyTests.Web
             {
                 if (requestContent.IsText())
                 {
-                    requestText = await requestContent.ReadAsStringAsync(cancellation);
+                    requestText = await requestContent.ReadAsStringAsync();
                 }
             }
 
@@ -49,12 +49,14 @@ namespace VerifyTests.Web
             string? responseText = null;
             if (responseContent.IsText())
             {
-                responseText = await responseContent.ReadAsStringAsync(cancellation);
+                responseText = await responseContent.ReadAsStringAsync();
             }
 
             var item = new LoggedSend(
                 request.RequestUri,
+#if(NET5_0_OR_GREATER)
                 request.Options,
+#endif
                 request.Method.ToString(),
                 request.Headers.ToDictionary(),
                 requestText,

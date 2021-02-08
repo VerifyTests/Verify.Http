@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+#if(NET5_0_OR_GREATER)
 using System.Net.Http;
+#endif
 
 namespace VerifyTests.Web
 {
     public class LoggedSend
     {
         public Uri? RequestUri { get; }
+#if(NET5_0_OR_GREATER)
         public HttpRequestOptions RequestOptions { get; }
+#endif
         public string RequestMethod { get; }
         public Dictionary<string, string> RequestHeaders { get; }
         public string? RequestContent { get; }
@@ -18,7 +22,9 @@ namespace VerifyTests.Web
 
         public LoggedSend(
             Uri? requestUri,
+            #if(NET5_0_OR_GREATER)
             HttpRequestOptions requestOptions,
+            #endif
             string requestMethod,
             Dictionary<string, string> requestHeaders,
             string? requestContent,
@@ -27,7 +33,9 @@ namespace VerifyTests.Web
             string? responseContent)
         {
             RequestUri = requestUri;
+#if(NET5_0_OR_GREATER)
             RequestOptions = requestOptions;
+#endif
             RequestMethod = requestMethod;
             RequestHeaders = requestHeaders;
             RequestContent = requestContent;

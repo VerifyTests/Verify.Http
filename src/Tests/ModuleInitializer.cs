@@ -11,3 +11,13 @@ public static class ModuleInitializer
         #endregion
     }
 }
+
+#if(NETCOREAPP3_1)
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsage(AttributeTargets.Method, Inherited = false)]
+    public sealed class ModuleInitializerAttribute : Attribute
+    {
+    }
+}
+#endif

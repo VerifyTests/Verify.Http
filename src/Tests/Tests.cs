@@ -76,27 +76,75 @@ PageResult
         return Verifier.Verify(result);
     }
 
+    #region ServiceThatDoesHttp
 
-    [Test]
-    public async Task HttpClientRecording()
+    public class MyService
     {
-        #region HttpClientRecording
+        HttpClient client;
+
+        // Resolve a HttpClient. All http calls done at any
+        // resolved client will be added to `recording.Sends`
+        public MyService(HttpClient client)
+        {
+            this.client = client;
+        }
+
+        public Task MethodThatDoesHttp()
+        {
+            // Some code that does some http calls
+            return client.GetAsync("https://httpbin.org/status/undefined");
+        }
+    }
+
+    #endregion
+
+    #if(NET5_0_OR_GREATER)
+    [Test]
+    public async Task HttpClientRecordingGlobal()
+    {
+        #region HttpClientRecordingGlobal
+
         var collection = new ServiceCollection();
+        collection.AddScoped<MyService>();
+
         // Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
         var (builder, recording) = collection.AddRecordingHttpClient();
 
         await using var provider = collection.BuildServiceProvider();
 
-        // Resolve a HttpClient
-        // All http calls done at any resolved client will be added to `recording.Sends`
-        var client = provider.GetRequiredService<HttpClient>();
+        var myService = provider.GetRequiredService<MyService>();
 
-        // Some code that does some http calls
-        await client.GetAsync("https://httpbin.org/status/undefined");
+        await myService.MethodThatDoesHttp();
 
         await Verifier.Verify(recording.Sends)
             // Ignore some headers that change per request
             .ModifySerialization(x => x.IgnoreMembers("Date"));
+
+        #endregion
+    }
+    #endif
+    [Test]
+    public async Task HttpClientRecording()
+    {
+        #region HttpClientRecording
+
+        var collection = new ServiceCollection();
+        collection.AddScoped<MyService>();
+        var httpBuilder = collection.AddHttpClient<MyService>();
+
+        // Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
+        var recording = httpBuilder.AddRecording();
+
+        await using var provider = collection.BuildServiceProvider();
+
+        var myService = provider.GetRequiredService<MyService>();
+
+        await myService.MethodThatDoesHttp();
+
+        await Verifier.Verify(recording.Sends)
+            // Ignore some headers that change per request
+            .ModifySerialization(x => x.IgnoreMembers("Date"));
+
         #endregion
     }
 
@@ -105,19 +153,23 @@ PageResult
     {
         #region HttpClientPauseResume
         var collection = new ServiceCollection();
-        var (builder, recording) = collection.AddRecordingHttpClient();
+        collection.AddScoped<MyService>();
+        var httpBuilder = collection.AddHttpClient<MyService>();
+
+        // Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
+        var recording = httpBuilder.AddRecording();
 
         await using var provider = collection.BuildServiceProvider();
 
-        var client = provider.GetRequiredService<HttpClient>();
+        var myService = provider.GetRequiredService<MyService>();
 
         // Recording is enabled by default. So Pause to stop recording
         recording.Pause();
-        await client.GetAsync("https://www.google.com/");
+        await myService.MethodThatDoesHttp();
 
         // Resume recording
         recording.Resume();
-        await client.GetAsync("https://httpbin.org/status/undefined");
+        await myService.MethodThatDoesHttp();
 
         await Verifier.Verify(recording.Sends)
             .ModifySerialization(x => x.IgnoreMembers("Date"));
