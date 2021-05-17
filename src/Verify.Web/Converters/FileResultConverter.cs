@@ -5,8 +5,11 @@ static class FileResultConverter
 {
     public static void WriteFileData(JsonWriter writer, FileResult result, JsonSerializer serializer)
     {
-        writer.WritePropertyName("FileDownloadName");
-        serializer.Serialize(writer, result.FileDownloadName);
+        if (!string.IsNullOrWhiteSpace(result.FileDownloadName))
+        {
+            writer.WritePropertyName("FileDownloadName");
+            serializer.Serialize(writer, result.FileDownloadName);
+        }
 
         if (result.LastModified != null)
         {
@@ -14,8 +17,12 @@ static class FileResultConverter
             serializer.Serialize(writer, result.LastModified);
         }
 
-        writer.WritePropertyName("EntityTag");
-        serializer.Serialize(writer, result.EntityTag);
+        if (result.EntityTag != null)
+        {
+            writer.WritePropertyName("EntityTag");
+            serializer.Serialize(writer, result.EntityTag);
+        }
+
         writer.WritePropertyName("EnableRangeProcessing");
         serializer.Serialize(writer, result.EnableRangeProcessing);
         writer.WritePropertyName("ContentType");

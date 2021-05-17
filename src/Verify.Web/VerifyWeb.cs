@@ -1,6 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Web;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 
 namespace VerifyTests
 {
@@ -26,6 +34,10 @@ namespace VerifyTests
 
         public static void Enable()
         {
+            VerifierSettings.RegisterFileConverter<FileStreamResult>(ConvertFileResult);
+            VerifierSettings.RegisterFileConverter<FileContentResult>(ConvertFileResult);
+            VerifierSettings.RegisterFileConverter<PhysicalFileResult>(ConvertFileResult);
+            VerifierSettings.RegisterFileConverter<VirtualFileResult>(ConvertFileResult);
             VerifierSettings.ModifySerialization(settings =>
             {
                 settings.AddExtraSettings(serializer =>
@@ -80,5 +92,94 @@ namespace VerifyTests
                 });
             });
         }
+
+        static ConversionResult ConvertFileResult(FileContentResult target, IReadOnlyDictionary<string, object> context)
+        {
+            var info = GetFileResultInfo(target);
+
+            if (!HttpExtensions.TryGetMediaTypeExtension(target.ContentType, out var extension))
+            {
+                return new ConversionResult(info, Enumerable.Empty<Target>());
+            }
+
+            if (EmptyFiles.Extensions.IsText(extension))
+            {
+                return new ConversionResult(info, extension, Encoding.UTF8.GetString(target.FileContents));
+            }
+
+            return new ConversionResult(info, extension, new MemoryStream(target.FileContents));
+        }
+
+        static async Task<ConversionResult> ConvertFileResult(VirtualFileResult target, IReadOnlyDictionary<string, object> context)
+        {
+            var info = GetFileResultInfo(target);
+
+            if (!HttpExtensions.TryGetMediaTypeExtension(target.ContentType, out var extension))
+            {
+                return new ConversionResult(info, Enumerable.Empty<Target>());
+            }
+
+            if (EmptyFiles.Extensions.IsText(extension))
+            {
+                return new ConversionResult(info, extension, await File.ReadAllTextAsync(target.FileName));
+            }
+
+            return new ConversionResult(info, extension, File.OpenRead(target.FileName));
+        }
+
+        static async Task<ConversionResult> ConvertFileResult(PhysicalFileResult target, IReadOnlyDictionary<string, object> context)
+        {
+            var info = GetFileResultInfo(target);
+
+            if (!HttpExtensions.TryGetMediaTypeExtension(target.ContentType, out var extension))
+            {
+                return new ConversionResult(info, Enumerable.Empty<Target>());
+            }
+
+            if (EmptyFiles.Extensions.IsText(extension))
+            {
+                return new ConversionResult(info, extension, await File.ReadAllTextAsync(target.FileName));
+            }
+
+            return new ConversionResult(info, extension, File.OpenRead(target.FileName));
+        }
+
+        static async Task<ConversionResult> ConvertFileResult(FileStreamResult target, IReadOnlyDictionary<string, object> context)
+        {
+            var info = GetFileResultInfo(target);
+
+            if (!HttpExtensions.TryGetMediaTypeExtension(target.ContentType, out var extension))
+            {
+                return new ConversionResult(info, Enumerable.Empty<Target>());
+            }
+
+            if (!EmptyFiles.Extensions.IsText(extension))
+            {
+                return new ConversionResult(info, extension, target.FileStream);
+            }
+
+            return new ConversionResult(info, extension, await target.FileStream.ReadAsString());
+        }
+
+        static FileResultInfo GetFileResultInfo(FileResult target)
+        {
+            return new()
+            {
+                FileDownloadName = target.FileDownloadName,
+                LastModified = target.LastModified,
+                EntityTag = target.EntityTag,
+                EnableRangeProcessing = target.EnableRangeProcessing,
+                ContentType = target.ContentType
+            };
+        }
+    }
+
+    class FileResultInfo
+    {
+        public string FileDownloadName { get; set; } = null!;
+        public DateTimeOffset? LastModified { get; set; }
+        public EntityTagHeaderValue? EntityTag { get; set; }
+        public bool EnableRangeProcessing { get; set; }
+        public string ContentType { get; set; } = null!;
     }
 }
