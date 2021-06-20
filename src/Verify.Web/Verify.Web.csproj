@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Verify" Version="11.18.4" />
+    <PackageReference Include="Verify" Version="11.19.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
     <PackageReference Include="ProjectDefaults" Version="1.0.54" PrivateAssets="All" />
   </ItemGroup>
