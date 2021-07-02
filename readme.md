@@ -310,10 +310,10 @@ Will result in the following verified file:
     RequestMethod: GET,
     ResponseStatus: BadRequest,
     ResponseHeaders: {
-      Connection: keep-alive,
-      Server: gunicorn/19.9.0,
+      Access-Control-Allow-Credentials: true,
       Access-Control-Allow-Origin: *,
-      Access-Control-Allow-Credentials: true
+      Connection: keep-alive,
+      Server: gunicorn/19.9.0
     },
     ResponseContent: Invalid status code
   }
