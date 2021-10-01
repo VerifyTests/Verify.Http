@@ -44,6 +44,9 @@ namespace VerifyTests
                 {
                     var converters = serializer.Converters;
                     converters.Add(new HttpResponseConverter());
+                    converters.Add(new HttpRequestConverter());
+                    converters.Add(new HttpResponseMessageConverter());
+                    converters.Add(new HttpRequestMessageConverter());
                     converters.Add(new ChallengeResultConverter());
                     converters.Add(new ActionResultConverter());
                     converters.Add(new ContentResultConverter());

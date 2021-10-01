@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 using Newtonsoft.Json;
 using VerifyTests;
 
-class HttpResponseConverter :
-    WriteOnlyJsonConverter<HttpResponse>
+class HttpResponseMessageConverter :
+    WriteOnlyJsonConverter<HttpResponseMessage>
 {
-    public override void WriteJson(JsonWriter writer, HttpResponse? value, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
+    public override void WriteJson(JsonWriter writer, HttpResponseMessage? value, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
         if (value == null)
         {
@@ -21,14 +21,14 @@ class HttpResponseConverter :
         writer.WriteEndObject();
     }
 
-    public static void WriteProperties(JsonWriter writer, JsonSerializer serializer, HttpResponse response)
+    public static void WriteProperties(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
     {
         WriteHeaders(writer, serializer, response);
 
         WriteCookies(writer, serializer, response);
     }
 
-    static void WriteCookies(JsonWriter writer, JsonSerializer serializer, HttpResponse response)
+    static void WriteCookies(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
     {
         var cookies = response.Headers.Cookies();
         if (!cookies.Any())
@@ -40,7 +40,7 @@ class HttpResponseConverter :
         serializer.Serialize(writer, cookies);
     }
 
-    static void WriteHeaders(JsonWriter writer, JsonSerializer serializer, HttpResponse response)
+    static void WriteHeaders(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
     {
         var headers = response.Headers.NotCookies();
         if (!headers.Any())

@@ -236,7 +236,7 @@ public class MyService
     }
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L109-L129' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L58-L78' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -264,7 +264,7 @@ await Verifier.Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L159-L178' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L108-L127' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -293,7 +293,7 @@ await Verifier.Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L135-L153' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L84-L102' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -349,7 +349,7 @@ await myService.MethodThatDoesHttp();
 await Verifier.Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L184-L206' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L133-L155' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -380,7 +380,7 @@ await client.GetAsync("https://httpbin.org/status/undefined");
 await Verifier.Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L212-L235' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L161-L184' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

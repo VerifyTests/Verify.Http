@@ -14,57 +14,6 @@ using VerifyTests.Web;
 [TestFixture]
 public class Tests
 {
-    /**
-
-ContentResult
-EmptyResult
-FileContentResult
-FileStreamResult
-PhysicalFileResult
-VirtualFileResult
-ForbidResult
-JsonResult
-LocalRedirectResult
-ObjectResult
-AcceptedAtActionResult
-AcceptedAtRouteResult
-AcceptedResult
-BadRequestObjectResult
-ConflictObjectResult
-CreatedAtActionResult
-CreatedAtRouteResult
-CreatedResult
-NotFoundObjectResult
-OkObjectResult
-UnauthorizedObjectResult
-UnprocessableEntityObjectResult
-BadRequestErrorMessageResult
-ExceptionResult
-InvalidModelStateResult
-NegotiatedContentResult<T>
-ResponseMessageResult
-PartialViewResult
-RedirectResult
-RedirectToActionResult
-RedirectToPageResult
-RedirectToRouteResult
-SignInResult
-SignOutResult
-StatusCodeResult
-BadRequestResult
-ConflictResult
-NoContentResult
-NotFoundResult
-OkResult
-UnauthorizedResult
-UnprocessableEntityResult
-UnsupportedMediaTypeResult
-ConflictResult
-InternalServerErrorResult
-ViewComponentResult
-ViewResult
-PageResult
-    **/
     [Test]
     public Task ChallengeResult()
     {
