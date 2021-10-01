@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
-using VerifyNUnit;
-using NUnit.Framework;
 using VerifyTests;
 using VerifyTests.Web;
+using VerifyXunit;
+using Xunit;
 
-[TestFixture]
+[UsesVerify]
 public class Tests
 {
     #region ServiceThatDoesHttp
@@ -30,8 +30,8 @@ public class Tests
 
     #endregion
 
-    #if(NET5_0_OR_GREATER)
-    [Test]
+#if(NET5_0_OR_GREATER)
+    [Fact]
     public async Task HttpClientRecordingGlobal()
     {
         #region HttpClientRecordingGlobal
@@ -54,8 +54,8 @@ public class Tests
 
         #endregion
     }
-    #endif
-    [Test]
+#endif
+    [Fact]
     public async Task HttpClientRecording()
     {
         #region HttpClientRecording
@@ -80,10 +80,11 @@ public class Tests
         #endregion
     }
 
-    [Test]
+    [Fact]
     public async Task PauseResume()
     {
         #region HttpClientPauseResume
+
         var collection = new ServiceCollection();
         collection.AddScoped<MyService>();
         var httpBuilder = collection.AddHttpClient<MyService>();
@@ -105,13 +106,15 @@ public class Tests
 
         await Verifier.Verify(recording.Sends)
             .ModifySerialization(x => x.IgnoreMembers("Date"));
+
         #endregion
     }
 
-    [Test]
+    [Fact]
     public async Task RecordingFullControl()
     {
         #region HttpClientRecordingExplicit
+
         var collection = new ServiceCollection();
 
         var builder = collection.AddHttpClient("name");
@@ -134,6 +137,7 @@ public class Tests
 
         await Verifier.Verify(recording.Sends)
             .ModifySerialization(x => x.IgnoreMembers("Date"));
+
         #endregion
     }
 }
