@@ -7,12 +7,12 @@ public static class ModuleInitializer
     public static void Initialize()
     {
         #region Enable
-        VerifyWeb.Enable();
+        VerifyHttp.Enable();
         #endregion
     }
 }
 
-#if(NETCOREAPP3_1)
+#if(NET48)
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]

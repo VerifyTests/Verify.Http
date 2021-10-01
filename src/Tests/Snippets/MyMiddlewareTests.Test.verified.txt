@@ -1,8 +1,0 @@
-{
-  Response: {
-    Headers: {
-      headerKey: headerValue
-    }
-  },
-  nextCalled: true
-}
