@@ -224,14 +224,14 @@ The perform the verification as usual:
 [Fact]
 public async Task TestHttpRecording()
 {
-    VerifyTests.Http.HttpRecording.StartRecording();
+    HttpRecording.StartRecording();
 
     var sizeOfResponse = await MethodThatDoesHttpCalls();
 
     await Verifier.Verify(
             new
             {
-                sizeOfResponse,
+                sizeOfResponse
             })
         .ModifySerialization(settings =>
         {
@@ -350,11 +350,11 @@ For example:
 [Fact]
 public async Task TestHttpRecordingExplicit()
 {
-    VerifyTests.Http.HttpRecording.StartRecording();
+    HttpRecording.StartRecording();
 
     var sizeOfResponse = await MethodThatDoesHttpCalls();
 
-    var httpCalls = VerifyTests.Http.HttpRecording.FinishRecording().ToList();
+    var httpCalls = HttpRecording.FinishRecording().ToList();
 
     // Ensure all calls finished in under 5 seconds
     var threshold = TimeSpan.FromSeconds(5);

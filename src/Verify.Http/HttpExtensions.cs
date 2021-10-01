@@ -2,9 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace VerifyTests;
-
-public static class HttpExtensions
+static class HttpExtensions
 {
     static Dictionary<string, string> mappings = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -87,18 +85,6 @@ public static class HttpExtensions
         {"x-world/x-vrml", "xof"}
     };
 
-    internal static string ReadAsString(this HttpContent content)
-    {
-        return content.ReadAsStringAsync().GetAwaiter().GetResult();
-    }
-
-#if(!NET5_0_OR_GREATER)
-        internal static Stream ReadAsStream(this HttpContent content)
-        {
-            return content.ReadAsStreamAsync().GetAwaiter().GetResult();
-        }
-#endif
-
     public static bool TryGetExtension(this HttpContent content, [NotNullWhen(true)] out string? extension)
     {
         var contentType = content.Headers.ContentType;
@@ -111,7 +97,7 @@ public static class HttpExtensions
         return TryGetExtension(contentType, out extension);
     }
 
-    public static bool TryGetExtension(this MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? extension)
+    static bool TryGetExtension(this MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? extension)
     {
         var mediaType = contentType.MediaType;
         if (mediaType is null)
@@ -123,7 +109,7 @@ public static class HttpExtensions
         return TryGetMediaTypeExtension(mediaType, out extension);
     }
 
-    public static bool TryGetMediaTypeExtension(string mediaType, [NotNullWhen(true)] out string? extension)
+    static bool TryGetMediaTypeExtension(string mediaType, [NotNullWhen(true)] out string? extension)
     {
         return mappings.TryGetValue(mediaType, out extension);
     }
@@ -140,7 +126,7 @@ public static class HttpExtensions
         return IsText(contentType, out subType);
     }
 
-    public static bool IsText(MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? subType)
+    static bool IsText(MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? subType)
     {
         var mediaType = contentType.MediaType;
         if (mediaType is null)
@@ -152,7 +138,7 @@ public static class HttpExtensions
         return IsTextMediaType(mediaType, out subType);
     }
 
-    public static bool IsTextMediaType(string mediaType, [NotNullWhen(true)] out string? subType)
+    static bool IsTextMediaType(string mediaType, [NotNullWhen(true)] out string? subType)
     {
         var split = mediaType.Split('/');
         subType = split[1];

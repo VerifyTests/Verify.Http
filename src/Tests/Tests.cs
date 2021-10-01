@@ -12,7 +12,7 @@ public class Tests
     [Fact]
     public async Task JsonGet()
     {
-        VerifyTests.Http.HttpRecording.StartRecording();
+        HttpRecording.StartRecording();
 
         using var client = new HttpClient();
 
@@ -24,7 +24,7 @@ public class Tests
     [Fact]
     public async Task TestHttpRecordingWithResponse()
     {
-        VerifyTests.Http.HttpRecording.StartRecording();
+        HttpRecording.StartRecording();
 
         using var client = new HttpClient();
 
@@ -66,14 +66,14 @@ public class Tests
     [Fact]
     public async Task TestHttpRecording()
     {
-        VerifyTests.Http.HttpRecording.StartRecording();
+        HttpRecording.StartRecording();
 
         var sizeOfResponse = await MethodThatDoesHttpCalls();
 
         await Verifier.Verify(
                 new
                 {
-                    sizeOfResponse,
+                    sizeOfResponse
                 })
             .ModifySerialization(settings =>
             {
@@ -98,11 +98,11 @@ public class Tests
     [Fact]
     public async Task TestHttpRecordingExplicit()
     {
-        VerifyTests.Http.HttpRecording.StartRecording();
+        HttpRecording.StartRecording();
 
         var sizeOfResponse = await MethodThatDoesHttpCalls();
 
-        var httpCalls = VerifyTests.Http.HttpRecording.FinishRecording().ToList();
+        var httpCalls = HttpRecording.FinishRecording().ToList();
 
         // Ensure all calls finished in under 5 seconds
         var threshold = TimeSpan.FromSeconds(5);
