@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace VerifyTests.Web;
+namespace VerifyTests.Http;
 
 public class RecordingHandler :
     DelegatingHandler

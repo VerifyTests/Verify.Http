@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using VerifyTests.Web;
+using VerifyTests.Http;
 using Microsoft.Extensions.Options;
 
 namespace VerifyTests;

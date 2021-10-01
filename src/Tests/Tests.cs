@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using VerifyTests;
-using VerifyTests.Web;
+using VerifyTests.Http;
 using VerifyXunit;
 using Xunit;
 
