@@ -27,7 +27,7 @@ VerifyHttp.Enable();
 <!-- endSnippet -->
 
 
-### HttpClient recording
+### HttpClient recording via Service
 
 For code that does web calls via HttpClient, these calls can be recorded and verified.
 
@@ -57,7 +57,7 @@ public class MyService
     }
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L11-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L40-L60' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -85,7 +85,7 @@ await Verifier.Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L61-L80' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L152-L171' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -114,7 +114,7 @@ await Verifier.Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L37-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L128-L146' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -170,7 +170,7 @@ await myService.MethodThatDoesHttp();
 await Verifier.Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L86-L110' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L177-L201' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -201,9 +201,195 @@ await client.GetAsync("https://httpbin.org/status/undefined");
 await Verifier.Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L116-L141' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L207-L232' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
+
+### Http Recording via listener
+
+Http Recording allows, when a method is being tested, for any http requests made as part of that method call to be recorded and verified.
+
+**Supported in net5 and up**
+
+
+#### Usage
+
+Call `HttpRecording.StartRecording();` before the method being tested is called.
+
+The perform the verification as usual:
+
+<!-- snippet: HttpRecording -->
+<a id='snippet-httprecording'></a>
+```cs
+[Fact]
+public async Task TestHttpRecording()
+{
+    VerifyTests.Http.HttpRecording.StartRecording();
+
+    var sizeOfResponse = await MethodThatDoesHttpCalls();
+
+    await Verifier.Verify(
+            new
+            {
+                sizeOfResponse,
+            })
+        .ModifySerialization(settings =>
+        {
+            //scrub some headers that are not consistent between test runs
+            settings.IgnoreMembers("traceparent", "Date");
+        });
+}
+
+static async Task<int> MethodThatDoesHttpCalls()
+{
+    using var client = new HttpClient();
+
+    var jsonResult = await client.GetStringAsync("https://httpbin.org/json");
+    var xmlResult = await client.GetStringAsync("https://httpbin.org/xml");
+    return jsonResult.Length + xmlResult.Length;
+}
+```
+<sup><a href='/src/Tests/Tests.cs#L64-L94' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+The requests/response pairs will be appended to the verified file.
+
+<!-- snippet: Tests.TestHttpRecording.verified.txt -->
+<a id='snippet-Tests.TestHttpRecording.verified.txt'></a>
+```txt
+{
+  target: {
+    sizeOfResponse: 951
+  },
+  httpCalls: [
+    {
+      Uri: https://httpbin.org/json,
+      RequestHeaders: {},
+      ResponseHeaders: {
+        Access-Control-Allow-Credentials: true,
+        Access-Control-Allow-Origin: *,
+        Connection: keep-alive,
+        Server: gunicorn/19.9.0
+      },
+      ResponseContentHeaders: {
+        Content-Length: 429,
+        Content-Type: application/json
+      },
+      ResponseContentString:
+{
+  "slideshow": {
+    "author": "Yours Truly",
+    "date": "date of publication",
+    "slides": [
+      {
+        "title": "Wake up to WonderWidgets!",
+        "type": "all"
+      },
+      {
+        "items": [
+          "Why <em>WonderWidgets</em> are great",
+          "Who <em>buys</em> WonderWidgets"
+        ],
+        "title": "Overview",
+        "type": "all"
+      }
+    ],
+    "title": "Sample Slide Show"
+  }
+}
+    },
+    {
+      Uri: https://httpbin.org/xml,
+      RequestHeaders: {},
+      ResponseHeaders: {
+        Access-Control-Allow-Credentials: true,
+        Access-Control-Allow-Origin: *,
+        Connection: keep-alive,
+        Server: gunicorn/19.9.0
+      },
+      ResponseContentHeaders: {
+        Content-Length: 522,
+        Content-Type: application/xml
+      },
+      ResponseContentString:
+<!--  A SAMPLE set of slides  -->
+<slideshow title="Sample Slide Show" date="Date of publication" author="Yours Truly">
+  <!-- TITLE SLIDE -->
+  <slide type="all">
+    <title>Wake up to WonderWidgets!</title>
+  </slide>
+  <!-- OVERVIEW -->
+  <slide type="all">
+    <title>Overview</title>
+    <item>Why <em>WonderWidgets</em> are great</item>
+    <item />
+    <item>Who <em>buys</em> WonderWidgets</item>
+  </slide>
+</slideshow>
+    }
+  ]
+}
+```
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L72' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+#### Explicit Usage
+
+The above usage results in the http calls being automatically added snapshot file. Calls can also be explicitly read and recorded using `HttpRecording.FinishRecording()`. This enables:
+
+ * Filtering what http calls are included in the snapshot.
+ * Only verifying a subset of information for each http call.
+ * Performing additional asserts on http calls.
+
+For example:
+
+<!-- snippet: HttpRecordingExplicit -->
+<a id='snippet-httprecordingexplicit'></a>
+```cs
+[Fact]
+public async Task TestHttpRecordingExplicit()
+{
+    VerifyTests.Http.HttpRecording.StartRecording();
+
+    var sizeOfResponse = await MethodThatDoesHttpCalls();
+
+    var httpCalls = VerifyTests.Http.HttpRecording.FinishRecording().ToList();
+
+    // Ensure all calls finished in under 5 seconds
+    var threshold = TimeSpan.FromSeconds(5);
+    foreach (var call in httpCalls)
+    {
+        Assert.True(call.Duration < threshold);
+    }
+
+    await Verifier.Verify(
+        new
+        {
+            sizeOfResponse,
+            // Only use the Uri in the snapshot
+            httpCalls = httpCalls.Select(_ => _.Uri)
+        });
+}
+```
+<sup><a href='/src/Tests/Tests.cs#L96-L123' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+Results in the following:
+
+<!-- snippet: Tests.TestHttpRecordingExplicit.verified.txt -->
+<a id='snippet-Tests.TestHttpRecordingExplicit.verified.txt'></a>
+```txt
+{
+  sizeOfResponse: 951,
+  httpCalls: [
+    https://httpbin.org/json,
+    https://httpbin.org/xml
+  ]
+}
+```
+<sup><a href='/src/Tests/Tests.TestHttpRecordingExplicit.verified.txt#L1-L7' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecordingExplicit.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 
 ## Icon

@@ -1,0 +1,7 @@
+﻿{
+  sizeOfResponse: 951,
+  httpCalls: [
+    https://httpbin.org/json,
+    https://httpbin.org/xml
+  ]
+}

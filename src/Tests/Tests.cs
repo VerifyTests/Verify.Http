@@ -8,6 +8,35 @@ using Xunit;
 [UsesVerify]
 public class Tests
 {
+#if NET5_0_OR_GREATER && DEBUG
+    [Fact]
+    public async Task JsonGet()
+    {
+        VerifyTests.Http.HttpRecording.StartRecording();
+
+        using var client = new HttpClient();
+
+        var result = await client.GetStringAsync("https://httpbin.org/get");
+
+        await Verifier.Verify(result)
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
+    }
+    [Fact]
+    public async Task TestHttpRecordingWithResponse()
+    {
+        VerifyTests.Http.HttpRecording.StartRecording();
+
+        using var client = new HttpClient();
+
+        var result = await client.GetStringAsync("https://httpbin.org/json");
+
+        await Verifier.Verify(result)
+            .ModifySerialization(settings =>
+            {
+                settings.IgnoreMembers("traceparent");
+            });
+    }
+#endif
     #region ServiceThatDoesHttp
 
     public class MyService
@@ -31,6 +60,68 @@ public class Tests
     #endregion
 
 #if(NET5_0_OR_GREATER)
+
+    #region HttpRecording
+
+    [Fact]
+    public async Task TestHttpRecording()
+    {
+        VerifyTests.Http.HttpRecording.StartRecording();
+
+        var sizeOfResponse = await MethodThatDoesHttpCalls();
+
+        await Verifier.Verify(
+                new
+                {
+                    sizeOfResponse,
+                })
+            .ModifySerialization(settings =>
+            {
+                //scrub some headers that are not consistent between test runs
+                settings.IgnoreMembers("traceparent", "Date");
+            });
+    }
+
+    static async Task<int> MethodThatDoesHttpCalls()
+    {
+        using var client = new HttpClient();
+
+        var jsonResult = await client.GetStringAsync("https://httpbin.org/json");
+        var xmlResult = await client.GetStringAsync("https://httpbin.org/xml");
+        return jsonResult.Length + xmlResult.Length;
+    }
+
+    #endregion
+
+    #region HttpRecordingExplicit
+
+    [Fact]
+    public async Task TestHttpRecordingExplicit()
+    {
+        VerifyTests.Http.HttpRecording.StartRecording();
+
+        var sizeOfResponse = await MethodThatDoesHttpCalls();
+
+        var httpCalls = VerifyTests.Http.HttpRecording.FinishRecording().ToList();
+
+        // Ensure all calls finished in under 5 seconds
+        var threshold = TimeSpan.FromSeconds(5);
+        foreach (var call in httpCalls)
+        {
+            Assert.True(call.Duration < threshold);
+        }
+
+        await Verifier.Verify(
+            new
+            {
+                sizeOfResponse,
+                // Only use the Uri in the snapshot
+                httpCalls = httpCalls.Select(_ => _.Uri)
+            });
+    }
+
+    #endregion
+
     [Fact]
     public async Task HttpClientRecordingGlobal()
     {
@@ -79,7 +170,58 @@ public class Tests
 
         #endregion
     }
+    
+    [Fact]
+    public async Task HttpResponseNested()
+    {
+        using var client = new HttpClient();
 
+        var result = await client.GetAsync("https://httpbin.org/get");
+
+        await Verifier.Verify(new { result })
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+    }
+    
+    [Fact]
+    public Task Uri()
+    {
+        return Verifier.Verify(
+            new
+            {
+                uri1 = new Uri("http://127.0.0.1:57754/admin/databases"),
+                uri2 = new Uri("http://127.0.0.1:57754/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483"),
+                uri3 = new Uri("http://127.0.0.1/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483"),
+                uri4 = new Uri("http://127.0.0.1/?name"),
+                uri5 = new Uri("http://127.0.0.1/?name="),
+                uri6 = new Uri("/admin/databases", UriKind.Relative),
+                uri7 = new Uri("/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483", UriKind.Relative),
+                uri8 = new Uri("/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483", UriKind.Relative),
+                uri9 = new Uri("/?name", UriKind.Relative),
+                uri10 = new Uri("/?name=", UriKind.Relative)
+            });
+    }
+
+    [Fact]
+    public async Task ImageHttpResponse()
+    {
+        using var client = new HttpClient();
+
+        var result = await client.GetAsync("https://httpbin.org/image/png");
+
+        await Verifier.Verify(result)
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+    }
+
+    [Fact]
+    public async Task HttpResponse()
+    {
+        using var client = new HttpClient();
+
+        var result = await client.GetAsync("https://httpbin.org/get");
+
+        await Verifier.Verify(result)
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+    }
     [Fact]
     public async Task PauseResume()
     {

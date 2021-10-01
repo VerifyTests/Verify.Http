@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Net.Http;
+using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Http;
 using Microsoft.Extensions.Options;
 
@@ -26,11 +27,16 @@ public static class VerifyHttp
 
     public static void Enable()
     {
+        VerifierSettings.RegisterFileConverter<HttpResponseMessage>(
+            (instance, _) => HttpResponseSplitterResult.Convert(instance));
         VerifierSettings.ModifySerialization(settings =>
         {
             settings.AddExtraSettings(serializer =>
             {
                 var converters = serializer.Converters;
+                converters.Add(new UriConverter());
+                converters.Add(new HttpHeadersConverter());
+                converters.Add(new HttpContentConverter());
                 converters.Add(new HttpResponseMessageConverter());
                 converters.Add(new HttpRequestMessageConverter());
             });

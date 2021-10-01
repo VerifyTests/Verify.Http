@@ -4,6 +4,18 @@ using Microsoft.Net.Http.Headers;
 
 static class Extensions
 {
+#if(!NET5_0_OR_GREATER)
+    internal static Stream ReadAsStream(this HttpContent content)
+    {
+        return content.ReadAsStreamAsync().GetAwaiter().GetResult();
+    }
+#endif
+
+    internal static string ReadAsString(this HttpContent content)
+    {
+        return content.ReadAsStringAsync().GetAwaiter().GetResult();
+    }
+
     public static bool IsText(this HttpContent content)
     {
         var contentType = content.Headers.ContentType;
