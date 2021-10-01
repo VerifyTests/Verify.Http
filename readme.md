@@ -21,188 +21,9 @@ Enable VerifyWeb once at assembly load time:
 <!-- snippet: Enable -->
 <a id='snippet-enable'></a>
 ```cs
-VerifyWeb.Enable();
+VerifyHttp.Enable();
 ```
-<sup><a href='/src/Tests/Properties/ModuleInitializer.cs#L9-L11' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-
-### Controller
-
-Given the following controller:
-
-<!-- snippet: MyController.cs -->
-<a id='snippet-MyController.cs'></a>
-```cs
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-
-public class MyController :
-    Controller
-{
-    public ActionResult<List<DataItem>> Method(string input)
-    {
-        var headers = HttpContext.Response.Headers;
-        headers.Add("headerKey", "headerValue");
-        headers.Add("receivedInput", input);
-
-        var cookies = HttpContext.Response.Cookies;
-        cookies.Append("cookieKey", "cookieValue");
-
-        var items = new List<DataItem>
-        {
-            new("Value1"),
-            new("Value2")
-        };
-        return new ActionResult<List<DataItem>>(items);
-    }
-
-    public class DataItem
-    {
-        public string Value { get; }
-
-        public DataItem(string value)
-        {
-            Value = value;
-        }
-    }
-}
-```
-<sup><a href='/src/Tests/Snippets/MyController.cs#L1-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyController.cs' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-This test:
-
-<!-- snippet: MyControllerTest -->
-<a id='snippet-mycontrollertest'></a>
-```cs
-[Test]
-public Task Test()
-{
-    var context = new ControllerContext
-    {
-        HttpContext = new DefaultHttpContext()
-    };
-    var controller = new MyController
-    {
-        ControllerContext = context
-    };
-
-    var result = controller.Method("inputValue");
-    return Verifier.Verify(
-        new
-        {
-            result,
-            context
-        });
-}
-```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.cs#L10-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-mycontrollertest' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-Will result in the following verified file:
-
-<!-- snippet: MyControllerTests.Test.verified.txt -->
-<a id='snippet-MyControllerTests.Test.verified.txt'></a>
-```txt
-{
-  result: [
-    {
-      Value: Value1
-    },
-    {
-      Value: Value2
-    }
-  ],
-  context: {
-    Headers: {
-      headerKey: headerValue,
-      receivedInput: inputValue
-    },
-    Cookies: {
-      cookieKey: cookieValue
-    }
-  }
-}
-```
-<sup><a href='/src/Tests/Snippets/MyControllerTests.Test.verified.txt#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyControllerTests.Test.verified.txt' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-
-### Middleware
-
-Given the following middleware:
-
-<!-- snippet: MyMiddleware.cs -->
-<a id='snippet-MyMiddleware.cs'></a>
-```cs
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-
-public class MyMiddleware
-{
-    RequestDelegate next;
-
-    public MyMiddleware(RequestDelegate next)
-    {
-        this.next = next;
-    }
-
-    public async Task Invoke(HttpContext context)
-    {
-        context.Response.Headers.Add("headerKey", "headerValue");
-        await next(context);
-    }
-}
-```
-<sup><a href='/src/Tests/Snippets/MyMiddleware.cs#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyMiddleware.cs' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-This test:
-
-<!-- snippet: MyMiddlewareTest -->
-<a id='snippet-mymiddlewaretest'></a>
-```cs
-[Test]
-public async Task Test()
-{
-    var nextCalled = false;
-    var middleware = new MyMiddleware(
-        _ =>
-        {
-            nextCalled = true;
-            return Task.CompletedTask;
-        });
-
-    var context = new DefaultHttpContext();
-    await middleware.Invoke(context);
-
-    await Verifier.Verify(
-        new
-        {
-            context.Response,
-            nextCalled
-        });
-}
-```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.cs#L9-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-mymiddlewaretest' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-Will result in the following verified file:
-
-<!-- snippet: MyMiddlewareTests.Test.verified.txt -->
-<a id='snippet-MyMiddlewareTests.Test.verified.txt'></a>
-```txt
-{
-  Response: {
-    Headers: {
-      headerKey: headerValue
-    }
-  },
-  nextCalled: true
-}
-```
-<sup><a href='/src/Tests/Snippets/MyMiddlewareTests.Test.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-MyMiddlewareTests.Test.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Properties/ModuleInitializer.cs#L8-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -236,7 +57,7 @@ public class MyService
     }
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L58-L78' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L11-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -264,7 +85,7 @@ await Verifier.Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L108-L127' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L61-L80' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -293,7 +114,7 @@ await Verifier.Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L84-L102' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L37-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -349,7 +170,7 @@ await myService.MethodThatDoesHttp();
 await Verifier.Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L133-L155' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L86-L108' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -380,7 +201,7 @@ await client.GetAsync("https://httpbin.org/status/undefined");
 await Verifier.Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L161-L184' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L114-L137' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

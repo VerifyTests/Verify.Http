@@ -2,39 +2,38 @@
 using VerifyTests.Web;
 using Microsoft.Extensions.Options;
 
-namespace VerifyTests
+namespace VerifyTests;
+
+public static class VerifyHttp
 {
-    public static class VerifyHttp
+    public static (IHttpClientBuilder builder, RecordingHandler recording) AddRecordingHttpClient(
+        this ServiceCollection collection,
+        string? name = null)
     {
-        public static (IHttpClientBuilder builder, RecordingHandler recording) AddRecordingHttpClient(
-            this ServiceCollection collection,
-            string? name = null)
-        {
-            name ??= Options.DefaultName;
+        name ??= Options.DefaultName;
 
-            var builder = collection.AddHttpClient(name);
-            var recording = AddRecording(builder);
-            return (builder, recording);
-        }
+        var builder = collection.AddHttpClient(name);
+        var recording = AddRecording(builder);
+        return (builder, recording);
+    }
 
-        public static RecordingHandler AddRecording(this IHttpClientBuilder builder)
-        {
-            var recording = new RecordingHandler();
-            builder.AddHttpMessageHandler(() => recording);
-            return recording;
-        }
+    public static RecordingHandler AddRecording(this IHttpClientBuilder builder)
+    {
+        var recording = new RecordingHandler();
+        builder.AddHttpMessageHandler(() => recording);
+        return recording;
+    }
 
-        public static void Enable()
+    public static void Enable()
+    {
+        VerifierSettings.ModifySerialization(settings =>
         {
-            VerifierSettings.ModifySerialization(settings =>
+            settings.AddExtraSettings(serializer =>
             {
-                settings.AddExtraSettings(serializer =>
-                {
-                    var converters = serializer.Converters;
-                    converters.Add(new HttpResponseMessageConverter());
-                    converters.Add(new HttpRequestMessageConverter());
-                });
+                var converters = serializer.Converters;
+                converters.Add(new HttpResponseMessageConverter());
+                converters.Add(new HttpRequestMessageConverter());
             });
-        }
+        });
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 #if(NET5_0_OR_GREATER)
 using System.Net.Http;
 #endif
