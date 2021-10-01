@@ -1,9 +1,9 @@
-# <img src="/src/icon.png" height="30px"> Verify.Web
+# <img src="/src/icon.png" height="30px"> Verify.Http
 
-[![Build status](https://ci.appveyor.com/api/projects/status/eedjhmx5o3082tyq?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-web)
-[![NuGet Status](https://img.shields.io/nuget/v/Verify.Web.svg)](https://www.nuget.org/packages/Verify.Web/)
+[![Build status](https://ci.appveyor.com/api/projects/status/eedjhmx5o3082tyq?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-http)
+[![NuGet Status](https://img.shields.io/nuget/v/Verify.Http.svg)](https://www.nuget.org/packages/Verify.Http/)
 
-Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of web bits.
+Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of Http bits.
 
 <a href='https://dotnetfoundation.org' alt='Part of the .NET Foundation'><img src='https://raw.githubusercontent.com/VerifyTests/Verify/master/docs/dotNetFoundation.svg' height='30px'></a><br>
 Part of the <a href='https://dotnetfoundation.org' alt=''>.NET Foundation</a>
@@ -11,12 +11,12 @@ Part of the <a href='https://dotnetfoundation.org' alt=''>.NET Foundation</a>
 
 ## NuGet package
 
-https://nuget.org/packages/Verify.Web/
+https://nuget.org/packages/Verify.Http/
 
 
 ## Usage
 
-Enable VerifyWeb once at assembly load time:
+Enable VerifyHttp once at assembly load time:
 
 <!-- snippet: Enable -->
 <a id='snippet-enable'></a>
