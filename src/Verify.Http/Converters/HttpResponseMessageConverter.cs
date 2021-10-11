@@ -9,16 +9,11 @@ class HttpResponseMessageConverter :
     {
         writer.WriteStartObject();
 
-        WriteProperties(writer, serializer, value);
+        WriteHeaders(writer, serializer, value);
+
+        WriteCookies(writer, serializer, value);
 
         writer.WriteEndObject();
-    }
-
-    public static void WriteProperties(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
-    {
-        WriteHeaders(writer, serializer, response);
-
-        WriteCookies(writer, serializer, response);
     }
 
     static void WriteCookies(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
