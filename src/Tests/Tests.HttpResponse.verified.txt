@@ -1,0 +1,19 @@
+﻿{
+  Version: 1.1,
+  StatusCode: 200,
+  IsSuccessStatusCode: true,
+  ReasonPhrase: OK,
+  Headers: {
+    Access-Control-Allow-Credentials: true,
+    Connection: keep-alive,
+    Date: DateTime_1,
+    Server: gunicorn/19.9.0
+  },
+  Request: {
+    Version: 1.1,
+    Method: {
+      Method: GET
+    },
+    Uri: https://httpbin.org/get
+  }
+}

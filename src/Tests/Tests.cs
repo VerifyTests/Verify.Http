@@ -222,6 +222,7 @@ public class Tests
         await Verifier.Verify(result)
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
     }
+
     [Fact]
     public async Task PauseResume()
     {

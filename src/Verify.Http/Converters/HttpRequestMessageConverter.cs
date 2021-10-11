@@ -5,20 +5,22 @@ using VerifyTests;
 class HttpRequestMessageConverter :
     WriteOnlyJsonConverter<HttpRequestMessage>
 {
-    public override void WriteJson(JsonWriter writer, HttpRequestMessage value, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
+    public override void WriteJson(JsonWriter writer, HttpRequestMessage request, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
         writer.WriteStartObject();
+        
+        writer.WritePropertyName("Version");
+        serializer.Serialize(writer, request.Version);
+        writer.WritePropertyName("Method");
+        serializer.Serialize(writer, request.Method);
+        writer.WritePropertyName("Uri");
+        serializer.Serialize(writer, request.RequestUri);
 
-        WriteProperties(writer, serializer, value);
-
-        writer.WriteEndObject();
-    }
-
-    public static void WriteProperties(JsonWriter writer, JsonSerializer serializer, HttpRequestMessage request)
-    {
         WriteHeaders(writer, serializer, request);
 
         WriteCookies(writer, serializer, request);
+
+        writer.WriteEndObject();
     }
 
     static void WriteCookies(JsonWriter writer, JsonSerializer serializer, HttpRequestMessage request)

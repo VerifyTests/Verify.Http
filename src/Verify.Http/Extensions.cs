@@ -32,21 +32,45 @@ static class Extensions
         return headers
             .ToDictionary(x => x.Key, x => string.Join("|", x.Value));
     }
-
-    public static Dictionary<string, string> NotCookies(this HttpHeaders headers)
+    
+    public static Dictionary<string, object> Simplify(this HttpHeaders headers)
     {
         return headers
+            .OrderBy(x => x.Key.ToLowerInvariant())
+            .ToDictionary(
+                x => x.Key,
+                x =>
+                {
+                    var values = x.Value.ToList();
+                    var key = x.Key.ToLowerInvariant();
+                    if (key is "date" or "expires" or "last-modified")
+                    {
+                        if (DateTime.TryParse(values.First(), out var date))
+                        {
+                            return date;
+                        }
+                    }
+
+                    return (object)string.Join(",", values);
+                });
+    }
+
+    public static Dictionary<string, object> NotCookies(this HttpHeaders headers)
+    {
+        return headers
+            .Simplify()
             .Where(x => x.Key != "Set-Cookie")
-            .ToDictionary(x => x.Key, x => x.Value.ToString()!);
+            .ToDictionary(x => x.Key, x => x.Value);
     }
     
     public static Dictionary<string, string> Cookies(this HttpHeaders headers)
     {
         return headers
+            .Simplify()
             .Where(x => x.Key == "Set-Cookie")
             .Select(x =>
             {
-                var stringSegment = x.Value.Single();
+                var stringSegment = (string)x.Value;
                 return SetCookieHeaderValue.Parse(stringSegment);
             })
             .ToDictionary(x => x.Name.Value, x => x.Value.Value);

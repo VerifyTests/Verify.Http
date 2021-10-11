@@ -11,24 +11,6 @@ class HttpHeadersConverter :
         JsonSerializer serializer,
         IReadOnlyDictionary<string, object> context)
     {
-        var value = headers
-            .OrderBy(x => x.Key.ToLowerInvariant())
-            .ToDictionary(
-                x => x.Key,
-                x =>
-                {
-                    var values = x.Value.ToList();
-                    var key = x.Key.ToLowerInvariant();
-                    if (key is "date" or "expires" or "last-modified")
-                    {
-                        if (DateTime.TryParse(values.First(), out var date))
-                        {
-                            return date;
-                        }
-                    }
-
-                    return (object) string.Join(",", values);
-                });
-        serializer.Serialize(writer, value);
+        serializer.Serialize(writer, headers.Simplify());
     }
 }
