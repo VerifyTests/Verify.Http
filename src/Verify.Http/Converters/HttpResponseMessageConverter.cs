@@ -12,7 +12,7 @@ class HttpResponseMessageConverter :
         writer.WritePropertyName("Version");
         serializer.Serialize(writer, response.Version);
         writer.WritePropertyName("StatusCode");
-        writer.WriteValue(response.StatusCode);
+        serializer.Serialize(writer, response.StatusCode);
         writer.WritePropertyName("IsSuccessStatusCode");
         writer.WriteValue(response.IsSuccessStatusCode);
         writer.WritePropertyName("ReasonPhrase");

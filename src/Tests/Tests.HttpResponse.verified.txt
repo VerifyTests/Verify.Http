@@ -1,6 +1,6 @@
-﻿{
+{
   Version: 1.1,
-  StatusCode: 200,
+  StatusCode: OK,
   IsSuccessStatusCode: true,
   ReasonPhrase: OK,
   Headers: {
