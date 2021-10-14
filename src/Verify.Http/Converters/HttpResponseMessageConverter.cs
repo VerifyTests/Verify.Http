@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using VerifyTests;
 
 class HttpResponseMessageConverter :
@@ -22,6 +21,8 @@ class HttpResponseMessageConverter :
 
         WriteCookies(writer, serializer, response);
 
+        writer.WritePropertyName("Content");
+        serializer.Serialize(writer, response.Content);
         writer.WritePropertyName("Request");
         serializer.Serialize(writer, response.RequestMessage);
 

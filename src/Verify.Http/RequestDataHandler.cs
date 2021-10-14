@@ -1,7 +1,4 @@
 ﻿using System.Net;
-#if(NET5_0_OR_GREATER)
-using System.Net.Http;
-#endif
 
 namespace VerifyTests.Http;
 

@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using VerifyTests;
 
 class HttpRequestMessageConverter :

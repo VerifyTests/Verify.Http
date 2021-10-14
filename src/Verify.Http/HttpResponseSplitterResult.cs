@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using VerifyTests;
+﻿using VerifyTests;
 
 static class HttpResponseSplitterResult
 {

@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using VerifyTests;
 using VerifyTests.Http;
 using VerifyXunit;

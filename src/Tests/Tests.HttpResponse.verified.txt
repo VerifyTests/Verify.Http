@@ -9,6 +9,18 @@
     Date: DateTime_1,
     Server: gunicorn/19.9.0
   },
+  Content: {
+    Headers: {
+      Content-Type: application/json
+    },
+    Value: {
+      args: {},
+      headers: {
+        Host: httpbin.org,
+      },
+      url: https://httpbin.org/get
+    }
+  },
   Request: {
     Version: 1.1,
     Method: {
