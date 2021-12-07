@@ -1,7 +1,6 @@
 ﻿using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using VerifyTests;
 
 class HttpContentConverter :
     WriteOnlyJsonConverter<HttpContent>

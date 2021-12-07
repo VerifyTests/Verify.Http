@@ -1,6 +1,4 @@
-﻿using VerifyTests;
-
-static class HttpResponseSplitterResult
+﻿static class HttpResponseSplitterResult
 {
     public static ConversionResult Convert(HttpResponseMessage instance)
     {

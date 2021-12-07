@@ -1,7 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Web;
 using Newtonsoft.Json;
-using VerifyTests;
 
 class UriConverter :
     WriteOnlyJsonConverter<Uri>

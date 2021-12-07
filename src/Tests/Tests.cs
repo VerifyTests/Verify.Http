@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using VerifyTests;
 using VerifyTests.Http;
-using VerifyXunit;
-using Xunit;
 
 [UsesVerify]
 public class Tests

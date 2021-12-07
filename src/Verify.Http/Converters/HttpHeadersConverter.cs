@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using VerifyTests;
 
 class HttpHeadersConverter :
     WriteOnlyJsonConverter<HttpHeaders>
