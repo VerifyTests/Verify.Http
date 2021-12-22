@@ -14,7 +14,7 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/get");
 
-        await Verifier.Verify(result)
+        await Verify(result)
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
     [Fact]
@@ -26,7 +26,7 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/json");
 
-        await Verifier.Verify(result)
+        await Verify(result)
             .ModifySerialization(settings =>
             {
                 settings.IgnoreMembers("traceparent");
@@ -66,7 +66,7 @@ public class Tests
 
         var sizeOfResponse = await MethodThatDoesHttpCalls();
 
-        await Verifier.Verify(
+        await Verify(
                 new
                 {
                     sizeOfResponse
@@ -107,7 +107,7 @@ public class Tests
             Assert.True(call.Duration < threshold);
         }
 
-        await Verifier.Verify(
+        await Verify(
             new
             {
                 sizeOfResponse,
@@ -135,7 +135,7 @@ public class Tests
 
         await myService.MethodThatDoesHttp();
 
-        await Verifier.Verify(recording.Sends)
+        await Verify(recording.Sends)
             // Ignore some headers that change per request
             .ModifySerialization(x => x.IgnoreMembers("Date"));
 
@@ -160,7 +160,7 @@ public class Tests
 
         await myService.MethodThatDoesHttp();
 
-        await Verifier.Verify(recording.Sends)
+        await Verify(recording.Sends)
             // Ignore some headers that change per request
             .ModifySerialization(x => x.IgnoreMembers("Date"));
 
@@ -174,14 +174,14 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verifier.Verify(new { result })
+        await Verify(new { result })
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
     }
     
     [Fact]
     public Task Uri()
     {
-        return Verifier.Verify(
+        return Verify(
             new
             {
                 uri1 = new Uri("http://127.0.0.1:57754/admin/databases"),
@@ -204,7 +204,7 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/image/png");
 
-        await Verifier.Verify(result)
+        await Verify(result)
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
     }
 
@@ -215,7 +215,7 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verifier.Verify(result)
+        await Verify(result)
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
     }
 
@@ -243,7 +243,7 @@ public class Tests
         recording.Resume();
         await myService.MethodThatDoesHttp();
 
-        await Verifier.Verify(recording.Sends)
+        await Verify(recording.Sends)
             .ModifySerialization(x => x.IgnoreMembers("Date"));
 
         #endregion
@@ -274,7 +274,7 @@ public class Tests
         recording.Resume();
         await client.GetAsync("https://httpbin.org/status/undefined");
 
-        await Verifier.Verify(recording.Sends)
+        await Verify(recording.Sends)
             .ModifySerialization(x => x.IgnoreMembers("Date"));
 
         #endregion
