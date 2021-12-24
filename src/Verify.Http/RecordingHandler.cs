@@ -42,9 +42,12 @@ public class RecordingHandler :
 
         var responseContent = response.Content;
         string? responseText = null;
-        if (responseContent.IsText())
+        if (responseContent != null)
         {
-            responseText = await responseContent.ReadAsStringAsync();
+            if (responseContent.IsText())
+            {
+                responseText = await responseContent.ReadAsStringAsync();
+            }
         }
 
         var item = new LoggedSend(
