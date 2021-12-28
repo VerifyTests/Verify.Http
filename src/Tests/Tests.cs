@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Net;
+using System.Net.Http.Headers;
+using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Http;
 
 [UsesVerify]
@@ -33,6 +35,7 @@ public class Tests
             });
     }
 #endif
+
     #region ServiceThatDoesHttp
 
     public class MyService
@@ -166,7 +169,7 @@ public class Tests
 
         #endregion
     }
-    
+
     [Fact]
     public async Task HttpResponseNested()
     {
@@ -174,10 +177,10 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verify(new { result })
+        await Verify(new {result})
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
     }
-    
+
     [Fact]
     public Task Uri()
     {
@@ -185,13 +188,19 @@ public class Tests
             new
             {
                 uri1 = new Uri("http://127.0.0.1:57754/admin/databases"),
-                uri2 = new Uri("http://127.0.0.1:57754/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483"),
-                uri3 = new Uri("http://127.0.0.1/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483"),
+                uri2 = new Uri(
+                    "http://127.0.0.1:57754/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483"),
+                uri3 = new Uri(
+                    "http://127.0.0.1/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483"),
                 uri4 = new Uri("http://127.0.0.1/?name"),
                 uri5 = new Uri("http://127.0.0.1/?name="),
                 uri6 = new Uri("/admin/databases", UriKind.Relative),
-                uri7 = new Uri("/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483", UriKind.Relative),
-                uri8 = new Uri("/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483", UriKind.Relative),
+                uri7 = new Uri(
+                    "/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483",
+                    UriKind.Relative),
+                uri8 = new Uri(
+                    "/admin/databases?name=HttpRecordingTest&replicationFactor=1&raft-request-id=1331f44c-02de-4d00-a645-28bc1b639483",
+                    UriKind.Relative),
                 uri9 = new Uri("/?name", UriKind.Relative),
                 uri10 = new Uri("/?name=", UriKind.Relative)
             });
@@ -278,5 +287,113 @@ public class Tests
             .ModifySerialization(x => x.IgnoreMembers("Date"));
 
         #endregion
+    }
+
+    [Fact]
+    public async Task MediaTypeTexPlain_ShouldBeRecorded_WithDefaultContentRetriever()
+    {
+        var verifyRecordingHandler = new RecordingHandler(true);
+        verifyRecordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler(null, "string content 123");
+        using var client = new HttpClient(verifyRecordingHandler);
+
+        var httpResponse = await client.GetAsync("https://httpbin.org/get");
+
+        await Verify(new
+        {
+            Recorded =  verifyRecordingHandler.Sends,
+            HttpResponse = httpResponse,
+        });
+    }
+
+    [Fact]
+    public async Task ApplicationJson_ShouldNotBeRecorded_WithDefaultContentRetriever()
+    {
+        var verifyRecordingHandler = new RecordingHandler(true);
+        verifyRecordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler("application/json", "{ \"age\": 1234 }");
+        using var client = new HttpClient(verifyRecordingHandler);
+
+        var httpResponse = await client.GetAsync("https://httpbin.org/get");
+
+        await Verify(new
+        {
+            Recorded = verifyRecordingHandler.Sends,
+            HttpResponse = httpResponse,
+        });
+    }
+
+    [Fact]
+    public async Task ApplicationJson_ShouldBeRecorded_WithCustomContentRetriever()
+    {
+        var verifyRecordingHandler = new RecordingHandler(true);
+        verifyRecordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler("application/json", "{ \"age\": 1234 }");
+        using var client = new HttpClient(verifyRecordingHandler);
+        
+        verifyRecordingHandler.SetCustomResponseContentRetriever(async content =>
+        {
+            if (content == null)
+            {
+                return null;
+            }
+
+            var contentType = content.Headers.ContentType;
+            if (contentType?.MediaType == null)
+            {
+                return null;
+            }
+
+            if (!contentType.MediaType.StartsWith("application/json"))
+            {
+                return null;
+            }
+
+            return await content.ReadAsStringAsync();
+        });
+
+        var httpResponse = await client.GetAsync("https://httpbin.org/get");
+
+        await Verify(new
+        {
+            Recorded = verifyRecordingHandler.Sends,
+            HttpResponse = httpResponse,
+        });
+    }
+
+    private class ConfigurableContentTypeDelegatingHandler : DelegatingHandler
+    {
+        private readonly string? _mediaType;
+        private readonly string? _content;
+
+        public ConfigurableContentTypeDelegatingHandler(string? mediaType, string? content)
+        {
+            _mediaType = mediaType;
+            _content = content;
+        }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellation)
+        {
+            if (_mediaType != null && _content != null)
+            {
+                var result = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(_content, Encoding.UTF8, _mediaType),
+                };
+
+                return Task.FromResult(result);
+            }
+            else if (_content != null)
+            {
+                var result = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(_content, Encoding.UTF8),
+                };
+                return Task.FromResult(result);
+            }
+            else
+            {
+                var result = new HttpResponseMessage(HttpStatusCode.OK);
+                return Task.FromResult(result);
+            }
+        }
     }
 }
