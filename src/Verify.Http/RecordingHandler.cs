@@ -3,6 +3,9 @@
 public class RecordingHandler :
     DelegatingHandler
 {
+    private Func<HttpContent?, Task<string?>> _customRequestContentRetriever = DefaultIsTextContentRetriever;
+    private Func<HttpContent?, Task<string?>> _customResponseContentRetriever = DefaultIsTextContentRetriever;
+
     public ConcurrentQueue<LoggedSend> Sends = new();
 
     public void Resume()
@@ -22,30 +25,29 @@ public class RecordingHandler :
 
     public bool Recording { get; private set; }
 
+    public void SetCustomRequestContentRetriever(Func<HttpContent?, Task<string?>> func)
+    {
+        _customRequestContentRetriever = func ?? throw new ArgumentNullException(nameof(func));
+    }
+
+    public void SetCustomResponseContentRetriever(Func<HttpContent?, Task<string?>> func)
+    {
+        _customResponseContentRetriever = func ?? throw new ArgumentNullException(nameof(func));
+    }
+
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
     {
         if (!Recording)
         {
             return await base.SendAsync(request, cancellation);
         }
-        string? requestText = null;
+ 
         var requestContent = request.Content;
-        if (requestContent != null)
-        {
-            if (requestContent.IsText())
-            {
-                requestText = await requestContent.ReadAsStringAsync();
-            }
-        }
-
+        var requestText = await _customRequestContentRetriever.Invoke(requestContent);
         var response = await base.SendAsync(request, cancellation);
 
         var responseContent = response.Content;
-        string? responseText = null;
-        if (responseContent.IsText())
-        {
-            responseText = await responseContent.ReadAsStringAsync();
-        }
+        var responseText = await _customResponseContentRetriever.Invoke(responseContent);
 
         var item = new LoggedSend(
             request.RequestUri,
@@ -61,5 +63,16 @@ public class RecordingHandler :
         Sends.Enqueue(item);
 
         return response;
+    }
+
+    private static async Task<string?> DefaultIsTextContentRetriever(HttpContent? content)
+    {
+        if (content == null)
+            return null;
+
+        if (!content.IsText())
+            return null;
+
+        return await content.ReadAsStringAsync();
     }
 }

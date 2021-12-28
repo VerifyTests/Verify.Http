@@ -1,0 +1,25 @@
+﻿{
+  Recorded: [
+    {
+      RequestUri: https://httpbin.org/get,
+      RequestMethod: GET,
+      ResponseStatus: OK
+    }
+  ],
+  HttpResponse: {
+    Version: 1.1,
+    StatusCode: OK,
+    IsSuccessStatusCode: true,
+    ReasonPhrase: OK,
+    Content: {
+      Headers: {
+        Content-Length: 15,
+        Content-Type: application/json; charset=utf-8
+      },
+      Value: {
+        age: 1234
+      }
+    },
+    Request: null
+  }
+}
