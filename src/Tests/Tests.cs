@@ -358,19 +358,6 @@ public class Tests
         });
     }
 
-    [Fact]
-    public async Task WithoutApplicationJsonContentType()
-    {
-        var verifyRecordingHandler = new RecordingHandler(true);
-        verifyRecordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler("application/json", "{}");
-
-        using var client = new HttpClient(verifyRecordingHandler);
-
-        var result = await client.GetAsync("https://httpbin.org/get");
-
-        await Verify(result);
-    }
-
     private class ConfigurableContentTypeDelegatingHandler : DelegatingHandler
     {
         private readonly string? _mediaType;
