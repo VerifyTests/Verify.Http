@@ -166,7 +166,7 @@ public class Tests
 
         #endregion
     }
-    
+
     [Fact]
     public async Task HttpResponseNested()
     {
@@ -177,7 +177,7 @@ public class Tests
         await Verify(new { result })
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
     }
-    
+
     [Fact]
     public Task Uri()
     {

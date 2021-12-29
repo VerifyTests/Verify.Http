@@ -31,7 +31,7 @@ static class Extensions
         return headers
             .ToDictionary(x => x.Key, x => string.Join("|", x.Value));
     }
-    
+
     public static Dictionary<string, object> Simplify(this HttpHeaders headers)
     {
         return headers
@@ -61,7 +61,7 @@ static class Extensions
             .Where(x => x.Key != "Set-Cookie")
             .ToDictionary(x => x.Key, x => x.Value);
     }
-    
+
     public static Dictionary<string, string> Cookies(this HttpHeaders headers)
     {
         return headers

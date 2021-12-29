@@ -6,7 +6,7 @@ class HttpResponseMessageConverter :
     public override void WriteJson(JsonWriter writer, HttpResponseMessage response, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
         writer.WriteStartObject();
-        
+
         writer.WritePropertyName("Version");
         serializer.Serialize(writer, response.Version);
         writer.WritePropertyName("StatusCode");
