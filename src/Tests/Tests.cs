@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Net;
+using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Http;
 
 [UsesVerify]
@@ -278,5 +279,51 @@ public class Tests
             .ModifySerialization(x => x.IgnoreMembers("Date"));
 
         #endregion
+    }
+
+    [Fact]
+    public async Task MediaTypePlainTextIsRecorded()
+    {
+        const string content = "string content 123";
+        var verifyRecordingHandler = new RecordingHandler(true);
+        verifyRecordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler(new StringContent(content, Encoding.UTF8));
+        using var client = new HttpClient(verifyRecordingHandler);
+
+        var httpResponse = await client.GetAsync("https://dont-care.org/get");
+
+        Assert.Equal(content, verifyRecordingHandler.Sends.Single().ResponseContent);
+    }
+
+    [Fact]
+    public async Task MediaTypeApplicationJsonIsRecorded()
+    {
+        const string content = "{ \"age\": 1234 }";
+        var verifyRecordingHandler = new RecordingHandler(true);
+        verifyRecordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler(new StringContent(content, Encoding.UTF8, "application/json"));
+        using var client = new HttpClient(verifyRecordingHandler);
+
+        var httpResponse = await client.GetAsync("https://dont-care.org/get");
+
+        Assert.Equal(content, verifyRecordingHandler.Sends.Single().ResponseContent);
+    }
+
+    private class ConfigurableContentTypeDelegatingHandler : DelegatingHandler
+    {
+        private readonly StringContent _stringContent;
+
+        public ConfigurableContentTypeDelegatingHandler(StringContent stringContent)
+        {
+            _stringContent = stringContent;
+        }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
+        {
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = _stringContent,
+            };
+
+            return Task.FromResult(result);
+        }
     }
 }
