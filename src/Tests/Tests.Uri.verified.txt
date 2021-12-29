@@ -1,4 +1,4 @@
-﻿{
+{
   uri1: http://127.0.0.1:57754/admin/databases,
   uri2: {
     Path: http://127.0.0.1:57754/admin/databases,

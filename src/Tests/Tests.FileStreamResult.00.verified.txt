@@ -1,4 +1,0 @@
-﻿{
-  FileDownloadName: ,
-  ContentType: text/plain
-}

@@ -1,4 +1,4 @@
-﻿[
+[
   {
     RequestUri: https://httpbin.org/status/undefined,
     RequestMethod: GET,
