@@ -15,17 +15,6 @@ static class Extensions
         return content.ReadAsStringAsync().GetAwaiter().GetResult();
     }
 
-    public static bool IsText(this HttpContent content)
-    {
-        var contentType = content.Headers.ContentType;
-        if (contentType?.MediaType == null)
-        {
-            return false;
-        }
-
-        return contentType.MediaType.StartsWith("text");
-    }
-
     public static Dictionary<string, string> ToDictionary(this HttpHeaders headers)
     {
         return headers

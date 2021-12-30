@@ -53,7 +53,7 @@ public class RecordingHandler :
         var item = new LoggedSend(
             request.RequestUri,
 #if(NET5_0_OR_GREATER)
-                request.Options,
+            request.Options,
 #endif
             request.Method.ToString(),
             request.Headers.ToDictionary(),

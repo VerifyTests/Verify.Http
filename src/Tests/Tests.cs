@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Net;
+using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Http;
 
 [UsesVerify]
@@ -56,6 +57,52 @@ public class Tests
     #endregion
 
 #if(NET5_0_OR_GREATER)
+
+    [Fact]
+    public async Task MediaTypePlainTextIsRecorded()
+    {
+        const string content = "string content 123";
+        var recordingHandler = new RecordingHandler(true);
+        recordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler(new StringContent(content, Encoding.UTF8));
+        using var client = new HttpClient(recordingHandler);
+
+        var response = await client.GetAsync("https://dont-care.org/get");
+
+        Assert.Equal(content, recordingHandler.Sends.Single().ResponseContent);
+    }
+
+    [Fact]
+    public async Task MediaTypeApplicationJsonIsRecorded()
+    {
+        const string content = "{ \"age\": 1234 }";
+        var recordingHandler = new RecordingHandler(true);
+        recordingHandler.InnerHandler = new ConfigurableContentTypeDelegatingHandler(new StringContent(content, Encoding.UTF8, "application/json"));
+        using var client = new HttpClient(recordingHandler);
+
+        var response = await client.GetAsync("https://dont-care.org/get");
+
+        Assert.Equal(content, recordingHandler.Sends.Single().ResponseContent);
+    }
+
+    class ConfigurableContentTypeDelegatingHandler : DelegatingHandler
+    {
+        StringContent content;
+
+        public ConfigurableContentTypeDelegatingHandler(StringContent content)
+        {
+            this.content = content;
+        }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
+        {
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = content,
+            };
+
+            return Task.FromResult(result);
+        }
+    }
 
     #region HttpRecording
 

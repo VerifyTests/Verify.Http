@@ -113,6 +113,11 @@ static class HttpExtensions
         return mappings.TryGetValue(mediaType, out extension);
     }
 
+    public static bool IsText(this HttpContent content)
+    {
+        return content.IsText(out _);
+    }
+
     public static bool IsText(this HttpContent content, [NotNullWhen(true)] out string? subType)
     {
         var contentType = content.Headers.ContentType;
