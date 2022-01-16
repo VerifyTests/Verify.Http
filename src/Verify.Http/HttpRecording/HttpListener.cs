@@ -60,7 +60,6 @@ class HttpListener :
     [DiagnosticName("System.Net.Http.HttpRequestOut.Start")]
     public virtual void OnHttpRequestOutStart(HttpRequestMessage request)
     {
-        Debug.WriteLine("d");
     }
 
     [DiagnosticName("System.Net.Http.HttpRequestOut.Stop")]
