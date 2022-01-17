@@ -1,10 +1,9 @@
-﻿{
+{
   result: ,
   client: {
     Calls: [
       {
         Request: {
-          Method: GET,
           Uri: https://httpbin.org/get
         },
         Response: 200 Ok

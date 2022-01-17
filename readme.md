@@ -264,7 +264,6 @@ The requests/response pairs will be appended to the verified file.
   httpCalls: [
     {
       Request: {
-        Method: GET,
         Uri: https://httpbin.org/json,
         Headers: {}
       },
@@ -306,7 +305,6 @@ The requests/response pairs will be appended to the verified file.
     },
     {
       Request: {
-        Method: GET,
         Uri: https://httpbin.org/xml,
         Headers: {}
       },
@@ -342,7 +340,7 @@ The requests/response pairs will be appended to the verified file.
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L84' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L82' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

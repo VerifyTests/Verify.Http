@@ -12,8 +12,11 @@ class HttpRequestConverter :
     {
         writer.WriteStartObject();
 
-        writer.WritePropertyName("Method");
-        serializer.Serialize(writer, request.Method);
+        if (request.Method != HttpMethod.Get)
+        {
+            writer.WritePropertyName("Method");
+            serializer.Serialize(writer, request.Method);
+        }
 
         writer.WritePropertyName("Uri");
         serializer.Serialize(writer, request.Uri);

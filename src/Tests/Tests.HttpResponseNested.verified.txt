@@ -21,8 +21,6 @@
       }
     },
     Request: {
-      Version: 1.1,
-      Method: GET,
       Uri: https://httpbin.org/get
     }
   }

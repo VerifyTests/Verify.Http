@@ -8,14 +8,20 @@ class HttpRequestMessageConverter :
 
         writer.WriteStartObject();
 
-        writer.WritePropertyName("Version");
-        serializer.Serialize(writer, request.Version);
-
-        writer.WritePropertyName("Method");
-        serializer.Serialize(writer, request.Method);
+        if (request.Method != HttpMethod.Get)
+        {
+            writer.WritePropertyName("Method");
+            serializer.Serialize(writer, request.Method);
+        }
 
         writer.WritePropertyName("Uri");
         serializer.Serialize(writer, request.RequestUri);
+
+        if (!request.IsDefaultVersion())
+        {
+            writer.WritePropertyName("Version");
+            serializer.Serialize(writer, request.Version);
+        }
 
         WriteHeaders(writer, serializer, request);
 

@@ -25,7 +25,6 @@
   httpCalls: [
     {
       Request: {
-        Method: GET,
         Uri: https://httpbin.org/json,
         Headers: {}
       },

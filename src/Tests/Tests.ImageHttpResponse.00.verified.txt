@@ -1,4 +1,4 @@
-﻿{
+{
   Version: 1.1,
   Status: 200 OK,
   Headers: {
@@ -8,8 +8,6 @@
     Server: gunicorn/19.9.0
   },
   RequestMessage: {
-    Version: 1.1,
-    Method: GET,
     Uri: https://httpbin.org/image/png
   }
 }

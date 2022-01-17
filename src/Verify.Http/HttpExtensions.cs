@@ -16,6 +16,32 @@ static class HttpExtensions
         return $"{(int) status} {instance.ReasonPhrase}";
     }
 
+    public static bool IsDefaultVersion(this HttpRequestMessage request)
+    {
+        return request.Version == defaultRequestVersion;
+    }
+
+#if NET5_0_OR_GREATER
+    public static bool IsDefaultVersionPolicy(this HttpRequestMessage request)
+    {
+        return request.VersionPolicy == defaultRequestVersionPolicy;
+    }
+#endif
+
+    static HttpExtensions()
+    {
+        var request = new HttpRequestMessage();
+        defaultRequestVersion = request.Version;
+#if NET5_0_OR_GREATER
+        defaultRequestVersionPolicy = request.VersionPolicy;
+#endif
+    }
+
+    static Version defaultRequestVersion;
+#if NET5_0_OR_GREATER
+    static HttpVersionPolicy defaultRequestVersionPolicy;
+#endif
+
     public static (string? content, string? prettyContent) TryReadStringContent(this HttpContent? content)
     {
         if (content == null)
