@@ -1,8 +1,53 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
+using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
 
 static class HttpExtensions
 {
+    public static string StatusText(this HttpResponseMessage instance)
+    {
+        if (instance.ReasonPhrase == null)
+        {
+            return $"{(int) instance.StatusCode} {instance.StatusCode}";
+        }
+
+        return $"{(int) instance.StatusCode} {instance.ReasonPhrase}";
+    }
+
+    public static (string? content, string? prettyContent) TryReadStringContent(this HttpContent content)
+    {
+        if (!content.IsText(out var subType))
+        {
+            return (null, null);
+        }
+
+        var stringContent = content.ReadAsString();
+        var prettyContent = stringContent;
+        if (subType == "json")
+        {
+            try
+            {
+                prettyContent = JToken.Parse(stringContent).ToString();
+            }
+            catch
+            {
+            }
+        }
+        else if (subType == "xml")
+        {
+            try
+            {
+                prettyContent = XDocument.Parse(stringContent).ToString();
+            }
+            catch
+            {
+            }
+        }
+
+        return (stringContent, prettyContent);
+    }
+
     static Dictionary<string, string> mappings = new(StringComparer.OrdinalIgnoreCase)
     {
         //extra

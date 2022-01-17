@@ -10,19 +10,23 @@
 ,
   httpCalls: [
     {
-      Uri: https://httpbin.org/get,
-      RequestHeaders: {
+      Request: {
+        Uri: https://httpbin.org/get,
+        Headers: {
+        }
       },
-      ResponseHeaders: {
-        Access-Control-Allow-Credentials: true,
-        Connection: keep-alive,
-        Date: DateTime_1,
-        Server: gunicorn/19.9.0
-      },
-      ResponseContentHeaders: {
-        Content-Type: application/json
-      },
-      ResponseContentString:
+      Response: {
+        Status: 200 OK,
+        Headers: {
+          Access-Control-Allow-Credentials: true,
+          Connection: keep-alive,
+          Date: DateTime_1,
+          Server: gunicorn/19.9.0
+        },
+        ContentHeaders: {
+          Content-Type: application/json
+        },
+        ContentString:
 {
   "args": {},
   "headers": {
@@ -30,6 +34,7 @@
   },
   "url": "https://httpbin.org/get"
 }
+      }
     }
   ]
 }

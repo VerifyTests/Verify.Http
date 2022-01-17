@@ -33,11 +33,16 @@ public static class VerifyHttp
             settings.AddExtraSettings(serializer =>
             {
                 var converters = serializer.Converters;
+                converters.Add(new HttpMethodConverter());
                 converters.Add(new UriConverter());
                 converters.Add(new HttpHeadersConverter());
                 converters.Add(new HttpContentConverter());
-                converters.Add(new HttpResponseMessageConverter());
                 converters.Add(new HttpRequestMessageConverter());
+                converters.Add(new HttpRequestConverter());
+                converters.Add(new HttpResponseConverter());
+                converters.Add(new MockHttpClientConverter());
+                converters.Add(new MockHttpHandlerConverter());
+                converters.Add(new HttpResponseMessageConverter());
             });
         });
     }
