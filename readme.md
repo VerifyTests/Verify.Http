@@ -57,7 +57,7 @@ public class MyService
     }
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L36-L56' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L45-L65' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -85,7 +85,7 @@ await Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L174-L193' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L183-L202' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -114,7 +114,7 @@ await Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L150-L168' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L159-L177' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -170,7 +170,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L251-L275' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L260-L284' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -201,7 +201,7 @@ await client.GetAsync("https://httpbin.org/status/undefined");
 await Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L281-L306' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L290-L315' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -249,7 +249,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + xmlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L86-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L95-L125' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The requests/response pairs will be appended to the verified file.
@@ -263,19 +263,24 @@ The requests/response pairs will be appended to the verified file.
   },
   httpCalls: [
     {
-      Uri: https://httpbin.org/json,
-      RequestHeaders: {},
-      ResponseHeaders: {
-        Access-Control-Allow-Credentials: true,
-        Access-Control-Allow-Origin: *,
-        Connection: keep-alive,
-        Server: gunicorn/19.9.0
+      Request: {
+        Method: GET,
+        Uri: https://httpbin.org/json,
+        Headers: {}
       },
-      ResponseContentHeaders: {
-        Content-Length: 429,
-        Content-Type: application/json
-      },
-      ResponseContentString:
+      Response: {
+        Status: 200 OK,
+        Headers: {
+          Access-Control-Allow-Credentials: true,
+          Access-Control-Allow-Origin: *,
+          Connection: keep-alive,
+          Server: gunicorn/19.9.0
+        },
+        ContentHeaders: {
+          Content-Length: 429,
+          Content-Type: application/json
+        },
+        ContentString:
 {
   "slideshow": {
     "author": "Yours Truly",
@@ -297,21 +302,27 @@ The requests/response pairs will be appended to the verified file.
     "title": "Sample Slide Show"
   }
 }
+      }
     },
     {
-      Uri: https://httpbin.org/xml,
-      RequestHeaders: {},
-      ResponseHeaders: {
-        Access-Control-Allow-Credentials: true,
-        Access-Control-Allow-Origin: *,
-        Connection: keep-alive,
-        Server: gunicorn/19.9.0
+      Request: {
+        Method: GET,
+        Uri: https://httpbin.org/xml,
+        Headers: {}
       },
-      ResponseContentHeaders: {
-        Content-Length: 522,
-        Content-Type: application/xml
-      },
-      ResponseContentString:
+      Response: {
+        Status: 200 OK,
+        Headers: {
+          Access-Control-Allow-Credentials: true,
+          Access-Control-Allow-Origin: *,
+          Connection: keep-alive,
+          Server: gunicorn/19.9.0
+        },
+        ContentHeaders: {
+          Content-Length: 522,
+          Content-Type: application/xml
+        },
+        ContentString:
 <!--  A SAMPLE set of slides  -->
 <slideshow title="Sample Slide Show" date="Date of publication" author="Yours Truly">
   <!-- TITLE SLIDE -->
@@ -326,11 +337,12 @@ The requests/response pairs will be appended to the verified file.
     <item>Who <em>buys</em> WonderWidgets</item>
   </slide>
 </slideshow>
+      }
     }
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L72' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L84' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -368,11 +380,11 @@ public async Task TestHttpRecordingExplicit()
         {
             sizeOfResponse,
             // Only use the Uri in the snapshot
-            httpCalls = httpCalls.Select(_ => _.Uri)
+            httpCalls = httpCalls.Select(_ => _.Request.Uri)
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L118-L145' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L127-L154' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Results in the following:

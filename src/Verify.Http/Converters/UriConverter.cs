@@ -11,13 +11,7 @@ class UriConverter :
         JsonSerializer serializer,
         IReadOnlyDictionary<string, object> context)
     {
-        if (value.IsAbsoluteUri == false)
-        {
-            writer.WriteValue(value.OriginalString);
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(value.Query))
+        if (ShouldUseOriginalString(value))
         {
             writer.WriteValue(value.OriginalString);
             return;
@@ -31,6 +25,12 @@ class UriConverter :
                 Path = path,
                 Query = HttpUtility.ParseQueryString(value.Query)
             });
+    }
+
+    public static bool ShouldUseOriginalString(Uri value)
+    {
+        return value.IsAbsoluteUri == false ||
+               string.IsNullOrWhiteSpace(value.Query);
     }
 
     static string GetPath(Uri value)

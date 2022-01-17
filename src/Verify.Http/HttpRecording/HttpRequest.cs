@@ -12,6 +12,7 @@ public class HttpRequest
         }
 
         Uri = request.RequestUri;
+        Method = request.Method;
 
         if (request.Headers.Any())
         {
@@ -31,8 +32,8 @@ public class HttpRequest
         }
     }
 
+    public HttpMethod Method { get; }
     public Uri Uri { get; }
-
     public HttpRequestHeaders? Headers { get; }
     public HttpContentHeaders? ContentHeaders { get; }
     public string? ContentString { get; }

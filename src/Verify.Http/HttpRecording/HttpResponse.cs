@@ -14,18 +14,29 @@ public class HttpResponse
             Headers = response.Headers;
         }
 
-        if (response.Content.Headers.Any())
+        var content = (HttpContent?) response.Content;
+        if (content != null && content.Headers.Any())
         {
-            ContentHeaders = response.Content.Headers;
+            ContentHeaders = content.Headers;
         }
 
-        var stringContent = response.Content.TryReadStringContent();
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
+        if (response.TrailingHeaders.Any())
+        {
+            TrailingHeaders = response.TrailingHeaders;
+        }
+#endif
+
+        var stringContent = content.TryReadStringContent();
         ContentString = stringContent.prettyContent;
         ContentStringRaw = stringContent.content;
     }
 
     public HttpStatusCode Status { get; }
     public HttpResponseHeaders? Headers { get; }
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
+    public HttpResponseHeaders? TrailingHeaders { get; }
+#endif
     public HttpContentHeaders? ContentHeaders { get; }
     public string? ContentString { get; }
     [JsonIgnore] public string? ContentStringRaw { get; }

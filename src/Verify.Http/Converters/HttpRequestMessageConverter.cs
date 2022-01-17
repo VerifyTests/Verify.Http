@@ -5,12 +5,15 @@ class HttpRequestMessageConverter :
 {
     public override void WriteJson(JsonWriter writer, HttpRequestMessage request, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
+
         writer.WriteStartObject();
 
         writer.WritePropertyName("Version");
         serializer.Serialize(writer, request.Version);
+
         writer.WritePropertyName("Method");
         serializer.Serialize(writer, request.Method);
+
         writer.WritePropertyName("Uri");
         serializer.Serialize(writer, request.RequestUri);
 

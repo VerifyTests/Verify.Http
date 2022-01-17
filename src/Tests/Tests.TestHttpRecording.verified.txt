@@ -5,6 +5,7 @@
   httpCalls: [
     {
       Request: {
+        Method: GET,
         Uri: https://httpbin.org/json,
         Headers: {}
       },
@@ -46,6 +47,7 @@
     },
     {
       Request: {
+        Method: GET,
         Uri: https://httpbin.org/xml,
         Headers: {}
       },

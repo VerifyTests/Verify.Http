@@ -7,16 +7,22 @@ static class HttpExtensions
 {
     public static string StatusText(this HttpResponseMessage instance)
     {
+        var status = instance.StatusCode;
         if (instance.ReasonPhrase == null)
         {
-            return $"{(int) instance.StatusCode} {instance.StatusCode}";
+            return $"{(int) status} {status}";
         }
 
-        return $"{(int) instance.StatusCode} {instance.ReasonPhrase}";
+        return $"{(int) status} {instance.ReasonPhrase}";
     }
 
-    public static (string? content, string? prettyContent) TryReadStringContent(this HttpContent content)
+    public static (string? content, string? prettyContent) TryReadStringContent(this HttpContent? content)
     {
+        if (content == null)
+        {
+            return (null, null);
+        }
+
         if (!content.IsText(out var subType))
         {
             return (null, null);

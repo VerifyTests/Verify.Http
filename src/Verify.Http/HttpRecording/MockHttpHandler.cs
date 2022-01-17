@@ -35,18 +35,22 @@ public class MockHttpHandler :
 
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
     {
+        var response = Add(request);
+        return Task.FromResult(response);
+    }
+
+    HttpResponseMessage Add(HttpRequestMessage request)
+    {
         var response = builder(request);
         calls.Enqueue(new HttpCall(request, response));
-        return Task.FromResult(response);
+        return response;
     }
 
 #if !NETCOREAPP3_1 && !NET48
 
     protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellation)
     {
-        var response = builder(request);
-        calls.Enqueue(new HttpCall(request, response));
-        return response;
+        return Add(request);
     }
 
 #endif

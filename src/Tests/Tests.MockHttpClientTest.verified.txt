@@ -3,7 +3,10 @@
   client: {
     Calls: [
       {
-        Request: 'https://httpbin.org/get',
+        Request: {
+          Method: GET,
+          Uri: https://httpbin.org/get
+        },
         Response: 200 Ok
       }
     ]

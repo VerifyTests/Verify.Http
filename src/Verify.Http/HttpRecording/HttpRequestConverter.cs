@@ -10,15 +10,11 @@ class HttpRequestConverter :
         JsonSerializer serializer,
         IReadOnlyDictionary<string, object> context)
     {
-        if (request.ContentHeaders == null &&
-            request.Headers == null &&
-            request.ContentStringRaw == null)
-        {
-            serializer.Serialize(writer, request.Uri);
-            return;
-        }
-
         writer.WriteStartObject();
+
+        writer.WritePropertyName("Method");
+        serializer.Serialize(writer, request.Method);
+
         writer.WritePropertyName("Uri");
         serializer.Serialize(writer, request.Uri);
 
