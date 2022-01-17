@@ -21,6 +21,22 @@ class HttpRequestConverter :
         writer.WritePropertyName("Uri");
         serializer.Serialize(writer, request.Uri);
 
+        if (!request.IsDefaultVersion())
+        {
+            writer.WritePropertyName("Version");
+            serializer.Serialize(writer, request.Version);
+        }
+
+#if NET5_0_OR_GREATER
+
+        if (!request.IsDefaultVersionPolicy())
+        {
+            writer.WritePropertyName("VersionPolicy");
+            serializer.Serialize(writer, request.VersionPolicy);
+        }
+
+#endif
+
         if (request.Headers != null)
         {
             writer.WritePropertyName("Headers");

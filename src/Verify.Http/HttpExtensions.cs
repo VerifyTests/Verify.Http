@@ -2,6 +2,7 @@
 using System.Net.Http.Headers;
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
+using VerifyTests.Http;
 
 static class HttpExtensions
 {
@@ -16,12 +17,22 @@ static class HttpExtensions
         return $"{(int) status} {instance.ReasonPhrase}";
     }
 
+    public static bool IsDefaultVersion(this HttpRequest request)
+    {
+        return request.Version == defaultRequestVersion;
+    }
+
     public static bool IsDefaultVersion(this HttpRequestMessage request)
     {
         return request.Version == defaultRequestVersion;
     }
 
 #if NET5_0_OR_GREATER
+    public static bool IsDefaultVersionPolicy(this HttpRequest request)
+    {
+        return request.VersionPolicy == defaultRequestVersionPolicy;
+    }
+
     public static bool IsDefaultVersionPolicy(this HttpRequestMessage request)
     {
         return request.VersionPolicy == defaultRequestVersionPolicy;
