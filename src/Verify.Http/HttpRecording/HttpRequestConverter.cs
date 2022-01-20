@@ -4,11 +4,7 @@ using VerifyTests.Http;
 class HttpRequestConverter :
     WriteOnlyJsonConverter<HttpRequest>
 {
-    public override void WriteJson(
-        JsonWriter writer,
-        HttpRequest request,
-        JsonSerializer serializer,
-        IReadOnlyDictionary<string, object> context)
+    public override void Write(VerifyJsonWriter writer, HttpRequest request, JsonSerializer serializer)
     {
         if (request.Method == HttpMethod.Get &&
             UriConverter.ShouldUseOriginalString(request.Uri) &&

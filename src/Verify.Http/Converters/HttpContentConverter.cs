@@ -5,15 +5,13 @@ using Newtonsoft.Json.Linq;
 class HttpContentConverter :
     WriteOnlyJsonConverter<HttpContent>
 {
-    public override void WriteJson(
-        JsonWriter writer,
+    public override void Write(
+        VerifyJsonWriter writer,
         HttpContent content,
-        JsonSerializer serializer,
-        IReadOnlyDictionary<string, object> context)
+        JsonSerializer serializer)
     {
         writer.WriteStartObject();
-        writer.WritePropertyName("Headers");
-        serializer.Serialize(writer, content.Headers);
+        writer.WriteProperty(content, _ => _.Headers);
 
         WriteIfText(writer, content, serializer);
 

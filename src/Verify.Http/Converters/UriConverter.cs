@@ -5,11 +5,10 @@ using Newtonsoft.Json;
 class UriConverter :
     WriteOnlyJsonConverter<Uri>
 {
-    public override void WriteJson(
-        JsonWriter writer,
+    public override void Write(
+        VerifyJsonWriter writer,
         Uri value,
-        JsonSerializer serializer,
-        IReadOnlyDictionary<string, object> context)
+        JsonSerializer serializer)
     {
         if (ShouldUseOriginalString(value))
         {

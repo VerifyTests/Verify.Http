@@ -5,11 +5,10 @@ using VerifyTests.Http;
 class HttpResponseConverter :
     WriteOnlyJsonConverter<HttpResponse>
 {
-    public override void WriteJson(
-        JsonWriter writer,
+    public override void Write(
+        VerifyJsonWriter writer,
         HttpResponse response,
-        JsonSerializer serializer,
-        IReadOnlyDictionary<string, object> context)
+        JsonSerializer serializer)
     {
         if (response.Status == HttpStatusCode.OK &&
             response.ContentHeaders == null &&

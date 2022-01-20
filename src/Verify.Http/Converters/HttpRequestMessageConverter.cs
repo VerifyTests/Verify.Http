@@ -3,7 +3,10 @@
 class HttpRequestMessageConverter :
     WriteOnlyJsonConverter<HttpRequestMessage>
 {
-    public override void WriteJson(JsonWriter writer, HttpRequestMessage request, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
+    public override void Write(
+        VerifyJsonWriter writer,
+        HttpRequestMessage request,
+        JsonSerializer serializer)
     {
         if (request.Method == HttpMethod.Get &&
             UriConverter.ShouldUseOriginalString(request.RequestUri!) &&
@@ -21,8 +24,7 @@ class HttpRequestMessageConverter :
 
         if (request.Method != HttpMethod.Get)
         {
-            writer.WritePropertyName("Method");
-            serializer.Serialize(writer, request.Method);
+            writer.WriteProperty(request, _ => _.Method);
         }
 
         writer.WritePropertyName("Uri");
@@ -30,16 +32,14 @@ class HttpRequestMessageConverter :
 
         if (!request.IsDefaultVersion())
         {
-            writer.WritePropertyName("Version");
-            serializer.Serialize(writer, request.Version);
+            writer.WriteProperty(request, _ => _.Version);
         }
 
 #if NET5_0_OR_GREATER
 
         if (!request.IsDefaultVersionPolicy())
         {
-            writer.WritePropertyName("VersionPolicy");
-            serializer.Serialize(writer, request.VersionPolicy);
+            writer.WriteProperty(request, _ => _.VersionPolicy);
         }
 
 #endif
@@ -50,8 +50,7 @@ class HttpRequestMessageConverter :
 
         if (request.Content != null)
         {
-            writer.WritePropertyName("Content");
-            serializer.Serialize(writer, request.Content);
+            writer.WriteProperty(request, _ => _.Content);
         }
 
         writer.WriteEndObject();
