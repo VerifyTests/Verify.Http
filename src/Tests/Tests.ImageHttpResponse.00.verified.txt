@@ -7,7 +7,5 @@
     Date: DateTime_1,
     Server: gunicorn/19.9.0
   },
-  RequestMessage: {
-    Uri: https://httpbin.org/image/png
-  }
+  RequestMessage: https://httpbin.org/image/png
 }

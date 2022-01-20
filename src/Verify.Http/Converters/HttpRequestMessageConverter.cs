@@ -5,6 +5,17 @@ class HttpRequestMessageConverter :
 {
     public override void WriteJson(JsonWriter writer, HttpRequestMessage request, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
     {
+        if (request.Method == HttpMethod.Get &&
+            UriConverter.ShouldUseOriginalString(request.RequestUri!) &&
+#if NET5_0_OR_GREATER
+            request.IsDefaultVersionPolicy() &&
+#endif
+            !request.Headers.Any() &&
+            request.Content == null)
+        {
+            writer.WriteValue(request.RequestUri!.OriginalString);
+            return;
+        }
 
         writer.WriteStartObject();
 
@@ -36,6 +47,12 @@ class HttpRequestMessageConverter :
         WriteHeaders(writer, serializer, request);
 
         WriteCookies(writer, serializer, request);
+
+        if (request.Content != null)
+        {
+            writer.WritePropertyName("Content");
+            serializer.Serialize(writer, request.Content);
+        }
 
         writer.WriteEndObject();
     }

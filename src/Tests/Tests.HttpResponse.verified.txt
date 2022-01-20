@@ -19,7 +19,5 @@
       url: https://httpbin.org/get
     }
   },
-  Request: {
-    Uri: https://httpbin.org/get
-  }
+  Request: https://httpbin.org/get
 }

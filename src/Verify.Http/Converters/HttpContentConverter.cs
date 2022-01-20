@@ -14,39 +14,47 @@ class HttpContentConverter :
         writer.WriteStartObject();
         writer.WritePropertyName("Headers");
         serializer.Serialize(writer, content.Headers);
-        if (content.IsText(out var subType))
-        {
-            writer.WritePropertyName("Value");
-            var result = content.ReadAsString();
 
-            if (subType == "json")
+        WriteIfText(writer, content, serializer);
+
+        writer.WriteEndObject();
+    }
+
+    static void WriteIfText(JsonWriter writer, HttpContent content, JsonSerializer serializer)
+    {
+        if (!content.IsText(out var subType))
+        {
+            return;
+        }
+
+        writer.WritePropertyName("Value");
+        var result = content.ReadAsString();
+
+        if (subType == "json")
+        {
+            try
             {
-                try
-                {
-                    serializer.Serialize(writer, JToken.Parse(result));
-                }
-                catch
-                {
-                    writer.WriteValue(result);
-                }
+                serializer.Serialize(writer, JToken.Parse(result));
             }
-            else if (subType == "xml")
-            {
-                try
-                {
-                    serializer.Serialize(writer, XDocument.Parse(result));
-                }
-                catch
-                {
-                    writer.WriteValue(result);
-                }
-            }
-            else
+            catch
             {
                 writer.WriteValue(result);
             }
         }
-
-        writer.WriteEndObject();
+        else if (subType == "xml")
+        {
+            try
+            {
+                serializer.Serialize(writer, XDocument.Parse(result));
+            }
+            catch
+            {
+                writer.WriteValue(result);
+            }
+        }
+        else
+        {
+            writer.WriteValue(result);
+        }
     }
 }

@@ -10,6 +10,20 @@ class HttpRequestConverter :
         JsonSerializer serializer,
         IReadOnlyDictionary<string, object> context)
     {
+        if (request.Method == HttpMethod.Get &&
+            UriConverter.ShouldUseOriginalString(request.Uri) &&
+#if NET5_0_OR_GREATER
+            request.IsDefaultVersionPolicy() &&
+#endif
+            request.Headers == null &&
+            request.ContentHeaders == null &&
+            request.ContentString == null
+            )
+        {
+            writer.WriteValue(request.Uri.OriginalString);
+            return;
+        }
+
         writer.WriteStartObject();
 
         if (request.Method != HttpMethod.Get)
