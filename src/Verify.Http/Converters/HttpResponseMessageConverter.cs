@@ -9,17 +9,15 @@ class HttpResponseMessageConverter :
 
         writer.WritePropertyName("Version");
         serializer.Serialize(writer, response.Version);
-        writer.WritePropertyName("StatusCode");
-        serializer.Serialize(writer, response.StatusCode);
-        writer.WritePropertyName("IsSuccessStatusCode");
-        writer.WriteValue(response.IsSuccessStatusCode);
-        writer.WritePropertyName("ReasonPhrase");
-        writer.WriteValue(response.ReasonPhrase);
+        writer.WritePropertyName("Status");
+        writer.WriteValue(response.StatusText());
 
         WriteHeaders(writer, serializer, response);
 
         WriteCookies(writer, serializer, response);
-
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
+        WriteTrailingHeaders(writer, serializer, response);
+#endif
         writer.WritePropertyName("Content");
         serializer.Serialize(writer, response.Content);
         writer.WritePropertyName("Request");
@@ -51,4 +49,17 @@ class HttpResponseMessageConverter :
         writer.WritePropertyName("Headers");
         serializer.Serialize(writer, headers);
     }
+
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
+    static void WriteTrailingHeaders(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
+    {
+        if (!response.TrailingHeaders.Any())
+        {
+            return;
+        }
+
+        writer.WritePropertyName("TrailingHeaders");
+        serializer.Serialize(writer, response.TrailingHeaders);
+    }
+#endif
 }

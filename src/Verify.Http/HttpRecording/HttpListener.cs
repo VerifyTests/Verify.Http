@@ -65,7 +65,7 @@ class HttpListener :
     [DiagnosticName("System.Net.Http.HttpRequestOut.Stop")]
     public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus requestTaskStatus)
     {
-        local.Value!.Add(new(request, response, requestTaskStatus));
+        local.Value!.Add(new(request, response,Activity.Current?.Duration, requestTaskStatus));
     }
 
     void Clear()

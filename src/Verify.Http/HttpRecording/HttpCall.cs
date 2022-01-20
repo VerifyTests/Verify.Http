@@ -1,102 +1,27 @@
-﻿#if NET5_0_OR_GREATER
-using System.Net.Http.Headers;
-using System.Xml.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 
 namespace VerifyTests.Http;
 
 public class HttpCall
 {
-    public HttpCall(HttpRequestMessage request, HttpResponseMessage response, TaskStatus status)
+    public HttpCall(HttpRequestMessage request, HttpResponseMessage response,TimeSpan? duration = null, TaskStatus? status = null)
     {
-        Uri = request.RequestUri!;
-
-        if (request.Headers.Any())
-        {
-            RequestHeaders = request.Headers;
-        }
-
-        if (request.Content is not null)
-        {
-            if (request.Content.Headers.Any())
-            {
-                RequestContentHeaders = request.Content.Headers;
-            }
-
-            var requestStringContent = TryReadStringContent(request.Content);
-            RequestContentString = requestStringContent.prettyContent;
-            RequestContentStringRaw = requestStringContent.content;
-        }
-
-        ResponseHeaders = response.Headers;
-        if (response.Content.Headers.Any())
-        {
-            ResponseContentHeaders = response.Content.Headers;
-        }
-        var responseStringContent = TryReadStringContent(response.Content);
-        ResponseContentString = responseStringContent.prettyContent;
-        ResponseContentStringRaw = responseStringContent.content;
+        Request = new HttpRequest(request);
+        Response = new HttpResponse(response);
 
         if (status != TaskStatus.RanToCompletion)
         {
             Status = status;
         }
 
-        Duration = Activity.Current!.Duration;
+        Duration = duration;
     }
 
-    static (string? content, string? prettyContent) TryReadStringContent(HttpContent content)
-    {
-        if (!content.IsText(out var subType))
-        {
-            return (null, null);
-        }
-
-        var stringContent = content.ReadAsString();
-        var prettyContent = stringContent;
-        if (subType == "json")
-        {
-            try
-            {
-                prettyContent = JToken.Parse(stringContent).ToString();
-            }
-            catch
-            {
-            }
-        }
-        else if (subType == "xml")
-        {
-            try
-            {
-                prettyContent = XDocument.Parse(stringContent).ToString();
-            }
-            catch
-            {
-            }
-        }
-
-        return (stringContent, prettyContent);
-    }
-
-    [JsonIgnore]
-    public TimeSpan Duration { get; }
-
-    public Uri Uri { get; }
+    [JsonIgnore] public TimeSpan? Duration { get; }
 
     public TaskStatus? Status { get; }
 
-    public HttpRequestHeaders? RequestHeaders { get; }
-    public HttpContentHeaders? RequestContentHeaders { get; }
-    public string? RequestContentString { get; }
-    [JsonIgnore]
-    public string? RequestContentStringRaw { get; }
+    public HttpRequest Request { get; }
 
-    public HttpResponseHeaders ResponseHeaders { get; }
-    public HttpContentHeaders? ResponseContentHeaders { get; }
-    public string? ResponseContentString { get; }
-    [JsonIgnore]
-    public string? ResponseContentStringRaw { get; }
+    public HttpResponse Response { get; }
 }
-
-#endif

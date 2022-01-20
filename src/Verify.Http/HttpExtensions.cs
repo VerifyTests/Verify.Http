@@ -1,8 +1,96 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
+using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
+using VerifyTests.Http;
 
 static class HttpExtensions
 {
+    public static string StatusText(this HttpResponseMessage instance)
+    {
+        var status = instance.StatusCode;
+        if (instance.ReasonPhrase == null)
+        {
+            return $"{(int) status} {status}";
+        }
+
+        return $"{(int) status} {instance.ReasonPhrase}";
+    }
+
+    public static bool IsDefaultVersion(this HttpRequest request)
+    {
+        return request.Version == defaultRequestVersion;
+    }
+
+    public static bool IsDefaultVersion(this HttpRequestMessage request)
+    {
+        return request.Version == defaultRequestVersion;
+    }
+
+#if NET5_0_OR_GREATER
+    public static bool IsDefaultVersionPolicy(this HttpRequest request)
+    {
+        return request.VersionPolicy == defaultRequestVersionPolicy;
+    }
+
+    public static bool IsDefaultVersionPolicy(this HttpRequestMessage request)
+    {
+        return request.VersionPolicy == defaultRequestVersionPolicy;
+    }
+#endif
+
+    static HttpExtensions()
+    {
+        var request = new HttpRequestMessage();
+        defaultRequestVersion = request.Version;
+#if NET5_0_OR_GREATER
+        defaultRequestVersionPolicy = request.VersionPolicy;
+#endif
+    }
+
+    static Version defaultRequestVersion;
+#if NET5_0_OR_GREATER
+    static HttpVersionPolicy defaultRequestVersionPolicy;
+#endif
+
+    public static (string? content, string? prettyContent) TryReadStringContent(this HttpContent? content)
+    {
+        if (content == null)
+        {
+            return (null, null);
+        }
+
+        if (!content.IsText(out var subType))
+        {
+            return (null, null);
+        }
+
+        var stringContent = content.ReadAsString();
+        var prettyContent = stringContent;
+        if (subType == "json")
+        {
+            try
+            {
+                prettyContent = JToken.Parse(stringContent).ToString();
+            }
+            catch
+            {
+            }
+        }
+        else if (subType == "xml")
+        {
+            try
+            {
+                prettyContent = XDocument.Parse(stringContent).ToString();
+            }
+            catch
+            {
+            }
+        }
+
+        return (stringContent, prettyContent);
+    }
+
     static Dictionary<string, string> mappings = new(StringComparer.OrdinalIgnoreCase)
     {
         //extra

@@ -4,6 +4,16 @@ using VerifyTests.Http;
 [UsesVerify]
 public class Tests
 {
+    [Fact]
+    public async Task MockHttpClientTest()
+    {
+        using var client = new MockHttpClient();
+
+        var result = await client.GetStringAsync("https://httpbin.org/get");
+
+        await Verify(new {result, client});
+    }
+
 #if NET5_0_OR_GREATER && DEBUG
     [Fact]
     public async Task JsonGet()
@@ -17,6 +27,7 @@ public class Tests
         await Verify(result)
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
+
     [Fact]
     public async Task TestHttpRecordingWithResponse()
     {
@@ -27,12 +38,10 @@ public class Tests
         var result = await client.GetStringAsync("https://httpbin.org/json");
 
         await Verify(result)
-            .ModifySerialization(settings =>
-            {
-                settings.IgnoreMembers("traceparent");
-            });
+            .ModifySerialization(settings => { settings.IgnoreMembers("traceparent"); });
     }
 #endif
+
     #region ServiceThatDoesHttp
 
     public class MyService
@@ -138,7 +147,7 @@ public class Tests
             {
                 sizeOfResponse,
                 // Only use the Uri in the snapshot
-                httpCalls = httpCalls.Select(_ => _.Uri)
+                httpCalls = httpCalls.Select(_ => _.Request.Uri)
             });
     }
 
@@ -200,7 +209,7 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verify(new { result })
+        await Verify(new {result})
             .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
     }
 

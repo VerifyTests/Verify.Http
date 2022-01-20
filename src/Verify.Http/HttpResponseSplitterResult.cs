@@ -18,9 +18,7 @@
             new
             {
                 instance.Version,
-                instance.StatusCode,
-                instance.IsSuccessStatusCode,
-                instance.ReasonPhrase,
+                Status = instance.StatusText(),
                 Cookies = instance.Headers.Cookies(),
                 Headers = instance.Headers.NotCookies(),
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
@@ -30,4 +28,5 @@
             },
             targets);
     }
+
 }

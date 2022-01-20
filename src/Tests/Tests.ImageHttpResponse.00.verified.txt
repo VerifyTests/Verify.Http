@@ -1,19 +1,11 @@
 {
   Version: 1.1,
-  StatusCode: OK,
-  IsSuccessStatusCode: true,
-  ReasonPhrase: OK,
+  Status: 200 OK,
   Headers: {
     Access-Control-Allow-Credentials: true,
     Connection: keep-alive,
     Date: DateTime_1,
     Server: gunicorn/19.9.0
   },
-  RequestMessage: {
-    Version: 1.1,
-    Method: {
-      Method: GET
-    },
-    Uri: https://httpbin.org/image/png
-  }
+  RequestMessage: https://httpbin.org/image/png
 }

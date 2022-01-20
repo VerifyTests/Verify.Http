@@ -24,20 +24,24 @@
 ,
   httpCalls: [
     {
-      Uri: https://httpbin.org/json,
-      RequestHeaders: {},
-      ResponseHeaders: {
-        Access-Control-Allow-Credentials: true,
-        Access-Control-Allow-Origin: *,
-        Connection: keep-alive,
-        Date: DateTime_1,
-        Server: gunicorn/19.9.0
+      Request: {
+        Uri: https://httpbin.org/json,
+        Headers: {}
       },
-      ResponseContentHeaders: {
-        Content-Length: 429,
-        Content-Type: application/json
-      },
-      ResponseContentString:
+      Response: {
+        Status: 200 OK,
+        Headers: {
+          Access-Control-Allow-Credentials: true,
+          Access-Control-Allow-Origin: *,
+          Connection: keep-alive,
+          Date: DateTime_1,
+          Server: gunicorn/19.9.0
+        },
+        ContentHeaders: {
+          Content-Length: 429,
+          Content-Type: application/json
+        },
+        ContentString:
 {
   "slideshow": {
     "author": "Yours Truly",
@@ -59,6 +63,7 @@
     "title": "Sample Slide Show"
   }
 }
+      }
     }
   ]
 }

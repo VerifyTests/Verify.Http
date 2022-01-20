@@ -1,9 +1,7 @@
-﻿{
+{
   result: {
     Version: 1.1,
-    StatusCode: OK,
-    IsSuccessStatusCode: true,
-    ReasonPhrase: OK,
+    Status: 200 OK,
     Headers: {
       Access-Control-Allow-Credentials: true,
       Connection: keep-alive,
@@ -22,12 +20,6 @@
         url: https://httpbin.org/get
       }
     },
-    Request: {
-      Version: 1.1,
-      Method: {
-        Method: GET
-      },
-      Uri: https://httpbin.org/get
-    }
+    Request: https://httpbin.org/get
   }
 }
