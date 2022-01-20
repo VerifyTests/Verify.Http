@@ -4,11 +4,10 @@ using Newtonsoft.Json;
 class HttpHeadersConverter :
     WriteOnlyJsonConverter<HttpHeaders>
 {
-    public override void WriteJson(
-        JsonWriter writer,
+    public override void Write(
+        VerifyJsonWriter writer,
         HttpHeaders headers,
-        JsonSerializer serializer,
-        IReadOnlyDictionary<string, object> context)
+        JsonSerializer serializer)
     {
         serializer.Serialize(writer, headers.Simplify());
     }

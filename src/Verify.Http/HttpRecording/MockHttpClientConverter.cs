@@ -4,11 +4,10 @@ using VerifyTests.Http;
 class MockHttpClientConverter :
     WriteOnlyJsonConverter<MockHttpClient>
 {
-    public override void WriteJson(
-        JsonWriter writer,
+    public override void Write(
+        VerifyJsonWriter writer,
         MockHttpClient client,
-        JsonSerializer serializer,
-        IReadOnlyDictionary<string, object> context)
+        JsonSerializer serializer)
     {
         writer.WriteStartObject();
 

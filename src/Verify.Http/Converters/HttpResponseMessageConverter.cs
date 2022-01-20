@@ -3,12 +3,14 @@
 class HttpResponseMessageConverter :
     WriteOnlyJsonConverter<HttpResponseMessage>
 {
-    public override void WriteJson(JsonWriter writer, HttpResponseMessage response, JsonSerializer serializer, IReadOnlyDictionary<string, object> context)
+    public override void Write(
+        VerifyJsonWriter writer,
+        HttpResponseMessage response,
+        JsonSerializer serializer)
     {
         writer.WriteStartObject();
 
-        writer.WritePropertyName("Version");
-        serializer.Serialize(writer, response.Version);
+        writer.WriteProperty(response, _ => _.Version);
         writer.WritePropertyName("Status");
         writer.WriteValue(response.StatusText());
 
@@ -18,15 +20,14 @@ class HttpResponseMessageConverter :
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
         WriteTrailingHeaders(writer, serializer, response);
 #endif
-        writer.WritePropertyName("Content");
-        serializer.Serialize(writer, response.Content);
+        writer.WriteProperty(response, _ => _.Content);
         writer.WritePropertyName("Request");
         serializer.Serialize(writer, response.RequestMessage);
 
         writer.WriteEndObject();
     }
 
-    static void WriteCookies(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
+    static void WriteCookies(VerifyJsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
     {
         var cookies = response.Headers.Cookies();
         if (!cookies.Any())
@@ -38,7 +39,7 @@ class HttpResponseMessageConverter :
         serializer.Serialize(writer, cookies);
     }
 
-    static void WriteHeaders(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
+    static void WriteHeaders(VerifyJsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
     {
         var headers = response.Headers.NotCookies();
         if (!headers.Any())
@@ -51,15 +52,14 @@ class HttpResponseMessageConverter :
     }
 
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
-    static void WriteTrailingHeaders(JsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
+    static void WriteTrailingHeaders(VerifyJsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
     {
         if (!response.TrailingHeaders.Any())
         {
             return;
         }
 
-        writer.WritePropertyName("TrailingHeaders");
-        serializer.Serialize(writer, response.TrailingHeaders);
+        writer.WriteProperty(response, _ => _.TrailingHeaders);
     }
 #endif
 }
