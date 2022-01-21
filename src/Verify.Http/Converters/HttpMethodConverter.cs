@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
-
-class HttpMethodConverter :
+﻿class HttpMethodConverter :
     WriteOnlyJsonConverter<HttpMethod>
 {
-    public override void Write(
-        VerifyJsonWriter writer,
-        HttpMethod method,
-        JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, HttpMethod method)
     {
-        serializer.Serialize(writer, method.ToString());
+        writer.WriteValue(method.ToString());
     }
 }

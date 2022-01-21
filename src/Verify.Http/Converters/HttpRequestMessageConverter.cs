@@ -1,12 +1,7 @@
-﻿using Newtonsoft.Json;
-
-class HttpRequestMessageConverter :
+﻿class HttpRequestMessageConverter :
     WriteOnlyJsonConverter<HttpRequestMessage>
 {
-    public override void Write(
-        VerifyJsonWriter writer,
-        HttpRequestMessage request,
-        JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, HttpRequestMessage request)
     {
         if (request.Method == HttpMethod.Get &&
             UriConverter.ShouldUseOriginalString(request.RequestUri!) &&
@@ -24,59 +19,46 @@ class HttpRequestMessageConverter :
 
         if (request.Method != HttpMethod.Get)
         {
-            writer.WriteProperty(request, _ => _.Method);
+            writer.WriteProperty(request, request.Method, "Method");
         }
 
-        writer.WritePropertyName("Uri");
-        serializer.Serialize(writer, request.RequestUri);
+        writer.WriteProperty(request, request.RequestUri, "Uri");
 
         if (!request.IsDefaultVersion())
         {
-            writer.WriteProperty(request, _ => _.Version);
+            writer.WriteProperty(request, request.Version, "Version");
         }
 
 #if NET5_0_OR_GREATER
 
         if (!request.IsDefaultVersionPolicy())
         {
-            writer.WriteProperty(request, _ => _.VersionPolicy);
+            writer.WriteProperty(request, request.VersionPolicy, "VersionPolicy");
         }
 
 #endif
 
-        WriteHeaders(writer, serializer, request);
+        WriteHeaders(writer, request);
 
-        WriteCookies(writer, serializer, request);
+        WriteCookies(writer, request);
 
         if (request.Content != null)
         {
-            writer.WriteProperty(request, _ => _.Content);
+            writer.WriteProperty(request, request.Content, "Content");
         }
 
         writer.WriteEndObject();
     }
 
-    static void WriteCookies(JsonWriter writer, JsonSerializer serializer, HttpRequestMessage request)
+    static void WriteCookies(VerifyJsonWriter writer, HttpRequestMessage request)
     {
         var cookies = request.Headers.Cookies();
-        if (!cookies.Any())
-        {
-            return;
-        }
-
-        writer.WritePropertyName("Cookies");
-        serializer.Serialize(writer, cookies);
+        writer.WriteProperty(request, cookies, "Cookies");
     }
 
-    static void WriteHeaders(JsonWriter writer, JsonSerializer serializer, HttpRequestMessage request)
+    static void WriteHeaders(VerifyJsonWriter writer, HttpRequestMessage request)
     {
         var headers = request.Headers.NotCookies();
-        if (!headers.Any())
-        {
-            return;
-        }
-
-        writer.WritePropertyName("Headers");
-        serializer.Serialize(writer, headers);
+        writer.WriteProperty(request, headers, "Headers");
     }
 }

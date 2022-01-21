@@ -1,14 +1,10 @@
 ﻿using System.Net;
-using Newtonsoft.Json;
 using VerifyTests.Http;
 
 class HttpResponseConverter :
     WriteOnlyJsonConverter<HttpResponse>
 {
-    public override void Write(
-        VerifyJsonWriter writer,
-        HttpResponse response,
-        JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, HttpResponse response)
     {
         if (response.Status == HttpStatusCode.OK &&
             response.ContentHeaders == null &&
@@ -20,26 +16,14 @@ class HttpResponseConverter :
         }
 
         writer.WriteStartObject();
-        writer.WritePropertyName("Status");
-        writer.WriteValue($"{(int) response.Status} {response.Status}");
 
-        if (response.Headers != null)
-        {
-            writer.WritePropertyName("Headers");
-            serializer.Serialize(writer, response.Headers);
-        }
+        writer.WriteProperty(response, $"{(int) response.Status} {response.Status}", "Status");
 
-        if (response.ContentHeaders != null)
-        {
-            writer.WritePropertyName("ContentHeaders");
-            serializer.Serialize(writer, response.ContentHeaders);
-        }
+        writer.WriteProperty(response, response.Headers, "Headers");
 
-        if (response.ContentString != null)
-        {
-            writer.WritePropertyName("ContentString");
-            serializer.Serialize(writer, response.ContentString);
-        }
+        writer.WriteProperty(response, response.ContentHeaders, "ContentHeaders");
+
+        writer.WriteProperty(response, response.ContentString, "ContentString");
 
         writer.WriteEndObject();
     }

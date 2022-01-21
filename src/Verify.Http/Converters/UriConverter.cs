@@ -1,14 +1,10 @@
 ﻿using System.Collections.Specialized;
 using System.Web;
-using Newtonsoft.Json;
 
 class UriConverter :
     WriteOnlyJsonConverter<Uri>
 {
-    public override void Write(
-        VerifyJsonWriter writer,
-        Uri value,
-        JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, Uri value)
     {
         if (ShouldUseOriginalString(value))
         {
@@ -18,7 +14,7 @@ class UriConverter :
 
         var path = GetPath(value);
 
-        serializer.Serialize(writer,
+        writer.Serialize(
             new UriWrapper
             {
                 Path = path,

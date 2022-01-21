@@ -1,18 +1,13 @@
-﻿using Newtonsoft.Json;
-using VerifyTests.Http;
+﻿using VerifyTests.Http;
 
 class MockHttpClientConverter :
     WriteOnlyJsonConverter<MockHttpClient>
 {
-    public override void Write(
-        VerifyJsonWriter writer,
-        MockHttpClient client,
-        JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, MockHttpClient client)
     {
         writer.WriteStartObject();
 
-        writer.WritePropertyName("Calls");
-        serializer.Serialize(writer, client.Calls);
+        writer.WriteProperty(client, client.Calls, "Calls");
 
         writer.WriteEndObject();
     }

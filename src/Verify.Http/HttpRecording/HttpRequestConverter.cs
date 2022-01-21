@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
-using VerifyTests.Http;
+﻿using VerifyTests.Http;
 
 class HttpRequestConverter :
     WriteOnlyJsonConverter<HttpRequest>
 {
-    public override void Write(VerifyJsonWriter writer, HttpRequest request, JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, HttpRequest request)
     {
         if (request.Method == HttpMethod.Get &&
             UriConverter.ShouldUseOriginalString(request.Uri) &&
@@ -14,7 +13,7 @@ class HttpRequestConverter :
             request.Headers == null &&
             request.ContentHeaders == null &&
             request.ContentString == null
-            )
+           )
         {
             writer.WriteValue(request.Uri.OriginalString);
             return;
@@ -24,46 +23,30 @@ class HttpRequestConverter :
 
         if (request.Method != HttpMethod.Get)
         {
-            writer.WritePropertyName("Method");
-            serializer.Serialize(writer, request.Method);
+            writer.WriteProperty(request, request.Method, "Method");
         }
 
-        writer.WritePropertyName("Uri");
-        serializer.Serialize(writer, request.Uri);
+        writer.WriteProperty(request, request.Uri, "Uri");
 
         if (!request.IsDefaultVersion())
         {
-            writer.WritePropertyName("Version");
-            serializer.Serialize(writer, request.Version);
+            writer.WriteProperty(request, request.Version, "Version");
         }
 
 #if NET5_0_OR_GREATER
 
         if (!request.IsDefaultVersionPolicy())
         {
-            writer.WritePropertyName("VersionPolicy");
-            serializer.Serialize(writer, request.VersionPolicy);
+            writer.WriteProperty(request, request.VersionPolicy, "VersionPolicy");
         }
 
 #endif
 
-        if (request.Headers != null)
-        {
-            writer.WritePropertyName("Headers");
-            serializer.Serialize(writer, request.Headers);
-        }
+        writer.WriteProperty(request, request.Headers, "Headers");
 
-        if (request.ContentHeaders != null)
-        {
-            writer.WritePropertyName("ContentHeaders");
-            serializer.Serialize(writer, request.ContentHeaders);
-        }
+        writer.WriteProperty(request, request.ContentHeaders, "ContentHeaders");
 
-        if (request.ContentString != null)
-        {
-            writer.WritePropertyName("ContentString");
-            serializer.Serialize(writer, request.ContentString);
-        }
+        writer.WriteProperty(request, request.ContentString, "ContentString");
 
         writer.WriteEndObject();
     }

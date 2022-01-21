@@ -17,7 +17,7 @@ public class MockHttpClient :
     {
     }
 
-    public MockHttpClient(string content, string mediaType, bool recordResponses = false) :
+    public MockHttpClient(string content, string mediaType) :
         this(new MockHttpHandler(content, mediaType))
     {
     }

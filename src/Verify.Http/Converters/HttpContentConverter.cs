@@ -1,24 +1,21 @@
 ﻿using System.Xml.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 class HttpContentConverter :
     WriteOnlyJsonConverter<HttpContent>
 {
-    public override void Write(
-        VerifyJsonWriter writer,
-        HttpContent content,
-        JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, HttpContent content)
     {
         writer.WriteStartObject();
-        writer.WriteProperty(content, _ => _.Headers);
 
-        WriteIfText(writer, content, serializer);
+        writer.WriteProperty(content, content.Headers, "Headers");
+
+        WriteIfText(writer, content);
 
         writer.WriteEndObject();
     }
 
-    static void WriteIfText(JsonWriter writer, HttpContent content, JsonSerializer serializer)
+    static void WriteIfText(VerifyJsonWriter writer, HttpContent content)
     {
         if (!content.IsText(out var subType))
         {
@@ -32,7 +29,7 @@ class HttpContentConverter :
         {
             try
             {
-                serializer.Serialize(writer, JToken.Parse(result));
+                writer.Serialize(JToken.Parse(result));
             }
             catch
             {
@@ -43,7 +40,7 @@ class HttpContentConverter :
         {
             try
             {
-                serializer.Serialize(writer, XDocument.Parse(result));
+                writer.Serialize(XDocument.Parse(result));
             }
             catch
             {

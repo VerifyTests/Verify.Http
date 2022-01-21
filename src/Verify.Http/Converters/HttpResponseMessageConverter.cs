@@ -1,65 +1,41 @@
-﻿using Newtonsoft.Json;
-
-class HttpResponseMessageConverter :
+﻿class HttpResponseMessageConverter :
     WriteOnlyJsonConverter<HttpResponseMessage>
 {
-    public override void Write(
-        VerifyJsonWriter writer,
-        HttpResponseMessage response,
-        JsonSerializer serializer)
+    public override void Write(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         writer.WriteStartObject();
 
-        writer.WriteProperty(response, _ => _.Version);
-        writer.WritePropertyName("Status");
-        writer.WriteValue(response.StatusText());
+        writer.WriteProperty(response, response.Version, "Version");
+        writer.WriteProperty(response, response.StatusText(), "Status");
 
-        WriteHeaders(writer, serializer, response);
+        WriteHeaders(writer, response);
 
-        WriteCookies(writer, serializer, response);
+        WriteCookies(writer, response);
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
-        WriteTrailingHeaders(writer, serializer, response);
+        WriteTrailingHeaders(writer, response);
 #endif
-        writer.WriteProperty(response, _ => _.Content);
-        writer.WritePropertyName("Request");
-        serializer.Serialize(writer, response.RequestMessage);
+        writer.WriteProperty(response, response.Content, "Content");
+        writer.WriteProperty(response, response.RequestMessage, "Request");
 
         writer.WriteEndObject();
     }
 
-    static void WriteCookies(VerifyJsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
+    static void WriteCookies(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var cookies = response.Headers.Cookies();
-        if (!cookies.Any())
-        {
-            return;
-        }
-
-        writer.WritePropertyName("Cookies");
-        serializer.Serialize(writer, cookies);
+        writer.WriteProperty(response, cookies, "Cookies");
     }
 
-    static void WriteHeaders(VerifyJsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
+    static void WriteHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var headers = response.Headers.NotCookies();
-        if (!headers.Any())
-        {
-            return;
-        }
-
-        writer.WritePropertyName("Headers");
-        serializer.Serialize(writer, headers);
+        writer.WriteProperty(response, headers, "Headers");
     }
 
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
-    static void WriteTrailingHeaders(VerifyJsonWriter writer, JsonSerializer serializer, HttpResponseMessage response)
+    static void WriteTrailingHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
-        if (!response.TrailingHeaders.Any())
-        {
-            return;
-        }
-
-        writer.WriteProperty(response, _ => _.TrailingHeaders);
+        writer.WriteProperty(response, response.TrailingHeaders, "TrailingHeaders");
     }
 #endif
 }
