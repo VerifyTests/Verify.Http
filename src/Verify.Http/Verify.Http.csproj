@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6;net48;netcoreapp3.1;net5</TargetFrameworks>
+    <TargetFrameworks>net6;net48;netcoreapp3.1;net5;netstandard2.0;net461</TargetFrameworks>
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
@@ -9,8 +9,8 @@
     <PackageReference Include="Verify" Version="15.1.1" />
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.22" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="6.0.0" />
-    <Reference Include="System.Web" Version="4.0.0" Condition="$(TargetFramework) == 'net48'" />
-    <PackageReference Include="Nullable" Version="1.3.0" Condition="$(TargetFramework) == 'net48'" PrivateAssets="all" />
+    <Reference Include="System.Web" Version="4.0.0" Condition="$(TargetFramework) == 'net48' OR $(TargetFramework) == 'net461'" />
+    <PackageReference Include="Nullable" Version="1.3.0" Condition="$(TargetFramework) == 'net48' OR $(TargetFramework) == 'net461' OR $(TargetFramework) == 'netstandard2.0'" PrivateAssets="all" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
     <PackageReference Include="ProjectDefaults" Version="1.0.63" PrivateAssets="all" />
   </ItemGroup>
