@@ -1,0 +1,22 @@
+﻿{
+  result: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 0
+      }
+    }
+  },
+  client: {
+    Calls: [
+      {
+        Request: {
+          Method: POST,
+          Uri: https://fake/post
+        },
+        Response: 200 Ok
+      }
+    ]
+  }
+}

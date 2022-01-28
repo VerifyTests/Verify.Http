@@ -4,16 +4,6 @@ using VerifyTests.Http;
 [UsesVerify]
 public class Tests
 {
-    [Fact]
-    public async Task MockHttpClientTest()
-    {
-        using var client = new MockHttpClient();
-
-        var result = await client.GetStringAsync("https://httpbin.org/get");
-
-        await Verify(new {result, client});
-    }
-
 #if NET5_0_OR_GREATER && DEBUG
     [Fact]
     public async Task JsonGet()
