@@ -210,7 +210,7 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/get");
 
         await Verify(new {result})
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
 
     [Fact]
@@ -240,7 +240,7 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/image/png");
 
         await Verify(result)
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
 
     [Fact]
@@ -251,7 +251,7 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/get");
 
         await Verify(result)
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
 
     [Fact]

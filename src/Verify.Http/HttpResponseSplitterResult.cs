@@ -22,11 +22,10 @@
                 Cookies = instance.Headers.Cookies(),
                 Headers = instance.Headers.NotCookies(),
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
-                instance.TrailingHeaders,
+                TrailingHeaders = instance.TrailingHeaders.Simplify(),
 #endif
                 instance.RequestMessage
             },
             targets);
     }
-
 }
