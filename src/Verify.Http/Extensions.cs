@@ -27,11 +27,13 @@ static class Extensions
         using var stringReader = new StringReader(json);
         using var stringWriter = new StringWriter();
         using var jsonReader = new JsonTextReader(stringReader);
-        using var jsonWriter = new JsonTextWriter(stringWriter)
+        using (var jsonWriter = new JsonTextWriter(stringWriter)
+               {
+                   Formatting = Formatting.Indented
+               })
         {
-            Formatting = Formatting.Indented
-        };
-        jsonWriter.WriteToken(jsonReader);
+            jsonWriter.WriteToken(jsonReader);
+        }
         return stringWriter.ToString();
     }
 
