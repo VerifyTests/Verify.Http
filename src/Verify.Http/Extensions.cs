@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
 
 static class Extensions
 {
@@ -19,6 +20,19 @@ static class Extensions
     {
         return headers
             .ToDictionary(x => x.Key, x => string.Join("|", x.Value));
+    }
+
+    public static string JsonPrettify(this string json)
+    {
+        using var stringReader = new StringReader(json);
+        using var stringWriter = new StringWriter();
+        using var jsonReader = new JsonTextReader(stringReader);
+        using var jsonWriter = new JsonTextWriter(stringWriter)
+        {
+            Formatting = Formatting.Indented
+        };
+        jsonWriter.WriteToken(jsonReader);
+        return stringWriter.ToString();
     }
 
     public static Dictionary<string, object> Simplify(this HttpHeaders headers)

@@ -33,7 +33,7 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var result = await client.PostAsync("https://fake/post", JsonContent.Create("{a:{b:c}}"));
+        var result = await client.PostAsync("https://fake/post", JsonContent.Create(new{a="b"}));
 
         await Verify(new {result, client}).UniqueForRuntimeAndVersion();
     }
