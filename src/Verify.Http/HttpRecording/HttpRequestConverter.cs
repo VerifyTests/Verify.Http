@@ -12,7 +12,7 @@ class HttpRequestConverter :
 #endif
             request.Headers == null &&
             request.ContentHeaders == null &&
-            request.ContentString == null
+            request.ContentStringParsed == null
            )
         {
             writer.WriteValue(request.Uri.OriginalString);
@@ -46,7 +46,14 @@ class HttpRequestConverter :
 
         writer.WriteProperty(request, request.ContentHeaders, "ContentHeaders");
 
-        writer.WriteProperty(request, request.ContentString, "ContentString");
+        if (request.ContentStringParsed is string stringValue)
+        {
+            writer.WriteProperty(request, stringValue, "ContentString");
+        }
+        else
+        {
+            writer.WriteProperty(request, request.ContentStringParsed, "ContentStringParsed");
+        }
 
         writer.WriteEndObject();
     }

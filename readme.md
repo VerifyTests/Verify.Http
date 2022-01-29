@@ -279,28 +279,27 @@ The requests/response pairs will be appended to the verified file.
           Content-Length: 429,
           Content-Type: application/json
         },
-        ContentString:
-{
-  "slideshow": {
-    "author": "Yours Truly",
-    "date": "date of publication",
-    "slides": [
-      {
-        "title": "Wake up to WonderWidgets!",
-        "type": "all"
-      },
-      {
-        "items": [
-          "Why <em>WonderWidgets</em> are great",
-          "Who <em>buys</em> WonderWidgets"
-        ],
-        "title": "Overview",
-        "type": "all"
-      }
-    ],
-    "title": "Sample Slide Show"
-  }
-}
+        ContentStringParsed: {
+          slideshow: {
+            author: Yours Truly,
+            date: date of publication,
+            slides: [
+              {
+                title: Wake up to WonderWidgets!,
+                type: all
+              },
+              {
+                items: [
+                  Why <em>WonderWidgets</em> are great,
+                  Who <em>buys</em> WonderWidgets
+                ],
+                title: Overview,
+                type: all
+              }
+            ],
+            title: Sample Slide Show
+          }
+        }
       }
     },
     {
@@ -320,27 +319,51 @@ The requests/response pairs will be appended to the verified file.
           Content-Length: 522,
           Content-Type: application/xml
         },
-        ContentString:
-<!--  A SAMPLE set of slides  -->
-<slideshow title="Sample Slide Show" date="Date of publication" author="Yours Truly">
-  <!-- TITLE SLIDE -->
-  <slide type="all">
-    <title>Wake up to WonderWidgets!</title>
-  </slide>
-  <!-- OVERVIEW -->
-  <slide type="all">
-    <title>Overview</title>
-    <item>Why <em>WonderWidgets</em> are great</item>
-    <item />
-    <item>Who <em>buys</em> WonderWidgets</item>
-  </slide>
-</slideshow>
+        ContentStringParsed: {
+          ?xml: {
+            @version: 1.0,
+            @encoding: us-ascii
+          }/*  A SAMPLE set of slides  */,
+          slideshow: {
+            @title: Sample Slide Show,
+            @date: Date of publication,
+            @author: Yours Truly,
+            #comment: [],
+            slide: [
+              {
+                @type: all,
+                title: Wake up to WonderWidgets!
+              },
+              {
+                @type: all,
+                title: Overview,
+                item: [
+                  {
+                    #text: [
+                      Why ,
+                       are great
+                    ],
+                    em: WonderWidgets
+                  },
+                  null,
+                  {
+                    #text: [
+                      Who ,
+                       WonderWidgets
+                    ],
+                    em: buys
+                  }
+                ]
+              }
+            ]
+          }
+        }
       }
     }
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L82' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L105' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

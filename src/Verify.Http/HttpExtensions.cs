@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 #endif
 using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
 using VerifyTests.Http;
 
 static class HttpExtensions
@@ -55,7 +56,7 @@ static class HttpExtensions
     static HttpVersionPolicy defaultRequestVersionPolicy;
 #endif
 
-    public static (string? content, string? prettyContent) TryReadStringContent(this HttpContent? content)
+    public static (string? content, object? prettyContent) TryReadStringContent(this HttpContent? content)
     {
         if (content == null)
         {
@@ -68,12 +69,12 @@ static class HttpExtensions
         }
 
         var stringContent = content.ReadAsString();
-        var prettyContent = stringContent;
+        object prettyContent = stringContent;
         if (subType == "json")
         {
             try
             {
-                prettyContent = stringContent.JsonPrettify();
+                prettyContent = JToken.Parse(stringContent);
             }
             catch
             {
@@ -83,7 +84,7 @@ static class HttpExtensions
         {
             try
             {
-                prettyContent = XDocument.Parse(stringContent).ToString();
+                prettyContent = XDocument.Parse(stringContent);
             }
             catch
             {

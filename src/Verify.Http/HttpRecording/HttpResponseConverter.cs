@@ -9,7 +9,7 @@ class HttpResponseConverter :
         if (response.Status == HttpStatusCode.OK &&
             response.ContentHeaders == null &&
             response.Headers == null &&
-            response.ContentStringRaw == null)
+            response.ContentString == null)
         {
             writer.WriteValue("200 Ok");
             return;
@@ -23,7 +23,14 @@ class HttpResponseConverter :
 
         writer.WriteProperty(response, response.ContentHeaders, "ContentHeaders");
 
-        writer.WriteProperty(response, response.ContentString, "ContentString");
+        if (response.ContentStringParsed is string stringValue)
+        {
+            writer.WriteProperty(response, stringValue, "ContentString");
+        }
+        else
+        {
+            writer.WriteProperty(response, response.ContentStringParsed, "ContentStringParsed");
+        }
 
         writer.WriteEndObject();
     }

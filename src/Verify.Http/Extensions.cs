@@ -34,6 +34,7 @@ static class Extensions
         {
             jsonWriter.WriteToken(jsonReader);
         }
+
         return stringWriter.ToString();
     }
 

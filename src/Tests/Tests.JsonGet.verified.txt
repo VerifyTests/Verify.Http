@@ -26,14 +26,13 @@
         ContentHeaders: {
           Content-Type: application/json
         },
-        ContentString:
-{
-  "args": {},
-  "headers": {
-    "Host": "httpbin.org",
-  },
-  "url": "https://httpbin.org/get"
-}
+        ContentStringParsed: {
+          args: {},
+          headers: {
+            Host: httpbin.org,
+          },
+          url: https://httpbin.org/get
+        }
       }
     }
   ]
