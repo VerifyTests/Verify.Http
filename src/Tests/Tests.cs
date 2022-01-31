@@ -4,16 +4,6 @@ using VerifyTests.Http;
 [UsesVerify]
 public class Tests
 {
-    [Fact]
-    public async Task MockHttpClientTest()
-    {
-        using var client = new MockHttpClient();
-
-        var result = await client.GetStringAsync("https://httpbin.org/get");
-
-        await Verify(new {result, client});
-    }
-
 #if NET5_0_OR_GREATER && DEBUG
     [Fact]
     public async Task JsonGet()
@@ -210,7 +200,7 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/get");
 
         await Verify(new {result})
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
 
     [Fact]
@@ -240,7 +230,7 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/image/png");
 
         await Verify(result)
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
 
     [Fact]
@@ -251,7 +241,7 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/get");
 
         await Verify(result)
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length", "TrailingHeaders");
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
     }
 
     [Fact]

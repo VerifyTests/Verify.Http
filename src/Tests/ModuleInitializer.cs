@@ -9,7 +9,7 @@
     }
 }
 
-#if(NET48)
+#if(NET48 || NET461)
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]

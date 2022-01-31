@@ -35,7 +35,11 @@
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
     static void WriteTrailingHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
-        writer.WriteProperty(response, response.TrailingHeaders, "TrailingHeaders");
+        var dictionary = response.TrailingHeaders.Simplify();
+        if (dictionary.Any())
+        {
+            writer.WriteProperty(response, dictionary, "TrailingHeaders");
+        }
     }
 #endif
 }

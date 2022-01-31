@@ -1,0 +1,27 @@
+﻿{
+  result: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 0
+      }
+    }
+  },
+  client: {
+    Calls: [
+      {
+        Request: {
+          Method: POST,
+          Uri: https://fake/post,
+          ContentHeaders: {
+            Content-Length: 11,
+            Content-Type: text/plain; charset=utf-8
+          },
+          ContentString: the content
+        },
+        Response: 200 Ok
+      }
+    ]
+  }
+}

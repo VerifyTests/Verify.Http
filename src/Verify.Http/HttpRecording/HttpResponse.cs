@@ -28,8 +28,8 @@ public class HttpResponse
 #endif
 
         var stringContent = content.TryReadStringContent();
-        ContentString = stringContent.prettyContent;
-        ContentStringRaw = stringContent.content;
+        ContentStringParsed = stringContent.prettyContent;
+        ContentString = stringContent.content;
     }
 
     public HttpStatusCode Status { get; }
@@ -38,6 +38,6 @@ public class HttpResponse
     public HttpResponseHeaders? TrailingHeaders { get; }
 #endif
     public HttpContentHeaders? ContentHeaders { get; }
-    public string? ContentString { get; }
-    [JsonIgnore] public string? ContentStringRaw { get; }
+    public object? ContentStringParsed { get; }
+    [JsonIgnore] public string? ContentString { get; }
 }

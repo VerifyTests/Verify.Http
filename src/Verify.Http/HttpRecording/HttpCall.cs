@@ -4,7 +4,7 @@ namespace VerifyTests.Http;
 
 public class HttpCall
 {
-    public HttpCall(HttpRequestMessage request, HttpResponseMessage response,TimeSpan? duration = null, TaskStatus? status = null)
+    public HttpCall(HttpRequestMessage request, HttpResponseMessage response, TimeSpan? duration = null, TaskStatus? status = null)
     {
         Request = new HttpRequest(request);
         Response = new HttpResponse(response);

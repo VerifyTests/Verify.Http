@@ -32,8 +32,8 @@ public class HttpRequest
             }
 
             var stringContent = request.Content.TryReadStringContent();
-            ContentString = stringContent.prettyContent;
-            ContentStringRaw = stringContent.content;
+            ContentStringParsed = stringContent.prettyContent;
+            ContentString = stringContent.content;
         }
     }
 
@@ -45,6 +45,6 @@ public class HttpRequest
     public Uri Uri { get; }
     public HttpRequestHeaders? Headers { get; }
     public HttpContentHeaders? ContentHeaders { get; }
+    public object? ContentStringParsed { get; }
     public string? ContentString { get; }
-    public string? ContentStringRaw { get; }
 }

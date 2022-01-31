@@ -3,7 +3,7 @@
   client: {
     Calls: [
       {
-        Request: https://httpbin.org/get,
+        Request: https://fake/get,
         Response: 200 Ok
       }
     ]

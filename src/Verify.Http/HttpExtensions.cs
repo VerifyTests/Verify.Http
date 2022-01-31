@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
+#if NET5_0_OR_GREATER
+using System.Net.Http.Json;
+#endif
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 using VerifyTests.Http;
@@ -53,7 +56,7 @@ static class HttpExtensions
     static HttpVersionPolicy defaultRequestVersionPolicy;
 #endif
 
-    public static (string? content, string? prettyContent) TryReadStringContent(this HttpContent? content)
+    public static (string? content, object? prettyContent) TryReadStringContent(this HttpContent? content)
     {
         if (content == null)
         {
@@ -66,12 +69,12 @@ static class HttpExtensions
         }
 
         var stringContent = content.ReadAsString();
-        var prettyContent = stringContent;
+        object prettyContent = stringContent;
         if (subType == "json")
         {
             try
             {
-                prettyContent = JToken.Parse(stringContent).ToString();
+                prettyContent = JToken.Parse(stringContent);
             }
             catch
             {
@@ -81,7 +84,7 @@ static class HttpExtensions
         {
             try
             {
-                prettyContent = XDocument.Parse(stringContent).ToString();
+                prettyContent = XDocument.Parse(stringContent);
             }
             catch
             {
@@ -206,16 +209,29 @@ static class HttpExtensions
         return content.IsText(out _);
     }
 
-    public static bool IsText(this HttpContent content, [NotNullWhen(true)] out string? subType)
+    public static bool IsText(this HttpContent content, out string? subType)
     {
+#if NET5_0_OR_GREATER
+        if (content is JsonContent)
+        {
+            subType = "json";
+            return true;
+        }
+#endif
+
         var contentType = content.Headers.ContentType;
         if (contentType is null)
         {
             subType = null;
-            return false;
+            return content is StringContent;
         }
 
-        return IsText(contentType, out subType);
+        if (IsText(contentType, out subType))
+        {
+            return true;
+        }
+
+        return content is StringContent;
     }
 
     static bool IsText(MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? subType)
