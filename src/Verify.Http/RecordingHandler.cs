@@ -5,20 +5,14 @@ public class RecordingHandler :
 {
     public ConcurrentQueue<LoggedSend> Sends = new();
 
-    public void Resume()
-    {
+    public void Resume() =>
         Recording = true;
-    }
 
-    public void Pause()
-    {
+    public void Pause() =>
         Recording = false;
-    }
 
-    public RecordingHandler(bool recording = true)
-    {
+    public RecordingHandler(bool recording = true) =>
         Recording = recording;
-    }
 
     public bool Recording { get; private set; }
 

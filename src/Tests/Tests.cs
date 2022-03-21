@@ -40,16 +40,12 @@ public class Tests
 
         // Resolve a HttpClient. All http calls done at any
         // resolved client will be added to `recording.Sends`
-        public MyService(HttpClient client)
-        {
+        public MyService(HttpClient client) =>
             this.client = client;
-        }
 
-        public Task MethodThatDoesHttp()
-        {
+        public Task MethodThatDoesHttp() =>
             // Some code that does some http calls
-            return client.GetAsync("https://httpbin.org/status/undefined");
-        }
+            client.GetAsync("https://httpbin.org/status/undefined");
     }
 
     #endregion
@@ -204,9 +200,8 @@ public class Tests
     }
 
     [Fact]
-    public Task Uri()
-    {
-        return Verify(
+    public Task Uri() =>
+        Verify(
             new
             {
                 uri1 = new Uri("http://127.0.0.1:57754/admin/databases"),
@@ -220,7 +215,6 @@ public class Tests
                 uri9 = new Uri("/?name", UriKind.Relative),
                 uri10 = new Uri("/?name=", UriKind.Relative)
             });
-    }
 
     [Fact]
     public async Task ImageHttpResponse()

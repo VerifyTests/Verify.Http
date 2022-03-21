@@ -20,26 +20,18 @@ static class HttpExtensions
         return $"{(int) status} {instance.ReasonPhrase}";
     }
 
-    public static bool IsDefaultVersion(this HttpRequest request)
-    {
-        return request.Version == defaultRequestVersion;
-    }
+    public static bool IsDefaultVersion(this HttpRequest request) =>
+        request.Version == defaultRequestVersion;
 
-    public static bool IsDefaultVersion(this HttpRequestMessage request)
-    {
-        return request.Version == defaultRequestVersion;
-    }
+    public static bool IsDefaultVersion(this HttpRequestMessage request) =>
+        request.Version == defaultRequestVersion;
 
 #if NET5_0_OR_GREATER
-    public static bool IsDefaultVersionPolicy(this HttpRequest request)
-    {
-        return request.VersionPolicy == defaultRequestVersionPolicy;
-    }
+    public static bool IsDefaultVersionPolicy(this HttpRequest request) =>
+        request.VersionPolicy == defaultRequestVersionPolicy;
 
-    public static bool IsDefaultVersionPolicy(this HttpRequestMessage request)
-    {
-        return request.VersionPolicy == defaultRequestVersionPolicy;
-    }
+    public static bool IsDefaultVersionPolicy(this HttpRequestMessage request) =>
+        request.VersionPolicy == defaultRequestVersionPolicy;
 #endif
 
     static HttpExtensions()
@@ -199,15 +191,11 @@ static class HttpExtensions
         return TryGetMediaTypeExtension(mediaType, out extension);
     }
 
-    static bool TryGetMediaTypeExtension(string mediaType, [NotNullWhen(true)] out string? extension)
-    {
-        return mappings.TryGetValue(mediaType, out extension);
-    }
+    static bool TryGetMediaTypeExtension(string mediaType, [NotNullWhen(true)] out string? extension) =>
+        mappings.TryGetValue(mediaType, out extension);
 
-    public static bool IsText(this HttpContent content)
-    {
-        return content.IsText(out _);
-    }
+    public static bool IsText(this HttpContent content) =>
+        content.IsText(out _);
 
     public static bool IsText(this HttpContent content, out string? subType)
     {

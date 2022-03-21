@@ -11,10 +11,8 @@ class HttpListener :
     ConcurrentQueue<IDisposable> subscriptions = new();
     AsyncLocal<List<HttpCall>?> local = new();
 
-    public void Start()
-    {
+    public void Start() =>
         local.Value = new();
-    }
 
     public bool TryFinish(out IEnumerable<HttpCall>? entries)
     {
@@ -63,10 +61,8 @@ class HttpListener :
     }
 
     [DiagnosticName("System.Net.Http.HttpRequestOut.Stop")]
-    public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus requestTaskStatus)
-    {
+    public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus requestTaskStatus) =>
         local.Value!.Add(new(request, response, Activity.Current?.Duration, requestTaskStatus));
-    }
 
     void Clear()
     {
@@ -76,15 +72,11 @@ class HttpListener :
         }
     }
 
-    public void Dispose()
-    {
+    public void Dispose() =>
         Clear();
-    }
 
-    public void OnCompleted()
-    {
+    public void OnCompleted() =>
         Clear();
-    }
 
     public void OnError(Exception error)
     {

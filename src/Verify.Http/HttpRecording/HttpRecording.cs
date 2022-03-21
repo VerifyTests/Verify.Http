@@ -22,20 +22,14 @@ public static class HttpRecording
         });
     }
 
-    public static void StartRecording()
-    {
+    public static void StartRecording() =>
         listener.Start();
-    }
 
-    public static IEnumerable<HttpCall> FinishRecording()
-    {
-        return listener.Finish();
-    }
+    public static IEnumerable<HttpCall> FinishRecording() =>
+        listener.Finish();
 
-    public static bool TryFinishRecording(out IEnumerable<HttpCall>? entries)
-    {
-        return listener.TryFinish(out entries);
-    }
+    public static bool TryFinishRecording(out IEnumerable<HttpCall>? entries) =>
+        listener.TryFinish(out entries);
 }
 
 #endif

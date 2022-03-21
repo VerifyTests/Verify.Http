@@ -22,11 +22,9 @@ class UriConverter :
             });
     }
 
-    public static bool ShouldUseOriginalString(Uri value)
-    {
-        return value.IsAbsoluteUri == false ||
-               string.IsNullOrWhiteSpace(value.Query);
-    }
+    public static bool ShouldUseOriginalString(Uri value) =>
+        value.IsAbsoluteUri == false ||
+        string.IsNullOrWhiteSpace(value.Query);
 
     static string GetPath(Uri value)
     {

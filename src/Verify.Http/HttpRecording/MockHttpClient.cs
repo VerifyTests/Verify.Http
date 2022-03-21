@@ -23,13 +23,8 @@ public class MockHttpClient :
     }
 
     MockHttpClient(MockHttpHandler handler) :
-        base(handler)
-    {
+        base(handler) =>
         this.handler = handler;
-    }
 
-    public IReadOnlyCollection<HttpCall> Calls
-    {
-        get => handler.Calls;
-    }
+    public IReadOnlyCollection<HttpCall> Calls => handler.Calls;
 }
