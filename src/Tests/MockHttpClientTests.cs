@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-#if NET5_0_OR_GREATER
+﻿#if NET5_0_OR_GREATER
 using System.Net.Http.Json;
 #endif
 using VerifyTests.Http;
@@ -59,7 +58,7 @@ public class MockHttpClientTests
         {
             Headers =
             {
-                ContentType = new MediaTypeHeaderValue("application/json")
+                ContentType = new("application/json")
             }
         };
         var result = await client.PostAsync("https://fake/post", streamContent);

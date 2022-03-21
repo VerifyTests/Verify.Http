@@ -57,7 +57,7 @@ public class Tests
     {
         const string content = "string content 123";
         var recordingHandler = new RecordingHandler();
-        recordingHandler.InnerHandler = new ContentHandler(new StringContent(content, Encoding.UTF8));
+        recordingHandler.InnerHandler = new ContentHandler(new(content, Encoding.UTF8));
         using var client = new HttpClient(recordingHandler);
 
         var response = await client.GetAsync("https://dont-care.org/get");
@@ -70,7 +70,7 @@ public class Tests
     {
         const string content = "{ \"age\": 1234 }";
         var recordingHandler = new RecordingHandler();
-        recordingHandler.InnerHandler = new ContentHandler(new StringContent(content, Encoding.UTF8, "application/json"));
+        recordingHandler.InnerHandler = new ContentHandler(new(content, Encoding.UTF8, "application/json"));
         using var client = new HttpClient(recordingHandler);
 
         var response = await client.GetAsync("https://dont-care.org/get");

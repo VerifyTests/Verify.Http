@@ -12,7 +12,7 @@ public class MockHttpHandler :
         builder = responseBuilder;
 
     public MockHttpHandler(HttpStatusCode status = HttpStatusCode.OK) =>
-        builder = _ => new HttpResponseMessage(status);
+        builder = _ => new(status);
 
     public MockHttpHandler(string content, string mediaType) =>
         builder = _ =>
@@ -33,7 +33,7 @@ public class MockHttpHandler :
     HttpResponseMessage Add(HttpRequestMessage request)
     {
         var response = builder(request);
-        calls.Enqueue(new HttpCall(request, response));
+        calls.Enqueue(new(request, response));
         return response;
     }
 

@@ -6,8 +6,8 @@ public class HttpCall
 {
     public HttpCall(HttpRequestMessage request, HttpResponseMessage response, TimeSpan? duration = null, TaskStatus? status = null)
     {
-        Request = new HttpRequest(request);
-        Response = new HttpResponse(response);
+        Request = new(request);
+        Response = new(response);
 
         if (status != TaskStatus.RanToCompletion)
         {

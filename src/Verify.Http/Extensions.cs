@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Headers;
 using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
 
 static class Extensions
 {
