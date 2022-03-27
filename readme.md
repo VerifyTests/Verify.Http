@@ -1,6 +1,6 @@
 # <img src="/src/icon.png" height="30px"> Verify.Http
 
-[![Build status](https://ci.appveyor.com/api/projects/status/eedjhmx5o3082tyq?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-http)
+[![Build status](https://ci.appveyor.com/api/projects/status/rfmvbst3od5vpl7p?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-http)
 [![NuGet Status](https://img.shields.io/nuget/v/Verify.Http.svg)](https://www.nuget.org/packages/Verify.Http/)
 
 Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of Http bits.
