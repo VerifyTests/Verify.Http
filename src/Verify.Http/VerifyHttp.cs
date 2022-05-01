@@ -38,11 +38,11 @@ public static class VerifyHttp
                 converters.Add(new HttpHeadersConverter());
                 converters.Add(new HttpContentConverter());
                 converters.Add(new HttpRequestMessageConverter());
+                converters.Add(new HttpResponseMessageConverter());
                 converters.Add(new HttpRequestConverter());
                 converters.Add(new HttpResponseConverter());
                 converters.Add(new MockHttpClientConverter());
                 converters.Add(new MockHttpHandlerConverter());
-                converters.Add(new HttpResponseMessageConverter());
             });
         });
     }

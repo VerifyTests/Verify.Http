@@ -10,7 +10,6 @@
           Method: POST,
           Uri: https://fake/post,
           ContentHeaders: {
-            Content-Length: 11,
             Content-Type: application/json
           },
           ContentString: the content
