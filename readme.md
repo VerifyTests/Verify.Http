@@ -6,13 +6,12 @@
 Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of Http bits.
 
 
-
 ## NuGet package
 
 https://nuget.org/packages/Verify.Http/
 
 
-## Usage
+## Enable
 
 Enable VerifyHttp once at assembly load time:
 
@@ -25,12 +24,74 @@ VerifyHttp.Enable();
 <!-- endSnippet -->
 
 
-### HttpClient recording via Service
+## Converters
+
+Includes converters for the following
+
+  * `HttpMethod`
+  * `Uri`
+  * `HttpHeaders`
+  * `HttpContent`
+  * `HttpRequestMessage`
+  * `HttpResponseMessage`
+
+For example:
+
+<!-- snippet: HttpResponse -->
+<a id='snippet-httpresponse'></a>
+```cs
+[Fact]
+public async Task HttpResponse()
+{
+    using var client = new HttpClient();
+
+    var result = await client.GetAsync("https://httpbin.org/get");
+
+    await Verify(result);
+}
+```
+<sup><a href='/src/Tests/Tests.cs#L231-L241' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+Results in:
+
+<!-- snippet: Tests.HttpResponse.verified.txt -->
+<a id='snippet-Tests.HttpResponse.verified.txt'></a>
+```txt
+{
+  Version: 1.1,
+  Status: 200 OK,
+  Headers: {
+    Access-Control-Allow-Credentials: true,
+    Connection: keep-alive,
+    Date: DateTime_1,
+    Server: gunicorn/19.9.0
+  },
+  Content: {
+    Headers: {
+      Content-Type: application/json
+    },
+    Value: {
+      args: {},
+      headers: {
+        Host: httpbin.org,
+      },
+      url: https://httpbin.org/get
+    }
+  },
+  Request: https://httpbin.org/get
+}
+```
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+## HttpClient recording via Service
 
 For code that does web calls via HttpClient, these calls can be recorded and verified.
 
 
-#### Service that does http
+### Service that does http
 
 Given a class that does some Http calls:
 
@@ -51,11 +112,11 @@ public class MyService
         client.GetAsync("https://httpbin.org/status/undefined");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L35-L51' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L33-L49' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
-#### Add to IHttpClientBuilder
+### Add to IHttpClientBuilder
 
 Http recording can be added to a `IHttpClientBuilder`:
 
@@ -83,7 +144,7 @@ await Verify(recording.Sends)
 <!-- endSnippet -->
 
 
-#### Add globally
+### Add globally
 
 Http can also be added globally `IHttpClientBuilder`:
 
@@ -108,11 +169,11 @@ await Verify(recording.Sends)
     // Ignore some headers that change per request
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L145-L163' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L143-L161' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
-#### Result
+### Result
 
 Will result in the following verified file:
 
@@ -126,7 +187,6 @@ Will result in the following verified file:
     ResponseStatus: BadRequest,
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
-      Access-Control-Allow-Origin: *,
       Connection: keep-alive,
       Server: gunicorn/19.9.0
     },
@@ -134,7 +194,7 @@ Will result in the following verified file:
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L13' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -164,7 +224,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L244-L268' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L246-L270' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -195,18 +255,18 @@ await client.GetAsync("https://httpbin.org/status/undefined");
 await Verify(recording.Sends)
     .ModifySerialization(x => x.IgnoreMembers("Date"));
 ```
-<sup><a href='/src/Tests/Tests.cs#L274-L299' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L276-L301' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
-### Http Recording via listener
+## Http Recording via listener
 
 Http Recording allows, when a method is being tested, for any http requests made as part of that method call to be recorded and verified.
 
 **Supported in net5 and up**
 
 
-#### Usage
+### Usage
 
 Call `HttpRecording.StartRecording();` before the method being tested is called.
 
@@ -243,7 +303,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + xmlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L81-L111' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L79-L109' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The requests/response pairs will be appended to the verified file.
@@ -265,12 +325,10 @@ The requests/response pairs will be appended to the verified file.
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
-          Access-Control-Allow-Origin: *,
           Connection: keep-alive,
           Server: gunicorn/19.9.0
         },
         ContentHeaders: {
-          Content-Length: 429,
           Content-Type: application/json
         },
         ContentStringParsed: {
@@ -305,12 +363,10 @@ The requests/response pairs will be appended to the verified file.
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
-          Access-Control-Allow-Origin: *,
           Connection: keep-alive,
           Server: gunicorn/19.9.0
         },
         ContentHeaders: {
-          Content-Length: 522,
           Content-Type: application/xml
         },
         ContentStringParsed: {
@@ -357,11 +413,11 @@ The requests/response pairs will be appended to the verified file.
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L105' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
-#### Explicit Usage
+### Explicit Usage
 
 The above usage results in the http calls being automatically added snapshot file. Calls can also be explicitly read and recorded using `HttpRecording.FinishRecording()`. This enables:
 
@@ -399,7 +455,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L113-L140' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L111-L138' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Results in the following:

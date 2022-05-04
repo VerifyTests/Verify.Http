@@ -12,12 +12,10 @@
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
-          Access-Control-Allow-Origin: *,
           Connection: keep-alive,
           Server: gunicorn/19.9.0
         },
         ContentHeaders: {
-          Content-Length: 429,
           Content-Type: application/json
         },
         ContentStringParsed: {
@@ -52,12 +50,10 @@
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
-          Access-Control-Allow-Origin: *,
           Connection: keep-alive,
           Server: gunicorn/19.9.0
         },
         ContentHeaders: {
-          Content-Length: 522,
           Content-Type: application/xml
         },
         ContentStringParsed: {

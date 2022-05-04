@@ -13,7 +13,12 @@ public class MockHttpClientTests
 
         var result = await client.GetStringAsync("https://fake/get");
 
-        await Verify(new {result, client});
+        await Verify(
+            new
+            {
+                result,
+                client
+            });
     }
 
     [Fact]
@@ -21,9 +26,16 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var result = await client.PostAsync("https://fake/post", new StringContent("the content"));
+        var content = new StringContent("the content");
+        var result = await client.PostAsync("https://fake/post", content);
 
-        await Verify(new {result, client}).UniqueForRuntimeAndVersion();
+        await Verify(
+                new
+                {
+                    result,
+                    client
+                })
+            .UniqueForRuntimeAndVersion();
     }
 
 #if NET5_0_OR_GREATER
@@ -32,20 +44,39 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var result = await client.PostAsync("https://fake/post", JsonContent.Create(new{a="b"}));
+        var content = JsonContent.Create(
+            new
+            {
+                a = "b"
+            });
+        var result = await client.PostAsync("https://fake/post", content);
 
-        await Verify(new {result, client}).UniqueForRuntimeAndVersion();
+        await Verify(
+                new
+                {
+                    result,
+                    client
+                })
+            .UniqueForRuntimeAndVersion();
     }
-    #endif
+#endif
+
     [Fact]
     public async Task PostStreamContent()
     {
         using var client = new MockHttpClient();
 
-        var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes("the content"));
-        var result = await client.PostAsync("https://fake/post", new StreamContent(memoryStream));
+        var stream = new MemoryStream(Encoding.UTF8.GetBytes("the content"));
+        var content = new StreamContent(stream);
+        var result = await client.PostAsync("https://fake/post", content);
 
-        await Verify(new {result, client}).UniqueForRuntimeAndVersion();
+        await Verify(
+                new
+                {
+                    result,
+                    client
+                })
+            .UniqueForRuntimeAndVersion();
     }
 
     [Fact]
@@ -63,6 +94,12 @@ public class MockHttpClientTests
         };
         var result = await client.PostAsync("https://fake/post", streamContent);
 
-        await Verify(new {result, client}).UniqueForRuntimeAndVersion();
+        await Verify(
+                new
+                {
+                    result,
+                    client
+                })
+            .UniqueForRuntimeAndVersion();
     }
 }

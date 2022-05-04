@@ -4,7 +4,6 @@
     Status: 200 OK,
     Content: {
       Headers: {
-        Content-Length: 0
       }
     }
   },

@@ -5,7 +5,6 @@
     ResponseStatus: BadRequest,
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
-      Access-Control-Allow-Origin: *,
       Connection: keep-alive,
       Server: gunicorn/19.9.0
     },

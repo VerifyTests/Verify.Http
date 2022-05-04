@@ -14,8 +14,7 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/get");
 
-        await Verify(result)
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
+        await Verify(result);
     }
 
     [Fact]
@@ -27,8 +26,7 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/json");
 
-        await Verify(result)
-            .ModifySerialization(settings => { settings.IgnoreMembers("traceparent"); });
+        await Verify(result);
     }
 #endif
 
@@ -162,7 +160,9 @@ public class Tests
 
         #endregion
     }
+
 #endif
+
     [Fact]
     public async Task HttpClientRecording()
     {
@@ -195,8 +195,10 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verify(new {result})
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
+        await Verify(new
+            {
+                result
+            });
     }
 
     [Fact]
@@ -223,10 +225,10 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/image/png");
 
-        await Verify(result)
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
+        await Verify(result);
     }
 
+    #region HttpResponse
     [Fact]
     public async Task HttpResponse()
     {
@@ -234,9 +236,9 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verify(result)
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
+        await Verify(result);
     }
+    #endregion
 
     [Fact]
     public async Task PauseResume()
