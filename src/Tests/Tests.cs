@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Http;
 
 [UsesVerify]
@@ -63,12 +63,14 @@ public class Tests
         Assert.Equal(content, recordingHandler.Sends.Single().ResponseContent);
     }
 
-    [Fact]
-    public async Task MediaTypeApplicationJsonIsRecorded()
+    [Theory]
+    [InlineData("application/json")]
+    [InlineData("application/foo+json")]
+    public async Task MediaTypeApplicationJsonIsRecorded(string mediaType)
     {
         const string content = "{ \"age\": 1234 }";
         var recordingHandler = new RecordingHandler();
-        recordingHandler.InnerHandler = new ContentHandler(new(content, Encoding.UTF8, "application/json"));
+        recordingHandler.InnerHandler = new ContentHandler(new(content, Encoding.UTF8, mediaType));
         using var client = new HttpClient(recordingHandler);
 
         var response = await client.GetAsync("https://dont-care.org/get");

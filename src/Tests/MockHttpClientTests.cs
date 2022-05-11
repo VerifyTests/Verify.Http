@@ -1,5 +1,7 @@
-﻿#if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text;
 #endif
 using VerifyTests.Http;
 
@@ -21,6 +23,20 @@ public class MockHttpClientTests
             });
     }
 
+    [Theory]
+    [InlineData("application/json")]
+    [InlineData("application/foo+json")]
+    public async Task GetJsonContent(string mediaType)
+    {
+        using var client = new MockHttpClient(content: @"{ ""a"": ""b"" }", mediaType);
+
+        var result = await client.GetAsync("https://fake/get");
+
+        await Verify(result)
+            .UseParameters(mediaType)
+            .UniqueForRuntimeAndVersion();
+    }
+
     [Fact]
     public async Task PostStringContent()
     {
@@ -38,17 +54,18 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-#if NET5_0_OR_GREATER
-    [Fact]
-    public async Task PostJsonContent()
+    [Theory]
+    [InlineData("application/json")]
+    [InlineData("application/foo+json")]
+    public async Task PostJsonStringContent(string mediaType)
     {
         using var client = new MockHttpClient();
 
-        var content = JsonContent.Create(
-            new
-            {
-                a = "b"
-            });
+        var content = new StringContent(
+            content: @"{ ""a"": ""b"" }",
+            encoding: Encoding.UTF8,
+            mediaType: mediaType);
+
         var result = await client.PostAsync("https://fake/post", content);
 
         await Verify(
@@ -57,6 +74,33 @@ public class MockHttpClientTests
                     result,
                     client
                 })
+            .UseParameters(mediaType)
+            .UniqueForRuntimeAndVersion();
+    }
+
+#if NET5_0_OR_GREATER
+    [Theory]
+    [InlineData("application/json")]
+    [InlineData("application/foo+json")]
+    public async Task PostJsonContent(string mediaType)
+    {
+        using var client = new MockHttpClient();
+
+        var content = JsonContent.Create(
+            new
+            {
+                a = "b"
+            },
+            mediaType: MediaTypeHeaderValue.Parse(mediaType));
+        var result = await client.PostAsync("https://fake/post", content);
+
+        await Verify(
+                new
+                {
+                    result,
+                    client
+                })
+            .UseParameters(mediaType)
             .UniqueForRuntimeAndVersion();
     }
 #endif

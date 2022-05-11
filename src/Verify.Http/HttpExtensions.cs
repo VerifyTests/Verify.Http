@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
 #if NET5_0_OR_GREATER
 using System.Net.Http.Json;
@@ -14,10 +14,10 @@ static class HttpExtensions
         var status = instance.StatusCode;
         if (instance.ReasonPhrase == null)
         {
-            return $"{(int) status} {status}";
+            return $"{(int)status} {status}";
         }
 
-        return $"{(int) status} {instance.ReasonPhrase}";
+        return $"{(int)status} {instance.ReasonPhrase}";
     }
 
     public static bool IsDefaultVersion(this HttpRequest request) =>
@@ -90,7 +90,6 @@ static class HttpExtensions
     {
         //extra
         {"application/graphql", "gql"},
-        {"application/json", "json"},
         {"application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx"},
         {"application/vnd.openxmlformats-officedocument.wordprocessingml.template", "dotx"},
         {"application/vnd.ms-word.document.macroEnabled.12", "docm"},
@@ -191,8 +190,20 @@ static class HttpExtensions
         return TryGetMediaTypeExtension(mediaType, out extension);
     }
 
-    static bool TryGetMediaTypeExtension(string mediaType, [NotNullWhen(true)] out string? extension) =>
-        mappings.TryGetValue(mediaType, out extension);
+    static bool TryGetMediaTypeExtension(string mediaType, [NotNullWhen(true)] out string? extension)
+    {
+        if (mappings.TryGetValue(mediaType, out extension))
+        {
+            return true;
+        }
+
+        if (IsJsonMediaType(mediaType, out extension))
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public static bool IsText(this HttpContent content) =>
         content.IsText(out _);
@@ -212,6 +223,11 @@ static class HttpExtensions
         {
             subType = null;
             return content is StringContent;
+        }
+
+        if (IsJson(contentType, out subType))
+        {
+            return true;
         }
 
         if (IsText(contentType, out subType))
@@ -241,6 +257,31 @@ static class HttpExtensions
         if (mappings.TryGetValue(mediaType, out var extension))
         {
             return EmptyFiles.Extensions.IsText(extension);
+        }
+
+        return false;
+    }
+
+    static bool IsJson(MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? subType)
+    {
+        var mediaType = contentType.MediaType;
+        if (mediaType is null)
+        {
+            subType = null;
+            return false;
+        }
+
+        return IsJsonMediaType(mediaType, out subType);
+    }
+
+    static bool IsJsonMediaType(string mediaType, [NotNullWhen(true)] out string? subType)
+    {
+        subType = null;
+
+        if (mediaType == "application/json" || mediaType.EndsWith("+json"))
+        {
+            subType = "json";
+            return true;
         }
 
         return false;
