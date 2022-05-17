@@ -28,9 +28,8 @@ public static class VerifyHttp
     {
         VerifierSettings.RegisterFileConverter<HttpResponseMessage>(
             (instance, _) => HttpResponseSplitterResult.Convert(instance));
-        VerifierSettings.ModifySerialization(settings =>
-        {
-            settings.AddExtraSettings(serializer =>
+        VerifierSettings
+            .AddExtraSettings(serializer =>
             {
                 var converters = serializer.Converters;
                 converters.Add(new HttpMethodConverter());
@@ -44,6 +43,5 @@ public static class VerifyHttp
                 converters.Add(new MockHttpClientConverter());
                 converters.Add(new MockHttpHandlerConverter());
             });
-        });
     }
 }

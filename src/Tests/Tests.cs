@@ -92,11 +92,8 @@ public class Tests
                 {
                     sizeOfResponse
                 })
-            .ModifySerialization(settings =>
-            {
                 //scrub some headers that are not consistent between test runs
-                settings.IgnoreMembers("traceparent", "Date");
-            });
+                .IgnoreMembers("traceparent", "Date");
     }
 
     static async Task<int> MethodThatDoesHttpCalls()
@@ -158,7 +155,7 @@ public class Tests
 
         await Verify(recording.Sends)
             // Ignore some headers that change per request
-            .ModifySerialization(x => x.IgnoreMembers("Date"));
+            .IgnoreMembers("Date");
 
         #endregion
     }
@@ -185,7 +182,7 @@ public class Tests
 
         await Verify(recording.Sends)
             // Ignore some headers that change per request
-            .ModifySerialization(x => x.IgnoreMembers("Date"));
+            .IgnoreMembers("Date");
 
         #endregion
     }
@@ -198,9 +195,9 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/get");
 
         await Verify(new
-            {
-                result
-            });
+        {
+            result
+        });
     }
 
     [Fact]
@@ -231,6 +228,7 @@ public class Tests
     }
 
     #region HttpResponse
+
     [Fact]
     public async Task HttpResponse()
     {
@@ -240,6 +238,7 @@ public class Tests
 
         await Verify(result);
     }
+
     #endregion
 
     [Fact]
@@ -267,7 +266,7 @@ public class Tests
         await myService.MethodThatDoesHttp();
 
         await Verify(recording.Sends)
-            .ModifySerialization(x => x.IgnoreMembers("Date"));
+            .IgnoreMembers("Date");
 
         #endregion
     }
@@ -298,7 +297,7 @@ public class Tests
         await client.GetAsync("https://httpbin.org/status/undefined");
 
         await Verify(recording.Sends)
-            .ModifySerialization(x => x.IgnoreMembers("Date"));
+            .IgnoreMembers("Date");
 
         #endregion
     }

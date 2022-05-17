@@ -50,7 +50,7 @@ public async Task HttpResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L233-L243' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L230-L242' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Results in:
@@ -138,9 +138,9 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends)
     // Ignore some headers that change per request
-    .ModifySerialization(x => x.IgnoreMembers("Date"));
+    .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L171-L190' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L168-L187' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -167,9 +167,9 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends)
     // Ignore some headers that change per request
-    .ModifySerialization(x => x.IgnoreMembers("Date"));
+    .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L145-L163' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L142-L160' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -222,9 +222,9 @@ recording.Resume();
 await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends)
-    .ModifySerialization(x => x.IgnoreMembers("Date"));
+    .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L248-L272' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L247-L271' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -253,9 +253,9 @@ recording.Resume();
 await client.GetAsync("https://httpbin.org/status/undefined");
 
 await Verify(recording.Sends)
-    .ModifySerialization(x => x.IgnoreMembers("Date"));
+    .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L278-L303' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L277-L302' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -287,11 +287,8 @@ public async Task TestHttpRecording()
             {
                 sizeOfResponse
             })
-        .ModifySerialization(settings =>
-        {
             //scrub some headers that are not consistent between test runs
-            settings.IgnoreMembers("traceparent", "Date");
-        });
+            .IgnoreMembers("traceparent", "Date");
 }
 
 static async Task<int> MethodThatDoesHttpCalls()
@@ -303,7 +300,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + xmlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L81-L111' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L81-L108' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The requests/response pairs will be appended to the verified file.
@@ -455,7 +452,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L113-L140' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L110-L137' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Results in the following:
