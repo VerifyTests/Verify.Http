@@ -11,7 +11,7 @@
                 return new(instance, targets);
             }
 
-            targets.Add(new(extension, content.ReadAsStream(), null));
+            targets.Add(new(extension, content.ReadAsStream()));
         }
 
         return new(
