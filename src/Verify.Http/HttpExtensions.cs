@@ -114,6 +114,7 @@ static class HttpExtensions
         {"application/octet-stream", "bin"},
         {"application/onenote", "one"},
         {"application/postscript", "eps"},
+        {"application/soap+xml", "xml"},
         {"application/step", "step"},
         {"application/vnd.ms-excel", "xls"},
         {"application/vnd.ms-powerpoint", "ppt"},
