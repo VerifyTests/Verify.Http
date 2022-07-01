@@ -39,6 +39,38 @@ public class MockHttpClientTests
 
     #endregion
 
+    #region DefaultContent
+
+    [Fact]
+    public async Task DefaultContent()
+    {
+        using var client = new MockHttpClient();
+
+        var result = await client.GetAsync("https://fake/get");
+
+        await Verify(result);
+    }
+
+    #endregion
+
+#if NET6_0_OR_GREATER
+
+    #region RecordedCalls
+
+    [Fact]
+    public async Task RecordedCalls()
+    {
+        using var client = new MockHttpClient();
+
+        await client.GetAsync("https://fake/get1");
+        await client.GetAsync("https://fake/get2");
+
+        await Verify(client.Calls);
+    }
+
+    #endregion
+#endif
+
     #region ExplicitStatusCode
 
     [Fact]
@@ -52,6 +84,7 @@ public class MockHttpClientTests
     }
 
     #endregion
+
     #region ExplicitResponse
 
     [Fact]
@@ -69,6 +102,7 @@ public class MockHttpClientTests
     }
 
     #endregion
+
     #region EnumerableResponses
 
     [Fact]
@@ -95,6 +129,7 @@ public class MockHttpClientTests
     }
 
     #endregion
+
     #region ResponseBuilder
 
     [Fact]

@@ -1,9 +1,10 @@
-{
+﻿{
   result: {
     Version: 1.1,
     Status: 200 OK,
     Headers: {
       Access-Control-Allow-Credentials: true,
+      Access-Control-Allow-Origin: *,
       Connection: keep-alive,
       Date: DateTime_1,
       Server: gunicorn/19.9.0
@@ -15,7 +16,7 @@
       Value: {
         args: {},
         headers: {
-          Host: httpbin.org,
+          Host: httpbin.org
         },
         url: https://httpbin.org/get
       }

@@ -4,10 +4,19 @@
     public static void Initialize()
     {
         #region Enable
+
         VerifyHttp.Enable();
+
         #endregion
+
+        VerifierSettings.IgnoreMembers(
+            "Content-Length",
+            "traceparent",
+            "Traceparent",
+            "X-Amzn-Trace-Id",
+            "origin");
         VerifierSettings
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "origin", "Content-Length");
+            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "Content-Length");
     }
 }
 

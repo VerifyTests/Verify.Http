@@ -35,6 +35,7 @@ public static class VerifyHttp
                 converters.Add(new HttpMethodConverter());
                 converters.Add(new UriConverter());
                 converters.Add(new HttpHeadersConverter());
+                converters.Add(new HttpContentHeadersConverter());
                 converters.Add(new HttpContentConverter());
                 converters.Add(new HttpRequestMessageConverter());
                 converters.Add(new HttpResponseMessageConverter());

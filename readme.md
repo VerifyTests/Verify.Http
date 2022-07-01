@@ -20,7 +20,7 @@ Enable VerifyHttp once at assembly load time:
 ```cs
 VerifyHttp.Enable();
 ```
-<sup><a href='/src/Tests/ModuleInitializer.cs#L6-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInitializer.cs#L6-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -63,6 +63,7 @@ Results in:
   Status: 200 OK,
   Headers: {
     Access-Control-Allow-Credentials: true,
+    Access-Control-Allow-Origin: *,
     Connection: keep-alive,
     Date: DateTime_1,
     Server: gunicorn/19.9.0
@@ -74,7 +75,7 @@ Results in:
     Value: {
       args: {},
       headers: {
-        Host: httpbin.org,
+        Host: httpbin.org
       },
       url: https://httpbin.org/get
     }
@@ -82,7 +83,7 @@ Results in:
   Request: https://httpbin.org/get
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -187,6 +188,7 @@ Will result in the following verified file:
     ResponseStatus: BadRequest,
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
+      Access-Control-Allow-Origin: *,
       Connection: keep-alive,
       Server: gunicorn/19.9.0
     },
@@ -194,7 +196,7 @@ Will result in the following verified file:
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L13' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -322,6 +324,7 @@ The requests/response pairs will be appended to the verified file.
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
+          Access-Control-Allow-Origin: *,
           Connection: keep-alive,
           Server: gunicorn/19.9.0
         },
@@ -360,6 +363,7 @@ The requests/response pairs will be appended to the verified file.
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
+          Access-Control-Allow-Origin: *,
           Connection: keep-alive,
           Server: gunicorn/19.9.0
         },
@@ -410,7 +414,7 @@ The requests/response pairs will be appended to the verified file.
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L103' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -474,8 +478,86 @@ Results in the following:
 
 ## Mocking
 
+`MockHttpClient` allows mocking of http responses and recording of http requests.
 
-### Explicit Content
+
+### Default Response
+
+The default behaviour is to return a `HttpResponseMessage` with a status code of `200 OK`.
+
+<!-- snippet: DefaultContent -->
+<a id='snippet-defaultcontent'></a>
+```cs
+[Fact]
+public async Task DefaultContent()
+{
+    using var client = new MockHttpClient();
+
+    var result = await client.GetAsync("https://fake/get");
+
+    await Verify(result);
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L42-L54' title='Snippet source file'>snippet source</a> | <a href='#snippet-defaultcontent' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.DefaultContent.verified.txt -->
+<a id='snippet-MockHttpClientTests.DefaultContent.verified.txt'></a>
+```txt
+{
+  Version: 1.1,
+  Status: 200 OK
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.DefaultContent.verified.txt#L1-L4' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.DefaultContent.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### Verifying Calls
+
+Request-Response pairs can be verified using `MockHttpClient.Calls`
+
+<!-- snippet: RecordedCalls -->
+<a id='snippet-recordedcalls'></a>
+```cs
+[Fact]
+public async Task RecordedCalls()
+{
+    using var client = new MockHttpClient();
+
+    await client.GetAsync("https://fake/get1");
+    await client.GetAsync("https://fake/get2");
+
+    await Verify(client.Calls);
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L58-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-recordedcalls' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.RecordedCalls.verified.txt -->
+<a id='snippet-MockHttpClientTests.RecordedCalls.verified.txt'></a>
+```txt
+{
+  Calls: [
+    {
+      Request: https://fake/get,
+      Response: 200 Ok
+    }
+  ],
+  result: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {}
+    }
+  }
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.RecordedCalls.verified.txt#L1-L15' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.RecordedCalls.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### Explicit Content Response
 
 <!-- snippet: ExplicitContent -->
 <a id='snippet-explicitcontent'></a>
@@ -515,7 +597,7 @@ public async Task ExplicitContent()
 <!-- endSnippet -->
 
 
-### Explicit HttpStatusCode
+### Explicit HttpStatusCode Response
 
 <!-- snippet: ExplicitStatusCode -->
 <a id='snippet-explicitstatuscode'></a>
@@ -530,7 +612,7 @@ public async Task ExplicitStatusCode()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L42-L54' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitstatuscode' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L74-L86' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitstatuscode' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <!-- snippet: MockHttpClientTests.ExplicitStatusCode.verified.txt -->
@@ -564,47 +646,7 @@ public async Task ExplicitResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L55-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-<!-- snippet: MockHttpClientTests.ExplicitResponse.verified.txt -->
-<a id='snippet-MockHttpClientTests.ExplicitResponse.verified.txt'></a>
-```txt
-{
-  Version: 1.1,
-  Status: 200 OK,
-  Content: {
-    Headers: {
-      Content-Type: text/plain; charset=utf-8
-    },
-    Value: Hello
-  }
-}
-```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-
-### Explicit HttpResponseMessage
-
-<!-- snippet: ExplicitResponse -->
-<a id='snippet-explicitresponse'></a>
-```cs
-[Fact]
-public async Task ExplicitResponse()
-{
-    var response = new HttpResponseMessage(HttpStatusCode.OK)
-    {
-        Content = new StringContent("Hello")
-    };
-    using var client = new MockHttpClient(response);
-
-    var result = await client.GetAsync("https://fake/get");
-
-    await Verify(result);
-}
-```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L55-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L88-L104' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <!-- snippet: MockHttpClientTests.ExplicitResponse.verified.txt -->
@@ -654,7 +696,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L98-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L133-L159' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <!-- snippet: MockHttpClientTests.ResponseBuilder.verified.txt -->
@@ -690,20 +732,19 @@ public async Task ResponseBuilder()
 ### Enumeration of HttpResponseMessage
 
 <!-- snippet: EnumerableResponses -->
-<a id='snippet-responsebuilder'></a>
+<a id='snippet-enumerableresponses'></a>
 ```cs
 [Fact]
-public async Task ResponseBuilder()
+public async Task EnumerableResponses()
 {
     using var client = new MockHttpClient(
-        request =>
+        new HttpResponseMessage(HttpStatusCode.OK)
         {
-            var content = $"Hello to {request.RequestUri}";
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(content),
-            };
-            return response;
+            Content = new StringContent("Hello")
+        },
+        new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent("World")
         });
 
     var result1 = await client.GetAsync("https://fake/get1");
@@ -716,11 +757,11 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L98-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L106-L131' title='Snippet source file'>snippet source</a> | <a href='#snippet-enumerableresponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <!-- snippet: MockHttpClientTests.EnumerableResponses.verified.txt -->
-<a id='snippet-MockHttpClientTests.ResponseBuilder.verified.txt'></a>
+<a id='snippet-MockHttpClientTests.EnumerableResponses.verified.txt'></a>
 ```txt
 {
   result1: {
@@ -730,7 +771,7 @@ public async Task ResponseBuilder()
       Headers: {
         Content-Type: text/plain; charset=utf-8
       },
-      Value: Hello to https://fake/get1
+      Value: Hello
     }
   },
   result2: {
@@ -740,12 +781,12 @@ public async Task ResponseBuilder()
       Headers: {
         Content-Type: text/plain; charset=utf-8
       },
-      Value: Hello to https://fake/get2
+      Value: World
     }
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
