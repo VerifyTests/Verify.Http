@@ -537,23 +537,18 @@ public async Task RecordedCalls()
 <!-- snippet: MockHttpClientTests.RecordedCalls.verified.txt -->
 <a id='snippet-MockHttpClientTests.RecordedCalls.verified.txt'></a>
 ```txt
-{
-  Calls: [
-    {
-      Request: https://fake/get,
-      Response: 200 Ok
-    }
-  ],
-  result: {
-    Version: 1.1,
-    Status: 200 OK,
-    Content: {
-      Headers: {}
-    }
+[
+  {
+    Request: https://fake/get1,
+    Response: 200 Ok
+  },
+  {
+    Request: https://fake/get2,
+    Response: 200 Ok
   }
-}
+]
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.RecordedCalls.verified.txt#L1-L15' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.RecordedCalls.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.RecordedCalls.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.RecordedCalls.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
