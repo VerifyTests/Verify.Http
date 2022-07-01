@@ -167,9 +167,9 @@ static class HttpExtensions
         {"x-world/x-vrml", "xof"}
     };
 
-    public static bool TryGetExtension(this HttpContent content, [NotNullWhen(true)] out string? extension)
+    public static bool TryGetExtension(this HttpContent? content, [NotNullWhen(true)] out string? extension)
     {
-        var contentType = content.Headers.ContentType;
+        var contentType = content?.Headers.ContentType;
         if (contentType is null)
         {
             extension = null;

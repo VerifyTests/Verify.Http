@@ -2,6 +2,7 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 #endif
+using System.Net;
 using VerifyTests.Http;
 
 [UsesVerify]
@@ -21,6 +22,106 @@ public class MockHttpClientTests
                 client
             });
     }
+
+    #region ExplicitContent
+
+    [Fact]
+    public async Task ExplicitContent()
+    {
+        using var client = new MockHttpClient(
+            content: @"{ ""a"": ""b"" }",
+            mediaType: "application/json");
+
+        var result = await client.GetAsync("https://fake/get");
+
+        await Verify(result);
+    }
+
+    #endregion
+
+    #region ExplicitStatusCode
+
+    [Fact]
+    public async Task ExplicitStatusCode()
+    {
+        using var client = new MockHttpClient(HttpStatusCode.Ambiguous);
+
+        var result = await client.GetAsync("https://fake/get");
+
+        await Verify(result);
+    }
+
+    #endregion
+    #region ExplicitResponse
+
+    [Fact]
+    public async Task ExplicitResponse()
+    {
+        var response = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent("Hello")
+        };
+        using var client = new MockHttpClient(response);
+
+        var result = await client.GetAsync("https://fake/get");
+
+        await Verify(result);
+    }
+
+    #endregion
+    #region EnumerableResponses
+
+    [Fact]
+    public async Task EnumerableResponses()
+    {
+        using var client = new MockHttpClient(
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("Hello")
+            },
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("World")
+            });
+
+        var result1 = await client.GetAsync("https://fake/get1");
+        var result2 = await client.GetAsync("https://fake/get2");
+
+        await Verify(new
+        {
+            result1,
+            result2
+        });
+    }
+
+    #endregion
+    #region ResponseBuilder
+
+    [Fact]
+    public async Task ResponseBuilder()
+    {
+        using var client = new MockHttpClient(
+            request =>
+            {
+                var content = $"Hello to {request.RequestUri}";
+                var response = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(content),
+                };
+                return response;
+            });
+
+        var result1 = await client.GetAsync("https://fake/get1");
+        var result2 = await client.GetAsync("https://fake/get2");
+
+        await Verify(new
+        {
+            result1,
+            result2
+        });
+    }
+
+    #endregion
 
     [Theory]
     [InlineData("application/json")]

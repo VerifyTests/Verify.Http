@@ -12,6 +12,21 @@ public class MockHttpClient :
     {
     }
 
+    public MockHttpClient(IEnumerable<HttpResponseMessage> responses) :
+        this(new MockHttpHandler(responses))
+    {
+    }
+
+    public MockHttpClient(params HttpResponseMessage[] responses) :
+        this(new MockHttpHandler(responses))
+    {
+    }
+
+    public MockHttpClient(HttpResponseMessage response) :
+        this(new MockHttpHandler(response))
+    {
+    }
+
     public MockHttpClient(HttpStatusCode status = HttpStatusCode.OK) :
         this(new MockHttpHandler(status))
     {

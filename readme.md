@@ -472,6 +472,283 @@ Results in the following:
 <!-- endSnippet -->
 
 
+## Mocking
+
+
+### Explicit Content
+
+<!-- snippet: ExplicitContent -->
+<a id='snippet-explicitcontent'></a>
+```cs
+[Fact]
+public async Task ExplicitContent()
+{
+    using var client = new MockHttpClient(
+        content: @"{ ""a"": ""b"" }",
+        mediaType: "application/json");
+
+    var result = await client.GetAsync("https://fake/get");
+
+    await Verify(result);
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L26-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitcontent' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.ExplicitContent.verified.txt -->
+<a id='snippet-MockHttpClientTests.ExplicitContent.verified.txt'></a>
+```txt
+{
+  Version: 1.1,
+  Status: 200 OK,
+  Content: {
+    Headers: {
+      Content-Type: application/json; charset=utf-8
+    },
+    Value: {
+      a: b
+    }
+  }
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitContent.verified.txt#L1-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitContent.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### Explicit HttpStatusCode
+
+<!-- snippet: ExplicitStatusCode -->
+<a id='snippet-explicitstatuscode'></a>
+```cs
+[Fact]
+public async Task ExplicitStatusCode()
+{
+    using var client = new MockHttpClient(HttpStatusCode.Ambiguous);
+
+    var result = await client.GetAsync("https://fake/get");
+
+    await Verify(result);
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L42-L54' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitstatuscode' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.ExplicitStatusCode.verified.txt -->
+<a id='snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt'></a>
+```txt
+{
+  Version: 1.1,
+  Status: 300 Multiple Choices
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitStatusCode.verified.txt#L1-L4' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### Explicit HttpResponseMessage
+
+<!-- snippet: ExplicitResponse -->
+<a id='snippet-explicitresponse'></a>
+```cs
+[Fact]
+public async Task ExplicitResponse()
+{
+    var response = new HttpResponseMessage(HttpStatusCode.OK)
+    {
+        Content = new StringContent("Hello")
+    };
+    using var client = new MockHttpClient(response);
+
+    var result = await client.GetAsync("https://fake/get");
+
+    await Verify(result);
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L55-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.ExplicitResponse.verified.txt -->
+<a id='snippet-MockHttpClientTests.ExplicitResponse.verified.txt'></a>
+```txt
+{
+  Version: 1.1,
+  Status: 200 OK,
+  Content: {
+    Headers: {
+      Content-Type: text/plain; charset=utf-8
+    },
+    Value: Hello
+  }
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### Explicit HttpResponseMessage
+
+<!-- snippet: ExplicitResponse -->
+<a id='snippet-explicitresponse'></a>
+```cs
+[Fact]
+public async Task ExplicitResponse()
+{
+    var response = new HttpResponseMessage(HttpStatusCode.OK)
+    {
+        Content = new StringContent("Hello")
+    };
+    using var client = new MockHttpClient(response);
+
+    var result = await client.GetAsync("https://fake/get");
+
+    await Verify(result);
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L55-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.ExplicitResponse.verified.txt -->
+<a id='snippet-MockHttpClientTests.ExplicitResponse.verified.txt'></a>
+```txt
+{
+  Version: 1.1,
+  Status: 200 OK,
+  Content: {
+    Headers: {
+      Content-Type: text/plain; charset=utf-8
+    },
+    Value: Hello
+  }
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### HttpResponseMessage builder
+
+<!-- snippet: ResponseBuilder -->
+<a id='snippet-responsebuilder'></a>
+```cs
+[Fact]
+public async Task ResponseBuilder()
+{
+    using var client = new MockHttpClient(
+        request =>
+        {
+            var content = $"Hello to {request.RequestUri}";
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(content),
+            };
+            return response;
+        });
+
+    var result1 = await client.GetAsync("https://fake/get1");
+    var result2 = await client.GetAsync("https://fake/get2");
+
+    await Verify(new
+    {
+        result1,
+        result2
+    });
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L98-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.ResponseBuilder.verified.txt -->
+<a id='snippet-MockHttpClientTests.ResponseBuilder.verified.txt'></a>
+```txt
+{
+  result1: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Type: text/plain; charset=utf-8
+      },
+      Value: Hello to https://fake/get1
+    }
+  },
+  result2: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Type: text/plain; charset=utf-8
+      },
+      Value: Hello to https://fake/get2
+    }
+  }
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### Enumeration of HttpResponseMessage
+
+<!-- snippet: EnumerableResponses -->
+<a id='snippet-responsebuilder'></a>
+```cs
+[Fact]
+public async Task ResponseBuilder()
+{
+    using var client = new MockHttpClient(
+        request =>
+        {
+            var content = $"Hello to {request.RequestUri}";
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(content),
+            };
+            return response;
+        });
+
+    var result1 = await client.GetAsync("https://fake/get1");
+    var result2 = await client.GetAsync("https://fake/get2");
+
+    await Verify(new
+    {
+        result1,
+        result2
+    });
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L98-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: MockHttpClientTests.EnumerableResponses.verified.txt -->
+<a id='snippet-MockHttpClientTests.ResponseBuilder.verified.txt'></a>
+```txt
+{
+  result1: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Type: text/plain; charset=utf-8
+      },
+      Value: Hello to https://fake/get1
+    }
+  },
+  result2: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Type: text/plain; charset=utf-8
+      },
+      Value: Hello to https://fake/get2
+    }
+  }
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
 ## Icon
 
 [Spider](https://thenounproject.com/term/spider/904683/) designed by [marialuisa iborra](https://thenounproject.com/marialuisa.iborra/) from [The Noun Project](https://thenounproject.com).

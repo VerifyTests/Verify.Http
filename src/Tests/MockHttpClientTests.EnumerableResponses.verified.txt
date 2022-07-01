@@ -1,0 +1,22 @@
+{
+  result1: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Type: text/plain; charset=utf-8
+      },
+      Value: Hello
+    }
+  },
+  result2: {
+    Version: 1.1,
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Type: text/plain; charset=utf-8
+      },
+      Value: World
+    }
+  }
+}
