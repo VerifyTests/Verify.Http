@@ -53,7 +53,8 @@ public async Task HttpResponse()
 <sup><a href='/src/Tests/Tests.cs#L230-L242' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-Results in:
+
+#### Resulting verified file
 
 <!-- snippet: Tests.HttpResponse.verified.txt -->
 <a id='snippet-Tests.HttpResponse.verified.txt'></a>
@@ -174,9 +175,7 @@ await Verify(recording.Sends)
 <!-- endSnippet -->
 
 
-### Result
-
-Will result in the following verified file:
+#### Resulting verified file
 
 <!-- snippet: Tests.HttpClientRecording.verified.txt -->
 <a id='snippet-Tests.HttpClientRecording.verified.txt'></a>
@@ -304,6 +303,9 @@ static async Task<int> MethodThatDoesHttpCalls()
 ```
 <sup><a href='/src/Tests/Tests.cs#L81-L108' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
+
+#### Resulting verified file
 
 The requests/response pairs will be appended to the verified file.
 
@@ -459,7 +461,8 @@ public async Task TestHttpRecordingExplicit()
 <sup><a href='/src/Tests/Tests.cs#L110-L137' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-Results in the following:
+
+#### Resulting verified file
 
 <!-- snippet: Tests.TestHttpRecordingExplicit.verified.txt -->
 <a id='snippet-Tests.TestHttpRecordingExplicit.verified.txt'></a>
@@ -501,6 +504,9 @@ public async Task DefaultContent()
 <sup><a href='/src/Tests/MockHttpClientTests.cs#L42-L54' title='Snippet source file'>snippet source</a> | <a href='#snippet-defaultcontent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
+
+#### Resulting verified file
+
 <!-- snippet: MockHttpClientTests.DefaultContent.verified.txt -->
 <a id='snippet-MockHttpClientTests.DefaultContent.verified.txt'></a>
 ```txt
@@ -534,6 +540,9 @@ public async Task RecordedCalls()
 <sup><a href='/src/Tests/MockHttpClientTests.cs#L58-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-recordedcalls' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
+
+#### Resulting verified file
+
 <!-- snippet: MockHttpClientTests.RecordedCalls.verified.txt -->
 <a id='snippet-MockHttpClientTests.RecordedCalls.verified.txt'></a>
 ```txt
@@ -554,6 +563,8 @@ public async Task RecordedCalls()
 
 ### Explicit Content Response
 
+Always return an explicit `StringContent` and media-type:
+
 <!-- snippet: ExplicitContent -->
 <a id='snippet-explicitcontent'></a>
 ```cs
@@ -571,6 +582,9 @@ public async Task ExplicitContent()
 ```
 <sup><a href='/src/Tests/MockHttpClientTests.cs#L26-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitcontent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
+
+#### Resulting verified file
 
 <!-- snippet: MockHttpClientTests.ExplicitContent.verified.txt -->
 <a id='snippet-MockHttpClientTests.ExplicitContent.verified.txt'></a>
@@ -594,6 +608,8 @@ public async Task ExplicitContent()
 
 ### Explicit HttpStatusCode Response
 
+Always return an explicit `HttpStatusCode`:
+
 <!-- snippet: ExplicitStatusCode -->
 <a id='snippet-explicitstatuscode'></a>
 ```cs
@@ -610,6 +626,9 @@ public async Task ExplicitStatusCode()
 <sup><a href='/src/Tests/MockHttpClientTests.cs#L74-L86' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitstatuscode' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
+
+#### Resulting verified file
+
 <!-- snippet: MockHttpClientTests.ExplicitStatusCode.verified.txt -->
 <a id='snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt'></a>
 ```txt
@@ -623,6 +642,8 @@ public async Task ExplicitStatusCode()
 
 
 ### Explicit HttpResponseMessage
+
+Alwars return an explicit `HttpResponseMessage`:
 
 <!-- snippet: ExplicitResponse -->
 <a id='snippet-explicitresponse'></a>
@@ -644,6 +665,9 @@ public async Task ExplicitResponse()
 <sup><a href='/src/Tests/MockHttpClientTests.cs#L88-L104' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
+
+#### Resulting verified file
+
 <!-- snippet: MockHttpClientTests.ExplicitResponse.verified.txt -->
 <a id='snippet-MockHttpClientTests.ExplicitResponse.verified.txt'></a>
 ```txt
@@ -663,6 +687,8 @@ public async Task ExplicitResponse()
 
 
 ### HttpResponseMessage builder
+
+Use custom code to create a `HttpResponseMessage` base on a `HttpRequestMessage`:
 
 <!-- snippet: ResponseBuilder -->
 <a id='snippet-responsebuilder'></a>
@@ -693,6 +719,9 @@ public async Task ResponseBuilder()
 ```
 <sup><a href='/src/Tests/MockHttpClientTests.cs#L133-L159' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
+
+#### Resulting verified file
 
 <!-- snippet: MockHttpClientTests.ResponseBuilder.verified.txt -->
 <a id='snippet-MockHttpClientTests.ResponseBuilder.verified.txt'></a>
@@ -726,6 +755,8 @@ public async Task ResponseBuilder()
 
 ### Enumeration of HttpResponseMessage
 
+Use a sequence of `HttpResponseMessage` to return a sequence of requests:
+
 <!-- snippet: EnumerableResponses -->
 <a id='snippet-enumerableresponses'></a>
 ```cs
@@ -754,6 +785,9 @@ public async Task EnumerableResponses()
 ```
 <sup><a href='/src/Tests/MockHttpClientTests.cs#L106-L131' title='Snippet source file'>snippet source</a> | <a href='#snippet-enumerableresponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
+
+#### Resulting verified file
 
 <!-- snippet: MockHttpClientTests.EnumerableResponses.verified.txt -->
 <a id='snippet-MockHttpClientTests.EnumerableResponses.verified.txt'></a>
