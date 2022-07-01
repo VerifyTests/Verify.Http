@@ -690,20 +690,19 @@ public async Task ResponseBuilder()
 ### Enumeration of HttpResponseMessage
 
 <!-- snippet: EnumerableResponses -->
-<a id='snippet-responsebuilder'></a>
+<a id='snippet-enumerableresponses'></a>
 ```cs
 [Fact]
-public async Task ResponseBuilder()
+public async Task EnumerableResponses()
 {
     using var client = new MockHttpClient(
-        request =>
+        new HttpResponseMessage(HttpStatusCode.OK)
         {
-            var content = $"Hello to {request.RequestUri}";
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(content),
-            };
-            return response;
+            Content = new StringContent("Hello")
+        },
+        new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent("World")
         });
 
     var result1 = await client.GetAsync("https://fake/get1");
@@ -716,11 +715,11 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L98-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L72-L97' title='Snippet source file'>snippet source</a> | <a href='#snippet-enumerableresponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <!-- snippet: MockHttpClientTests.EnumerableResponses.verified.txt -->
-<a id='snippet-MockHttpClientTests.ResponseBuilder.verified.txt'></a>
+<a id='snippet-MockHttpClientTests.EnumerableResponses.verified.txt'></a>
 ```txt
 {
   result1: {
@@ -730,7 +729,7 @@ public async Task ResponseBuilder()
       Headers: {
         Content-Type: text/plain; charset=utf-8
       },
-      Value: Hello to https://fake/get1
+      Value: Hello
     }
   },
   result2: {
@@ -740,12 +739,12 @@ public async Task ResponseBuilder()
       Headers: {
         Content-Type: text/plain; charset=utf-8
       },
-      Value: Hello to https://fake/get2
+      Value: World
     }
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
