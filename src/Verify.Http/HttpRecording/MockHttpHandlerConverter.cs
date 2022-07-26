@@ -7,7 +7,7 @@ class MockHttpHandlerConverter :
     {
         writer.WriteStartObject();
 
-        writer.WriteProperty(handler, handler.Calls, "Calls");
+        writer.WriteMember(handler, handler.Calls, "Calls");
 
         writer.WriteEndObject();
     }

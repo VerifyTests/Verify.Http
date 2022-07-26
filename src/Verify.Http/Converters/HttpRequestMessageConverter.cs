@@ -19,21 +19,21 @@
 
         if (request.Method != HttpMethod.Get)
         {
-            writer.WriteProperty(request, request.Method, "Method");
+            writer.WriteMember(request, request.Method, "Method");
         }
 
-        writer.WriteProperty(request, request.RequestUri, "Uri");
+        writer.WriteMember(request, request.RequestUri, "Uri");
 
         if (!request.IsDefaultVersion())
         {
-            writer.WriteProperty(request, request.Version, "Version");
+            writer.WriteMember(request, request.Version, "Version");
         }
 
 #if NET5_0_OR_GREATER
 
         if (!request.IsDefaultVersionPolicy())
         {
-            writer.WriteProperty(request, request.VersionPolicy, "VersionPolicy");
+            writer.WriteMember(request, request.VersionPolicy, "VersionPolicy");
         }
 
 #endif
@@ -44,7 +44,7 @@
 
         if (request.Content != null)
         {
-            writer.WriteProperty(request, request.Content, "Content");
+            writer.WriteMember(request, request.Content, "Content");
         }
 
         writer.WriteEndObject();
@@ -53,12 +53,12 @@
     static void WriteCookies(VerifyJsonWriter writer, HttpRequestMessage request)
     {
         var cookies = request.Headers.Cookies();
-        writer.WriteProperty(request, cookies, "Cookies");
+        writer.WriteMember(request, cookies, "Cookies");
     }
 
     static void WriteHeaders(VerifyJsonWriter writer, HttpRequestMessage request)
     {
         var headers = request.Headers.NotCookies();
-        writer.WriteProperty(request, headers, "Headers");
+        writer.WriteMember(request, headers, "Headers");
     }
 }

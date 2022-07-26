@@ -8,7 +8,7 @@ class HttpContentConverter :
     {
         writer.WriteStartObject();
 
-        writer.WriteProperty(content, content.Headers, "Headers");
+        writer.WriteMember(content, content.Headers, "Headers");
 
         WriteIfText(writer, content);
 

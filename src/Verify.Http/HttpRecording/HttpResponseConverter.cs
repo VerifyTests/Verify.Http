@@ -17,19 +17,19 @@ class HttpResponseConverter :
 
         writer.WriteStartObject();
 
-        writer.WriteProperty(response, $"{(int) response.Status} {response.Status}", "Status");
+        writer.WriteMember(response, $"{(int) response.Status} {response.Status}", "Status");
 
-        writer.WriteProperty(response, response.Headers, "Headers");
+        writer.WriteMember(response, response.Headers, "Headers");
 
-        writer.WriteProperty(response, response.ContentHeaders, "ContentHeaders");
+        writer.WriteMember(response, response.ContentHeaders, "ContentHeaders");
 
         if (response.ContentStringParsed is string stringValue)
         {
-            writer.WriteProperty(response, stringValue, "ContentString");
+            writer.WriteMember(response, stringValue, "ContentString");
         }
         else
         {
-            writer.WriteProperty(response, response.ContentStringParsed, "ContentStringParsed");
+            writer.WriteMember(response, response.ContentStringParsed, "ContentStringParsed");
         }
 
         writer.WriteEndObject();

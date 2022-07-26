@@ -5,8 +5,8 @@
     {
         writer.WriteStartObject();
 
-        writer.WriteProperty(response, response.Version, "Version");
-        writer.WriteProperty(response, response.StatusText(), "Status");
+        writer.WriteMember(response, response.Version, "Version");
+        writer.WriteMember(response, response.StatusText(), "Status");
 
         WriteHeaders(writer, response);
 
@@ -14,8 +14,8 @@
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
         WriteTrailingHeaders(writer, response);
 #endif
-        writer.WriteProperty(response, response.Content, "Content");
-        writer.WriteProperty(response, response.RequestMessage, "Request");
+        writer.WriteMember(response, response.Content, "Content");
+        writer.WriteMember(response, response.RequestMessage, "Request");
 
         writer.WriteEndObject();
     }
@@ -23,13 +23,13 @@
     static void WriteCookies(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var cookies = response.Headers.Cookies();
-        writer.WriteProperty(response, cookies, "Cookies");
+        writer.WriteMember(response, cookies, "Cookies");
     }
 
     static void WriteHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var headers = response.Headers.NotCookies();
-        writer.WriteProperty(response, headers, "Headers");
+        writer.WriteMember(response, headers, "Headers");
     }
 
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
@@ -38,7 +38,7 @@
         var dictionary = response.TrailingHeaders.Simplify();
         if (dictionary.Any())
         {
-            writer.WriteProperty(response, dictionary, "TrailingHeaders");
+            writer.WriteMember(response, dictionary, "TrailingHeaders");
         }
     }
 #endif

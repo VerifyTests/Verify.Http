@@ -23,36 +23,36 @@ class HttpRequestConverter :
 
         if (request.Method != HttpMethod.Get)
         {
-            writer.WriteProperty(request, request.Method, "Method");
+            writer.WriteMember(request, request.Method, "Method");
         }
 
-        writer.WriteProperty(request, request.Uri, "Uri");
+        writer.WriteMember(request, request.Uri, "Uri");
 
         if (!request.IsDefaultVersion())
         {
-            writer.WriteProperty(request, request.Version, "Version");
+            writer.WriteMember(request, request.Version, "Version");
         }
 
 #if NET5_0_OR_GREATER
 
         if (!request.IsDefaultVersionPolicy())
         {
-            writer.WriteProperty(request, request.VersionPolicy, "VersionPolicy");
+            writer.WriteMember(request, request.VersionPolicy, "VersionPolicy");
         }
 
 #endif
 
-        writer.WriteProperty(request, request.Headers, "Headers");
+        writer.WriteMember(request, request.Headers, "Headers");
 
-        writer.WriteProperty(request, request.ContentHeaders, "ContentHeaders");
+        writer.WriteMember(request, request.ContentHeaders, "ContentHeaders");
 
         if (request.ContentStringParsed is string stringValue)
         {
-            writer.WriteProperty(request, stringValue, "ContentString");
+            writer.WriteMember(request, stringValue, "ContentString");
         }
         else
         {
-            writer.WriteProperty(request, request.ContentStringParsed, "ContentStringParsed");
+            writer.WriteMember(request, request.ContentStringParsed, "ContentStringParsed");
         }
 
         writer.WriteEndObject();

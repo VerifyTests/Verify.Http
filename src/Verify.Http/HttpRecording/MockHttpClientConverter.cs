@@ -7,7 +7,7 @@ class MockHttpClientConverter :
     {
         writer.WriteStartObject();
 
-        writer.WriteProperty(client, client.Calls, "Calls");
+        writer.WriteMember(client, client.Calls, "Calls");
 
         writer.WriteEndObject();
     }
