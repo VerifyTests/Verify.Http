@@ -32,6 +32,7 @@ public static class VerifyHttp
             .AddExtraSettings(serializer =>
             {
                 var converters = serializer.Converters;
+                converters.Add(new XmlNodeConverter());
                 converters.Add(new HttpMethodConverter());
                 converters.Add(new UriConverter());
                 converters.Add(new HttpHeadersConverter());

@@ -5,6 +5,7 @@ using VerifyTests.Http;
 public class Tests
 {
 #if NET5_0_OR_GREATER && DEBUG
+
     [Fact]
     public async Task JsonGet()
     {
@@ -14,7 +15,8 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/get");
 
-        await Verify(result);
+        await Verify(result)
+            .ScrubLinesContaining("origin");
     }
 
     [Fact]
@@ -194,10 +196,11 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verify(new
-        {
-            result
-        });
+        await Verify(
+            new
+            {
+                result
+            });
     }
 
     [Fact]
