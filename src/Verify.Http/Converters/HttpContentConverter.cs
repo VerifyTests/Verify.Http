@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Newtonsoft.Json.Linq;
+using Argon;
 
 class HttpContentConverter :
     WriteOnlyJsonConverter<HttpContent>

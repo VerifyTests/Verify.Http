@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 #endif
 using System.Xml.Linq;
-using Newtonsoft.Json.Linq;
+using Argon;
 using VerifyTests.Http;
 
 static class HttpExtensions

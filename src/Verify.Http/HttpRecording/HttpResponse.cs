@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
+using Argon;
 
 namespace VerifyTests.Http;
 
