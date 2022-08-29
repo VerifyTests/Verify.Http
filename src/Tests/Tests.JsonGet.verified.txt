@@ -5,7 +5,6 @@
   "headers": {
     "Host": "httpbin.org", 
   }, 
-  "origin": "158.40.5.123", 
   "url": "https://httpbin.org/get"
 }
 ,
@@ -28,7 +27,6 @@
           Content-Type: application/json
         },
         ContentStringParsed: {
-          args: {},
           headers: {
             Host: httpbin.org
           },

@@ -13,7 +13,6 @@
       Content-Type: application/json
     },
     Value: {
-      args: {},
       headers: {
         Host: httpbin.org
       },

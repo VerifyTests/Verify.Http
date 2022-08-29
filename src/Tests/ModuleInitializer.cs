@@ -1,10 +1,10 @@
 ﻿public static class ModuleInitializer
 {
+    #region Enable
+
     [ModuleInitializer]
     public static void Initialize()
     {
-        #region Enable
-
         VerifyHttp.Enable();
 
         #endregion
