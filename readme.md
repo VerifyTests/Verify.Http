@@ -77,7 +77,6 @@ public async Task HttpResponse()
       Content-Type: application/json
     },
     Value: {
-      args: {},
       headers: {
         Host: httpbin.org
       },
@@ -87,7 +86,7 @@ public async Task HttpResponse()
   Request: https://httpbin.org/get
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
