@@ -8,6 +8,7 @@
         VerifyHttp.Enable();
 
         #endregion
+        VerifyDiffPlex.Initialize();
 
         VerifierSettings.IgnoreMembers(
             "Content-Length",
