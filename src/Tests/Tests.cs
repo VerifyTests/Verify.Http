@@ -6,6 +6,21 @@ public class Tests
 {
 #if NET5_0_OR_GREATER && DEBUG
 
+    #region IgnoreHeader
+
+    [Fact]
+    public async Task IgnoreHeader()
+    {
+        using var client = new HttpClient();
+
+        var result = await client.GetAsync("https://httpbin.org/get");
+
+        await Verify(result)
+            .IgnoreMember("Server");
+    }
+
+    #endregion
+
     [Fact]
     public async Task JsonGet()
     {
@@ -15,8 +30,7 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/get");
 
-        await Verify(result)
-            .ScrubLinesContaining("origin");
+        await Verify(result);
     }
 
     [Fact]
