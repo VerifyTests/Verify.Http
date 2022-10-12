@@ -141,6 +141,7 @@ static class HttpExtensions
         {"image/heic", ".heic"},
         {"image/heic-sequence", "heics"},
         {"image/jpeg", "jpg"},
+        {"image/gif", "gif"},
         {"image/pict", "pic"},
         {"image/png", "png"},
         {"image/x-png", "png"},
