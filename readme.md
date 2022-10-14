@@ -53,7 +53,7 @@ public async Task HttpResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L247-L259' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L248-L260' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -108,7 +108,7 @@ public async Task IgnoreHeader()
         .IgnoreMember("Server");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L9-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-ignoreheader' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L10-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-ignoreheader' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -138,7 +138,7 @@ public class MyService
         client.GetAsync("https://httpbin.org/status/undefined");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L49-L65' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L50-L66' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -166,7 +166,7 @@ await Verify(recording.Sends)
     // Ignore some headers that change per request
     .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L184-L203' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L185-L204' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -195,7 +195,7 @@ await Verify(recording.Sends)
     // Ignore some headers that change per request
     .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L158-L176' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L159-L177' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -208,7 +208,7 @@ await Verify(recording.Sends)
   {
     RequestUri: https://httpbin.org/status/undefined,
     RequestMethod: GET,
-    ResponseStatus: BadRequest,
+    ResponseStatus: BadRequest 400,
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
       Access-Control-Allow-Origin: *,
@@ -249,7 +249,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L264-L288' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L270-L294' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -280,7 +280,7 @@ await client.GetAsync("https://httpbin.org/status/undefined");
 await Verify(recording.Sends)
     .IgnoreMembers("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L294-L319' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L300-L325' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -325,7 +325,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + xmlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L97-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L98-L125' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -482,7 +482,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L126-L153' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L127-L154' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
