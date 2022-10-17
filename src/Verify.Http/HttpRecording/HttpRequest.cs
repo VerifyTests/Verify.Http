@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace VerifyTests.Http;
+﻿namespace VerifyTests.Http;
 
 public class HttpRequest
 {

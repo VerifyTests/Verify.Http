@@ -1,7 +1,4 @@
-﻿using System.Net;
-using VerifyTests.Http;
-
-class HttpResponseConverter :
+﻿class HttpResponseConverter :
     WriteOnlyJsonConverter<HttpResponse>
 {
     public override void Write(VerifyJsonWriter writer, HttpResponse response)

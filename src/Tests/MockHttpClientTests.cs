@@ -2,8 +2,6 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 #endif
-using System.Net;
-using VerifyTests.Http;
 
 [UsesVerify]
 public class MockHttpClientTests

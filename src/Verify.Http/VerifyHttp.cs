@@ -1,9 +1,4 @@
-﻿using Argon;
-using Microsoft.Extensions.DependencyInjection;
-using VerifyTests.Http;
-using Microsoft.Extensions.Options;
-
-namespace VerifyTests;
+﻿namespace VerifyTests;
 
 public static class VerifyHttp
 {

@@ -1,7 +1,4 @@
-﻿using System.Xml.Linq;
-using Argon;
-
-class HttpContentConverter :
+﻿class HttpContentConverter :
     WriteOnlyJsonConverter<HttpContent>
 {
     public override void Write(VerifyJsonWriter writer, HttpContent content)

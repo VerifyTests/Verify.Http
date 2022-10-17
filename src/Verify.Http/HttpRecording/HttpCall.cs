@@ -1,6 +1,4 @@
-﻿using Argon;
-
-namespace VerifyTests.Http;
+﻿namespace VerifyTests.Http;
 
 public class HttpCall
 {

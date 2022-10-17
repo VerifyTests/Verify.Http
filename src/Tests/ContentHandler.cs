@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-class ContentHandler : DelegatingHandler
+﻿class ContentHandler : DelegatingHandler
 {
     StringContent content;
 

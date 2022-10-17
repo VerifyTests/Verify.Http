@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using Microsoft.Net.Http.Headers;
+﻿using Microsoft.Net.Http.Headers;
 
 static class Extensions
 {

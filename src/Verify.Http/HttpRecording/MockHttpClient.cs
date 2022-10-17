@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace VerifyTests.Http;
+﻿namespace VerifyTests.Http;
 
 public class MockHttpClient :
     HttpClient

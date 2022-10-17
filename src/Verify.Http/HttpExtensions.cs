@@ -1,11 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Http.Headers;
 #if NET5_0_OR_GREATER
 using System.Net.Http.Json;
 #endif
-using System.Xml.Linq;
-using Argon;
-using VerifyTests.Http;
 
 static class HttpExtensions
 {
@@ -258,7 +253,7 @@ static class HttpExtensions
         subType = split[1];
         if (mappings.TryGetValue(mediaType, out var extension))
         {
-            return EmptyFiles.Extensions.IsText(extension);
+            return FileExtensions.IsText(extension);
         }
 
         return false;

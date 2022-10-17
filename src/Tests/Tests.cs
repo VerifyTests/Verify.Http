@@ -1,7 +1,3 @@
-using System.Net;
-using Microsoft.Extensions.DependencyInjection;
-using VerifyTests.Http;
-
 [UsesVerify]
 public class Tests
 {

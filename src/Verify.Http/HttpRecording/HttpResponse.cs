@@ -1,8 +1,4 @@
-﻿using System.Net;
-using System.Net.Http.Headers;
-using Argon;
-
-namespace VerifyTests.Http;
+﻿namespace VerifyTests.Http;
 
 public class HttpResponse
 {

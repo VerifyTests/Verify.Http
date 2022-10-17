@@ -1,6 +1,4 @@
-﻿using VerifyTests.Http;
-
-class MockHttpClientConverter :
+﻿class MockHttpClientConverter :
     WriteOnlyJsonConverter<MockHttpClient>
 {
     public override void Write(VerifyJsonWriter writer, MockHttpClient client)

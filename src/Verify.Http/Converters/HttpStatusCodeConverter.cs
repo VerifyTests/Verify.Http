@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-class HttpStatusCodeConverter :
+﻿class HttpStatusCodeConverter :
     WriteOnlyJsonConverter<HttpStatusCode>
 {
     public override void Write(VerifyJsonWriter writer, HttpStatusCode code) =>
