@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.Extensions.DependencyInjection;
 using VerifyTests.Http;
 
@@ -257,6 +258,11 @@ public class Tests
     }
 
     #endregion
+
+    [Fact]
+    public Task HttpStatusCodeTest() =>
+        Verify(HttpStatusCode.Ambiguous)
+            .UniqueForRuntime();
 
     [Fact]
     public async Task PauseResume()

@@ -2,7 +2,7 @@
   {
     RequestUri: https://httpbin.org/status/undefined,
     RequestMethod: GET,
-    ResponseStatus: BadRequest,
+    ResponseStatus: BadRequest 400,
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
       Access-Control-Allow-Origin: *,
