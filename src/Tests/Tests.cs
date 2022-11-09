@@ -13,7 +13,7 @@ public class Tests
         var result = await client.GetAsync("https://httpbin.org/get");
 
         await Verify(result)
-            .IgnoreMember("Server");
+            .IgnoreMembers("Server", "origin");
     }
 
     #endregion
@@ -27,7 +27,8 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/get");
 
-        await Verify(result);
+        await Verify(result)
+            .IgnoreMembers("Server", "origin");
     }
 
     [Fact]
@@ -39,7 +40,8 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/json");
 
-        await Verify(result);
+        await Verify(result)
+            .IgnoreMembers("Server", "origin");
     }
 #endif
 
@@ -211,7 +213,8 @@ public class Tests
             new
             {
                 result
-            });
+            })
+            .IgnoreMembers("Server", "origin");
     }
 
     [Fact]
@@ -238,7 +241,8 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/image/png");
 
-        await Verify(result);
+        await Verify(result)
+            .IgnoreMembers("Server", "origin");
     }
 
     #region HttpResponse
@@ -250,7 +254,8 @@ public class Tests
 
         var result = await client.GetAsync("https://httpbin.org/get");
 
-        await Verify(result);
+        await Verify(result)
+            .IgnoreMembers("Server", "origin");
     }
 
     #endregion
@@ -316,7 +321,7 @@ public class Tests
         await client.GetAsync("https://httpbin.org/status/undefined");
 
         await Verify(recording.Sends)
-            .IgnoreMembers("Date");
+            .IgnoreMembers("Date", "Server", "origin");
 
         #endregion
     }

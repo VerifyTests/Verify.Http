@@ -6,7 +6,7 @@
         var content = instance.Content;
         if (content.TryGetExtension(out var extension))
         {
-            if (EmptyFiles.FileExtensions.IsText(extension))
+            if (FileExtensions.IsText(extension))
             {
                 return new(instance, targets);
             }

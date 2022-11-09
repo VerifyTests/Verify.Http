@@ -40,7 +40,7 @@ static class Extensions
             .Where(x => x.Key != "Set-Cookie")
             .ToDictionary(x => x.Key, x => x.Value);
 
-    public static Dictionary<string, string> Cookies(this HttpHeaders headers) =>
+    public static Dictionary<string, string?> Cookies(this HttpHeaders headers) =>
         headers
             .Simplify()
             .Where(x => x.Key == "Set-Cookie")
@@ -49,5 +49,5 @@ static class Extensions
                 var stringSegment = (string)x.Value;
                 return SetCookieHeaderValue.Parse(stringSegment);
             })
-            .ToDictionary(x => x.Name.Value, x => x.Value.Value);
+            .ToDictionary(x => x.Name.Value!, x => x.Value.Value);
 }

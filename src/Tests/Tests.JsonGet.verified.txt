@@ -5,7 +5,7 @@
   "headers": {
     "Host": "httpbin.org", 
   }, 
-  "origin": "118.211.48.91", 
+  "origin": "158.40.5.123", 
   "url": "https://httpbin.org/get"
 }
 ,
@@ -21,8 +21,7 @@
           Access-Control-Allow-Credentials: true,
           Access-Control-Allow-Origin: *,
           Connection: keep-alive,
-          Date: DateTime_1,
-          Server: gunicorn/19.9.0
+          Date: DateTime_1
         },
         ContentHeaders: {
           Content-Type: application/json
