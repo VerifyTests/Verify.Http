@@ -3,10 +3,13 @@
 {
     public override void Write(VerifyJsonWriter writer, HttpResponse response)
     {
-        if (response.Status == HttpStatusCode.OK &&
-            response.ContentHeaders == null &&
-            response.Headers == null &&
-            response.ContentString == null)
+        if (response is
+            {
+                Status: HttpStatusCode.OK,
+                ContentHeaders: null,
+                Headers: null,
+                ContentString: null
+            })
         {
             writer.WriteValue("200 Ok");
             return;
