@@ -121,6 +121,7 @@ static class HttpExtensions
         {"application/x-x509-ca-cert", "cer"},
         {"application/x-zip-compressed", "zip"},
         {"application/xhtml+xml", "xhtml"},
+        {"application/xrd+xml", "xml"},
         {"application/xml", "xml"},
         {"audio/aac", "aac"},
         {"audio/aiff", "aiff"},
