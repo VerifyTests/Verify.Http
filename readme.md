@@ -19,11 +19,10 @@ Enable VerifyHttp once at assembly load time:
 <a id='snippet-enable'></a>
 ```cs
 [ModuleInitializer]
-public static void Initialize()
-{
+public static void Initialize() =>
     VerifyHttp.Enable();
 ```
-<sup><a href='/src/Tests/ModuleInitializer.cs#L3-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInitializer.cs#L3-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
