@@ -3,11 +3,13 @@
     #region Enable
 
     [ModuleInitializer]
-    public static void Initialize()
-    {
+    public static void Initialize() =>
         VerifyHttp.Enable();
 
-        #endregion
+    #endregion
+    [ModuleInitializer]
+    public static void InitializeOtehr()
+    {
         VerifyDiffPlex.Initialize();
 
         VerifierSettings.IgnoreMembers(
