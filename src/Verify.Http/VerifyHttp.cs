@@ -33,8 +33,9 @@ public static class VerifyHttp
             throw new("Already Initialized");
         }
 
+        Initialized = true;
 
-    VerifierSettings.RegisterFileConverter<HttpResponseMessage>(
+        VerifierSettings.RegisterFileConverter<HttpResponseMessage>(
             (instance, _) => HttpResponseSplitterResult.Convert(instance));
         VerifierSettings
             .AddExtraSettings(serializer =>
