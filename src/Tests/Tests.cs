@@ -27,7 +27,7 @@ public class Tests
 
         var result = await client.GetStringAsync("https://httpbin.org/get");
 
-        await Verify(result)
+        await VerifyJson(result)
             .IgnoreMembers("Server", "origin");
     }
 

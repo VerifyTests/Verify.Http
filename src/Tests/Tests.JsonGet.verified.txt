@@ -1,14 +1,10 @@
 ﻿{
-  target:
-{
-  "args": {}, 
-  "headers": {
-    "Host": "httpbin.org", 
-  }, 
-  "origin": "158.40.5.123", 
-  "url": "https://httpbin.org/get"
-}
-,
+  target: {
+    headers: {
+      Host: httpbin.org
+    },
+    url: https://httpbin.org/get
+  },
   httpCalls: [
     {
       Request: {

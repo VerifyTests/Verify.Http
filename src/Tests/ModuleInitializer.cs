@@ -4,13 +4,13 @@
 
     [ModuleInitializer]
     public static void Initialize() =>
-        VerifyHttp.Enable();
+        VerifyHttp.Initialize();
 
     #endregion
     [ModuleInitializer]
-    public static void InitializeOtehr()
+    public static void InitializeOther()
     {
-        VerifyDiffPlex.Initialize();
+        VerifierSettings.InitializePlugins();
 
         VerifierSettings.IgnoreMembers(
             "Content-Length",
