@@ -1,4 +1,4 @@
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 #endif
@@ -211,7 +211,7 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     [Theory]
     [InlineData("application/json")]
     [InlineData("application/foo+json")]

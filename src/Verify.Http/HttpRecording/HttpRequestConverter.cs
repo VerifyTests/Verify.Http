@@ -5,7 +5,7 @@
     {
         if (request.Method == HttpMethod.Get &&
             UriConverter.ShouldUseOriginalString(request.Uri) &&
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
             request.IsDefaultVersionPolicy() &&
 #endif
             request.Headers == null &&
@@ -31,7 +31,7 @@
             writer.WriteMember(request, request.Version, "Version");
         }
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
         if (!request.IsDefaultVersionPolicy())
         {

@@ -16,7 +16,7 @@ public class HttpResponse
             ContentHeaders = content.Headers;
         }
 
-#if NET5_0_OR_GREATER || NETSTANDARD2_1
+#if NET6_0_OR_GREATER
         if (response.TrailingHeaders.Any())
         {
             TrailingHeaders = response.TrailingHeaders;
@@ -30,7 +30,7 @@ public class HttpResponse
 
     public HttpStatusCode Status { get; }
     public HttpResponseHeaders? Headers { get; }
-#if NET5_0_OR_GREATER || NETSTANDARD2_1
+#if NET6_0_OR_GREATER
     public HttpResponseHeaders? TrailingHeaders { get; }
 #endif
     public HttpContentHeaders? ContentHeaders { get; }

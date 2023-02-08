@@ -1,4 +1,4 @@
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 using System.Net.Http.Json;
 #endif
 
@@ -18,10 +18,15 @@ static class HttpExtensions
     public static bool IsDefaultVersion(this HttpRequest request) =>
         request.Version == defaultRequestVersion;
 
+#if NET48
+    public static Task<string> ReadAsStringAsync(this HttpContent request, CancellationToken cancellation) =>
+        request.ReadAsStringAsync();
+#endif
+
     public static bool IsDefaultVersion(this HttpRequestMessage request) =>
         request.Version == defaultRequestVersion;
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     public static bool IsDefaultVersionPolicy(this HttpRequest request) =>
         request.VersionPolicy == defaultRequestVersionPolicy;
 
@@ -33,13 +38,13 @@ static class HttpExtensions
     {
         var request = new HttpRequestMessage();
         defaultRequestVersion = request.Version;
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
         defaultRequestVersionPolicy = request.VersionPolicy;
 #endif
     }
 
     static Version defaultRequestVersion;
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     static HttpVersionPolicy defaultRequestVersionPolicy;
 #endif
 
@@ -208,7 +213,7 @@ static class HttpExtensions
 
     public static bool IsText(this HttpContent content, out string? subType)
     {
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
         if (content is JsonContent)
         {
             subType = "json";

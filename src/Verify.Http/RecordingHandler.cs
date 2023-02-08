@@ -28,7 +28,7 @@ public class RecordingHandler :
         {
             if (requestContent.IsText())
             {
-                requestText = await requestContent.ReadAsStringAsync();
+                requestText = await requestContent.ReadAsStringAsync(cancellation);
             }
         }
 
@@ -40,13 +40,13 @@ public class RecordingHandler :
         {
             if (responseContent.IsText())
             {
-                responseText = await responseContent.ReadAsStringAsync();
+                responseText = await responseContent.ReadAsStringAsync(cancellation);
             }
         }
 
         var item = new LoggedSend(
             request.RequestUri,
-#if(NET5_0_OR_GREATER)
+#if NET6_0_OR_GREATER
             request.Options,
 #endif
             request.Method.ToString(),

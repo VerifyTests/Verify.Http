@@ -1,7 +1,7 @@
 [UsesVerify]
 public class Tests
 {
-#if NET5_0_OR_GREATER && DEBUG
+#if NET6_0_OR_GREATER && DEBUG
 
     #region IgnoreHeader
 
@@ -63,7 +63,7 @@ public class Tests
 
     #endregion
 
-#if(NET5_0_OR_GREATER)
+#if NET6_0_OR_GREATER
 
     [Fact]
     public async Task MediaTypePlainTextIsRecorded()

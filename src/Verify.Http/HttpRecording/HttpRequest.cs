@@ -13,7 +13,7 @@ public class HttpRequest
         Method = request.Method;
         Method = request.Method;
         Version = request.Version;
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
         VersionPolicy = request.VersionPolicy;
 #endif
 
@@ -35,7 +35,7 @@ public class HttpRequest
         }
     }
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     public HttpVersionPolicy VersionPolicy { get; }
 #endif
     public HttpMethod Method { get; }

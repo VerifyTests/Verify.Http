@@ -2,7 +2,7 @@
 
 static class Extensions
 {
-#if(!NET5_0_OR_GREATER)
+#if(NET48)
     internal static Stream ReadAsStream(this HttpContent content) =>
         content.ReadAsStreamAsync().GetAwaiter().GetResult();
 #endif

@@ -3,7 +3,7 @@
 public class LoggedSend
 {
     public Uri? RequestUri { get; }
-#if(NET5_0_OR_GREATER)
+#if NET6_0_OR_GREATER
     public HttpRequestOptions RequestOptions { get; }
 #endif
     public string RequestMethod { get; }
@@ -15,7 +15,7 @@ public class LoggedSend
 
     public LoggedSend(
         Uri? requestUri,
-        #if(NET5_0_OR_GREATER)
+        #if NET6_0_OR_GREATER
         HttpRequestOptions requestOptions,
         #endif
         string requestMethod,
@@ -26,7 +26,7 @@ public class LoggedSend
         string? responseContent)
     {
         RequestUri = requestUri;
-#if(NET5_0_OR_GREATER)
+#if NET6_0_OR_GREATER
         RequestOptions = requestOptions;
 #endif
         RequestMethod = requestMethod;

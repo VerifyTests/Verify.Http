@@ -21,7 +21,7 @@
                 Status = instance.StatusText(),
                 Cookies = instance.Headers.Cookies(),
                 Headers = instance.Headers.NotCookies(),
-#if NET5_0_OR_GREATER || NETSTANDARD2_1
+#if NET6_0_OR_GREATER
                 TrailingHeaders = instance.TrailingHeaders.Simplify(),
 #endif
                 instance.RequestMessage

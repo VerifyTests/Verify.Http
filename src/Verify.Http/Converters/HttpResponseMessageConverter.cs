@@ -11,7 +11,7 @@
         WriteHeaders(writer, response);
 
         WriteCookies(writer, response);
-#if NET5_0_OR_GREATER || NETSTANDARD2_1
+#if NET6_0_OR_GREATER
         WriteTrailingHeaders(writer, response);
 #endif
         writer.WriteMember(response, response.Content, "Content");
@@ -32,7 +32,7 @@
         writer.WriteMember(response, headers, "Headers");
     }
 
-#if NET5_0_OR_GREATER || NETSTANDARD2_1
+#if NET6_0_OR_GREATER
     static void WriteTrailingHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var dictionary = response.TrailingHeaders.Simplify();
