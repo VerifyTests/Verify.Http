@@ -16,7 +16,7 @@ public class RecordingHandler :
 
     public bool Recording { get; private set; }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancellation cancellation)
     {
         if (!Recording)
         {

@@ -5,7 +5,7 @@
     public ContentHandler(StringContent content) =>
         this.content = content;
 
-    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellation)
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancellation cancellation)
     {
         var result = new HttpResponseMessage(HttpStatusCode.OK)
         {
