@@ -1,4 +1,4 @@
-﻿public static class ModuleInitializer
+﻿public static class ModuleInit
 {
     #region Enable
 
