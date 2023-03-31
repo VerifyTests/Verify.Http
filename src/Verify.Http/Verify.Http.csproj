@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net6.0;net48</TargetFrameworks>
     <OutputType>Library</OutputType>
@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
     <PackageReference Include="Verify" Version="19.11.2" />
     <PackageReference Include="Argon" Version="0.5.1" />
-    <PackageReference Include="Argon.Xml" Version="0.5.0" />
+    <PackageReference Include="Argon.Xml" Version="0.5.1" />
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="7.0.2" />
     <PackageReference Include="Polyfill" Version="1.8.0" PrivateAssets="all" />
