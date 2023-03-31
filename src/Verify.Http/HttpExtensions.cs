@@ -178,11 +178,6 @@ static class HttpExtensions
             return false;
         }
 
-        return TryGetExtension(contentType, out extension);
-    }
-
-    static bool TryGetExtension(this MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? extension)
-    {
         var mediaType = contentType.MediaType;
         if (mediaType is null)
         {
@@ -190,11 +185,6 @@ static class HttpExtensions
             return false;
         }
 
-        return TryGetMediaTypeExtension(mediaType, out extension);
-    }
-
-    static bool TryGetMediaTypeExtension(string mediaType, [NotNullWhen(true)] out string? extension)
-    {
         if (mappings.TryGetValue(mediaType, out extension))
         {
             return true;
@@ -202,6 +192,7 @@ static class HttpExtensions
 
         if (IsJsonMediaType(mediaType, out extension))
         {
+            extension = "json";
             return true;
         }
 
@@ -250,11 +241,6 @@ static class HttpExtensions
             return false;
         }
 
-        return IsTextMediaType(mediaType, out subType);
-    }
-
-    static bool IsTextMediaType(string mediaType, [NotNullWhen(true)] out string? subType)
-    {
         var split = mediaType.Split('/');
         subType = split[1];
         if (mappings.TryGetValue(mediaType, out var extension))

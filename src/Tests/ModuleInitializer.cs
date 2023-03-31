@@ -19,6 +19,9 @@
             "X-Amzn-Trace-Id",
             "origin");
         VerifierSettings
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "Content-Length");
+            .ScrubLinesContaining(
+                "Traceparent",
+                "X-Amzn-Trace-Id",
+                "Content-Length");
     }
 }
