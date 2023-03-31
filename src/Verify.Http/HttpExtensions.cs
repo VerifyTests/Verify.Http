@@ -219,8 +219,9 @@ static class HttpExtensions
             return content is StringContent;
         }
 
-        if (IsJson(contentType, out subType))
+        if (IsJson(contentType))
         {
+            subType = "json";
             return true;
         }
 
@@ -251,16 +252,15 @@ static class HttpExtensions
         return false;
     }
 
-    static bool IsJson(MediaTypeHeaderValue contentType, [NotNullWhen(true)] out string? subType)
+    static bool IsJson(MediaTypeHeaderValue contentType)
     {
         var mediaType = contentType.MediaType;
         if (mediaType is null)
         {
-            subType = null;
             return false;
         }
 
-        return IsJsonMediaType(mediaType, out subType);
+        return IsJsonMediaType(mediaType, out _);
     }
 
     static bool IsJsonMediaType(string mediaType, [NotNullWhen(true)] out string? subType)
