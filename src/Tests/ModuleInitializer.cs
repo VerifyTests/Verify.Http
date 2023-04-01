@@ -7,6 +7,7 @@
         VerifyHttp.Initialize();
 
     #endregion
+
     [ModuleInitializer]
     public static void InitializeOther()
     {
