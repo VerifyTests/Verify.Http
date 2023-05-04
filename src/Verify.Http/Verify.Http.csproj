@@ -12,7 +12,7 @@
     <PackageReference Include="Argon.Xml" Version="0.6.0" />
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="7.0.2" />
-    <PackageReference Include="Polyfill" Version="1.21.0" PrivateAssets="all" />
+    <PackageReference Include="Polyfill" Version="1.22.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
     <PackageReference Include="ProjectDefaults" Version="1.0.90" PrivateAssets="all" />
   </ItemGroup>
