@@ -4,11 +4,10 @@ namespace VerifyTests.Http;
 
 public static class HttpRecording
 {
-    static HttpListener listener;
+    static HttpListener listener = new();
 
-    static HttpRecording()
+    public static void Enable()
     {
-        listener = new();
         var subscription = DiagnosticListener.AllListeners.Subscribe(listener);
 
         VerifierSettings.RegisterJsonAppender(_ =>

@@ -3,8 +3,13 @@
     #region Enable
 
     [ModuleInitializer]
-    public static void Initialize() =>
+    public static void Initialize()
+    {
         VerifyHttp.Initialize();
+#if NET7_0
+        HttpRecording.Enable();
+#endif
+    }
 
     #endregion
 
