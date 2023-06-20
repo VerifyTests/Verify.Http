@@ -19,7 +19,7 @@ static class HttpExtensions
         request.Version == defaultRequestVersion;
 
 #if NET48
-    public static Task<string> ReadAsStringAsync(this HttpContent request, Cancellation cancellation) =>
+    public static Task<string> ReadAsStringAsync(this HttpContent request, Cancel cancel) =>
         request.ReadAsStringAsync();
 #endif
 

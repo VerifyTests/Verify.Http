@@ -53,7 +53,7 @@ public class MockHttpHandler :
 
     public IReadOnlyCollection<HttpCall> Calls => calls;
 
-    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancellation cancellation)
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancel cancel)
     {
         var response = Add(request);
         return Task.FromResult(response);
@@ -70,7 +70,7 @@ public class MockHttpHandler :
 
 #if !NETCOREAPP3_1 && !NET48 && !NET461 && !NETSTANDARD2_0
 
-    protected override HttpResponseMessage Send(HttpRequestMessage request, Cancellation cancellation) =>
+    protected override HttpResponseMessage Send(HttpRequestMessage request, Cancel cancel) =>
         Add(request);
 
 #endif

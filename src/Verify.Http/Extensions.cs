@@ -12,17 +12,17 @@ static class Extensions
 
     public static Dictionary<string, string> ToDictionary(this HttpHeaders headers) =>
         headers
-            .ToDictionary(x => x.Key, x => string.Join("|", x.Value));
+            .ToDictionary(_ => _.Key, _ => string.Join("|", _.Value));
 
     public static Dictionary<string, object> Simplify(this HttpHeaders headers) =>
         headers
-            .OrderBy(x => x.Key.ToLowerInvariant())
+            .OrderBy(_ => _.Key.ToLowerInvariant())
             .ToDictionary(
-                x => x.Key,
-                x =>
+                _ => _.Key,
+                _ =>
                 {
-                    var values = x.Value.ToList();
-                    var key = x.Key.ToLowerInvariant();
+                    var values = _.Value.ToList();
+                    var key = _.Key.ToLowerInvariant();
                     if (key is "date" or "expires" or "last-modified")
                     {
                         if (DateTime.TryParse(values.First(), out var date))
@@ -37,17 +37,17 @@ static class Extensions
     public static Dictionary<string, object> NotCookies(this HttpHeaders headers) =>
         headers
             .Simplify()
-            .Where(x => x.Key != "Set-Cookie")
-            .ToDictionary(x => x.Key, x => x.Value);
+            .Where(_ => _.Key != "Set-Cookie")
+            .ToDictionary(_ => _.Key, _ => _.Value);
 
     public static Dictionary<string, string?> Cookies(this HttpHeaders headers) =>
         headers
             .Simplify()
-            .Where(x => x.Key == "Set-Cookie")
+            .Where(_ => _.Key == "Set-Cookie")
             .Select(x =>
             {
                 var stringSegment = (string)x.Value;
                 return SetCookieHeaderValue.Parse(stringSegment);
             })
-            .ToDictionary(x => x.Name.Value!, x => x.Value.Value);
+            .ToDictionary(_ => _.Name.Value!, _ => _.Value.Value);
 }

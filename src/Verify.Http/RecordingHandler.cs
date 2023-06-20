@@ -16,11 +16,11 @@ public class RecordingHandler :
 
     public bool Recording { get; private set; }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancellation cancellation)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancel cancel)
     {
         if (!Recording)
         {
-            return await base.SendAsync(request, cancellation);
+            return await base.SendAsync(request, cancel);
         }
         string? requestText = null;
         var requestContent = request.Content;
@@ -28,11 +28,11 @@ public class RecordingHandler :
         {
             if (requestContent.IsText())
             {
-                requestText = await requestContent.ReadAsStringAsync(cancellation);
+                requestText = await requestContent.ReadAsStringAsync(cancel);
             }
         }
 
-        var response = await base.SendAsync(request, cancellation);
+        var response = await base.SendAsync(request, cancel);
 
         var responseContent = response.Content;
         string? responseText = null;
@@ -40,7 +40,7 @@ public class RecordingHandler :
         {
             if (responseContent.IsText())
             {
-                responseText = await responseContent.ReadAsStringAsync(cancellation);
+                responseText = await responseContent.ReadAsStringAsync(cancel);
             }
         }
 
