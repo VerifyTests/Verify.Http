@@ -81,7 +81,6 @@ public async Task HttpResponse()
     Strict-Transport-Security: max-age=31536000,
     Vary: Authorization,Accept-Encoding,Origin,
     Via: 1.1 varnish,
-    X-Cache: HIT,
     X-Content-Type-Options: nosniff,
     X-Frame-Options: deny,
     X-XSS-Protection: 1; mode=block
@@ -118,7 +117,7 @@ SOFTWARE.
   Request: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L50' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L49' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -248,7 +247,6 @@ await Verify(recording.Sends);
       Strict-Transport-Security: max-age=31536000,
       Vary: Authorization|Accept-Encoding|Origin,
       Via: 1.1 varnish,
-      X-Cache: HIT,
       X-Content-Type-Options: nosniff,
       X-Frame-Options: deny,
       X-XSS-Protection: 1; mode=block
@@ -279,7 +277,7 @@ SOFTWARE.
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L46' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L45' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -440,7 +438,6 @@ The requests/response pairs will be appended to the verified file.
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
-          X-Cache: HIT,
           X-Content-Type-Options: nosniff,
           X-Frame-Options: deny,
           X-XSS-Protection: 1; mode=block
@@ -502,7 +499,6 @@ The requests/response pairs will be appended to the verified file.
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
-          X-Cache: HIT,
           X-Content-Type-Options: nosniff,
           X-Frame-Options: deny,
           X-XSS-Protection: 1; mode=block
@@ -533,7 +529,7 @@ artifacts:
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L140' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L138' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
