@@ -1,102 +1,139 @@
 ﻿{
   target: {
-    sizeOfResponse: 951
+    sizeOfResponse: 771
   },
   httpCalls: [
     {
       Request: {
-        Uri: https://httpbin.org/json,
+        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
         Headers: {}
       },
       Response: {
-        Status: 200 OK,
+        Status: 302 Redirect,
         Headers: {
-          Access-Control-Allow-Credentials: true,
-          Access-Control-Allow-Origin: *,
-          Connection: keep-alive,
-          Server: gunicorn/19.9.0
+          Access-Control-Allow-Origin: https://render.githubusercontent.com,
+          Cache-Control: no-cache,
+          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ wss://*.actions.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/,
+          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
+          Referrer-Policy: no-referrer-when-downgrade,
+          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
+          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,Accept-Encoding,Accept,X-Requested-With,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 0
         },
         ContentHeaders: {
-          Content-Type: application/json
+          Content-Type: text/html; charset=utf-8
         },
-        ContentStringParsed: {
-          slideshow: {
-            author: Yours Truly,
-            date: date of publication,
-            slides: [
-              {
-                title: Wake up to WonderWidgets!,
-                type: all
-              },
-              {
-                items: [
-                  Why <em>WonderWidgets</em> are great,
-                  Who <em>buys</em> WonderWidgets
-                ],
-                title: Overview,
-                type: all
-              }
-            ],
-            title: Sample Slide Show
-          }
-        }
+        ContentString: 
       }
     },
     {
       Request: {
-        Uri: https://httpbin.org/xml,
+        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Access-Control-Allow-Credentials: true,
+          Accept-Ranges: bytes,
           Access-Control-Allow-Origin: *,
+          Cache-Control: max-age=300,
           Connection: keep-alive,
-          Server: gunicorn/19.9.0
+          Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+          Cross-Origin-Resource-Policy: cross-origin,
+          ETag: "4ec419eb28702d0b77f9f3ecb771f0a29465c2dbd60aae2d6801ff57a7d43d42",
+          Strict-Transport-Security: max-age=31536000,
+          Vary: Authorization,Accept-Encoding,Origin,
+          Via: 1.1 varnish,
+          X-Cache: HIT,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 1; mode=block
         },
         ContentHeaders: {
-          Content-Type: application/xml
+          Content-Type: text/plain; charset=utf-8,
+          Expires: DateTime_1
         },
-        ContentStringParsed: {
-          ?xml: {
-            @version: 1.0,
-            @encoding: us-ascii
-          }/*  A SAMPLE set of slides  */,
-          slideshow: {
-            @title: Sample Slide Show,
-            @date: Date of publication,
-            @author: Yours Truly,
-            #comment: [],
-            slide: [
-              {
-                @type: all,
-                title: Wake up to WonderWidgets!
-              },
-              {
-                @type: all,
-                title: Overview,
-                item: [
-                  {
-                    #text: [
-                      Why ,
-                       are great
-                    ],
-                    em: WonderWidgets
-                  },
-                  null,
-                  {
-                    #text: [
-                      Who ,
-                       WonderWidgets
-                    ],
-                    em: buys
-                  }
-                ]
-              }
-            ]
-          }
-        }
+        ContentString:
+{
+  "sdk": {
+    "version": "7.0.306",
+    "allowPrerelease": true,
+    "rollForward": "latestFeature"
+  }
+}
+      }
+    },
+    {
+      Request: {
+        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml,
+        Headers: {}
+      },
+      Response: {
+        Status: 302 Redirect,
+        Headers: {
+          Access-Control-Allow-Origin: https://render.githubusercontent.com,
+          Cache-Control: no-cache,
+          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ wss://*.actions.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/,
+          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
+          Referrer-Policy: no-referrer-when-downgrade,
+          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
+          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,Accept-Encoding,Accept,X-Requested-With,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 0
+        },
+        ContentHeaders: {
+          Content-Type: text/html; charset=utf-8
+        },
+        ContentString: 
+      }
+    },
+    {
+      Request: {
+        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
+        Headers: {}
+      },
+      Response: {
+        Status: 200 OK,
+        Headers: {
+          Accept-Ranges: bytes,
+          Access-Control-Allow-Origin: *,
+          Cache-Control: max-age=300,
+          Connection: keep-alive,
+          Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+          Cross-Origin-Resource-Policy: cross-origin,
+          ETag: "5e3ae0644317bb5701cde0b57eae20773e7f2c2b2ca0ecbfca34ce3b0b683c75",
+          Strict-Transport-Security: max-age=31536000,
+          Vary: Authorization,Accept-Encoding,Origin,
+          Via: 1.1 varnish,
+          X-Cache: HIT,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 1; mode=block
+        },
+        ContentHeaders: {
+          Content-Type: text/plain; charset=utf-8,
+          Expires: DateTime_1
+        },
+        ContentString:
+image: Visual Studio 2022
+environment:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+build_script:
+- pwsh: |
+    Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
+    ./dotnet-install.ps1 -JSonFile src/global.json -Architecture x64 -InstallDir 'C:\Program Files\dotnet'
+- dotnet build src --configuration Release
+- dotnet test src --configuration Release --no-build --no-restore --filter Category!=Integration
+test: off
+on_failure:
+  - ps: Get-ChildItem *.received.* -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+artifacts:
+- path: nugets\*.nupkg
       }
     }
   ]

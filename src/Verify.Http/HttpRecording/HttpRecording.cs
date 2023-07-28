@@ -17,17 +17,22 @@ public static class HttpRecording
                 return null;
             }
 
-            return new("httpCalls", entries!);
+            if (entries.Count == 0)
+            {
+                return null;
+            }
+
+            return new("httpCalls", entries);
         });
     }
 
     public static void StartRecording() =>
         listener.Start();
 
-    public static IEnumerable<HttpCall> FinishRecording() =>
+    public static IReadOnlyList<HttpCall> FinishRecording() =>
         listener.Finish();
 
-    public static bool TryFinishRecording(out IEnumerable<HttpCall>? entries) =>
+    public static bool TryFinishRecording([NotNullWhen(true)] out IReadOnlyList<HttpCall>? entries) =>
         listener.TryFinish(out entries);
 }
 

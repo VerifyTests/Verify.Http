@@ -1,7 +1,7 @@
 [UsesVerify]
 public class Tests
 {
-#if NET6_0_OR_GREATER && DEBUG
+#if NET7_0_OR_GREATER && DEBUG
 
     #region IgnoreHeader
 
@@ -10,10 +10,10 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var result = await client.GetAsync("https://httpbin.org/get");
+        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
         await Verify(result)
-            .IgnoreMembers("Server", "origin");
+            .IgnoreMembers("Server");
     }
 
     #endregion
@@ -25,10 +25,9 @@ public class Tests
 
         using var client = new HttpClient();
 
-        var result = await client.GetStringAsync("https://httpbin.org/get");
+        var result = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json");
 
-        await VerifyJson(result)
-            .IgnoreMembers("Server", "origin");
+        await VerifyJson(result);
     }
 
     [Fact]
@@ -38,10 +37,9 @@ public class Tests
 
         using var client = new HttpClient();
 
-        var result = await client.GetStringAsync("https://httpbin.org/json");
+        var result = await client.GetStringAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
-        await Verify(result)
-            .IgnoreMembers("Server", "origin");
+        await Verify(result);
     }
 #endif
 
@@ -58,7 +56,7 @@ public class Tests
 
         public Task MethodThatDoesHttp() =>
             // Some code that does some http calls
-            client.GetAsync("https://httpbin.org/status/undefined");
+            client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
     }
 
     #endregion
@@ -106,18 +104,16 @@ public class Tests
                 new
                 {
                     sizeOfResponse
-                })
-                //scrub some headers that are not consistent between test runs
-                .IgnoreMembers("traceparent", "Date");
+                });
     }
 
     static async Task<int> MethodThatDoesHttpCalls()
     {
         using var client = new HttpClient();
 
-        var jsonResult = await client.GetStringAsync("https://httpbin.org/json");
-        var xmlResult = await client.GetStringAsync("https://httpbin.org/xml");
-        return jsonResult.Length + xmlResult.Length;
+        var jsonResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json");
+        var ymlResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml");
+        return jsonResult.Length + ymlResult.Length;
     }
 
     #endregion
@@ -129,7 +125,7 @@ public class Tests
     {
         HttpRecording.StartRecording();
 
-        var sizeOfResponse = await MethodThatDoesHttpCalls();
+        var responseSize = await MethodThatDoesHttpCalls();
 
         var httpCalls = HttpRecording.FinishRecording().ToList();
 
@@ -143,7 +139,7 @@ public class Tests
         await Verify(
             new
             {
-                sizeOfResponse,
+                responseSize,
                 // Only use the Uri in the snapshot
                 httpCalls = httpCalls.Select(_ => _.Request.Uri)
             });
@@ -168,9 +164,7 @@ public class Tests
 
         await myService.MethodThatDoesHttp();
 
-        await Verify(recording.Sends)
-            // Ignore some headers that change per request
-            .IgnoreMembers("Date");
+        await Verify(recording.Sends);
 
         #endregion
     }
@@ -195,9 +189,7 @@ public class Tests
 
         await myService.MethodThatDoesHttp();
 
-        await Verify(recording.Sends)
-            // Ignore some headers that change per request
-            .IgnoreMembers("Date");
+        await Verify(recording.Sends);
 
         #endregion
     }
@@ -207,14 +199,13 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var result = await client.GetAsync("https://httpbin.org/get");
+        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
         await Verify(
             new
             {
                 result
-            })
-            .IgnoreMembers("Server", "origin");
+            });
     }
 
     [Fact]
@@ -239,10 +230,9 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var result = await client.GetAsync("https://httpbin.org/image/png");
+        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/src/icon.png");
 
-        await Verify(result)
-            .IgnoreMembers("Server", "origin");
+        await Verify(result);
     }
 
     #region HttpResponse
@@ -252,10 +242,9 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var result = await client.GetAsync("https://httpbin.org/get");
+        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
-        await Verify(result)
-            .IgnoreMembers("Server", "origin");
+        await Verify(result);
     }
 
     #endregion
@@ -289,8 +278,7 @@ public class Tests
         recording.Resume();
         await myService.MethodThatDoesHttp();
 
-        await Verify(recording.Sends)
-            .IgnoreMembers("Date");
+        await Verify(recording.Sends);
 
         #endregion
     }
@@ -318,10 +306,9 @@ public class Tests
         await client.GetAsync("https://www.google.com/");
 
         recording.Resume();
-        await client.GetAsync("https://httpbin.org/status/undefined");
+        await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
-        await Verify(recording.Sends)
-            .IgnoreMembers("Date", "Server", "origin");
+        await Verify(recording.Sends);
 
         #endregion
     }

@@ -2,10 +2,20 @@
   Version: 1.1,
   Status: 200 OK,
   Headers: {
-    Access-Control-Allow-Credentials: true,
+    Accept-Ranges: bytes,
     Access-Control-Allow-Origin: *,
+    Cache-Control: max-age=300,
     Connection: keep-alive,
-    Date: DateTime_1
+    Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+    Cross-Origin-Resource-Policy: cross-origin,
+    ETag: "5c0e4129f37006970f06277a55df93d1c88d1854e41b93de924f2382aa4de9a5",
+    Strict-Transport-Security: max-age=31536000,
+    Vary: Authorization,Accept-Encoding,Origin,
+    Via: 1.1 varnish,
+    X-Cache: HIT,
+    X-Content-Type-Options: nosniff,
+    X-Frame-Options: deny,
+    X-XSS-Protection: 1; mode=block
   },
-  RequestMessage: https://httpbin.org/image/png
+  RequestMessage: https://raw.githubusercontent.com/VerifyTests/Verify/main/src/icon.png
 }

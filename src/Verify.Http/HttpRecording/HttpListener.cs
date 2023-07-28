@@ -14,7 +14,7 @@ class HttpListener :
     public void Start() =>
         local.Value = new();
 
-    public bool TryFinish(out IEnumerable<HttpCall>? entries)
+    public bool TryFinish(out IReadOnlyList<HttpCall>? entries)
     {
         entries = local.Value;
 
@@ -27,7 +27,7 @@ class HttpListener :
         return true;
     }
 
-    public IEnumerable<HttpCall> Finish()
+    public IReadOnlyList<HttpCall> Finish()
     {
         var localValue = local.Value;
 

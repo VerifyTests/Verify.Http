@@ -23,8 +23,23 @@
             "traceparent",
             "Traceparent",
             "X-Amzn-Trace-Id",
-            "origin");
+            "X-GitHub-Request-Id",
+            "origin",
+            "Date",
+            "Server",
+            "X-Fastly-Request",
+            "Source-Age",
+            "X-Fastly-Request-ID",
+            "X-Served-By",
+            "X-Cache-Hits",
+            "X-Served-By",
+            "Content-Length",
+            "X-Timer");
         VerifierSettings
-            .ScrubLinesContaining("Traceparent", "X-Amzn-Trace-Id", "Content-Length");
+            .ScrubLinesContaining(
+                "Traceparent",
+                "Date",
+                "X-Amzn-Trace-Id",
+                "Content-Length");
     }
 }

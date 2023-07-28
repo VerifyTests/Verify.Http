@@ -53,7 +53,7 @@ public async Task HttpResponse()
 {
     using var client = new HttpClient();
 
-    var result = await client.GetAsync("https://httpbin.org/get");
+    var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
     await Verify(result)
         .IgnoreMembers("Server", "origin");
