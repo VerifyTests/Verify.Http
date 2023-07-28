@@ -33,6 +33,7 @@
             "X-Served-By",
             "X-Cache-Hits",
             "X-Served-By",
+            "X-Cache",
             "Content-Length",
             "X-Timer");
         VerifierSettings

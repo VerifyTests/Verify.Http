@@ -46,7 +46,6 @@
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
-          X-Cache: HIT,
           X-Content-Type-Options: nosniff,
           X-Frame-Options: deny,
           X-XSS-Protection: 1; mode=block
@@ -108,7 +107,6 @@
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
-          X-Cache: HIT,
           X-Content-Type-Options: nosniff,
           X-Frame-Options: deny,
           X-XSS-Protection: 1; mode=block
