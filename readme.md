@@ -55,11 +55,10 @@ public async Task HttpResponse()
 
     var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
-    await Verify(result)
-        .IgnoreMembers("Server", "origin");
+    await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L248-L261' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L238-L250' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -72,26 +71,54 @@ public async Task HttpResponse()
   Version: 1.1,
   Status: 200 OK,
   Headers: {
-    Access-Control-Allow-Credentials: true,
+    Accept-Ranges: bytes,
     Access-Control-Allow-Origin: *,
+    Cache-Control: max-age=300,
     Connection: keep-alive,
-    Date: DateTime_1
+    Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+    Cross-Origin-Resource-Policy: cross-origin,
+    ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
+    Strict-Transport-Security: max-age=31536000,
+    Vary: Authorization,Accept-Encoding,Origin,
+    Via: 1.1 varnish,
+    X-Cache: HIT,
+    X-Content-Type-Options: nosniff,
+    X-Frame-Options: deny,
+    X-XSS-Protection: 1; mode=block
   },
   Content: {
     Headers: {
-      Content-Type: application/json
+      Content-Type: text/plain; charset=utf-8,
+      Expires: DateTime_1
     },
-    Value: {
-      headers: {
-        Host: httpbin.org
-      },
-      url: https://httpbin.org/get
-    }
+    Value:
+MIT License
+
+Copyright (c) .NET Foundation and Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
   },
-  Request: https://httpbin.org/get
+  Request: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L50' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -107,10 +134,10 @@ public async Task IgnoreHeader()
 {
     using var client = new HttpClient();
 
-    var result = await client.GetAsync("https://httpbin.org/get");
+    var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
     await Verify(result)
-        .IgnoreMembers("Server", "origin");
+        .IgnoreMembers("Server");
 }
 ```
 <sup><a href='/src/Tests/Tests.cs#L6-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-ignoreheader' title='Start of snippet'>anchor</a></sup>
@@ -140,10 +167,10 @@ public class MyService
 
     public Task MethodThatDoesHttp() =>
         // Some code that does some http calls
-        client.GetAsync("https://httpbin.org/status/undefined");
+        client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L48-L64' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L46-L62' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -167,11 +194,9 @@ var myService = provider.GetRequiredService<MyService>();
 
 await myService.MethodThatDoesHttp();
 
-await Verify(recording.Sends)
-    // Ignore some headers that change per request
-    .IgnoreMembers("Date");
+await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L183-L202' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L177-L194' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -196,11 +221,9 @@ var myService = provider.GetRequiredService<MyService>();
 
 await myService.MethodThatDoesHttp();
 
-await Verify(recording.Sends)
-    // Ignore some headers that change per request
-    .IgnoreMembers("Date");
+await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L157-L175' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L153-L169' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -211,20 +234,52 @@ await Verify(recording.Sends)
 ```txt
 [
   {
-    RequestUri: https://httpbin.org/status/undefined,
+    RequestUri: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt,
     RequestMethod: GET,
-    ResponseStatus: BadRequest 400,
+    ResponseStatus: OK 200,
     ResponseHeaders: {
-      Access-Control-Allow-Credentials: true,
+      Accept-Ranges: bytes,
       Access-Control-Allow-Origin: *,
+      Cache-Control: max-age=300,
       Connection: keep-alive,
-      Server: gunicorn/19.9.0
+      Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+      Cross-Origin-Resource-Policy: cross-origin,
+      ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
+      Strict-Transport-Security: max-age=31536000,
+      Vary: Authorization|Accept-Encoding|Origin,
+      Via: 1.1 varnish,
+      X-Cache: HIT,
+      X-Content-Type-Options: nosniff,
+      X-Frame-Options: deny,
+      X-XSS-Protection: 1; mode=block
     },
-    ResponseContent: Invalid status code
+    ResponseContent:
+MIT License
+
+Copyright (c) .NET Foundation and Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L46' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -251,10 +306,9 @@ await myService.MethodThatDoesHttp();
 recording.Resume();
 await myService.MethodThatDoesHttp();
 
-await Verify(recording.Sends)
-    .IgnoreMembers("Date");
+await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L271-L295' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L260-L283' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -280,12 +334,11 @@ var client = factory.CreateClient("name");
 await client.GetAsync("https://www.google.com/");
 
 recording.Resume();
-await client.GetAsync("https://httpbin.org/status/undefined");
+await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
-await Verify(recording.Sends)
-    .IgnoreMembers("Date", "Server", "origin");
+await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L301-L326' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L289-L313' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -316,21 +369,19 @@ public async Task TestHttpRecording()
             new
             {
                 sizeOfResponse
-            })
-            //scrub some headers that are not consistent between test runs
-            .IgnoreMembers("traceparent", "Date");
+            });
 }
 
 static async Task<int> MethodThatDoesHttpCalls()
 {
     using var client = new HttpClient();
 
-    var jsonResult = await client.GetStringAsync("https://httpbin.org/json");
-    var xmlResult = await client.GetStringAsync("https://httpbin.org/xml");
-    return jsonResult.Length + xmlResult.Length;
+    var jsonResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json");
+    var ymlResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml");
+    return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L96-L123' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L94-L119' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -343,109 +394,146 @@ The requests/response pairs will be appended to the verified file.
 ```txt
 {
   target: {
-    sizeOfResponse: 951
+    sizeOfResponse: 771
   },
   httpCalls: [
     {
       Request: {
-        Uri: https://httpbin.org/json,
+        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
         Headers: {}
       },
       Response: {
-        Status: 200 OK,
+        Status: 302 Redirect,
         Headers: {
-          Access-Control-Allow-Credentials: true,
-          Access-Control-Allow-Origin: *,
-          Connection: keep-alive,
-          Server: gunicorn/19.9.0
+          Access-Control-Allow-Origin: https://render.githubusercontent.com,
+          Cache-Control: no-cache,
+          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ wss://*.actions.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/,
+          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
+          Referrer-Policy: no-referrer-when-downgrade,
+          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
+          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,Accept-Encoding,Accept,X-Requested-With,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 0
         },
         ContentHeaders: {
-          Content-Type: application/json
+          Content-Type: text/html; charset=utf-8
         },
-        ContentStringParsed: {
-          slideshow: {
-            author: Yours Truly,
-            date: date of publication,
-            slides: [
-              {
-                title: Wake up to WonderWidgets!,
-                type: all
-              },
-              {
-                items: [
-                  Why <em>WonderWidgets</em> are great,
-                  Who <em>buys</em> WonderWidgets
-                ],
-                title: Overview,
-                type: all
-              }
-            ],
-            title: Sample Slide Show
-          }
-        }
+        ContentString: 
       }
     },
     {
       Request: {
-        Uri: https://httpbin.org/xml,
+        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Access-Control-Allow-Credentials: true,
+          Accept-Ranges: bytes,
           Access-Control-Allow-Origin: *,
+          Cache-Control: max-age=300,
           Connection: keep-alive,
-          Server: gunicorn/19.9.0
+          Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+          Cross-Origin-Resource-Policy: cross-origin,
+          ETag: "4ec419eb28702d0b77f9f3ecb771f0a29465c2dbd60aae2d6801ff57a7d43d42",
+          Strict-Transport-Security: max-age=31536000,
+          Vary: Authorization,Accept-Encoding,Origin,
+          Via: 1.1 varnish,
+          X-Cache: HIT,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 1; mode=block
         },
         ContentHeaders: {
-          Content-Type: application/xml
+          Content-Type: text/plain; charset=utf-8,
+          Expires: DateTime_1
         },
-        ContentStringParsed: {
-          ?xml: {
-            @version: 1.0,
-            @encoding: us-ascii
-          }/*  A SAMPLE set of slides  */,
-          slideshow: {
-            @title: Sample Slide Show,
-            @date: Date of publication,
-            @author: Yours Truly,
-            #comment: [],
-            slide: [
-              {
-                @type: all,
-                title: Wake up to WonderWidgets!
-              },
-              {
-                @type: all,
-                title: Overview,
-                item: [
-                  {
-                    #text: [
-                      Why ,
-                       are great
-                    ],
-                    em: WonderWidgets
-                  },
-                  null,
-                  {
-                    #text: [
-                      Who ,
-                       WonderWidgets
-                    ],
-                    em: buys
-                  }
-                ]
-              }
-            ]
-          }
-        }
+        ContentString:
+{
+  "sdk": {
+    "version": "7.0.306",
+    "allowPrerelease": true,
+    "rollForward": "latestFeature"
+  }
+}
+      }
+    },
+    {
+      Request: {
+        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml,
+        Headers: {}
+      },
+      Response: {
+        Status: 302 Redirect,
+        Headers: {
+          Access-Control-Allow-Origin: https://render.githubusercontent.com,
+          Cache-Control: no-cache,
+          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ wss://*.actions.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/,
+          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
+          Referrer-Policy: no-referrer-when-downgrade,
+          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
+          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,Accept-Encoding,Accept,X-Requested-With,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 0
+        },
+        ContentHeaders: {
+          Content-Type: text/html; charset=utf-8
+        },
+        ContentString: 
+      }
+    },
+    {
+      Request: {
+        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
+        Headers: {}
+      },
+      Response: {
+        Status: 200 OK,
+        Headers: {
+          Accept-Ranges: bytes,
+          Access-Control-Allow-Origin: *,
+          Cache-Control: max-age=300,
+          Connection: keep-alive,
+          Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+          Cross-Origin-Resource-Policy: cross-origin,
+          ETag: "5e3ae0644317bb5701cde0b57eae20773e7f2c2b2ca0ecbfca34ce3b0b683c75",
+          Strict-Transport-Security: max-age=31536000,
+          Vary: Authorization,Accept-Encoding,Origin,
+          Via: 1.1 varnish,
+          X-Cache: HIT,
+          X-Content-Type-Options: nosniff,
+          X-Frame-Options: deny,
+          X-XSS-Protection: 1; mode=block
+        },
+        ContentHeaders: {
+          Content-Type: text/plain; charset=utf-8,
+          Expires: DateTime_1
+        },
+        ContentString:
+image: Visual Studio 2022
+environment:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+build_script:
+- pwsh: |
+    Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
+    ./dotnet-install.ps1 -JSonFile src/global.json -Architecture x64 -InstallDir 'C:\Program Files\dotnet'
+- dotnet build src --configuration Release
+- dotnet test src --configuration Release --no-build --no-restore --filter Category!=Integration
+test: off
+on_failure:
+  - ps: Get-ChildItem *.received.* -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+artifacts:
+- path: nugets\*.nupkg
       }
     }
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L103' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L140' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -467,7 +555,7 @@ public async Task TestHttpRecordingExplicit()
 {
     HttpRecording.StartRecording();
 
-    var sizeOfResponse = await MethodThatDoesHttpCalls();
+    var responseSize = await MethodThatDoesHttpCalls();
 
     var httpCalls = HttpRecording.FinishRecording().ToList();
 
@@ -481,13 +569,13 @@ public async Task TestHttpRecordingExplicit()
     await Verify(
         new
         {
-            sizeOfResponse,
+            responseSize,
             // Only use the Uri in the snapshot
             httpCalls = httpCalls.Select(_ => _.Request.Uri)
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L125-L152' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L121-L148' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -497,14 +585,16 @@ public async Task TestHttpRecordingExplicit()
 <a id='snippet-Tests.TestHttpRecordingExplicit.verified.txt'></a>
 ```txt
 {
-  sizeOfResponse: 951,
+  responseSize: 771,
   httpCalls: [
-    https://httpbin.org/json,
-    https://httpbin.org/xml
+    https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
+    https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
+    https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml,
+    https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecordingExplicit.verified.txt#L1-L7' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecordingExplicit.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecordingExplicit.verified.txt#L1-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecordingExplicit.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
