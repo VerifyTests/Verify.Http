@@ -18,11 +18,6 @@ static class HttpExtensions
     public static bool IsDefaultVersion(this HttpRequest request) =>
         request.Version == defaultRequestVersion;
 
-#if NET48
-    public static Task<string> ReadAsStringAsync(this HttpContent request, Cancel cancel) =>
-        request.ReadAsStringAsync();
-#endif
-
     public static bool IsDefaultVersion(this HttpRequestMessage request) =>
         request.Version == defaultRequestVersion;
 
