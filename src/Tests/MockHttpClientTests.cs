@@ -27,7 +27,7 @@ public class MockHttpClientTests
     public async Task ExplicitContent()
     {
         using var client = new MockHttpClient(
-            content: @"{ ""a"": ""b"" }",
+            content: """{ "a": "b" }""",
             mediaType: "application/json");
 
         var result = await client.GetAsync("https://fake/get");
@@ -161,7 +161,7 @@ public class MockHttpClientTests
     [InlineData("application/foo+json")]
     public async Task GetJsonContent(string mediaType)
     {
-        using var client = new MockHttpClient(content: @"{ ""a"": ""b"" }", mediaType);
+        using var client = new MockHttpClient(content: """{ "a": "b" }""", mediaType);
 
         var result = await client.GetAsync("https://fake/get");
 
@@ -195,7 +195,7 @@ public class MockHttpClientTests
         using var client = new MockHttpClient();
 
         var content = new StringContent(
-            content: @"{ ""a"": ""b"" }",
+            content: """{ "a": "b" }""",
             encoding: Encoding.UTF8,
             mediaType: mediaType);
 
