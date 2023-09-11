@@ -1,3 +1,4 @@
+// ReSharper disable UnusedVariable
 [UsesVerify]
 public class Tests
 {

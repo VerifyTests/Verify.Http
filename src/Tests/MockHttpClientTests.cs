@@ -243,7 +243,7 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var stream = new MemoryStream(Encoding.UTF8.GetBytes("the content"));
+        var stream = new MemoryStream("the content"u8.ToArray());
         var content = new StreamContent(stream);
         var result = await client.PostAsync("https://fake/post", content);
 
@@ -261,7 +261,7 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes("the content"));
+        var memoryStream = new MemoryStream("the content"u8.ToArray());
         var streamContent = new StreamContent(memoryStream)
         {
             Headers =

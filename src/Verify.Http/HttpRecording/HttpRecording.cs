@@ -8,6 +8,7 @@ public static class HttpRecording
 
     public static void Enable()
     {
+        // ReSharper disable once UnusedVariable
         var subscription = DiagnosticListener.AllListeners.Subscribe(listener);
 
         VerifierSettings.RegisterJsonAppender(_ =>

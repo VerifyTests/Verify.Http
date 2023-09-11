@@ -36,6 +36,7 @@ public class RecordingHandler :
 
         var responseContent = response.Content;
         string? responseText = null;
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (responseContent != null)
         {
             if (responseContent.IsText())
