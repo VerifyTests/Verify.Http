@@ -33,19 +33,23 @@ public static class VerifyHttp
 
         VerifierSettings.RegisterFileConverter<HttpResponseMessage>(
             (instance, _) => HttpResponseSplitterResult.Convert(instance));
-        var converters = DefaultContractResolver.Converters;
-        converters.Insert(0, new HttpStatusCodeConverter());
-        converters.Add(new XmlNodeConverter());
-        converters.Add(new HttpMethodConverter());
-        converters.Add(new UriConverter());
-        converters.Add(new HttpHeadersConverter());
-        converters.Add(new HttpContentHeadersConverter());
-        converters.Add(new HttpContentConverter());
-        converters.Add(new HttpRequestMessageConverter());
-        converters.Add(new HttpResponseMessageConverter());
-        converters.Add(new HttpRequestConverter());
-        converters.Add(new HttpResponseConverter());
-        converters.Add(new MockHttpClientConverter());
-        converters.Add(new MockHttpHandlerConverter());
+        VerifierSettings
+            .AddExtraSettings(serializer =>
+            {
+                var converters = serializer.Converters;
+                converters.Insert(0, new HttpStatusCodeConverter());
+                converters.Add(new XmlNodeConverter());
+                converters.Add(new HttpMethodConverter());
+                converters.Add(new UriConverter());
+                converters.Add(new HttpHeadersConverter());
+                converters.Add(new HttpContentHeadersConverter());
+                converters.Add(new HttpContentConverter());
+                converters.Add(new HttpRequestMessageConverter());
+                converters.Add(new HttpResponseMessageConverter());
+                converters.Add(new HttpRequestConverter());
+                converters.Add(new HttpResponseConverter());
+                converters.Add(new MockHttpClientConverter());
+                converters.Add(new MockHttpHandlerConverter());
+            });
     }
 }
