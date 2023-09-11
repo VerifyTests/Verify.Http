@@ -120,7 +120,6 @@ public class Tests
 
     #endregion
 
-#endif
 
     #region HttpRecordingExplicit
 
@@ -150,6 +149,7 @@ public class Tests
     }
 
     #endregion
+#endif
 
     [Fact]
     public async Task HttpClientRecordingGlobal()
