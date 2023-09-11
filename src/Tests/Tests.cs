@@ -91,6 +91,7 @@ public class Tests
 
         Assert.Equal(content, recordingHandler.Sends.Single().ResponseContent);
     }
+#if DEBUG
 
     #region HttpRecording
 
@@ -118,6 +119,8 @@ public class Tests
     }
 
     #endregion
+
+#endif
 
     #region HttpRecordingExplicit
 
