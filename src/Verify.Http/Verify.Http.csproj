@@ -15,6 +15,6 @@
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="7.0.2" />
     <PackageReference Include="Polyfill" Version="1.27.2" PrivateAssets="all" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.96" PrivateAssets="all" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.97" PrivateAssets="all" />
   </ItemGroup>
 </Project>
