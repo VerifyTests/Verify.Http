@@ -1,9 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 using Microsoft.Extensions.DiagnosticAdapter;
 
-//TODO: remove namespace
-namespace VerifyTests.Http;
-
 class HttpListener :
     IObserver<DiagnosticListener>,
     IDisposable
