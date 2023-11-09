@@ -1,6 +1,6 @@
 ﻿namespace VerifyTests.Http;
 
-public class RecordingHandler :
+public class RecordingHandler(bool recording = true) :
     DelegatingHandler
 {
     public ConcurrentQueue<LoggedSend> Sends = new();
@@ -11,10 +11,7 @@ public class RecordingHandler :
     public void Pause() =>
         Recording = false;
 
-    public RecordingHandler(bool recording = true) =>
-        Recording = recording;
-
-    public bool Recording { get; private set; }
+    public bool Recording { get; private set; } = recording;
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancel cancel)
     {
