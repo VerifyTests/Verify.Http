@@ -22,6 +22,10 @@ public static class VerifyHttp
 
     public static bool Initialized { get; private set; }
 
+#if NET6_0_OR_GREATER
+    static HttpListener listener = new();
+#endif
+
     public static void Initialize()
     {
         if (Initialized)
@@ -30,7 +34,10 @@ public static class VerifyHttp
         }
 
         Initialized = true;
-
+#if NET6_0_OR_GREATER
+        // ReSharper disable once UnusedVariable
+        var subscription = DiagnosticListener.AllListeners.Subscribe(listener);
+#endif
         VerifierSettings.RegisterFileConverter<HttpResponseMessage>(
             (instance, _) => HttpResponseSplitterResult.Convert(instance));
         VerifierSettings

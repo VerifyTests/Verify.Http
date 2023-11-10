@@ -6,36 +6,6 @@ class HttpListener :
     IDisposable
 {
     ConcurrentQueue<IDisposable> subscriptions = new();
-    AsyncLocal<List<HttpCall>?> local = new();
-
-    public void Start() =>
-        local.Value = new();
-
-    public bool TryFinish(out IReadOnlyList<HttpCall>? entries)
-    {
-        entries = local.Value;
-
-        if (entries is null)
-        {
-            return false;
-        }
-
-        local.Value = null;
-        return true;
-    }
-
-    public IReadOnlyList<HttpCall> Finish()
-    {
-        var localValue = local.Value;
-
-        if (localValue is null)
-        {
-            throw new("HttpRecording.StartRecording must be called prior to FinishRecording.");
-        }
-
-        local.Value = null;
-        return localValue;
-    }
 
     public void OnNext(DiagnosticListener value)
     {
@@ -44,7 +14,10 @@ class HttpListener :
             return;
         }
 
-        subscriptions.Enqueue(value.SubscribeWithAdapter(this, _ => local.Value is not null));
+        subscriptions.Enqueue(
+            value.SubscribeWithAdapter(
+                this,
+                _ => Recording.IsRecording()));
     }
 
     [DiagnosticName("System.Net.Http.HttpRequestOut")]
@@ -59,7 +32,9 @@ class HttpListener :
 
     [DiagnosticName("System.Net.Http.HttpRequestOut.Stop")]
     public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus requestTaskStatus) =>
-        local.Value!.Add(new(request, response, Activity.Current?.Duration, requestTaskStatus));
+        Recording.Add(
+            "httpCalls",
+            new HttpCall(request, response, Activity.Current?.Duration, requestTaskStatus));
 
     void Clear()
     {

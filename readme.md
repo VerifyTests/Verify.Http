@@ -16,22 +16,7 @@ https://nuget.org/packages/Verify.Http/
 
 ## Enable
 
-Enable VerifyHttp once at assembly load time:
-
-<!-- snippet: Enable -->
-<a id='snippet-enable'></a>
-```cs
-[ModuleInitializer]
-public static void Initialize()
-{
-    VerifyHttp.Initialize();
-#if NET7_0
-    HttpRecording.Enable();
-#endif
-}
-```
-<sup><a href='/src/Tests/ModuleInitializer.cs#L3-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
+Enable at any point in a test using `VerifyTests.Recoding.Start()`.
 
 
 ## Converters

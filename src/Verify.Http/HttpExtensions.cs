@@ -166,7 +166,8 @@ static class HttpExtensions
     {
         subType = null;
 
-        if (mediaType == "application/json" || mediaType.EndsWith("+json"))
+        if (mediaType == "application/json" ||
+            mediaType.EndsWith("+json"))
         {
             subType = "json";
             return true;
