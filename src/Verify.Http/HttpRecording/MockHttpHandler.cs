@@ -45,11 +45,10 @@ public class MockHttpHandler :
 
     public MockHttpHandler(string content, string mediaType) =>
         builder = _ =>
-        {
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StringContent(content, Encoding.UTF8, mediaType);
-            return response;
-        };
+            new(HttpStatusCode.OK)
+            {
+                Content = new StringContent(content, Encoding.UTF8, mediaType)
+            };
 
     public IReadOnlyCollection<HttpCall> Calls => calls;
 
