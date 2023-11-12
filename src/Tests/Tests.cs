@@ -22,7 +22,7 @@ public class Tests
     [Fact]
     public async Task JsonGet()
     {
-        HttpRecording.StartRecording();
+        Recording.Start();
 
         using var client = new HttpClient();
 
@@ -34,7 +34,7 @@ public class Tests
     [Fact]
     public async Task TestHttpRecordingWithResponse()
     {
-        HttpRecording.StartRecording();
+        Recording.Start();
 
         using var client = new HttpClient();
 
@@ -46,15 +46,10 @@ public class Tests
 
     #region ServiceThatDoesHttp
 
-    public class MyService
+    // Resolve a HttpClient. All http calls done at any
+    // resolved client will be added to `recording.Sends`
+    public class MyService(HttpClient client)
     {
-        HttpClient client;
-
-        // Resolve a HttpClient. All http calls done at any
-        // resolved client will be added to `recording.Sends`
-        public MyService(HttpClient client) =>
-            this.client = client;
-
         public Task MethodThatDoesHttp() =>
             // Some code that does some http calls
             client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
@@ -98,7 +93,7 @@ public class Tests
     [Fact]
     public async Task TestHttpRecording()
     {
-        HttpRecording.StartRecording();
+        Recording.Start();
 
         var sizeOfResponse = await MethodThatDoesHttpCalls();
 
@@ -126,11 +121,14 @@ public class Tests
     [Fact]
     public async Task TestHttpRecordingExplicit()
     {
-        HttpRecording.StartRecording();
+        Recording.Start();
 
         var responseSize = await MethodThatDoesHttpCalls();
 
-        var httpCalls = HttpRecording.FinishRecording().ToList();
+        var httpCalls = Recording.Stop()
+            .Select(_ => _.Data)
+            .OfType<HttpCall>()
+            .ToList();
 
         // Ensure all calls finished in under 5 seconds
         var threshold = TimeSpan.FromSeconds(5);

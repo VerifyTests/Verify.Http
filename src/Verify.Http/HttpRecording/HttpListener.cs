@@ -31,10 +31,10 @@ class HttpListener :
     }
 
     [DiagnosticName("System.Net.Http.HttpRequestOut.Stop")]
-    public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus requestTaskStatus) =>
+    public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus status) =>
         Recording.Add(
-            "httpCalls",
-            new HttpCall(request, response, Activity.Current?.Duration, requestTaskStatus));
+            "httpCall",
+            new HttpCall(request, response, Activity.Current?.Duration, status));
 
     void Clear()
     {

@@ -2,7 +2,7 @@
 <Project>
   <PropertyGroup>
     <NoWarn>CS1591;CS0649;CS8632</NoWarn>
-    <Version>5.0.0</Version>
+    <Version>5.0.1</Version>
     <LangVersion>preview</LangVersion>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <PackageTags>Http, Verify</PackageTags>

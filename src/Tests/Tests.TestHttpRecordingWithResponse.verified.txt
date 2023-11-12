@@ -22,34 +22,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ,
-  httpCalls: [
-    {
-      Request: {
-        Uri: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt,
-        Headers: {}
+  httpCall: {
+    Status: Created,
+    Request: {
+      Uri: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt,
+      Headers: {}
+    },
+    Response: {
+      Status: 200 OK,
+      Headers: {
+        Accept-Ranges: bytes,
+        Access-Control-Allow-Origin: *,
+        Cache-Control: max-age=300,
+        Connection: keep-alive,
+        Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
+        Cross-Origin-Resource-Policy: cross-origin,
+        ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
+        Strict-Transport-Security: max-age=31536000,
+        Vary: Authorization,Accept-Encoding,Origin,
+        Via: 1.1 varnish,
+        X-Content-Type-Options: nosniff,
+        X-Frame-Options: deny,
+        X-XSS-Protection: 1; mode=block
       },
-      Response: {
-        Status: 200 OK,
-        Headers: {
-          Accept-Ranges: bytes,
-          Access-Control-Allow-Origin: *,
-          Cache-Control: max-age=300,
-          Connection: keep-alive,
-          Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
-          Cross-Origin-Resource-Policy: cross-origin,
-          ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
-          Strict-Transport-Security: max-age=31536000,
-          Vary: Authorization,Accept-Encoding,Origin,
-          Via: 1.1 varnish,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 1; mode=block
-        },
-        ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8,
-          Expires: DateTime_1
-        },
-        ContentString:
+      ContentHeaders: {
+        Content-Type: text/plain; charset=utf-8,
+        Expires: DateTime_1
+      },
+      ContentString:
 MIT License
 
 Copyright (c) .NET Foundation and Contributors
@@ -72,7 +72,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-      }
     }
-  ]
+  }
 }

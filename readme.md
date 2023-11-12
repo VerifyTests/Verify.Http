@@ -45,7 +45,7 @@ public async Task HttpResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L242-L254' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L240-L252' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -142,21 +142,16 @@ Given a class that does some Http calls:
 <!-- snippet: ServiceThatDoesHttp -->
 <a id='snippet-servicethatdoeshttp'></a>
 ```cs
-public class MyService
+// Resolve a HttpClient. All http calls done at any
+// resolved client will be added to `recording.Sends`
+public class MyService(HttpClient client)
 {
-    HttpClient client;
-
-    // Resolve a HttpClient. All http calls done at any
-    // resolved client will be added to `recording.Sends`
-    public MyService(HttpClient client) =>
-        this.client = client;
-
     public Task MethodThatDoesHttp() =>
         // Some code that does some http calls
         client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L47-L63' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L47-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -182,7 +177,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L181-L198' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L179-L196' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -209,7 +204,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L157-L173' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L155-L171' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -293,7 +288,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L264-L287' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L262-L285' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -323,7 +318,7 @@ await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L293-L317' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L291-L315' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -346,7 +341,7 @@ The perform the verification as usual:
 [Fact]
 public async Task TestHttpRecording()
 {
-    HttpRecording.StartRecording();
+    Recording.Start();
 
     var sizeOfResponse = await MethodThatDoesHttpCalls();
 
@@ -366,7 +361,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L96-L121' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L91-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -536,11 +531,14 @@ For example:
 [Fact]
 public async Task TestHttpRecordingExplicit()
 {
-    HttpRecording.StartRecording();
+    Recording.Start();
 
     var responseSize = await MethodThatDoesHttpCalls();
 
-    var httpCalls = HttpRecording.FinishRecording().ToList();
+    var httpCalls = Recording.Stop()
+        .Select(_ => _.Data)
+        .OfType<HttpCall>()
+        .ToList();
 
     // Ensure all calls finished in under 5 seconds
     var threshold = TimeSpan.FromSeconds(5);
@@ -558,7 +556,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L124-L151' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L119-L149' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
