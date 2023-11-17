@@ -9,7 +9,7 @@ public class MockHttpHandler :
     public MockHttpHandler(Func<HttpRequestMessage, HttpResponseMessage> responseBuilder) =>
         builder = responseBuilder;
 
-    ConcurrentBag<IDisposable> disposables = new();
+    ConcurrentBag<IDisposable> disposables = [];
 
     protected override void Dispose(bool disposing)
     {
@@ -67,10 +67,6 @@ public class MockHttpHandler :
         return response;
     }
 
-#if !NETCOREAPP3_1 && !NET48 && !NET461 && !NETSTANDARD2_0
-
     protected override HttpResponseMessage Send(HttpRequestMessage request, Cancel cancel) =>
         Add(request);
-
-#endif
 }

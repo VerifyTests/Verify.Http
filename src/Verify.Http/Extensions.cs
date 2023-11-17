@@ -2,11 +2,6 @@
 
 static class Extensions
 {
-#if(NET48)
-    internal static Stream ReadAsStream(this HttpContent content) =>
-        content.ReadAsStreamAsync().GetAwaiter().GetResult();
-#endif
-
     internal static string ReadAsString(this HttpContent content) =>
         content.ReadAsStringAsync().GetAwaiter().GetResult();
 
@@ -44,9 +39,9 @@ static class Extensions
         headers
             .Simplify()
             .Where(_ => _.Key == "Set-Cookie")
-            .Select(x =>
+            .Select(_ =>
             {
-                var stringSegment = (string)x.Value;
+                var stringSegment = (string)_.Value;
                 return SetCookieHeaderValue.Parse(stringSegment);
             })
             .ToDictionary(_ => _.Name.Value!, _ => _.Value.Value);

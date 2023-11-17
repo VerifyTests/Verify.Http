@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net48</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Net.Http" Version="4.3.4" Condition="$(TargetFramework) == 'net48'" />
-    <Reference Include="System.Web" Version="4.0.0" Condition="$(TargetFramework) == 'net48'" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Microsoft.Net.Http.Headers" Version="8.0.0" />
     <PackageReference Include="Verify" Version="22.5.0" />
