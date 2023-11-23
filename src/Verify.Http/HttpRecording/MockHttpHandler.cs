@@ -3,7 +3,7 @@
 public class MockHttpHandler :
     DelegatingHandler
 {
-    ConcurrentQueue<HttpCall> calls = new();
+    ConcurrentQueue<HttpCall> calls = [];
     Func<HttpRequestMessage, HttpResponseMessage> builder;
 
     public MockHttpHandler(Func<HttpRequestMessage, HttpResponseMessage> responseBuilder) =>
