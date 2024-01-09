@@ -7,8 +7,8 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Microsoft.Net.Http.Headers" Version="8.0.0" />
     <PackageReference Include="Verify" Version="22.10.2" />
-    <PackageReference Include="Argon" Version="0.14.0" />
-    <PackageReference Include="Argon.Xml" Version="0.14.0" />
+    <PackageReference Include="Argon" Version="0.15.0" />
+    <PackageReference Include="Argon.Xml" Version="0.15.0" />
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="8.0.0" />
     <PackageReference Include="Polyfill" Version="1.34.0" PrivateAssets="all" />
