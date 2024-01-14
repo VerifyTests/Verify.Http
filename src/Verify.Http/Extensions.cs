@@ -7,7 +7,7 @@ static class Extensions
 
     public static Dictionary<string, string> ToDictionary(this HttpHeaders headers) =>
         headers
-            .ToDictionary(_ => _.Key, _ => string.Join("|", _.Value));
+            .ToDictionary(_ => _.Key, _ => string.Join('|', _.Value));
 
     public static Dictionary<string, object> Simplify(this HttpHeaders headers) =>
         headers
