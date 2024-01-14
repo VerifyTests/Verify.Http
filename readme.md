@@ -45,7 +45,7 @@ public async Task HttpResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L240-L252' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L233-L245' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -126,7 +126,7 @@ public async Task IgnoreHeader()
         .IgnoreMembers("Server");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L7-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-ignoreheader' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L5-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-ignoreheader' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -151,7 +151,7 @@ public class MyService(HttpClient client)
         client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L47-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L44-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-servicethatdoeshttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -177,7 +177,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L179-L196' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L172-L189' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -204,7 +204,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L155-L171' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L150-L166' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingglobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -288,7 +288,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L262-L285' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L255-L278' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientpauseresume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -318,7 +318,7 @@ await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L291-L315' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L284-L308' title='Snippet source file'>snippet source</a> | <a href='#snippet-httpclientrecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -361,7 +361,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L91-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L86-L111' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -560,7 +560,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L119-L149' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L114-L144' title='Snippet source file'>snippet source</a> | <a href='#snippet-httprecordingexplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -605,7 +605,7 @@ public async Task DefaultContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L40-L52' title='Snippet source file'>snippet source</a> | <a href='#snippet-defaultcontent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L38-L50' title='Snippet source file'>snippet source</a> | <a href='#snippet-defaultcontent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -641,7 +641,7 @@ public async Task RecordedCalls()
     await Verify(client.Calls);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L56-L69' title='Snippet source file'>snippet source</a> | <a href='#snippet-recordedcalls' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L52-L65' title='Snippet source file'>snippet source</a> | <a href='#snippet-recordedcalls' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -684,7 +684,7 @@ public async Task ExplicitContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L24-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitcontent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L22-L36' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitcontent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -727,7 +727,7 @@ public async Task ExplicitStatusCode()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L72-L84' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitstatuscode' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L67-L79' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitstatuscode' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -766,7 +766,7 @@ public async Task ExplicitResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L86-L102' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L81-L97' title='Snippet source file'>snippet source</a> | <a href='#snippet-explicitresponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -821,7 +821,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L131-L157' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L126-L152' title='Snippet source file'>snippet source</a> | <a href='#snippet-responsebuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -887,7 +887,7 @@ public async Task EnumerableResponses()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L104-L129' title='Snippet source file'>snippet source</a> | <a href='#snippet-enumerableresponses' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L99-L124' title='Snippet source file'>snippet source</a> | <a href='#snippet-enumerableresponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

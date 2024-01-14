@@ -2,8 +2,6 @@
 [UsesVerify]
 public class Tests
 {
-#if NET7_0_OR_GREATER && DEBUG
-
     #region IgnoreHeader
 
     [Fact]
@@ -42,7 +40,6 @@ public class Tests
 
         await Verify(result);
     }
-#endif
 
     #region ServiceThatDoesHttp
 
@@ -56,8 +53,6 @@ public class Tests
     }
 
     #endregion
-
-#if NET6_0_OR_GREATER
 
     [Fact]
     public async Task MediaTypePlainTextIsRecorded()
@@ -170,8 +165,6 @@ public class Tests
 
         #endregion
     }
-
-#endif
 
     [Fact]
     public async Task HttpClientRecording()

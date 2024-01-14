@@ -1,7 +1,5 @@
-#if NET6_0_OR_GREATER
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-#endif
 
 [UsesVerify]
 public class MockHttpClientTests
@@ -51,8 +49,6 @@ public class MockHttpClientTests
 
     #endregion
 
-#if NET6_0_OR_GREATER
-
     #region RecordedCalls
 
     [Fact]
@@ -67,7 +63,6 @@ public class MockHttpClientTests
     }
 
     #endregion
-#endif
 
     #region ExplicitStatusCode
 
@@ -211,7 +206,6 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-#if NET6_0_OR_GREATER
     [Theory]
     [InlineData("application/json")]
     [InlineData("application/foo+json")]
@@ -236,7 +230,6 @@ public class MockHttpClientTests
             .UseParameters(mediaType)
             .UniqueForRuntimeAndVersion();
     }
-#endif
 
     [Fact]
     public async Task PostStreamContent()

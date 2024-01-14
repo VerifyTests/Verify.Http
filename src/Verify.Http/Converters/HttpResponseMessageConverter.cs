@@ -11,9 +11,7 @@
         WriteHeaders(writer, response);
 
         WriteCookies(writer, response);
-#if NET6_0_OR_GREATER
         WriteTrailingHeaders(writer, response);
-#endif
         writer.WriteMember(response, response.Content, "Content");
         writer.WriteMember(response, response.RequestMessage, "Request");
 
@@ -32,7 +30,6 @@
         writer.WriteMember(response, headers, "Headers");
     }
 
-#if NET6_0_OR_GREATER
     static void WriteTrailingHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var dictionary = response.TrailingHeaders.Simplify();
@@ -41,5 +38,4 @@
             writer.WriteMember(response, dictionary, "TrailingHeaders");
         }
     }
-#endif
 }

@@ -1,7 +1,4 @@
-﻿#if NET6_0_OR_GREATER
-using Microsoft.Extensions.DiagnosticAdapter;
-
-class HttpListener :
+﻿class HttpListener :
     IObserver<DiagnosticListener>,
     IDisposable
 {
@@ -54,4 +51,3 @@ class HttpListener :
     {
     }
 }
-#endif
