@@ -1,5 +1,5 @@
 ﻿{
-  responseSize: 784,
+  responseSize: 771,
   httpCalls: [
     https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
     https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
