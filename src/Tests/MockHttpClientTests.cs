@@ -1,7 +1,6 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
-[UsesVerify]
 public class MockHttpClientTests
 {
     [Fact]
