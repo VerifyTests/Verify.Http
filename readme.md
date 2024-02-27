@@ -16,7 +16,7 @@ https://nuget.org/packages/Verify.Http/
 
 ## Enable
 
-Enable at any point in a test using `VerifyTests.Recoding.Start()`.
+Enable at any point in a test using `VerifyTests.Recording.Start()`.
 
 
 ## Converters
