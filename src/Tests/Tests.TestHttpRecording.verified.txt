@@ -44,7 +44,7 @@
           Connection: keep-alive,
           Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
           Cross-Origin-Resource-Policy: cross-origin,
-          ETag: "c82978c0be7fc658a7a153af83697d2fb744486fb377977533b62a76ce351b8d",
+          ETag: "529be0ead7b278443390ecd828509337d4a46effa2699c3d5aac62bfb4cd266c",
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
@@ -59,7 +59,7 @@
         ContentString:
 {
   "sdk": {
-    "version": "8.0.101",
+    "version": "8.0.201",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
