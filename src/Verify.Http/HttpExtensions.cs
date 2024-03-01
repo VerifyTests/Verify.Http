@@ -77,6 +77,19 @@ static class HttpExtensions
             {
             }
         }
+        else if (subType == "formUrlEncoded")
+        {
+            try
+            {
+                prettyContent = stringContent
+                    .Split('&')
+                    .Select(x => x.Split('='))
+                    .ToDictionary(x => x[0], x => x[1]);
+            }
+            catch
+            {
+            }
+        }
 
         return (stringContent, prettyContent);
     }
@@ -117,6 +130,12 @@ static class HttpExtensions
             return true;
         }
 #endif
+
+        if (content is FormUrlEncodedContent)
+        {
+            subType = "formUrlEncoded";
+            return true;
+        }
 
         var contentType = content.Headers.ContentType;
         if (contentType is null)

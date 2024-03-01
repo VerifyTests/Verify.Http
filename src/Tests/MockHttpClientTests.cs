@@ -271,4 +271,21 @@ public class MockHttpClientTests
                 })
             .UniqueForRuntimeAndVersion();
     }
+
+    [Fact]
+    public async Task PostFormContent()
+    {
+        using var client = new MockHttpClient();
+
+        var content = new FormUrlEncodedContent([new("a", "b"), new("c", "d")]);
+        var result = await client.PostAsync("https://fake/post", content);
+
+        await Verify(
+                new
+                {
+                    result,
+                    client
+                })
+            .UniqueForRuntimeAndVersion();
+    }
 }
