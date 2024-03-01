@@ -21,9 +21,7 @@
                 Status = instance.StatusText(),
                 Cookies = instance.Headers.Cookies(),
                 Headers = instance.Headers.NotCookies(),
-#if NET6_0_OR_GREATER
                 TrailingHeaders = instance.TrailingHeaders.Simplify(),
-#endif
                 instance.RequestMessage
             },
             targets);

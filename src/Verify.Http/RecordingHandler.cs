@@ -44,9 +44,7 @@ public class RecordingHandler(bool recording = true) :
 
         var item = new LoggedSend(
             request.RequestUri,
-#if NET6_0_OR_GREATER
             request.Options,
-#endif
             request.Method.ToString(),
             request.Headers.ToDictionary(),
             requestText,

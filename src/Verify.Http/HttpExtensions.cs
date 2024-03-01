@@ -1,6 +1,4 @@
-#if NET6_0_OR_GREATER
 using System.Net.Http.Json;
-#endif
 
 static class HttpExtensions
 {
@@ -21,27 +19,21 @@ static class HttpExtensions
     public static bool IsDefaultVersion(this HttpRequestMessage request) =>
         request.Version == defaultRequestVersion;
 
-#if NET6_0_OR_GREATER
     public static bool IsDefaultVersionPolicy(this HttpRequest request) =>
         request.VersionPolicy == defaultRequestVersionPolicy;
 
     public static bool IsDefaultVersionPolicy(this HttpRequestMessage request) =>
         request.VersionPolicy == defaultRequestVersionPolicy;
-#endif
 
     static HttpExtensions()
     {
         var request = new HttpRequestMessage();
         defaultRequestVersion = request.Version;
-#if NET6_0_OR_GREATER
         defaultRequestVersionPolicy = request.VersionPolicy;
-#endif
     }
 
     static Version defaultRequestVersion;
-#if NET6_0_OR_GREATER
     static HttpVersionPolicy defaultRequestVersionPolicy;
-#endif
 
     public static (string? content, object? prettyContent) TryReadStringContent(this HttpContent? content)
     {
@@ -83,8 +75,8 @@ static class HttpExtensions
             {
                 prettyContent = stringContent
                     .Split('&')
-                    .Select(x => x.Split('='))
-                    .ToDictionary(x => x[0], x => x[1]);
+                    .Select(_ => _.Split('='))
+                    .ToDictionary(_ => _[0], _ => _[1]);
             }
             catch
             {
@@ -123,13 +115,11 @@ static class HttpExtensions
 
     public static bool IsText(this HttpContent content, out string? subType)
     {
-#if NET6_0_OR_GREATER
         if (content is JsonContent)
         {
             subType = "json";
             return true;
         }
-#endif
 
         if (content is FormUrlEncodedContent)
         {

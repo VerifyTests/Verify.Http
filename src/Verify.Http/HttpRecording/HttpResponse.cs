@@ -16,12 +16,10 @@ public class HttpResponse
             ContentHeaders = content.Headers;
         }
 
-#if NET6_0_OR_GREATER
         if (response.TrailingHeaders.Any())
         {
             TrailingHeaders = response.TrailingHeaders;
         }
-#endif
 
         var stringContent = content.TryReadStringContent();
         ContentStringParsed = stringContent.prettyContent;
@@ -30,9 +28,7 @@ public class HttpResponse
 
     public HttpStatusCode Status { get; }
     public HttpResponseHeaders? Headers { get; }
-#if NET6_0_OR_GREATER
     public HttpResponseHeaders? TrailingHeaders { get; }
-#endif
     public HttpContentHeaders? ContentHeaders { get; }
     public object? ContentStringParsed { get; }
     [JsonIgnore] public string? ContentString { get; }

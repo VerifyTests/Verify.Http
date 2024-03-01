@@ -13,9 +13,7 @@ public class HttpRequest
         Method = request.Method;
         Method = request.Method;
         Version = request.Version;
-#if NET6_0_OR_GREATER
         VersionPolicy = request.VersionPolicy;
-#endif
 
         if (request.Headers.Any())
         {
@@ -35,9 +33,7 @@ public class HttpRequest
         }
     }
 
-#if NET6_0_OR_GREATER
     public HttpVersionPolicy VersionPolicy { get; }
-#endif
     public HttpMethod Method { get; }
     public Version Version { get; }
     public Uri Uri { get; }

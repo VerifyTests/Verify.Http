@@ -3,9 +3,7 @@
 public class LoggedSend
 {
     public Uri? RequestUri { get; }
-#if NET6_0_OR_GREATER
     public HttpRequestOptions RequestOptions { get; }
-#endif
     public string RequestMethod { get; }
     public Dictionary<string, string> RequestHeaders { get; }
     public string? RequestContent { get; }
@@ -15,9 +13,7 @@ public class LoggedSend
 
     public LoggedSend(
         Uri? requestUri,
-        #if NET6_0_OR_GREATER
         HttpRequestOptions requestOptions,
-        #endif
         string requestMethod,
         Dictionary<string, string> requestHeaders,
         string? requestContent,
@@ -26,9 +22,7 @@ public class LoggedSend
         string? responseContent)
     {
         RequestUri = requestUri;
-#if NET6_0_OR_GREATER
         RequestOptions = requestOptions;
-#endif
         RequestMethod = requestMethod;
         RequestHeaders = requestHeaders;
         RequestContent = requestContent;
