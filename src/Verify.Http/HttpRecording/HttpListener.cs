@@ -1,4 +1,5 @@
-﻿class HttpListener :
+﻿#pragma warning disable CA1822
+class HttpListener :
     IObserver<DiagnosticListener>,
     IDisposable
 {

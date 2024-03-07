@@ -33,7 +33,7 @@
     static void WriteTrailingHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var dictionary = response.TrailingHeaders.Simplify();
-        if (dictionary.Any())
+        if (dictionary.Count != 0)
         {
             writer.WriteMember(response, dictionary, "TrailingHeaders");
         }
