@@ -183,8 +183,6 @@ await Verify(recording.Sends);
 
 Http can also be added globally `IHttpClientBuilder`:
 
-Note: This only seems to work in net5 and up.
-
 <!-- snippet: HttpClientRecordingGlobal -->
 <a id='snippet-httpclientrecordingglobal'></a>
 ```cs
@@ -323,8 +321,6 @@ await Verify(recording.Sends);
 ## Http Recording via listener
 
 Http Recording allows, when a method is being tested, for any http requests made as part of that method call to be recorded and verified.
-
-**Supported in net5 and up**
 
 
 ### Usage
@@ -588,7 +584,7 @@ public async Task TestHttpRecordingExplicit()
 
 ### Default Response
 
-The default behaviour is to return a `HttpResponseMessage` with a status code of `200 OK`.
+The default behavior is to return a `HttpResponseMessage` with a status code of `200 OK`.
 
 <!-- snippet: DefaultContent -->
 <a id='snippet-defaultcontent'></a>
