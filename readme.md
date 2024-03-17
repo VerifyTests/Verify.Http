@@ -55,7 +55,6 @@ public async Task HttpResponse()
 <a id='snippet-Tests.HttpResponse.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 200 OK,
   Headers: {
     Accept-Ranges: bytes,
@@ -693,7 +692,6 @@ public async Task ExplicitContent()
 <a id='snippet-MockHttpClientTests.ExplicitContent.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 200 OK,
   Content: {
     Headers: {
@@ -705,7 +703,7 @@ public async Task ExplicitContent()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitContent.verified.txt#L1-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitContent.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitContent.verified.txt#L1-L11' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitContent.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -775,7 +773,6 @@ public async Task ExplicitResponse()
 <a id='snippet-MockHttpClientTests.ExplicitResponse.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 200 OK,
   Content: {
     Headers: {
@@ -785,7 +782,7 @@ public async Task ExplicitResponse()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -831,7 +828,6 @@ public async Task ResponseBuilder()
 ```txt
 {
   result1: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -841,7 +837,6 @@ public async Task ResponseBuilder()
     }
   },
   result2: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -852,7 +847,7 @@ public async Task ResponseBuilder()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -897,7 +892,6 @@ public async Task EnumerableResponses()
 ```txt
 {
   result1: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -907,7 +901,6 @@ public async Task EnumerableResponses()
     }
   },
   result2: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -918,7 +911,7 @@ public async Task EnumerableResponses()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

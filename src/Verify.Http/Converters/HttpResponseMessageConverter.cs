@@ -5,7 +5,11 @@
     {
         writer.WriteStartObject();
 
-        writer.WriteMember(response, response.Version, "Version");
+        if (!response.IsDefaultVersion())
+        {
+            writer.WriteMember(response, response.Version, "Version");
+        }
+
         writer.WriteMember(response, response.StatusText(), "Status");
 
         WriteHeaders(writer, response);

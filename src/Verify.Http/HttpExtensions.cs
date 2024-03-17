@@ -19,6 +19,9 @@ static class HttpExtensions
     public static bool IsDefaultVersion(this HttpRequestMessage request) =>
         request.Version == defaultRequestVersion;
 
+    public static bool IsDefaultVersion(this HttpResponseMessage request) =>
+        request.Version == defaultRequestVersion;
+
     public static bool IsDefaultVersionPolicy(this HttpRequest request) =>
         request.VersionPolicy == defaultRequestVersionPolicy;
 
