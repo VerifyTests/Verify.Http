@@ -13,7 +13,6 @@
         WriteCookies(writer, response);
         WriteTrailingHeaders(writer, response);
         writer.WriteMember(response, response.Content, "Content");
-        writer.WriteMember(response, response.RequestMessage, "Request");
 
         writer.WriteEndObject();
     }

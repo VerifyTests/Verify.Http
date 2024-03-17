@@ -100,11 +100,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-  },
-  Request: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt
+  }
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L49' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L48' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -418,7 +417,7 @@ The requests/response pairs will be appended to the verified file.
           Connection: keep-alive,
           Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
           Cross-Origin-Resource-Policy: cross-origin,
-          ETag: "529be0ead7b278443390ecd828509337d4a46effa2699c3d5aac62bfb4cd266c",
+          ETag: "f0a2c3f56177936f3b5b4c75fa1b1d54b3a553996faede4ede667dc668e3668e",
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
@@ -433,7 +432,7 @@ The requests/response pairs will be appended to the verified file.
         ContentString:
 {
   "sdk": {
-    "version": "8.0.201",
+    "version": "8.0.202",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
