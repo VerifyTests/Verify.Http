@@ -1,6 +1,5 @@
 ﻿{
   result1: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -10,7 +9,6 @@
     }
   },
   result2: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {

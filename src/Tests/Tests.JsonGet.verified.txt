@@ -1,7 +1,7 @@
 ﻿{
   target: {
     sdk: {
-      version: 8.0.201,
+      version: 8.0.202,
       allowPrerelease: true,
       rollForward: latestFeature
     }
@@ -48,7 +48,7 @@
           Connection: keep-alive,
           Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
           Cross-Origin-Resource-Policy: cross-origin,
-          ETag: "529be0ead7b278443390ecd828509337d4a46effa2699c3d5aac62bfb4cd266c",
+          ETag: "f0a2c3f56177936f3b5b4c75fa1b1d54b3a553996faede4ede667dc668e3668e",
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
@@ -63,7 +63,7 @@
         ContentString:
 {
   "sdk": {
-    "version": "8.0.201",
+    "version": "8.0.202",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }

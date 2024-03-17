@@ -55,7 +55,6 @@ public async Task HttpResponse()
 <a id='snippet-Tests.HttpResponse.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 200 OK,
   Headers: {
     Accept-Ranges: bytes,
@@ -104,7 +103,7 @@ SOFTWARE.
   Request: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L49' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L48' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -418,7 +417,7 @@ The requests/response pairs will be appended to the verified file.
           Connection: keep-alive,
           Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
           Cross-Origin-Resource-Policy: cross-origin,
-          ETag: "529be0ead7b278443390ecd828509337d4a46effa2699c3d5aac62bfb4cd266c",
+          ETag: "f0a2c3f56177936f3b5b4c75fa1b1d54b3a553996faede4ede667dc668e3668e",
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,Origin,
           Via: 1.1 varnish,
@@ -433,7 +432,7 @@ The requests/response pairs will be appended to the verified file.
         ContentString:
 {
   "sdk": {
-    "version": "8.0.201",
+    "version": "8.0.202",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
@@ -694,7 +693,6 @@ public async Task ExplicitContent()
 <a id='snippet-MockHttpClientTests.ExplicitContent.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 200 OK,
   Content: {
     Headers: {
@@ -706,7 +704,7 @@ public async Task ExplicitContent()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitContent.verified.txt#L1-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitContent.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitContent.verified.txt#L1-L11' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitContent.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -776,7 +774,6 @@ public async Task ExplicitResponse()
 <a id='snippet-MockHttpClientTests.ExplicitResponse.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 200 OK,
   Content: {
     Headers: {
@@ -786,7 +783,7 @@ public async Task ExplicitResponse()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -832,7 +829,6 @@ public async Task ResponseBuilder()
 ```txt
 {
   result1: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -842,7 +838,6 @@ public async Task ResponseBuilder()
     }
   },
   result2: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -853,7 +848,7 @@ public async Task ResponseBuilder()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -898,7 +893,6 @@ public async Task EnumerableResponses()
 ```txt
 {
   result1: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -908,7 +902,6 @@ public async Task EnumerableResponses()
     }
   },
   result2: {
-    Version: 1.1,
     Status: 200 OK,
     Content: {
       Headers: {
@@ -919,7 +912,7 @@ public async Task EnumerableResponses()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
