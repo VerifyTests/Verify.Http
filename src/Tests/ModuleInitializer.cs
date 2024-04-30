@@ -22,6 +22,7 @@
             "X-Served-By",
             "X-Cache",
             "Content-Length",
+            "RequestHeaders",
             "X-Timer");
         VerifierSettings
             .ScrubLinesContaining(
