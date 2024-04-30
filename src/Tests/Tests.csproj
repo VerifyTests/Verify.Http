@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
+    <NoWarn>CA1822</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Verify.DiffPlex" Version="3.0.0" />
@@ -12,7 +13,7 @@
     <PackageReference Include="Verify.Xunit" Version="24.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <ProjectReference Include="..\Verify.Http\Verify.Http.csproj" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.126" PrivateAssets="all" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.127" PrivateAssets="all" />
     <None Update="target.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
