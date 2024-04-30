@@ -1,4 +1,7 @@
 // ReSharper disable UnusedVariable
+
+using Microsoft.Extensions.DiagnosticAdapter;
+
 public class Tests
 {
     #region IgnoreHeader
@@ -305,5 +308,59 @@ public class Tests
         await Verify(recording.Sends);
 
         #endregion
+    }
+    [Fact]
+    public async Task WithOwnListener()
+    {
+        using var _ = DiagnosticListener.AllListeners.Subscribe(new MyListener());
+        using var client = new HttpClient();
+        using var response = await client.GetAsync("https://www.google.com/");
+        await Verify(response.StatusCode);
+    }
+
+    public class MyListener : IObserver<DiagnosticListener>, IDisposable
+    {
+        private readonly ConcurrentQueue<IDisposable> subscriptions = [];
+
+        public void Dispose()
+        {
+            foreach (var subscription in subscriptions)
+            {
+                subscription.Dispose();
+            }
+        }
+
+        public void OnCompleted()
+        {
+        }
+
+        public void OnError(Exception error)
+        {
+        }
+
+        public void OnNext(DiagnosticListener value)
+        {
+            if (value.Name != "HttpHandlerDiagnosticListener")
+            {
+                return;
+            }
+
+            subscriptions.Enqueue(value.SubscribeWithAdapter(this));
+        }
+
+        [DiagnosticName("System.Net.Http.HttpRequestOut")]
+        public void IsEnabled()
+        {
+        }
+
+        [DiagnosticName("System.Net.Http.HttpRequestOut.Start")]
+        public virtual void OnHttpRequestOutStart(HttpRequestMessage request)
+        {
+        }
+
+        [DiagnosticName("System.Net.Http.HttpRequestOut.Stop")]
+        public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus status)
+        {
+        }
     }
 }
