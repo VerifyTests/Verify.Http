@@ -8,7 +8,7 @@
     <PackageVersion Include="MarkdownSnippets.MsBuild" Version="27.0.2" />
     <PackageVersion Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.Net.Http.Headers" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.Net.Http.Headers" Version="8.0.6" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageVersion Include="Polyfill" Version="5.2.2" />
     <PackageVersion Include="ProjectDefaults" Version="1.0.127" />
