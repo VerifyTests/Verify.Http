@@ -37,7 +37,6 @@ SOFTWARE.
         Connection: keep-alive,
         Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
         Cross-Origin-Resource-Policy: cross-origin,
-        ETag: "753bbd67cc0d102eb769ba5301b846ee859521533eb8cacb3fd26ae32f6ebc35",
         Strict-Transport-Security: max-age=31536000,
         Vary: Authorization,Accept-Encoding,Origin,
         Via: 1.1 varnish,

@@ -8,7 +8,6 @@
     Connection: keep-alive,
     Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
     Cross-Origin-Resource-Policy: cross-origin,
-    ETag: "5c0e4129f37006970f06277a55df93d1c88d1854e41b93de924f2382aa4de9a5",
     Strict-Transport-Security: max-age=31536000,
     Vary: Authorization,Accept-Encoding,Origin,
     Via: 1.1 varnish,

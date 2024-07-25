@@ -23,7 +23,9 @@
             "X-Cache",
             "Content-Length",
             "RequestHeaders",
-            "X-Timer");
+            "X-Timer",
+            "version",
+            "ETag");
         VerifierSettings
             .ScrubLinesContaining(
                 "Traceparent",
