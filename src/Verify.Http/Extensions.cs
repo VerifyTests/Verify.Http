@@ -26,7 +26,12 @@ static class Extensions
                         }
                     }
 
-                    return (object)string.Join(",", values);
+                    if (key is "authorization")
+                    {
+                        return "{Scrubbed}";
+                    }
+
+                    return (object)string.Join(',', values);
                 });
 
     public static Dictionary<string, object> NotCookies(this HttpHeaders headers) =>
