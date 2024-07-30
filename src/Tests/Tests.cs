@@ -18,6 +18,20 @@ public class Tests
     }
 
     #endregion
+    [Fact]
+    public async Task IgnoreAuth()
+    {
+        using var client = new HttpClient
+        {
+            DefaultRequestHeaders =
+            {
+                Authorization = new("Basic", "key")
+            }
+        };
+        Recording.Start();
+        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        await Verify();
+    }
 
     [Fact]
     public async Task JsonGet()
