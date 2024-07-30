@@ -384,7 +384,7 @@ The requests/response pairs will be appended to the verified file.
           Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
           Referrer-Policy: no-referrer-when-downgrade,
           Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
-          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,Accept-Encoding,Accept,X-Requested-With,
+          Vary: X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept-Encoding, Accept, X-Requested-With,
           X-Content-Type-Options: nosniff,
           X-Frame-Options: deny,
           X-XSS-Protection: 0
@@ -446,7 +446,7 @@ The requests/response pairs will be appended to the verified file.
           Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
           Referrer-Policy: no-referrer-when-downgrade,
           Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
-          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,Accept-Encoding,Accept,X-Requested-With,
+          Vary: X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept-Encoding, Accept, X-Requested-With,
           X-Content-Type-Options: nosniff,
           X-Frame-Options: deny,
           X-XSS-Protection: 0
