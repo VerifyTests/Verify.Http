@@ -424,7 +424,7 @@ The requests/response pairs will be appended to the verified file.
         ContentString:
 {
   "sdk": {
-    "version": "9.0.100-preview.6.24328.19",
+    "version": "9.0.100-preview.7.24407.12",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
