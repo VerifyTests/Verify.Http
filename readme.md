@@ -21,7 +21,7 @@ Call `VerifierSettings.InitializePlugins()` in a `[ModuleInitializer]`.
 <!-- snippet: ModuleInitializer.cs -->
 <a id='snippet-ModuleInitializer.cs'></a>
 ```cs
-﻿public static class ModuleInit
+public static class ModuleInit
 {
     [ModuleInitializer]
     public static void Initialize()
