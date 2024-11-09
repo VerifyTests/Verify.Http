@@ -21,47 +21,20 @@ Call `VerifierSettings.InitializePlugins()` in a `[ModuleInitializer]`.
 <!-- snippet: ModuleInitializer.cs -->
 <a id='snippet-ModuleInitializer.cs'></a>
 ```cs
-﻿public static class ModuleInit
+public static class ModuleInitializer
 {
     [ModuleInitializer]
-    public static void Initialize()
-    {
+    public static void Initialize() =>
         VerifierSettings.InitializePlugins();
-
-        VerifierSettings.IgnoreMembers(
-            "Content-Length",
-            "traceparent",
-            "Traceparent",
-            "X-Amzn-Trace-Id",
-            "X-GitHub-Request-Id",
-            "origin",
-            "Date",
-            "Server",
-            "X-Fastly-Request",
-            "Source-Age",
-            "X-Fastly-Request-ID",
-            "X-Served-By",
-            "X-Cache-Hits",
-            "X-Served-By",
-            "X-Cache",
-            "Content-Length",
-            "RequestHeaders",
-            "X-Timer",
-            "version",
-            "ETag");
-        VerifierSettings
-            .ScrubLinesContaining(
-                "Traceparent",
-                "Date",
-                "X-Amzn-Trace-Id",
-                "Content-Length");
-    }
 }
 ```
-<sup><a href='/src/Tests/ModuleInitializer.cs#L1-L36' title='Snippet source file'>snippet source</a> | <a href='#snippet-ModuleInitializer.cs' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInitializer.cs#L1-L6' title='Snippet source file'>snippet source</a> | <a href='#snippet-ModuleInitializer.cs' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-## Enable
+Or if order of plugins is important, use `VerifyHttp.Initialize()` in a `[ModuleInitializer]`.
+
+
+## Enable Recording
 
 Enable at any point in a test using `VerifyTests.Recording.Start()`.
 
