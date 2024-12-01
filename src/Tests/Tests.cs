@@ -74,13 +74,15 @@ public class Tests
     public async Task MediaTypePlainTextIsRecorded()
     {
         const string content = "string content 123";
-        var recordingHandler = new RecordingHandler();
-        recordingHandler.InnerHandler = new ContentHandler(new(content, Encoding.UTF8));
-        using var client = new HttpClient(recordingHandler);
+        var handler = new RecordingHandler
+        {
+            InnerHandler = new ContentHandler(new(content, Encoding.UTF8))
+        };
+        using var client = new HttpClient(handler);
 
         var response = await client.GetAsync("https://dont-care.org/get");
 
-        Assert.Equal(content, recordingHandler.Sends.Single().ResponseContent);
+        Assert.Equal(content, handler.Sends.Single().ResponseContent);
     }
 
     [Theory]
@@ -89,13 +91,15 @@ public class Tests
     public async Task MediaTypeApplicationJsonIsRecorded(string mediaType)
     {
         const string content = "{ \"age\": 1234 }";
-        var recordingHandler = new RecordingHandler();
-        recordingHandler.InnerHandler = new ContentHandler(new(content, Encoding.UTF8, mediaType));
-        using var client = new HttpClient(recordingHandler);
+        var handler = new RecordingHandler
+        {
+            InnerHandler = new ContentHandler(new(content, Encoding.UTF8, mediaType))
+        };
+        using var client = new HttpClient(handler);
 
         var response = await client.GetAsync("https://dont-care.org/get");
 
-        Assert.Equal(content, recordingHandler.Sends.Single().ResponseContent);
+        Assert.Equal(content, handler.Sends.Single().ResponseContent);
     }
 #if DEBUG
 
