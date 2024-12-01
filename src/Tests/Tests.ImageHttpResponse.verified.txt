@@ -15,8 +15,5 @@
     X-Frame-Options: deny,
     X-XSS-Protection: 1; mode=block
   },
-  RequestMessage: {
-    Uri: https://raw.githubusercontent.com/VerifyTests/Verify/main/src/icon.png,
-    Headers: {}
-  }
+  RequestMessage: https://raw.githubusercontent.com/VerifyTests/Verify/main/src/icon.png
 }

@@ -11,7 +11,7 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        using var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 
         await Verify(result)
             .IgnoreMembers("Server");
@@ -80,7 +80,7 @@ public class Tests
         };
         using var client = new HttpClient(handler);
 
-        var response = await client.GetAsync("https://dont-care.org/get");
+        using var response = await client.GetAsync("https://dont-care.org/get");
 
         Assert.Equal(content, handler.Sends.Single().ResponseContent);
     }
@@ -97,7 +97,7 @@ public class Tests
         };
         using var client = new HttpClient(handler);
 
-        var response = await client.GetAsync("https://dont-care.org/get");
+        using var response = await client.GetAsync("https://dont-care.org/get");
 
         Assert.Equal(content, handler.Sends.Single().ResponseContent);
     }
@@ -116,7 +116,8 @@ public class Tests
                 new
                 {
                     sizeOfResponse
-                });
+                })
+            .IgnoreMember("Expires");
     }
 
     static async Task<int> MethodThatDoesHttpCalls()

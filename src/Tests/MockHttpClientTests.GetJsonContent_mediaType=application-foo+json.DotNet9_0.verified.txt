@@ -1,0 +1,11 @@
+﻿{
+  Status: 200 OK,
+  Content: {
+    Headers: {
+      Content-Type: application/foo+json; charset=utf-8
+    },
+    Value: {
+      a: b
+    }
+  }
+}

@@ -1,6 +1,6 @@
 ﻿{
   target: {
-    sizeOfResponse: 785
+    sizeOfResponse: 771
   },
   httpCall: [
     {
@@ -52,13 +52,12 @@
           X-XSS-Protection: 1; mode=block
         },
         ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8,
-          Expires: DateTime_1
+          Content-Type: text/plain; charset=utf-8
         },
         ContentString:
 {
   "sdk": {
-    "version": "9.0.100-rc.2.24474.11",
+    "version": "9.0.100",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
@@ -114,8 +113,7 @@
           X-XSS-Protection: 1; mode=block
         },
         ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8,
-          Expires: DateTime_1
+          Content-Type: text/plain; charset=utf-8
         },
         ContentString:
 image: Visual Studio 2022
