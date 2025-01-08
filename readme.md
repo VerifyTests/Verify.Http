@@ -444,7 +444,7 @@ The requests/response pairs will be appended to the verified file.
         ContentString:
 {
   "sdk": {
-    "version": "9.0.100",
+    "version": "9.0.101",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
