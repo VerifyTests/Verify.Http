@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <NoWarn>CA1822;xUnit1051</NoWarn>
     <OutputType>Exe</OutputType>
+    <RootNamespace>testing</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Verify.DiffPlex" />
