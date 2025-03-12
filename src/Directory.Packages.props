@@ -7,7 +7,7 @@
     <PackageVersion Include="Argon.Xml" Version="0.26.0" />
     <PackageVersion Include="MarkdownSnippets.MsBuild" Version="27.0.2" />
     <PackageVersion Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Net.Http.Headers" Version="9.0.3" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageVersion Include="Polyfill" Version="7.21.0" />
