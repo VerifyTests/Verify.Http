@@ -12,6 +12,35 @@ public static class VerifyHttp
         var recording = AddRecording(builder);
         return (builder, recording);
     }
+    public static void ScrubHttpTextResponse(
+        this VerifySettings settings,
+        Func<string, string> scrub) =>
+        settings.Context["ScrubHttpContentKey"] = scrub;
+
+    public static SettingsTask ScrubHttpTextResponse(
+        this SettingsTask settings,
+        Func<string, string> scrub)
+    {
+        settings.CurrentSettings.ScrubHttpTextResponse(scrub);
+        return settings;
+    }
+
+    internal static bool TryGetHttpTextResponseScrubber(
+        this VerifyJsonWriter writer ,
+        [NotNullWhen(true)]out Func<string, string>? scrubber)
+    {
+        if (writer.Context.TryGetValue("ScrubHttpContentKey", out var scrubberValue))
+        {
+            scrubber = (Func<string, string>)scrubberValue;
+            return true;
+        }
+
+        scrubber = null;
+        return false;
+    }
+
+    internal static bool HasHttpTextResponseScrubber(this VerifyJsonWriter writer) =>
+        writer.Context.ContainsKey("ScrubHttpContentKey");
 
     public static RecordingHandler AddRecording(this IHttpClientBuilder builder)
     {
