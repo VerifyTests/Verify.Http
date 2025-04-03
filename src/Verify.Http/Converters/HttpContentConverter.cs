@@ -1,6 +1,7 @@
-﻿class HttpContentConverter :
+﻿class HttpContentConverter:
     WriteOnlyJsonConverter<HttpContent>
 {
+
     public override void Write(VerifyJsonWriter writer, HttpContent content)
     {
         writer.WriteStartObject();
@@ -16,11 +17,20 @@
     {
         if (!content.IsText(out var subType))
         {
+            if (writer.HasHttpTextResponseScrubber())
+            {
+                throw new("Content is not text, but scrubContent is set.");
+            }
+
             return;
         }
 
         writer.WritePropertyName("Value");
         var result = content.ReadAsString();
+        if (writer.TryGetHttpTextResponseScrubber(out var scrubContent))
+        {
+            result = scrubContent(result);
+        }
 
         if (subType == "json")
         {

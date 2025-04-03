@@ -18,6 +18,20 @@ public class Tests
     }
 
     #endregion
+    #region ScrubHttpTextResponse
+
+    [Fact]
+    public async Task ScrubHttpTextResponse()
+    {
+        using var client = new HttpClient();
+
+        using var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Http/refs/heads/main/src/sample.html");
+
+        await Verify(result)
+            .ScrubHttpTextResponse(_ => _.Replace("This is the title of the webpage", "New title"));
+    }
+
+    #endregion
 
     [Fact]
     public async Task IgnoreAuth()
