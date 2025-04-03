@@ -18,6 +18,7 @@ public class Tests
     }
 
     #endregion
+
     [Fact]
     public async Task IgnoreAuth()
     {
@@ -163,6 +164,7 @@ public class Tests
     }
 
     #endregion
+
 #endif
 
     [Fact]
@@ -328,6 +330,7 @@ public class Tests
 
         #endregion
     }
+
     [Fact]
     public async Task WithOwnListener()
     {
@@ -337,7 +340,8 @@ public class Tests
         await Verify(response.StatusCode);
     }
 
-    public class MyListener : IObserver<DiagnosticListener>, IDisposable
+    public class MyListener : IObserver<DiagnosticListener>,
+        IDisposable
     {
         private readonly ConcurrentQueue<IDisposable> subscriptions = [];
 
