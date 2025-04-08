@@ -10,7 +10,7 @@
     <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Net.Http.Headers" Version="9.0.3" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="Polyfill" Version="7.24.0" />
+    <PackageVersion Include="Polyfill" Version="7.25.0" />
     <PackageVersion Include="ProjectDefaults" Version="1.0.150" />
     <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="9.0.3" />
     <PackageVersion Include="Verify" Version="29.2.0" />
