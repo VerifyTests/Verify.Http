@@ -13,8 +13,7 @@ static class Extensions
         headers
             .OrderBy(_ => _.Key.ToLowerInvariant())
             .ToDictionary(
-                _ => _.Key,
-                _ =>
+                _ => _.Key, object (_) =>
                 {
                     var values = _.Value.ToList();
                     var key = _.Key.ToLowerInvariant();
@@ -31,7 +30,7 @@ static class Extensions
                         return "{Scrubbed}";
                     }
 
-                    return (object)string.Join(',', values);
+                    return string.Join(',', values);
                 });
 
     public static Dictionary<string, object> NotCookies(this HttpHeaders headers) =>
