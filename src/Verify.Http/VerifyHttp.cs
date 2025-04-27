@@ -12,6 +12,7 @@ public static class VerifyHttp
         var recording = AddRecording(builder);
         return (builder, recording);
     }
+
     public static void ScrubHttpTextResponse(
         this VerifySettings settings,
         Func<string, string> scrub) =>
