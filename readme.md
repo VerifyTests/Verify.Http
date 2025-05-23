@@ -465,7 +465,6 @@ The requests/response pairs will be appended to the verified file.
         ContentString:
 {
   "sdk": {
-    "version": "9.0.300",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
@@ -545,7 +544,7 @@ artifacts:
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L138' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L137' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
