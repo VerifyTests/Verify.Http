@@ -85,7 +85,7 @@ public async Task HttpResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L270-L282' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L272-L284' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -188,7 +188,7 @@ public class MyService(HttpClient client)
         client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L75-L86' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L76-L87' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -214,7 +214,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L209-L226' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L211-L228' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -239,7 +239,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L187-L203' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L189-L205' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -322,7 +322,7 @@ await myService.MethodThatDoesHttp();
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L292-L315' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L294-L317' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -352,7 +352,7 @@ await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main
 
 await Verify(recording.Sends);
 ```
-<sup><a href='/src/Tests/Tests.cs#L321-L345' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L323-L347' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -382,7 +382,8 @@ public async Task TestHttpRecording()
             {
                 sizeOfResponse
             })
-        .IgnoreMember("Expires");
+        .IgnoreMember("Expires")
+        .ScrubLinesContaining("\"version\"");
 }
 
 static async Task<int> MethodThatDoesHttpCalls()
@@ -394,7 +395,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L121-L147' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L122-L149' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -421,7 +422,7 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Origin: ,
           Cache-Control: no-cache,
-          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ productionresultssa5.blob.core.windows.net/ productionresultssa6.blob.core.windows.net/ productionresultssa7.blob.core.windows.net/ productionresultssa8.blob.core.windows.net/ productionresultssa9.blob.core.windows.net/ productionresultssa10.blob.core.windows.net/ productionresultssa11.blob.core.windows.net/ productionresultssa12.blob.core.windows.net/ productionresultssa13.blob.core.windows.net/ productionresultssa14.blob.core.windows.net/ productionresultssa15.blob.core.windows.net/ productionresultssa16.blob.core.windows.net/ productionresultssa17.blob.core.windows.net/ productionresultssa18.blob.core.windows.net/ productionresultssa19.blob.core.windows.net/ github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com objects-origin.githubusercontent.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/,
+          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ productionresultssa5.blob.core.windows.net/ productionresultssa6.blob.core.windows.net/ productionresultssa7.blob.core.windows.net/ productionresultssa8.blob.core.windows.net/ productionresultssa9.blob.core.windows.net/ productionresultssa10.blob.core.windows.net/ productionresultssa11.blob.core.windows.net/ productionresultssa12.blob.core.windows.net/ productionresultssa13.blob.core.windows.net/ productionresultssa14.blob.core.windows.net/ productionresultssa15.blob.core.windows.net/ productionresultssa16.blob.core.windows.net/ productionresultssa17.blob.core.windows.net/ productionresultssa18.blob.core.windows.net/ productionresultssa19.blob.core.windows.net/ github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com release-assets.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com objects-origin.githubusercontent.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/,
           Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
           Referrer-Policy: no-referrer-when-downgrade,
           Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
@@ -464,7 +465,7 @@ The requests/response pairs will be appended to the verified file.
         ContentString:
 {
   "sdk": {
-    "version": "9.0.202",
+    "version": "9.0.300",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }
@@ -482,7 +483,7 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Origin: ,
           Cache-Control: no-cache,
-          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ productionresultssa5.blob.core.windows.net/ productionresultssa6.blob.core.windows.net/ productionresultssa7.blob.core.windows.net/ productionresultssa8.blob.core.windows.net/ productionresultssa9.blob.core.windows.net/ productionresultssa10.blob.core.windows.net/ productionresultssa11.blob.core.windows.net/ productionresultssa12.blob.core.windows.net/ productionresultssa13.blob.core.windows.net/ productionresultssa14.blob.core.windows.net/ productionresultssa15.blob.core.windows.net/ productionresultssa16.blob.core.windows.net/ productionresultssa17.blob.core.windows.net/ productionresultssa18.blob.core.windows.net/ productionresultssa19.blob.core.windows.net/ github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com objects-origin.githubusercontent.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/,
+          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ productionresultssa5.blob.core.windows.net/ productionresultssa6.blob.core.windows.net/ productionresultssa7.blob.core.windows.net/ productionresultssa8.blob.core.windows.net/ productionresultssa9.blob.core.windows.net/ productionresultssa10.blob.core.windows.net/ productionresultssa11.blob.core.windows.net/ productionresultssa12.blob.core.windows.net/ productionresultssa13.blob.core.windows.net/ productionresultssa14.blob.core.windows.net/ productionresultssa15.blob.core.windows.net/ productionresultssa16.blob.core.windows.net/ productionresultssa17.blob.core.windows.net/ productionresultssa18.blob.core.windows.net/ productionresultssa19.blob.core.windows.net/ github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com release-assets.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com objects-origin.githubusercontent.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/,
           Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
           Referrer-Policy: no-referrer-when-downgrade,
           Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
@@ -589,7 +590,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L150-L180' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L152-L182' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
