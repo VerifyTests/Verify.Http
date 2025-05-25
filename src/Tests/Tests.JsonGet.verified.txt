@@ -61,7 +61,6 @@
         ContentString:
 {
   "sdk": {
-    "version": "9.0.203",
     "allowPrerelease": true,
     "rollForward": "latestFeature"
   }

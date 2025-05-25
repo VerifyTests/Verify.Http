@@ -57,7 +57,8 @@ public class Tests
 
         var result = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json");
 
-        await VerifyJson(result);
+        await VerifyJson(result)
+            .ScrubLinesContaining("\"version\"");
     }
 
     [Fact]
@@ -132,7 +133,8 @@ public class Tests
                 {
                     sizeOfResponse
                 })
-            .IgnoreMember("Expires");
+            .IgnoreMember("Expires")
+            .ScrubLinesContaining("\"version\"");
     }
 
     static async Task<int> MethodThatDoesHttpCalls()
