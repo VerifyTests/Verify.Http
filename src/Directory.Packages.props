@@ -9,7 +9,7 @@
     <PackageVersion Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.5" />
     <PackageVersion Include="Microsoft.Net.Http.Headers" Version="9.0.5" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="ProjectDefaults" Version="1.0.155" />
     <PackageVersion Include="Polyfill" Version="8.0.0-beta.2" />
     <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="9.0.5" />
