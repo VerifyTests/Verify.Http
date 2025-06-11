@@ -9,9 +9,9 @@ Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of
 **See [Milestones](../../milestones?state=closed) for release notes.**
 
 
-## NuGet package
+## NuGet
 
-https://nuget.org/packages/Verify.Http/
+ * https://nuget.org/packages/Verify.Http
 
 
 ## Initialize
