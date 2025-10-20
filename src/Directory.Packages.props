@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Argon.Xml" Version="0.32.0" />
-    <PackageVersion Include="MarkdownSnippets.MsBuild" Version="28.0.0-beta.5" />
+    <PackageVersion Include="MarkdownSnippets.MsBuild" Version="28.0.0-beta.7" />
     <PackageVersion Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.10" />
     <PackageVersion Include="Microsoft.Net.Http.Headers" Version="9.0.10" />
