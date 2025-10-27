@@ -259,7 +259,7 @@ await Verify(recording.Sends)
 ```txt
 [
   {
-    RequestUri: https://httpcan.org/get,
+    RequestUri: https://httpcan.org/status/200,
     RequestMethod: GET,
     ResponseStatus: OK 200,
     ResponseHeaders: {
@@ -271,7 +271,7 @@ await Verify(recording.Sends)
       Server: cloudflare,
       Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers
     },
-    ResponseContent: {"args":{},"headers":{"accept-encoding":"gzip, br","connection":"close","host":"httpcan.org"},"origin":"194.193.45.211","url":"http://httpcan.org/get"}
+    ResponseContent: {"status":200}
   }
 ]
 ```
