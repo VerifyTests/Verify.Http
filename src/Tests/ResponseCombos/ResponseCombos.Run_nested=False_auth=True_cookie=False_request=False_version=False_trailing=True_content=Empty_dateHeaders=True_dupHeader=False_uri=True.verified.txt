@@ -1,7 +1,5 @@
 ﻿{
-  Response: {
-    Status: 202 Accepted,
-    Headers: {},
-    TrailingHeaders: {}
-  }
+  Status: 202 Accepted,
+  Headers: {},
+  TrailingHeaders: {}
 }

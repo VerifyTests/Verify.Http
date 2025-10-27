@@ -1,8 +1,6 @@
 ﻿{
-  Response: {
-    Status: 202 Accepted,
-    Cookies: {
-      sessionId: abc123
-    }
+  Status: 202 Accepted,
+  Cookies: {
+    sessionId: abc123
   }
 }

@@ -1,16 +1,14 @@
 ﻿{
-  Response: {
-    Status: 202 Accepted,
+  Status: 202 Accepted,
+  Headers: {
+    dupHeader: value1,value2
+  },
+  Cookies: {
+    sessionId: abc123
+  },
+  Content: {
     Headers: {
-      dupHeader: value1,value2
-    },
-    Cookies: {
-      sessionId: abc123
-    },
-    Content: {
-      Headers: {
-        Content-Type: image/png
-      }
+      Content-Type: image/png
     }
   }
 }

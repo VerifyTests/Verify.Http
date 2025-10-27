@@ -1,11 +1,9 @@
 ﻿{
-  Response: {
-    Status: 202 Accepted,
-    Headers: {
-      dupHeader: value1,value2
-    },
-    TrailingHeaders: {
-      dupHeader: value1,value2
-    }
+  Status: 202 Accepted,
+  Headers: {
+    dupHeader: value1,value2
+  },
+  TrailingHeaders: {
+    dupHeader: value1,value2
   }
 }

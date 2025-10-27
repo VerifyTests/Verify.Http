@@ -1,7 +1,5 @@
 ﻿{
-  Response: {
-    Version: 0.1,
-    Status: 202 Accepted,
-    Headers: {}
-  }
+  Version: 0.1,
+  Status: 202 Accepted,
+  Headers: {}
 }

@@ -1,5 +1,3 @@
 ﻿{
-  Response: {
-    Status: 202 Accepted
-  }
+  Status: 202 Accepted
 }

@@ -1,8 +1,6 @@
 ﻿{
-  Response: {
-    Version: 0.1,
-    Status: 202 Accepted,
-    Headers: {},
-    TrailingHeaders: {}
-  }
+  Version: 0.1,
+  Status: 202 Accepted,
+  Headers: {},
+  TrailingHeaders: {}
 }

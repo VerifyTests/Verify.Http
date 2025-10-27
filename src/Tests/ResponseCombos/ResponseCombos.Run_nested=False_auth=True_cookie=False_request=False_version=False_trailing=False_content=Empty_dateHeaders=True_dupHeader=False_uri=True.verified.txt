@@ -1,6 +1,4 @@
 ﻿{
-  Response: {
-    Status: 202 Accepted,
-    Headers: {}
-  }
+  Status: 202 Accepted,
+  Headers: {}
 }

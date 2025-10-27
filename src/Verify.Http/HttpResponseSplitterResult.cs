@@ -14,6 +14,11 @@
             targets.Add(new(extension, content.ReadAsStream()));
         }
 
+        if (instance.RequestMessage is null)
+        {
+            return new(instance, targets);
+        }
+
         return new(
             new
             {

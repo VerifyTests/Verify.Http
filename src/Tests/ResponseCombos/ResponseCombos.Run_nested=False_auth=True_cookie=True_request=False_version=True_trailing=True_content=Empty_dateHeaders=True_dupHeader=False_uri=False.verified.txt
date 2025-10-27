@@ -1,11 +1,9 @@
 ﻿{
-  Response: {
-    Version: 0.1,
-    Status: 202 Accepted,
-    Headers: {},
-    Cookies: {
-      sessionId: abc123
-    },
-    TrailingHeaders: {}
-  }
+  Version: 0.1,
+  Status: 202 Accepted,
+  Headers: {},
+  Cookies: {
+    sessionId: abc123
+  },
+  TrailingHeaders: {}
 }

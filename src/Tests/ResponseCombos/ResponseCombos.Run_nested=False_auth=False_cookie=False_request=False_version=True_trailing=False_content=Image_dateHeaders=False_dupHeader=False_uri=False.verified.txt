@@ -1,11 +1,9 @@
 ﻿{
-  Response: {
-    Version: 0.1,
-    Status: 202 Accepted,
-    Content: {
-      Headers: {
-        Content-Type: image/png
-      }
+  Version: 0.1,
+  Status: 202 Accepted,
+  Content: {
+    Headers: {
+      Content-Type: image/png
     }
   }
 }
