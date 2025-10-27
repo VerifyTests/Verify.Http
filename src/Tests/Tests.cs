@@ -18,6 +18,7 @@ public class Tests
     }
 
     #endregion
+
     #region ScrubHttpTextResponse
 
     [Fact]
@@ -148,7 +149,6 @@ public class Tests
 
     #endregion
 
-
     #region HttpRecordingExplicit
 
     [Fact]
@@ -227,6 +227,10 @@ public class Tests
 
         #endregion
     }
+
+    [Fact]
+    public Task HttpResponseSimple() =>
+        Verify(new HttpResponseMessage(HttpStatusCode.Accepted));
 
     [Fact]
     public async Task HttpResponseNested()

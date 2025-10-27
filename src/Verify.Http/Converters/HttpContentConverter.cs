@@ -1,12 +1,11 @@
 ﻿class HttpContentConverter:
     WriteOnlyJsonConverter<HttpContent>
 {
-
     public override void Write(VerifyJsonWriter writer, HttpContent content)
     {
         writer.WriteStartObject();
 
-        writer.WriteMember(content, content.Headers, "Headers");
+        writer.WriteMember(content, content.Headers.Simplify(), "Headers");
 
         WriteIfText(writer, content);
 
