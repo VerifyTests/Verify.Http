@@ -953,6 +953,8 @@ public async Task EnumerableResponses()
 
 ### Recording Mock Interactions
 
+Interactions with MockHttpClient (in the form of Request and repsponse pairs) can optionally be included in [Recording](https://github.com/VerifyTests/Verify/blob/main/docs/recording.md). 
+
 <!-- snippet: RecordingMockInteractions -->
 <a id='snippet-RecordingMockInteractions'></a>
 ```cs
