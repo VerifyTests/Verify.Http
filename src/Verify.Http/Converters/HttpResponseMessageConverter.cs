@@ -27,21 +27,27 @@
     static void WriteCookies(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var cookies = response.Headers.Cookies();
-        writer.WriteMember(response, cookies, "Cookies");
+        if (cookies.Count != 0)
+        {
+            writer.WriteMember(response, cookies, "Cookies");
+        }
     }
 
     static void WriteHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
         var headers = response.Headers.NotCookies();
-        writer.WriteMember(response, headers, "Headers");
+        if (headers.Count != 0)
+        {
+            writer.WriteMember(response, headers, "Headers");
+        }
     }
 
     static void WriteTrailingHeaders(VerifyJsonWriter writer, HttpResponseMessage response)
     {
-        var dictionary = response.TrailingHeaders.Simplify();
-        if (dictionary.Count != 0)
+        var headers = response.TrailingHeaders.Simplify();
+        if (headers.Count != 0)
         {
-            writer.WriteMember(response, dictionary, "TrailingHeaders");
+            writer.WriteMember(response, headers, "TrailingHeaders");
         }
     }
 }

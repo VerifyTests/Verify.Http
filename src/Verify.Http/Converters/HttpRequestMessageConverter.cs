@@ -37,7 +37,7 @@
 
         WriteCookies(writer, request);
 
-        if (request.Content != null)
+        if (request.Content?.Headers.ContentLength is not 0)
         {
             writer.WriteMember(request, request.Content, "Content");
         }
@@ -48,12 +48,18 @@
     static void WriteCookies(VerifyJsonWriter writer, HttpRequestMessage request)
     {
         var cookies = request.Headers.Cookies();
-        writer.WriteMember(request, cookies, "Cookies");
+        if (cookies.Count != 0)
+        {
+            writer.WriteMember(request, cookies, "Cookies");
+        }
     }
 
     static void WriteHeaders(VerifyJsonWriter writer, HttpRequestMessage request)
     {
         var headers = request.Headers.NotCookies();
-        writer.WriteMember(request, headers, "Headers");
+        if (headers.Count != 0)
+        {
+            writer.WriteMember(request, headers, "Headers");
+        }
     }
 }
