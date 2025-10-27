@@ -42,6 +42,23 @@ public class MockHttpHandler :
         };
     }
 
+    public MockHttpHandler(IEnumerable<HttpStatusCode> statuses, bool recording = false)
+    {
+        this.recording = recording;
+        var enumerator = statuses.GetEnumerator();
+        disposables.Add(enumerator);
+        builder = _ =>
+        {
+            var hasNext = enumerator.MoveNext();
+            if (!hasNext)
+            {
+                throw new("Not enough responses provided");
+            }
+
+            return new(enumerator.Current);
+        };
+    }
+
     public MockHttpHandler(HttpStatusCode status = HttpStatusCode.OK, bool recording = false)
     {
         this.recording = recording;

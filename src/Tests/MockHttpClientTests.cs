@@ -76,6 +76,31 @@ public class MockHttpClientTests
     }
 
     #endregion
+    #region ExplicitStatusCodes
+
+    [Fact]
+    public async Task ExplicitStatusCodes()
+    {
+        using var client = new MockHttpClient(
+            [
+                HttpStatusCode.Ambiguous,
+                HttpStatusCode.BadGateway,
+                HttpStatusCode.GatewayTimeout,
+                HttpStatusCode.InternalServerError
+            ],
+            recording: true);
+
+        Recording.Start();
+
+        await client.GetAsync("https://fake/get1");
+        await client.GetAsync("https://fake/get2");
+        await client.GetAsync("https://fake/get3");
+        await client.GetAsync("https://fake/get4");
+
+        await Verify();
+    }
+
+    #endregion
 
     #region ExplicitResponse
 
