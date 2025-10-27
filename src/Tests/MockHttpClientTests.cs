@@ -127,16 +127,15 @@ public class MockHttpClientTests
     [Fact]
     public async Task ResponseBuilder()
     {
-        using var client = new MockHttpClient(
-            request =>
+        using var client = new MockHttpClient(request =>
+        {
+            var content = $"Hello to {request.RequestUri}";
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                var content = $"Hello to {request.RequestUri}";
-                var response = new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new StringContent(content),
-                };
-                return response;
-            });
+                Content = new StringContent(content),
+            };
+            return response;
+        });
 
         var result1 = await client.GetAsync("https://fake/get1");
         var result2 = await client.GetAsync("https://fake/get2");
@@ -289,13 +288,19 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
+    #region RecordingMockInteractions
+
     [Fact]
     public async Task RecordingMockInteractions()
     {
         using var client = new MockHttpClient(recording: true);
 
-        var result = await client.GetStringAsync("https://fake/get");
+        Recording.Start();
+        await client.GetStringAsync("https://fake/getOne");
+        await client.GetStringAsync("https://fake/getTwo");
 
-        await Verify(result);
+        await Verify();
     }
+
+    #endregion
 }

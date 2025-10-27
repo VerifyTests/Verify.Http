@@ -832,16 +832,15 @@ Use custom code to create a `HttpResponseMessage` base on a `HttpRequestMessage`
 [Fact]
 public async Task ResponseBuilder()
 {
-    using var client = new MockHttpClient(
-        request =>
+    using var client = new MockHttpClient(request =>
+    {
+        var content = $"Hello to {request.RequestUri}";
+        var response = new HttpResponseMessage(HttpStatusCode.OK)
         {
-            var content = $"Hello to {request.RequestUri}";
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(content),
-            };
-            return response;
-        });
+            Content = new StringContent(content),
+        };
+        return response;
+    });
 
     var result1 = await client.GetAsync("https://fake/get1");
     var result2 = await client.GetAsync("https://fake/get2");
@@ -853,7 +852,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L125-L151' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L125-L150' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -948,6 +947,50 @@ public async Task EnumerableResponses()
 }
 ```
 <sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+
+### Recording Mock Interactions
+
+<!-- snippet: RecordingMockInteractions -->
+<a id='snippet-RecordingMockInteractions'></a>
+```cs
+[Fact]
+public async Task RecordingMockInteractions()
+{
+    using var client = new MockHttpClient(recording: true);
+
+    Recording.Start();
+    await client.GetStringAsync("https://fake/getOne");
+    await client.GetStringAsync("https://fake/getTwo");
+
+    await Verify();
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L291-L305' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+#### Resulting verified file
+
+<!-- snippet: MockHttpClientTests.RecordingMockInteractions.verified.txt -->
+<a id='snippet-MockHttpClientTests.RecordingMockInteractions.verified.txt'></a>
+```txt
+{
+  httpCall: [
+    {
+      Request: https://fake/getOne,
+      Response: 200 Ok
+    },
+    {
+      Request: https://fake/getTwo,
+      Response: 200 Ok
+    }
+  ]
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.RecordingMockInteractions.verified.txt#L1-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.RecordingMockInteractions.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
