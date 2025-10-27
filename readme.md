@@ -49,7 +49,7 @@ Or, if order of plugins is important, use `VerifyHttp.Initialize()` in a `[Modul
 <!-- snippet: ScrubHttpTextResponse -->
 <a id='snippet-ScrubHttpTextResponse'></a>
 ```cs
-[Fact]
+[Test]
 public async Task ScrubHttpTextResponse()
 {
     using var client = new HttpClient();
@@ -60,7 +60,7 @@ public async Task ScrubHttpTextResponse()
         .ScrubHttpTextResponse(_ => _.Replace("This is the title of the webpage", "New title"));
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L21-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L22-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -85,7 +85,7 @@ For example:
 <!-- snippet: HttpResponse -->
 <a id='snippet-HttpResponse'></a>
 ```cs
-[Fact]
+[Test]
 public async Task HttpResponse()
 {
     using var client = new HttpClient();
@@ -161,7 +161,7 @@ Headers are treated as properties, and hence can be ignored using `IgnoreMember`
 <!-- snippet: IgnoreHeader -->
 <a id='snippet-IgnoreHeader'></a>
 ```cs
-[Fact]
+[Test]
 public async Task IgnoreHeader()
 {
     using var client = new HttpClient();
@@ -197,7 +197,7 @@ public class MyService(HttpClient client)
         client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L76-L87' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L77-L88' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -378,7 +378,7 @@ The perform the verification as usual:
 <!-- snippet: HttpRecording -->
 <a id='snippet-HttpRecording'></a>
 ```cs
-[Fact]
+[Test]
 public async Task TestHttpRecording()
 {
     Recording.Start();
@@ -565,7 +565,7 @@ For example:
 <!-- snippet: HttpRecordingExplicit -->
 <a id='snippet-HttpRecordingExplicit'></a>
 ```cs
-[Fact]
+[Test]
 public async Task TestHttpRecordingExplicit()
 {
     Recording.Start();
@@ -581,7 +581,7 @@ public async Task TestHttpRecordingExplicit()
     var threshold = TimeSpan.FromSeconds(5);
     foreach (var call in httpCalls)
     {
-        Assert.True(call.Duration < threshold);
+        IsTrue(call.Duration < threshold);
     }
 
     await Verify(
@@ -628,7 +628,7 @@ The default behavior is to return a `HttpResponseMessage` with a status code of 
 <!-- snippet: DefaultContent -->
 <a id='snippet-DefaultContent'></a>
 ```cs
-[Fact]
+[Test]
 public async Task DefaultContent()
 {
     using var client = new MockHttpClient();
@@ -638,7 +638,7 @@ public async Task DefaultContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L37-L49' title='Snippet source file'>snippet source</a> | <a href='#snippet-DefaultContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L38-L50' title='Snippet source file'>snippet source</a> | <a href='#snippet-DefaultContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -663,7 +663,7 @@ Request-Response pairs can be verified using `MockHttpClient.Calls`
 <!-- snippet: ExplicitContent -->
 <a id='snippet-ExplicitContent'></a>
 ```cs
-[Fact]
+[Test]
 public async Task ExplicitContent()
 {
     using var client = new MockHttpClient(
@@ -675,7 +675,7 @@ public async Task ExplicitContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L21-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L22-L36' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -706,7 +706,7 @@ Always return an explicit `StringContent` and media-type:
 <!-- snippet: ExplicitContent -->
 <a id='snippet-ExplicitContent'></a>
 ```cs
-[Fact]
+[Test]
 public async Task ExplicitContent()
 {
     using var client = new MockHttpClient(
@@ -718,7 +718,7 @@ public async Task ExplicitContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L21-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L22-L36' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -750,7 +750,7 @@ Always return an explicit `HttpStatusCode`:
 <!-- snippet: ExplicitStatusCode -->
 <a id='snippet-ExplicitStatusCode'></a>
 ```cs
-[Fact]
+[Test]
 public async Task ExplicitStatusCode()
 {
     using var client = new MockHttpClient(HttpStatusCode.Ambiguous);
@@ -760,7 +760,7 @@ public async Task ExplicitStatusCode()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L66-L78' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitStatusCode' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L67-L79' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitStatusCode' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -785,7 +785,7 @@ Alwars return an explicit `HttpResponseMessage`:
 <!-- snippet: ExplicitResponse -->
 <a id='snippet-ExplicitResponse'></a>
 ```cs
-[Fact]
+[Test]
 public async Task ExplicitResponse()
 {
     var response = new HttpResponseMessage(HttpStatusCode.OK)
@@ -799,7 +799,7 @@ public async Task ExplicitResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L105-L121' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L106-L122' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -829,7 +829,7 @@ Use custom code to create a `HttpResponseMessage` base on a `HttpRequestMessage`
 <!-- snippet: ResponseBuilder -->
 <a id='snippet-ResponseBuilder'></a>
 ```cs
-[Fact]
+[Test]
 public async Task ResponseBuilder()
 {
     using var client = new MockHttpClient(request =>
@@ -852,7 +852,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L150-L175' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L151-L176' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -893,7 +893,7 @@ Use a sequence of `HttpResponseMessage` to return a sequence of requests:
 <!-- snippet: EnumerableResponses -->
 <a id='snippet-EnumerableResponses'></a>
 ```cs
-[Fact]
+[Test]
 public async Task EnumerableResponses()
 {
     using var client = new MockHttpClient(
@@ -916,7 +916,7 @@ public async Task EnumerableResponses()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L123-L148' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L124-L149' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -958,7 +958,7 @@ Interactions with MockHttpClient (in the form of Request and repsponse pairs) ca
 <!-- snippet: RecordingMockInteractions -->
 <a id='snippet-RecordingMockInteractions'></a>
 ```cs
-[Fact]
+[Test]
 public async Task RecordingMockInteractions()
 {
     using var client = new MockHttpClient(recording: true);
@@ -970,7 +970,7 @@ public async Task RecordingMockInteractions()
     await Verify();
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L316-L330' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L314-L328' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

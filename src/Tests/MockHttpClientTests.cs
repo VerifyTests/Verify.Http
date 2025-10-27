@@ -1,9 +1,10 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
+[TestFixture]
 public class MockHttpClientTests
 {
-    [Fact]
+    [Test]
     public async Task Get()
     {
         using var client = new MockHttpClient();
@@ -20,7 +21,7 @@ public class MockHttpClientTests
 
     #region ExplicitContent
 
-    [Fact]
+    [Test]
     public async Task ExplicitContent()
     {
         using var client = new MockHttpClient(
@@ -36,7 +37,7 @@ public class MockHttpClientTests
 
     #region DefaultContent
 
-    [Fact]
+    [Test]
     public async Task DefaultContent()
     {
         using var client = new MockHttpClient();
@@ -50,7 +51,7 @@ public class MockHttpClientTests
 
     #region TrackedCalls
 
-    [Fact]
+    [Test]
     public async Task TrackedCalls()
     {
         using var client = new MockHttpClient();
@@ -65,7 +66,7 @@ public class MockHttpClientTests
 
     #region ExplicitStatusCode
 
-    [Fact]
+    [Test]
     public async Task ExplicitStatusCode()
     {
         using var client = new MockHttpClient(HttpStatusCode.Ambiguous);
@@ -78,7 +79,7 @@ public class MockHttpClientTests
     #endregion
     #region ExplicitStatusCodes
 
-    [Fact]
+    [Test]
     public async Task ExplicitStatusCodes()
     {
         using var client = new MockHttpClient(
@@ -104,7 +105,7 @@ public class MockHttpClientTests
 
     #region ExplicitResponse
 
-    [Fact]
+    [Test]
     public async Task ExplicitResponse()
     {
         var response = new HttpResponseMessage(HttpStatusCode.OK)
@@ -122,7 +123,7 @@ public class MockHttpClientTests
 
     #region EnumerableResponses
 
-    [Fact]
+    [Test]
     public async Task EnumerableResponses()
     {
         using var client = new MockHttpClient(
@@ -149,7 +150,7 @@ public class MockHttpClientTests
 
     #region ResponseBuilder
 
-    [Fact]
+    [Test]
     public async Task ResponseBuilder()
     {
         using var client = new MockHttpClient(request =>
@@ -174,9 +175,8 @@ public class MockHttpClientTests
 
     #endregion
 
-    [Theory]
-    [InlineData("application/json")]
-    [InlineData("application/foo+json")]
+    [TestCase("application/json")]
+    [TestCase("application/foo+json")]
     public async Task GetJsonContent(string mediaType)
     {
         using var client = new MockHttpClient(content: """{ "a": "b" }""", mediaType);
@@ -188,7 +188,7 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-    [Fact]
+    [Test]
     public async Task PostStringContent()
     {
         using var client = new MockHttpClient();
@@ -205,9 +205,8 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-    [Theory]
-    [InlineData("application/json")]
-    [InlineData("application/foo+json")]
+    [TestCase("application/json")]
+    [TestCase("application/foo+json")]
     public async Task PostJsonStringContent(string mediaType)
     {
         using var client = new MockHttpClient();
@@ -229,9 +228,8 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-    [Theory]
-    [InlineData("application/json")]
-    [InlineData("application/foo+json")]
+    [TestCase("application/json")]
+    [TestCase("application/foo+json")]
     public async Task PostJsonContent(string mediaType)
     {
         using var client = new MockHttpClient();
@@ -254,7 +252,7 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-    [Fact]
+    [Test]
     public async Task PostStreamContent()
     {
         using var client = new MockHttpClient();
@@ -272,7 +270,7 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-    [Fact]
+    [Test]
     public async Task PostStreamContentWithContentType()
     {
         using var client = new MockHttpClient();
@@ -296,7 +294,7 @@ public class MockHttpClientTests
             .UniqueForRuntimeAndVersion();
     }
 
-    [Fact]
+    [Test]
     public async Task PostFormContent()
     {
         using var client = new MockHttpClient();
@@ -315,7 +313,7 @@ public class MockHttpClientTests
 
     #region RecordingMockInteractions
 
-    [Fact]
+    [Test]
     public async Task RecordingMockInteractions()
     {
         using var client = new MockHttpClient(recording: true);
