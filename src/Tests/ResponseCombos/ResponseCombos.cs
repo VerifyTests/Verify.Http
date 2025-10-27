@@ -3,6 +3,12 @@ using System.Net.Http.Headers;
 [TestFixture]
 public class ResponseCombos
 {
+    public enum ContentType
+    {
+        Empty,
+        String,
+        Image
+    }
     [Test]
     public Task Run(
         [Values] bool nested,
@@ -11,18 +17,16 @@ public class ResponseCombos
         [Values] bool request,
         [Values] bool defvaultVersion,
         [Values] bool trailing,
-        [Values] bool content,
+        [Values] ContentType content,
         [Values] bool dateHeaders,
         [Values] bool dupHeader)
     {
-        var response = new HttpResponseMessage(HttpStatusCode.Accepted);
+        var response = new HttpResponseMessage(HttpStatusCode.Accepted)
+        {
+            Content = BuildContent(content)
+        };
 
         AddHeaders(dupHeader, dateHeaders, auth, cookie, response.Headers);
-
-        if (content)
-        {
-            response.Content = new StringContent("the content");
-        }
 
         if (trailing)
         {
@@ -35,16 +39,15 @@ public class ResponseCombos
         }
         else
         {
-            response.Version = new Version(0, 1);
+            response.Version = new(0, 1);
         }
 
         if (request)
         {
-            var requestMessage = new HttpRequestMessage();
-            if (content)
+            var requestMessage = new HttpRequestMessage
             {
-                requestMessage.Content = new StringContent("the request content");
-            }
+                Content = BuildContent(content)
+            };
 
             AddHeaders(dupHeader, dateHeaders, auth, cookie, requestMessage.Headers);
             response.RequestMessage = requestMessage;
@@ -56,6 +59,33 @@ public class ResponseCombos
         }
 
         return Verify(response);
+    }
+
+    private static HttpContent? BuildContent(ContentType content)
+    {
+        switch (content)
+        {
+            case ContentType.Empty:
+            {
+
+                return null;
+            }
+            case ContentType.String:
+                return new StringContent("the content");
+            case ContentType.Image:
+            {
+                using var stream = File.OpenRead(EmptyFiles.AllFiles.GetPathFor("png"));
+                return new StreamContent(stream)
+                {
+                    Headers =
+                    {
+                        ContentType = new("image/png")
+                    }
+                };
+            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(content), content, null);
+        }
     }
 
     static void AddHeaders(bool dupHeader, bool dateHeaders, bool auth, bool cookie, HttpHeaders headers)
