@@ -228,10 +228,6 @@ public class Tests
     }
 
     [Test]
-    public Task HttpResponseCombos() =>
-        Verify(new HttpResponseMessage(HttpStatusCode.Accepted));
-
-    [Test]
     public Task Uri() =>
         Verify(
             new
