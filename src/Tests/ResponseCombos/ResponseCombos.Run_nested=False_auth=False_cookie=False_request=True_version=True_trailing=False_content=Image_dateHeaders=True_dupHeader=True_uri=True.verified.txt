@@ -18,7 +18,6 @@
   Request: {
     Uri: https://site/path,
     Headers: {
-      Authorization: {Scrubbed},
       Date: DateTime_1,
       dupHeader: value1,value2
     },

@@ -4,7 +4,6 @@
   },
   Request: {
     Headers: {
-      Authorization: {Scrubbed},
       Date: DateTime_1
     }
   }

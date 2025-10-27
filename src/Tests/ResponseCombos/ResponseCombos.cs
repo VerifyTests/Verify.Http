@@ -10,7 +10,7 @@ public class ResponseCombos
         Image
     }
 
-    static DateTimeOffset dateHeader = new DateTimeOffset(2020, 10, 9, 8, 7, 6, TimeSpan.Zero);
+    static DateTimeOffset dateHeader = new(2020, 10, 9, 8, 7, 6, TimeSpan.Zero);
 
     [Test]
     [Explicit]
@@ -86,7 +86,11 @@ public class ResponseCombos
                 Content = BuildContent(content)
             };
 
-            requestMessage.Headers.Authorization = new("authScheme", "authParam");
+            if (auth)
+            {
+                requestMessage.Headers.Authorization = new("authScheme", "authParam");
+            }
+
             if (uri)
             {
                 requestMessage.RequestUri = new("https://site/path");
