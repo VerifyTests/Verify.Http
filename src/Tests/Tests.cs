@@ -229,22 +229,8 @@ public class Tests
     }
 
     [Fact]
-    public Task HttpResponseSimple() =>
+    public Task HttpResponseCombos() =>
         Verify(new HttpResponseMessage(HttpStatusCode.Accepted));
-
-    [Fact]
-    public async Task HttpResponseNested()
-    {
-        using var client = new HttpClient();
-
-        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
-
-        await Verify(
-            new
-            {
-                result
-            });
-    }
 
     [Fact]
     public Task Uri() =>

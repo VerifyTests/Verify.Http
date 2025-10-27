@@ -1,4 +1,0 @@
-﻿{
-  Version: 1.1,
-  Status: 202 Accepted
-}
