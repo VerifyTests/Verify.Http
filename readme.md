@@ -649,14 +649,11 @@ public async Task DefaultContent()
 ```txt
 {
   Response: {
-    Status: 200 OK,
-    Content: {
-      Headers: {}
-    }
+    Status: 200 OK
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.DefaultContent.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.DefaultContent.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.DefaultContent.verified.txt#L1-L5' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.DefaultContent.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -775,14 +772,11 @@ public async Task ExplicitStatusCode()
 ```txt
 {
   Response: {
-    Status: 300 Multiple Choices,
-    Content: {
-      Headers: {}
-    }
+    Status: 300 Multiple Choices
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitStatusCode.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitStatusCode.verified.txt#L1-L5' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
