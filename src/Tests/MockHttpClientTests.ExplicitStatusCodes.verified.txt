@@ -1,0 +1,28 @@
+﻿{
+  httpCall: [
+    {
+      Request: https://fake/get1,
+      Response: {
+        Status: 300 MultipleChoices
+      }
+    },
+    {
+      Request: https://fake/get2,
+      Response: {
+        Status: 502 BadGateway
+      }
+    },
+    {
+      Request: https://fake/get3,
+      Response: {
+        Status: 504 GatewayTimeout
+      }
+    },
+    {
+      Request: https://fake/get4,
+      Response: {
+        Status: 500 InternalServerError
+      }
+    }
+  ]
+}

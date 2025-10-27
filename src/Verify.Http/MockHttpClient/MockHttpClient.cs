@@ -15,6 +15,11 @@ public class MockHttpClient :
     {
     }
 
+    public MockHttpClient(IEnumerable<HttpStatusCode> statuses, bool recording = false) :
+        this(new MockHttpHandler(statuses, recording))
+    {
+    }
+
     public MockHttpClient(params HttpResponseMessage[] responses) :
         this(new MockHttpHandler(responses))
     {
