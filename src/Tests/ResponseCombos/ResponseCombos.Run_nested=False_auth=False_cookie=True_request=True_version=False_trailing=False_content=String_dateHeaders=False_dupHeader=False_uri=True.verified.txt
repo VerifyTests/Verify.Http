@@ -1,0 +1,12 @@
+﻿{
+  Status: 202 Accepted,
+  Cookies: {
+    sessionId: abc123
+  },
+  Content: {
+    Headers: {
+      Content-Type: text/plain; charset=utf-8
+    },
+    Value: the content
+  }
+}

@@ -38,29 +38,34 @@ public class ResponseCombos
         [Values] bool trailing,
         [Values] ContentType content,
         [Values] bool dateHeaders,
-        [Values] bool dupHeader)
+        [Values] bool dupHeader,
+        [Values] bool uri)
     {
         var response = new HttpResponseMessage(HttpStatusCode.Accepted)
         {
-            Content = BuildContent(content)
+            Content = BuildContent(content),
         };
-
         if (dateHeaders)
         {
             response.Content?.Headers.Expires = dateHeader;
             response.Content?.Headers.LastModified = dateHeader;
         }
 
-        AddHeaders(dupHeader, auth, cookie, response.Headers);
+        AddHeaders(dupHeader, response.Headers);
 
         if (dateHeaders)
         {
             response.Headers.Date = dateHeader;
         }
 
+        if (cookie)
+        {
+            response.Headers.Add("Set-Cookie", "sessionId=abc123; Max-Age=3600");
+        }
+
         if (trailing)
         {
-            AddHeaders(dupHeader, auth, cookie, response.TrailingHeaders);
+            AddHeaders(dupHeader, response.TrailingHeaders);
             if (dateHeaders)
             {
                 response.TrailingHeaders.Date = dateHeader;
@@ -79,13 +84,19 @@ public class ResponseCombos
                 Content = BuildContent(content)
             };
 
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("authScheme", "authParam");
+            if (uri)
+            {
+                requestMessage.RequestUri = new("https://site/path");
+            }
+
             if (dateHeaders)
             {
                 requestMessage.Content?.Headers.Expires = dateHeader;
                 requestMessage.Content?.Headers.LastModified = dateHeader;
             }
 
-            AddHeaders(dupHeader, auth, cookie, requestMessage.Headers);
+            AddHeaders(dupHeader, requestMessage.Headers);
             requestMessage.Headers.Date = dateHeader;
             response.RequestMessage = requestMessage;
         }
@@ -124,22 +135,12 @@ public class ResponseCombos
         }
     }
 
-    static void AddHeaders(bool dupHeader, bool auth, bool cookie, HttpHeaders headers)
+    static void AddHeaders(bool dupHeader, HttpHeaders headers)
     {
         if (dupHeader)
         {
             headers.Add("dupHeader", "value1");
             headers.Add("dupHeader", "value2");
-        }
-
-        if (auth)
-        {
-            headers.Add("authorization", "BAD");
-        }
-
-        if (cookie)
-        {
-            headers.Add("Set-Cookie", "BAD");
         }
     }
 }

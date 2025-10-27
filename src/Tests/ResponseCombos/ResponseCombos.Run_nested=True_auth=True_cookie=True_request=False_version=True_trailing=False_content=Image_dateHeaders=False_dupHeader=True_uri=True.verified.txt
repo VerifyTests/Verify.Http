@@ -1,0 +1,17 @@
+﻿{
+  response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Headers: {
+      dupHeader: value1,value2
+    },
+    Cookies: {
+      sessionId: abc123
+    },
+    Content: {
+      Headers: {
+        Content-Type: image/png
+      }
+    }
+  }
+}

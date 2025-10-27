@@ -3,7 +3,8 @@
 {
     public override void Write(VerifyJsonWriter writer, HttpRequestMessage request)
     {
-        if (request.Method == HttpMethod.Get &&
+        if (request.RequestUri != null &&
+            request.Method == HttpMethod.Get &&
             UriConverter.ShouldUseOriginalString(request.RequestUri!) &&
             request.IsDefaultVersionPolicy() &&
             !request.Headers.Any() &&

@@ -1,0 +1,11 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Content: {}
+  },
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed}
+    }
+  }
+}

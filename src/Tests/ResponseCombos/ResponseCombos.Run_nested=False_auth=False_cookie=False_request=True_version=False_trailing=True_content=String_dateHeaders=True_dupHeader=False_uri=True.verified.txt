@@ -1,0 +1,13 @@
+﻿{
+  Status: 202 Accepted,
+  Headers: {},
+  TrailingHeaders: {},
+  Content: {
+    Headers: {
+      Content-Type: text/plain; charset=utf-8,
+      Expires: DateTime_1,
+      Last-Modified: DateTime_1
+    },
+    Value: the content
+  }
+}

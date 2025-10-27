@@ -1,0 +1,19 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Headers: {},
+    TrailingHeaders: {},
+    Content: {
+      Headers: {
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      Authorization: {Scrubbed}
+    }
+  }
+}

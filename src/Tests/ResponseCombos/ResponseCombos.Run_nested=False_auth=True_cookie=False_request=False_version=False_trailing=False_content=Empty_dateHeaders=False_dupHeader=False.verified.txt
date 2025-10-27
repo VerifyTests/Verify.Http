@@ -1,9 +1,0 @@
-﻿{
-  Response: {
-    Status: 202 Accepted,
-    Headers: {
-      Authorization: {Scrubbed}
-    },
-    Content: {}
-  }
-}

@@ -1,0 +1,17 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Headers: {},
+    Cookies: {
+      sessionId: abc123
+    },
+    TrailingHeaders: {},
+    Content: {
+      Headers: {
+        Content-Type: image/png,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

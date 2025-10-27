@@ -1,0 +1,25 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Cookies: {
+      sessionId: abc123
+    },
+    Content: {
+      Headers: {
+        Content-Type: image/png
+      }
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      Authorization: {Scrubbed}
+    },
+    Content: {
+      Headers: {
+        Content-Type: image/png
+      }
+    }
+  }
+}

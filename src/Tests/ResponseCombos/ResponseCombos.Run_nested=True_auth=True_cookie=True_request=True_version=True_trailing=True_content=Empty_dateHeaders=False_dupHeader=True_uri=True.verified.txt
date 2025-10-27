@@ -1,0 +1,16 @@
+﻿{
+  response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Headers: {
+      dupHeader: value1,value2
+    },
+    Cookies: {
+      sessionId: abc123
+    },
+    TrailingHeaders: {
+      dupHeader: value1,value2
+    },
+    Content: {}
+  }
+}

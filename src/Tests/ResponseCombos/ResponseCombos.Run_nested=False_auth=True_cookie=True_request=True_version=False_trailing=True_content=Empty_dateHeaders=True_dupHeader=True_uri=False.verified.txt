@@ -1,0 +1,26 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      dupHeader: value1,value2
+    },
+    Cookies: {
+      sessionId: abc123
+    },
+    TrailingHeaders: {
+      dupHeader: value1,value2
+    },
+    Content: {
+      Headers: {
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  },
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed},
+      dupHeader: value1,value2
+    }
+  }
+}

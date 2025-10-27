@@ -1,0 +1,21 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Content: {
+      Headers: {
+        Content-Type: image/png
+      }
+    }
+  },
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed}
+    },
+    Content: {
+      Headers: {
+        Content-Type: image/png
+      }
+    }
+  }
+}

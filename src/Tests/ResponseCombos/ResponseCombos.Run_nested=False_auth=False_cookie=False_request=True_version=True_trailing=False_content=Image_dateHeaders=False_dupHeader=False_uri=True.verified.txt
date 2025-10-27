@@ -1,0 +1,22 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Content: {
+      Headers: {
+        Content-Type: image/png
+      }
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      Authorization: {Scrubbed}
+    },
+    Content: {
+      Headers: {
+        Content-Type: image/png
+      }
+    }
+  }
+}

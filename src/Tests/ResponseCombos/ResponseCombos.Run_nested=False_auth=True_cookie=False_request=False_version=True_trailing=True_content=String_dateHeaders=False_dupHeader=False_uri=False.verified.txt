@@ -1,0 +1,10 @@
+﻿{
+  Version: 0.1,
+  Status: 202 Accepted,
+  Content: {
+    Headers: {
+      Content-Type: text/plain; charset=utf-8
+    },
+    Value: the content
+  }
+}

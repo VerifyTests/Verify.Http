@@ -1,0 +1,15 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Headers: {},
+    TrailingHeaders: {},
+    Content: {
+      Headers: {
+        Content-Type: image/png,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+﻿{
+  response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Headers: {},
+    Content: {
+      Headers: {
+        Content-Type: image/png,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

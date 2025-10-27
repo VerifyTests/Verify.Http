@@ -1,0 +1,15 @@
+﻿{
+  response: {
+    Status: 202 Accepted,
+    Headers: {},
+    Cookies: {
+      sessionId: abc123
+    },
+    Content: {
+      Headers: {
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}
