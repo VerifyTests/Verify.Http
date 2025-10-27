@@ -2,12 +2,15 @@
   Response: {
     Version: 0.1,
     Status: 202 Accepted,
-    Headers: {}
+    Headers: {
+      Date: DateTime_1
+    }
   },
   Request: {
     Uri: https://site/path,
     Headers: {
-      Authorization: {Scrubbed}
+      Authorization: {Scrubbed},
+      Date: DateTime_1
     }
   }
 }

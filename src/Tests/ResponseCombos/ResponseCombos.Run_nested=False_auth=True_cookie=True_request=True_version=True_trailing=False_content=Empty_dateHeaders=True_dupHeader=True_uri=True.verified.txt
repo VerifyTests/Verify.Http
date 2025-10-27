@@ -3,6 +3,7 @@
     Version: 0.1,
     Status: 202 Accepted,
     Headers: {
+      Date: DateTime_1,
       dupHeader: value1,value2
     },
     Cookies: {
@@ -13,6 +14,7 @@
     Uri: https://site/path,
     Headers: {
       Authorization: {Scrubbed},
+      Date: DateTime_1,
       dupHeader: value1,value2
     }
   }

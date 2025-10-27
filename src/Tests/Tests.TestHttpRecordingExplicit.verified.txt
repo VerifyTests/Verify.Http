@@ -1,9 +1,7 @@
 ﻿{
-  responseSize: 771,
+  responseSize: 792,
   httpCalls: [
-    https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
-    https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
-    https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml,
-    https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml
+    https://httpcan.org/json,
+    https://httpcan.org/xml
   ]
 }

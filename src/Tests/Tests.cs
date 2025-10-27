@@ -11,10 +11,12 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        using var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        using var result = await client.GetAsync("https://httpcan.org/get");
 
         await Verify(result)
-            .IgnoreMembers("Server");
+            .IgnoreMembers(
+                "Server",
+                "Access-Control-Allow-Credentials");
     }
 
     #endregion
@@ -26,10 +28,10 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        using var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Http/refs/heads/main/src/sample.html");
+        using var result = await client.GetAsync("https://httpcan.org/html");
 
         await Verify(result)
-            .ScrubHttpTextResponse(_ => _.Replace("This is the title of the webpage", "New title"));
+            .ScrubHttpTextResponse(_ => _.Replace("Herman Melville - Moby-Dick", "New title"));
     }
 
     #endregion
@@ -45,7 +47,7 @@ public class Tests
             }
         };
         Recording.Start();
-        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        var result = await client.GetAsync("https://httpcan.org/get");
         await Verify();
     }
 
@@ -56,10 +58,9 @@ public class Tests
 
         using var client = new HttpClient();
 
-        var result = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json");
+        var result = await client.GetStringAsync("https://httpcan.org/json");
 
-        await VerifyJson(result)
-            .ScrubLinesContaining("\"version\"");
+        await VerifyJson(result);
     }
 
     [Test]
@@ -69,7 +70,7 @@ public class Tests
 
         using var client = new HttpClient();
 
-        var result = await client.GetStringAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        var result = await client.GetStringAsync("https://httpcan.org/json");
 
         await Verify(result);
     }
@@ -82,7 +83,7 @@ public class Tests
     {
         public Task MethodThatDoesHttp() =>
             // Some code that does some http calls
-            client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+            client.GetAsync("https://httpcan.org/get");
     }
 
     #endregion
@@ -133,7 +134,7 @@ public class Tests
                 {
                     sizeOfResponse
                 })
-            .IgnoreMember("Expires")
+            .IgnoreMembers("Expires", "Date")
             .ScrubLinesContaining("\"version\"");
     }
 
@@ -141,8 +142,8 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var jsonResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json");
-        var ymlResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml");
+        var jsonResult = await client.GetStringAsync("https://httpcan.org/json");
+        var ymlResult = await client.GetStringAsync("https://httpcan.org/xml");
         return jsonResult.Length + ymlResult.Length;
     }
 
@@ -199,7 +200,8 @@ public class Tests
 
         await myService.MethodThatDoesHttp();
 
-        await Verify(recording.Sends);
+        await Verify(recording.Sends)
+            .IgnoreMember("Date");
 
         #endregion
     }
@@ -222,7 +224,8 @@ public class Tests
 
         await myService.MethodThatDoesHttp();
 
-        await Verify(recording.Sends);
+        await Verify(recording.Sends)
+            .IgnoreMember("Date");
 
         #endregion
     }
@@ -261,7 +264,7 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        var result = await client.GetAsync("https://httpcan.org/json");
 
         await Verify(result);
     }
@@ -297,7 +300,8 @@ public class Tests
         recording.Resume();
         await myService.MethodThatDoesHttp();
 
-        await Verify(recording.Sends);
+        await Verify(recording.Sends)
+            .ScrubInlineDateTimes("R");
 
         #endregion
     }
@@ -322,12 +326,13 @@ public class Tests
 
         var client = factory.CreateClient("name");
 
-        await client.GetAsync("https://www.google.com/");
+        await client.GetAsync("https://httpcan.org/html");
 
         recording.Resume();
-        await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        await client.GetAsync("https://httpcan.org/json");
 
-        await Verify(recording.Sends);
+        await Verify(recording.Sends)
+            .ScrubInlineDateTimes("R");
 
         #endregion
     }
@@ -337,7 +342,7 @@ public class Tests
     {
         using var _ = DiagnosticListener.AllListeners.Subscribe(new MyListener());
         using var client = new HttpClient();
-        using var response = await client.GetAsync("https://www.google.com/");
+        using var response = await client.GetAsync("https://httpcan.org/json");
         await Verify(response.StatusCode);
     }
 

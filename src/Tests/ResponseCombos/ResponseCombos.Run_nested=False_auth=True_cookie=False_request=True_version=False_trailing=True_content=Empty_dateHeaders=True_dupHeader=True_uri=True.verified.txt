@@ -2,9 +2,11 @@
   Response: {
     Status: 202 Accepted,
     Headers: {
+      Date: DateTime_1,
       dupHeader: value1,value2
     },
     TrailingHeaders: {
+      Date: DateTime_1,
       dupHeader: value1,value2
     }
   },
@@ -12,6 +14,7 @@
     Uri: https://site/path,
     Headers: {
       Authorization: {Scrubbed},
+      Date: DateTime_1,
       dupHeader: value1,value2
     }
   }

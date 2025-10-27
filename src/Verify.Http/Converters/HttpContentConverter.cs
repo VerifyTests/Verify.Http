@@ -5,7 +5,11 @@
     {
         writer.WriteStartObject();
 
-        writer.WriteMember(content, content.Headers.Simplify(), "Headers");
+        var headers = content.Headers.Simplify();
+        if (headers.Count != 0)
+        {
+            writer.WriteMember(content, headers, "Headers");
+        }
 
         WriteIfText(writer, content);
 

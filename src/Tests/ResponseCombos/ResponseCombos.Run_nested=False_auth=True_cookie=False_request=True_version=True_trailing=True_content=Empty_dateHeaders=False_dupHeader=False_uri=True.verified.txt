@@ -6,7 +6,8 @@
   Request: {
     Uri: https://site/path,
     Headers: {
-      Authorization: {Scrubbed}
+      Authorization: {Scrubbed},
+      Date: DateTime_1
     }
   }
 }

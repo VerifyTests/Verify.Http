@@ -13,6 +13,7 @@
     },
     Content: {
       Headers: {
+        Content-Length: 119,
         Content-Type: image/png
       }
     }
@@ -20,10 +21,12 @@
   Request: {
     Headers: {
       Authorization: {Scrubbed},
+      Date: DateTime_1,
       dupHeader: value1,value2
     },
     Content: {
       Headers: {
+        Content-Length: 119,
         Content-Type: image/png
       }
     }

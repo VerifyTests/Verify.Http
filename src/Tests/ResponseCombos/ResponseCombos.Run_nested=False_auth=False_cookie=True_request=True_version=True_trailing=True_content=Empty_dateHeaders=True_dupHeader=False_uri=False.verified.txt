@@ -2,15 +2,20 @@
   Response: {
     Version: 0.1,
     Status: 202 Accepted,
-    Headers: {},
+    Headers: {
+      Date: DateTime_1
+    },
     Cookies: {
       sessionId: abc123
     },
-    TrailingHeaders: {}
+    TrailingHeaders: {
+      Date: DateTime_1
+    }
   },
   Request: {
     Headers: {
-      Authorization: {Scrubbed}
+      Authorization: {Scrubbed},
+      Date: DateTime_1
     }
   }
 }

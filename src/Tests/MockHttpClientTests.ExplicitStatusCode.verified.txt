@@ -1,3 +1,0 @@
-﻿{
-  Status: 300 Multiple Choices
-}

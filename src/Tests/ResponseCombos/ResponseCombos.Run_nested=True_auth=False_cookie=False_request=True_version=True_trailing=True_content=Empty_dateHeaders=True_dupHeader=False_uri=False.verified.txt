@@ -2,7 +2,11 @@
   response: {
     Version: 0.1,
     Status: 202 Accepted,
-    Headers: {},
-    TrailingHeaders: {}
+    Headers: {
+      Date: DateTime_1
+    },
+    TrailingHeaders: {
+      Date: DateTime_1
+    }
   }
 }

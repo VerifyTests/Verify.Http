@@ -3,6 +3,7 @@
     Status: 202 Accepted,
     Content: {
       Headers: {
+        Content-Length: 119,
         Content-Type: image/png
       }
     }
@@ -10,10 +11,12 @@
   Request: {
     Uri: https://site/path,
     Headers: {
-      Authorization: {Scrubbed}
+      Authorization: {Scrubbed},
+      Date: DateTime_1
     },
     Content: {
       Headers: {
+        Content-Length: 119,
         Content-Type: image/png
       }
     }

@@ -2,6 +2,7 @@
   Response: {
     Status: 202 Accepted,
     Headers: {
+      Date: DateTime_1,
       dupHeader: value1,value2
     },
     Cookies: {
@@ -9,6 +10,7 @@
     },
     Content: {
       Headers: {
+        Content-Length: 119,
         Content-Type: image/png,
         Expires: DateTime_1,
         Last-Modified: DateTime_1
@@ -19,10 +21,12 @@
     Uri: https://site/path,
     Headers: {
       Authorization: {Scrubbed},
+      Date: DateTime_1,
       dupHeader: value1,value2
     },
     Content: {
       Headers: {
+        Content-Length: 119,
         Content-Type: image/png,
         Expires: DateTime_1,
         Last-Modified: DateTime_1

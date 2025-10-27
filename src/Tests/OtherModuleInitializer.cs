@@ -1,35 +1,19 @@
 ﻿public static class OtherModuleInitializer
 {
     [ModuleInitializer]
-    public static void Initialize()
-    {
+    public static void Initialize() =>
         VerifierSettings.IgnoreMembers(
-            "Content-Security-Policy",
-            "Content-Length",
-            "traceparent",
-            "Traceparent",
-            "X-Amzn-Trace-Id",
-            "X-GitHub-Request-Id",
-            "origin",
-            "Date",
-            "Server",
-            "X-Fastly-Request",
-            "Source-Age",
             "X-Fastly-Request-ID",
+            "X-GitHub-Request-Id",
             "X-Served-By",
-            "X-Cache-Hits",
-            "X-Served-By",
-            "X-Cache",
-            "Content-Length",
-            "RequestHeaders",
             "X-Timer",
-            "version",
+            "CF-RAY",
+            "Server-Timing",
+            "Report-To",
+            "traceparent",
+            "origin",
+            "Source-Age",
+            "X-Cache-Hits",
+            "X-Timer",
             "ETag");
-        VerifierSettings
-            .ScrubLinesContaining(
-                "Traceparent",
-                "Date",
-                "X-Amzn-Trace-Id",
-                "Content-Length");
-    }
 }

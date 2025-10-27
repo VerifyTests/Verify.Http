@@ -184,8 +184,7 @@ public class MockHttpClientTests
         var result = await client.GetAsync("https://fake/get");
 
         await Verify(result)
-            .UseParameters(mediaType)
-            .UniqueForRuntimeAndVersion();
+            .UseParameters(mediaType);
     }
 
     [Test]
@@ -201,8 +200,7 @@ public class MockHttpClientTests
                 {
                     result,
                     client
-                })
-            .UniqueForRuntimeAndVersion();
+                });
     }
 
     [TestCase("application/json")]
@@ -224,8 +222,7 @@ public class MockHttpClientTests
                     result,
                     client
                 })
-            .UseParameters(mediaType)
-            .UniqueForRuntimeAndVersion();
+            .UseParameters(mediaType);
     }
 
     [TestCase("application/json")]
@@ -248,8 +245,7 @@ public class MockHttpClientTests
                     result,
                     client
                 })
-            .UseParameters(mediaType)
-            .UniqueForRuntimeAndVersion();
+            .UseParameters(mediaType);
     }
 
     [Test]
@@ -266,8 +262,7 @@ public class MockHttpClientTests
                 {
                     result,
                     client
-                })
-            .UniqueForRuntimeAndVersion();
+                });
     }
 
     [Test]
@@ -290,8 +285,7 @@ public class MockHttpClientTests
                 {
                     result,
                     client
-                })
-            .UniqueForRuntimeAndVersion();
+                });
     }
 
     [Test]
@@ -307,8 +301,7 @@ public class MockHttpClientTests
                 {
                     result,
                     client
-                })
-            .UniqueForRuntimeAndVersion();
+                });
     }
 
     #region RecordingMockInteractions

@@ -2,12 +2,15 @@
   response: {
     Version: 0.1,
     Status: 202 Accepted,
-    Headers: {},
+    Headers: {
+      Date: DateTime_1
+    },
     Cookies: {
       sessionId: abc123
     },
     Content: {
       Headers: {
+        Content-Length: 11,
         Content-Type: text/plain; charset=utf-8,
         Expires: DateTime_1,
         Last-Modified: DateTime_1

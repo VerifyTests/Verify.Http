@@ -1,10 +1,14 @@
 ﻿{
   response: {
     Status: 202 Accepted,
-    Headers: {},
+    Headers: {
+      Date: DateTime_1
+    },
     Cookies: {
       sessionId: abc123
     },
-    TrailingHeaders: {}
+    TrailingHeaders: {
+      Date: DateTime_1
+    }
   }
 }

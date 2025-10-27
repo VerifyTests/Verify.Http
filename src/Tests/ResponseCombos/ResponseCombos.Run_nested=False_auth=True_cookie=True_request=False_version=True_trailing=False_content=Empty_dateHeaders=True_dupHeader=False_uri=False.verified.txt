@@ -1,7 +1,9 @@
 ﻿{
   Version: 0.1,
   Status: 202 Accepted,
-  Headers: {},
+  Headers: {
+    Date: DateTime_1
+  },
   Cookies: {
     sessionId: abc123
   }
