@@ -1,0 +1,14 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Cookies: {
+      sessionId: abc123
+    }
+  },
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed},
+      Date: DateTime_1
+    }
+  }
+}

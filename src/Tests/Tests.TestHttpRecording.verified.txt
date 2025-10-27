@@ -1,132 +1,112 @@
 ﻿{
   target: {
-    sizeOfResponse: 771
+    sizeOfResponse: 792
   },
   httpCall: [
     {
       Status: Created,
       Request: {
-        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
-        Headers: {}
-      },
-      Response: {
-        Status: 302 Found,
-        Headers: {
-          Access-Control-Allow-Origin: ,
-          Cache-Control: no-cache,
-          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
-          Referrer-Policy: no-referrer-when-downgrade,
-          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
-          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,X-Requested-With,Accept-Encoding,Accept,X-Requested-With,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 0
-        },
-        ContentHeaders: {
-          Content-Type: text/html; charset=utf-8
-        },
-        ContentString: 
-      }
-    },
-    {
-      Status: Created,
-      Request: {
-        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
+        Uri: https://httpcan.org/json,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Accept-Ranges: bytes,
-          Access-Control-Allow-Origin: *,
-          Cache-Control: max-age=300,
+          Access-Control-Allow-Credentials: true,
+          Alt-Svc: h3=":443",
+          cf-cache-status: DYNAMIC,
           Connection: keep-alive,
-          Cross-Origin-Resource-Policy: cross-origin,
-          Strict-Transport-Security: max-age=31536000,
-          Vary: Authorization,Accept-Encoding,
-          Via: 1.1 varnish,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 1; mode=block
+          Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+          Server: cloudflare,
+          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
         },
         ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8
+          Content-Length: 274,
+          Content-Type: application/json
         },
-        ContentString:
-{
-  "sdk": {
-    "allowPrerelease": true,
-    "rollForward": "latestFeature"
-  }
-}
+        ContentStringParsed: {
+          slideshow: {
+            author: Yours Truly,
+            date: date of publication,
+            slides: [
+              {
+                title: Wake up to WonderWidgets!,
+                type: all
+              },
+              {
+                items: [
+                  Why <em>WonderWidgets</em> are great,
+                  Who <em>buys</em> WonderWidgets
+                ],
+                title: Overview,
+                type: all
+              }
+            ],
+            title: Sample Slide Show
+          }
+        }
       }
     },
     {
       Status: Created,
       Request: {
-        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml,
-        Headers: {}
-      },
-      Response: {
-        Status: 302 Found,
-        Headers: {
-          Access-Control-Allow-Origin: ,
-          Cache-Control: no-cache,
-          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
-          Referrer-Policy: no-referrer-when-downgrade,
-          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
-          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,X-Requested-With,Accept-Encoding,Accept,X-Requested-With,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 0
-        },
-        ContentHeaders: {
-          Content-Type: text/html; charset=utf-8
-        },
-        ContentString: 
-      }
-    },
-    {
-      Status: Created,
-      Request: {
-        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
+        Uri: https://httpcan.org/xml,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Accept-Ranges: bytes,
-          Access-Control-Allow-Origin: *,
-          Cache-Control: max-age=300,
+          Access-Control-Allow-Credentials: true,
+          Alt-Svc: h3=":443",
+          cf-cache-status: DYNAMIC,
           Connection: keep-alive,
-          Cross-Origin-Resource-Policy: cross-origin,
-          Strict-Transport-Security: max-age=31536000,
-          Vary: Authorization,Accept-Encoding,
-          Via: 1.1 varnish,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 1; mode=block
+          Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+          Server: cloudflare,
+          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
         },
         ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8
+          Content-Length: 518,
+          Content-Type: application/xml
         },
-        ContentString:
-image: Visual Studio 2022
-environment:
-  DOTNET_NOLOGO: true
-  DOTNET_CLI_TELEMETRY_OPTOUT: true
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-build_script:
-- pwsh: |
-    Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
-    ./dotnet-install.ps1 -JSonFile src/global.json -Architecture x64 -InstallDir 'C:\Program Files\dotnet'
-- dotnet build src --configuration Release
-- dotnet test src --configuration Release --no-build --no-restore --filter Category!=Integration
-test: off
-on_failure:
-  - ps: Get-ChildItem *.received.* -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-artifacts:
-- path: nugets\*.nupkg
+        ContentStringParsed: {
+          ?xml: {
+            @version: 1.0,
+            @encoding: us-ascii
+          }/*  A SAMPLE set of slides  */,
+          slideshow: {
+            @title: Sample Slide Show,
+            @date: Date of publication,
+            @author: Yours Truly,
+            #comment: [],
+            slide: [
+              {
+                @type: all,
+                title: Wake up to WonderWidgets!
+              },
+              {
+                @type: all,
+                title: Overview,
+                item: [
+                  {
+                    #text: [
+                      Why ,
+                       are great
+                    ],
+                    em: WonderWidgets
+                  },
+                  null,
+                  {
+                    #text: [
+                      Who ,
+                       WonderWidgets
+                    ],
+                    em: buys
+                  }
+                ]
+              }
+            ]
+          }
+        }
       }
     }
   ]

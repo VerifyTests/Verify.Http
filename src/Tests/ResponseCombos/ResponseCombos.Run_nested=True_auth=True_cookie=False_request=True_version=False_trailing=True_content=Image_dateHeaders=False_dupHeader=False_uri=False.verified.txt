@@ -1,0 +1,11 @@
+﻿{
+  response: {
+    Status: 202 Accepted,
+    Content: {
+      Headers: {
+        Content-Length: 119,
+        Content-Type: image/png
+      }
+    }
+  }
+}

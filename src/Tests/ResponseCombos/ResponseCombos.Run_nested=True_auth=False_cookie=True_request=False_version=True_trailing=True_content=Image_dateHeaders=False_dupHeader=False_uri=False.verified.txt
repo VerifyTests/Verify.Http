@@ -1,0 +1,15 @@
+﻿{
+  response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Cookies: {
+      sessionId: abc123
+    },
+    Content: {
+      Headers: {
+        Content-Length: 119,
+        Content-Type: image/png
+      }
+    }
+  }
+}

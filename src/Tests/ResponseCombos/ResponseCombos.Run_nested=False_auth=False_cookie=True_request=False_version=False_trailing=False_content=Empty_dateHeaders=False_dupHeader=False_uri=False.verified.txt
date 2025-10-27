@@ -1,0 +1,6 @@
+﻿{
+  Status: 202 Accepted,
+  Cookies: {
+    sessionId: abc123
+  }
+}

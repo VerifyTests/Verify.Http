@@ -54,13 +54,13 @@ public async Task ScrubHttpTextResponse()
 {
     using var client = new HttpClient();
 
-    using var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify.Http/refs/heads/main/src/sample.html");
+    using var result = await client.GetAsync("https://httpcan.org/html");
 
     await Verify(result)
-        .ScrubHttpTextResponse(_ => _.Replace("This is the title of the webpage", "New title"));
+        .ScrubHttpTextResponse(_ => _.Replace("Herman Melville - Moby-Dick", "New title"));
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L22-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L25-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -90,12 +90,12 @@ public async Task HttpResponse()
 {
     using var client = new HttpClient();
 
-    var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+    var result = await client.GetAsync("https://httpcan.org/json");
 
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L272-L284' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L262-L274' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -107,50 +107,45 @@ public async Task HttpResponse()
 {
   Status: 200 OK,
   Headers: {
-    Accept-Ranges: bytes,
-    Access-Control-Allow-Origin: *,
-    Cache-Control: max-age=300,
+    Access-Control-Allow-Credentials: true,
+    Alt-Svc: h3=":443",
+    cf-cache-status: DYNAMIC,
     Connection: keep-alive,
-    Cross-Origin-Resource-Policy: cross-origin,
-    Strict-Transport-Security: max-age=31536000,
-    Vary: Authorization,Accept-Encoding,
-    Via: 1.1 varnish,
-    X-Content-Type-Options: nosniff,
-    X-Frame-Options: deny,
-    X-XSS-Protection: 1; mode=block
+    Date: DateTime_1,
+    Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+    Server: cloudflare,
+    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
   },
   Content: {
     Headers: {
-      Content-Type: text/plain; charset=utf-8,
-      Expires: DateTime_1
+      Content-Length: 274,
+      Content-Type: application/json
     },
-    Value:
-MIT License
-
-Copyright (c) .NET Foundation and Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+    Value: {
+      slideshow: {
+        author: Yours Truly,
+        date: date of publication,
+        slides: [
+          {
+            title: Wake up to WonderWidgets!,
+            type: all
+          },
+          {
+            items: [
+              Why <em>WonderWidgets</em> are great,
+              Who <em>buys</em> WonderWidgets
+            ],
+            title: Overview,
+            type: all
+          }
+        ],
+        title: Sample Slide Show
+      }
+    }
   }
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L45' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -166,13 +161,16 @@ public async Task IgnoreHeader()
 {
     using var client = new HttpClient();
 
-    using var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+    using var result = await client.GetAsync("https://httpcan.org/get");
 
     await Verify(result)
-        .IgnoreMembers("Server");
+        .IgnoreMembers(
+            "Server",
+            "Content-Length",
+            "Access-Control-Allow-Credentials");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L7-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-IgnoreHeader' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L7-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-IgnoreHeader' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -194,10 +192,10 @@ public class MyService(HttpClient client)
 {
     public Task MethodThatDoesHttp() =>
         // Some code that does some http calls
-        client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+        client.GetAsync("https://httpcan.org/status/200");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L77-L88' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L80-L91' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -221,9 +219,10 @@ var myService = provider.GetRequiredService<MyService>();
 
 await myService.MethodThatDoesHttp();
 
-await Verify(recording.Sends);
+await Verify(recording.Sends)
+    .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L211-L228' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L214-L232' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -246,9 +245,10 @@ var myService = provider.GetRequiredService<MyService>();
 
 await myService.MethodThatDoesHttp();
 
-await Verify(recording.Sends);
+await Verify(recording.Sends)
+    .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L189-L205' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L191-L208' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -259,49 +259,23 @@ await Verify(recording.Sends);
 ```txt
 [
   {
-    RequestUri: https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt,
+    RequestUri: https://httpcan.org/status/200,
     RequestMethod: GET,
     ResponseStatus: OK 200,
     ResponseHeaders: {
-      Accept-Ranges: bytes,
-      Access-Control-Allow-Origin: *,
-      Cache-Control: max-age=300,
+      Access-Control-Allow-Credentials: true,
+      Alt-Svc: h3=":443",
+      cf-cache-status: DYNAMIC,
       Connection: keep-alive,
-      Cross-Origin-Resource-Policy: cross-origin,
-      Strict-Transport-Security: max-age=31536000,
-      Vary: Authorization|Accept-Encoding,
-      Via: 1.1 varnish,
-      X-Content-Type-Options: nosniff,
-      X-Frame-Options: deny,
-      X-XSS-Protection: 1; mode=block
+      Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+      Server: cloudflare,
+      Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers
     },
-    ResponseContent:
-MIT License
-
-Copyright (c) .NET Foundation and Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+    ResponseContent: {"status":200}
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L17' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -328,9 +302,10 @@ await myService.MethodThatDoesHttp();
 recording.Resume();
 await myService.MethodThatDoesHttp();
 
-await Verify(recording.Sends);
+await Verify(recording.Sends)
+    .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L294-L317' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L284-L308' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -353,14 +328,15 @@ var factory = provider.GetRequiredService<IHttpClientFactory>();
 
 var client = factory.CreateClient("name");
 
-await client.GetAsync("https://www.google.com/");
+await client.GetAsync("https://httpcan.org/html");
 
 recording.Resume();
-await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/license.txt");
+await client.GetAsync("https://httpcan.org/json");
 
-await Verify(recording.Sends);
+await Verify(recording.Sends)
+    .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L323-L347' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L314-L339' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -390,7 +366,7 @@ public async Task TestHttpRecording()
             {
                 sizeOfResponse
             })
-        .IgnoreMember("Expires")
+        .IgnoreMembers("Expires", "Date")
         .ScrubLinesContaining("\"version\"");
 }
 
@@ -398,12 +374,12 @@ static async Task<int> MethodThatDoesHttpCalls()
 {
     using var client = new HttpClient();
 
-    var jsonResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json");
-    var ymlResult = await client.GetStringAsync("https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml");
+    var jsonResult = await client.GetStringAsync("https://httpcan.org/json");
+    var ymlResult = await client.GetStringAsync("https://httpcan.org/xml");
     return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L122-L149' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L125-L152' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -416,139 +392,119 @@ The requests/response pairs will be appended to the verified file.
 ```txt
 {
   target: {
-    sizeOfResponse: 771
+    sizeOfResponse: 792
   },
   httpCall: [
     {
       Status: Created,
       Request: {
-        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
-        Headers: {}
-      },
-      Response: {
-        Status: 302 Found,
-        Headers: {
-          Access-Control-Allow-Origin: ,
-          Cache-Control: no-cache,
-          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
-          Referrer-Policy: no-referrer-when-downgrade,
-          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
-          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,X-Requested-With,Accept-Encoding,Accept,X-Requested-With,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 0
-        },
-        ContentHeaders: {
-          Content-Type: text/html; charset=utf-8
-        },
-        ContentString: 
-      }
-    },
-    {
-      Status: Created,
-      Request: {
-        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
+        Uri: https://httpcan.org/json,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Accept-Ranges: bytes,
-          Access-Control-Allow-Origin: *,
-          Cache-Control: max-age=300,
+          Access-Control-Allow-Credentials: true,
+          Alt-Svc: h3=":443",
+          cf-cache-status: DYNAMIC,
           Connection: keep-alive,
-          Cross-Origin-Resource-Policy: cross-origin,
-          Strict-Transport-Security: max-age=31536000,
-          Vary: Authorization,Accept-Encoding,
-          Via: 1.1 varnish,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 1; mode=block
+          Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+          Server: cloudflare,
+          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
         },
         ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8
+          Content-Length: 274,
+          Content-Type: application/json
         },
-        ContentString:
-{
-  "sdk": {
-    "allowPrerelease": true,
-    "rollForward": "latestFeature"
-  }
-}
+        ContentStringParsed: {
+          slideshow: {
+            author: Yours Truly,
+            date: date of publication,
+            slides: [
+              {
+                title: Wake up to WonderWidgets!,
+                type: all
+              },
+              {
+                items: [
+                  Why <em>WonderWidgets</em> are great,
+                  Who <em>buys</em> WonderWidgets
+                ],
+                title: Overview,
+                type: all
+              }
+            ],
+            title: Sample Slide Show
+          }
+        }
       }
     },
     {
       Status: Created,
       Request: {
-        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml,
-        Headers: {}
-      },
-      Response: {
-        Status: 302 Found,
-        Headers: {
-          Access-Control-Allow-Origin: ,
-          Cache-Control: no-cache,
-          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
-          Referrer-Policy: no-referrer-when-downgrade,
-          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
-          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,X-Requested-With,Accept-Encoding,Accept,X-Requested-With,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 0
-        },
-        ContentHeaders: {
-          Content-Type: text/html; charset=utf-8
-        },
-        ContentString: 
-      }
-    },
-    {
-      Status: Created,
-      Request: {
-        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
+        Uri: https://httpcan.org/xml,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Accept-Ranges: bytes,
-          Access-Control-Allow-Origin: *,
-          Cache-Control: max-age=300,
+          Access-Control-Allow-Credentials: true,
+          Alt-Svc: h3=":443",
+          cf-cache-status: DYNAMIC,
           Connection: keep-alive,
-          Cross-Origin-Resource-Policy: cross-origin,
-          Strict-Transport-Security: max-age=31536000,
-          Vary: Authorization,Accept-Encoding,
-          Via: 1.1 varnish,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 1; mode=block
+          Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+          Server: cloudflare,
+          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
         },
         ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8
+          Content-Length: 518,
+          Content-Type: application/xml
         },
-        ContentString:
-image: Visual Studio 2022
-environment:
-  DOTNET_NOLOGO: true
-  DOTNET_CLI_TELEMETRY_OPTOUT: true
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-build_script:
-- pwsh: |
-    Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
-    ./dotnet-install.ps1 -JSonFile src/global.json -Architecture x64 -InstallDir 'C:\Program Files\dotnet'
-- dotnet build src --configuration Release
-- dotnet test src --configuration Release --no-build --no-restore --filter Category!=Integration
-test: off
-on_failure:
-  - ps: Get-ChildItem *.received.* -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-artifacts:
-- path: nugets\*.nupkg
+        ContentStringParsed: {
+          ?xml: {
+            @version: 1.0,
+            @encoding: us-ascii
+          }/*  A SAMPLE set of slides  */,
+          slideshow: {
+            @title: Sample Slide Show,
+            @date: Date of publication,
+            @author: Yours Truly,
+            #comment: [],
+            slide: [
+              {
+                @type: all,
+                title: Wake up to WonderWidgets!
+              },
+              {
+                @type: all,
+                title: Overview,
+                item: [
+                  {
+                    #text: [
+                      Why ,
+                       are great
+                    ],
+                    em: WonderWidgets
+                  },
+                  null,
+                  {
+                    #text: [
+                      Who ,
+                       WonderWidgets
+                    ],
+                    em: buys
+                  }
+                ]
+              }
+            ]
+          }
+        }
       }
     }
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L133' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L113' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -593,7 +549,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L152-L182' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L154-L184' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -603,16 +559,14 @@ public async Task TestHttpRecordingExplicit()
 <a id='snippet-Tests.TestHttpRecordingExplicit.verified.txt'></a>
 ```txt
 {
-  responseSize: 771,
+  responseSize: 792,
   httpCalls: [
-    https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
-    https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
-    https://github.com/VerifyTests/Verify.Http/raw/main/src/appveyor.yml,
-    https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml
+    https://httpcan.org/json,
+    https://httpcan.org/xml
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecordingExplicit.verified.txt#L1-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecordingExplicit.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecordingExplicit.verified.txt#L1-L7' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecordingExplicit.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -648,11 +602,10 @@ public async Task DefaultContent()
 <a id='snippet-MockHttpClientTests.DefaultContent.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 200 OK
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.DefaultContent.verified.txt#L1-L4' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.DefaultContent.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.DefaultContent.verified.txt#L1-L3' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.DefaultContent.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -731,6 +684,7 @@ public async Task ExplicitContent()
   Status: 200 OK,
   Content: {
     Headers: {
+      Content-Length: 12,
       Content-Type: application/json; charset=utf-8
     },
     Value: {
@@ -739,7 +693,7 @@ public async Task ExplicitContent()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitContent.verified.txt#L1-L11' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitContent.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitContent.verified.txt#L1-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitContent.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -770,11 +724,10 @@ public async Task ExplicitStatusCode()
 <a id='snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt'></a>
 ```txt
 {
-  Version: 1.1,
   Status: 300 Multiple Choices
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitStatusCode.verified.txt#L1-L4' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitStatusCode.verified.txt#L1-L3' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitStatusCode.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -812,13 +765,14 @@ public async Task ExplicitResponse()
   Status: 200 OK,
   Content: {
     Headers: {
+      Content-Length: 5,
       Content-Type: text/plain; charset=utf-8
     },
     Value: Hello
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L9' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ExplicitResponse.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ExplicitResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -866,6 +820,7 @@ public async Task ResponseBuilder()
     Status: 200 OK,
     Content: {
       Headers: {
+        Content-Length: 26,
         Content-Type: text/plain; charset=utf-8
       },
       Value: Hello to https://fake/get1
@@ -875,6 +830,7 @@ public async Task ResponseBuilder()
     Status: 200 OK,
     Content: {
       Headers: {
+        Content-Length: 26,
         Content-Type: text/plain; charset=utf-8
       },
       Value: Hello to https://fake/get2
@@ -882,7 +838,7 @@ public async Task ResponseBuilder()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ResponseBuilder.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseBuilder.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -930,6 +886,7 @@ public async Task EnumerableResponses()
     Status: 200 OK,
     Content: {
       Headers: {
+        Content-Length: 5,
         Content-Type: text/plain; charset=utf-8
       },
       Value: Hello
@@ -939,6 +896,7 @@ public async Task EnumerableResponses()
     Status: 200 OK,
     Content: {
       Headers: {
+        Content-Length: 5,
         Content-Type: text/plain; charset=utf-8
       },
       Value: World
@@ -946,7 +904,7 @@ public async Task EnumerableResponses()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -970,7 +928,7 @@ public async Task RecordingMockInteractions()
     await Verify();
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L314-L328' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L307-L321' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

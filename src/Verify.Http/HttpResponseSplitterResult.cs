@@ -14,15 +14,16 @@
             targets.Add(new(extension, content.ReadAsStream()));
         }
 
+        if (instance.RequestMessage is null)
+        {
+            return new(instance, targets);
+        }
+
         return new(
             new
             {
-                instance.Version,
-                Status = instance.StatusText(),
-                Cookies = instance.Headers.Cookies(),
-                Headers = instance.Headers.NotCookies(),
-                TrailingHeaders = instance.TrailingHeaders.Simplify(),
-                instance.RequestMessage
+                Response = instance,
+                Request = instance.RequestMessage
             },
             targets);
     }

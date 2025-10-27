@@ -1,0 +1,13 @@
+﻿{
+  response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Headers: {
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    },
+    Cookies: {
+      sessionId: abc123
+    }
+  }
+}

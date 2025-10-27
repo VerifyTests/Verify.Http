@@ -1,0 +1,6 @@
+﻿{
+  response: {
+    Version: 0.1,
+    Status: 202 Accepted
+  }
+}

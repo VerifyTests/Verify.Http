@@ -1,0 +1,11 @@
+﻿{
+  response: {
+    Status: 202 Accepted,
+    Headers: {
+      Date: DateTime_1
+    },
+    TrailingHeaders: {
+      Date: DateTime_1
+    }
+  }
+}

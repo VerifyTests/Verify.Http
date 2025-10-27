@@ -1,0 +1,21 @@
+﻿{
+  result: {
+    Status: 200 OK
+  },
+  client: {
+    Calls: [
+      {
+        Request: {
+          Method: POST,
+          Uri: https://fake/post,
+          ContentHeaders: {
+            Content-Length: 11,
+            Content-Type: application/json
+          },
+          ContentString: the content
+        },
+        Response: 200 Ok
+      }
+    ]
+  }
+}

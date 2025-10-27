@@ -1,0 +1,15 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    }
+  },
+  Request: {
+    Headers: {
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    }
+  }
+}

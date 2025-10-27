@@ -1,0 +1,16 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Cookies: {
+      sessionId: abc123
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      Authorization: {Scrubbed},
+      Date: DateTime_1
+    }
+  }
+}

@@ -1,69 +1,68 @@
 ﻿{
   target: {
-    sdk: {
-      allowPrerelease: true,
-      rollForward: latestFeature
+    slideshow: {
+      author: Yours Truly,
+      date: date of publication,
+      slides: [
+        {
+          title: Wake up to WonderWidgets!,
+          type: all
+        },
+        {
+          items: [
+            Why <em>WonderWidgets</em> are great,
+            Who <em>buys</em> WonderWidgets
+          ],
+          title: Overview,
+          type: all
+        }
+      ],
+      title: Sample Slide Show
     }
   },
-  httpCall: [
-    {
-      Status: Created,
-      Request: {
-        Uri: https://github.com/VerifyTests/Verify.Http/raw/main/src/global.json,
-        Headers: {}
-      },
-      Response: {
-        Status: 302 Found,
-        Headers: {
-          Access-Control-Allow-Origin: ,
-          Cache-Control: no-cache,
-          Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
-          Referrer-Policy: no-referrer-when-downgrade,
-          Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
-          Vary: X-PJAX,X-PJAX-Container,Turbo-Visit,Turbo-Frame,X-Requested-With,Accept-Encoding,Accept,X-Requested-With,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 0
-        },
-        ContentHeaders: {
-          Content-Type: text/html; charset=utf-8
-        },
-        ContentString: 
-      }
+  httpCall: {
+    Status: Created,
+    Request: {
+      Uri: https://httpcan.org/json,
+      Headers: {}
     },
-    {
-      Status: Created,
-      Request: {
-        Uri: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
-        Headers: {}
+    Response: {
+      Status: 200 OK,
+      Headers: {
+        Access-Control-Allow-Credentials: true,
+        Alt-Svc: h3=":443",
+        cf-cache-status: DYNAMIC,
+        Connection: keep-alive,
+        Date: DateTime_1,
+        Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+        Server: cloudflare,
+        Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
       },
-      Response: {
-        Status: 200 OK,
-        Headers: {
-          Accept-Ranges: bytes,
-          Access-Control-Allow-Origin: *,
-          Cache-Control: max-age=300,
-          Connection: keep-alive,
-          Cross-Origin-Resource-Policy: cross-origin,
-          Strict-Transport-Security: max-age=31536000,
-          Vary: Authorization,Accept-Encoding,
-          Via: 1.1 varnish,
-          X-Content-Type-Options: nosniff,
-          X-Frame-Options: deny,
-          X-XSS-Protection: 1; mode=block
-        },
-        ContentHeaders: {
-          Content-Type: text/plain; charset=utf-8,
-          Expires: DateTime_1
-        },
-        ContentString:
-{
-  "sdk": {
-    "allowPrerelease": true,
-    "rollForward": "latestFeature"
-  }
-}
+      ContentHeaders: {
+        Content-Length: 274,
+        Content-Type: application/json
+      },
+      ContentStringParsed: {
+        slideshow: {
+          author: Yours Truly,
+          date: date of publication,
+          slides: [
+            {
+              title: Wake up to WonderWidgets!,
+              type: all
+            },
+            {
+              items: [
+                Why <em>WonderWidgets</em> are great,
+                Who <em>buys</em> WonderWidgets
+              ],
+              title: Overview,
+              type: all
+            }
+          ],
+          title: Sample Slide Show
+        }
       }
     }
-  ]
+  }
 }

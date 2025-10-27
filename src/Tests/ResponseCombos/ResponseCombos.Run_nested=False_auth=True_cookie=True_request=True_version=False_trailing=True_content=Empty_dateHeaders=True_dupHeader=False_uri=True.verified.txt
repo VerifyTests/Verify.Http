@@ -1,0 +1,21 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      Date: DateTime_1
+    },
+    Cookies: {
+      sessionId: abc123
+    },
+    TrailingHeaders: {
+      Date: DateTime_1
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      Authorization: {Scrubbed},
+      Date: DateTime_1
+    }
+  }
+}

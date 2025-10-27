@@ -1,32 +1,45 @@
 ﻿{
   Status: 200 OK,
   Headers: {
-    Accept-Ranges: bytes,
-    Access-Control-Allow-Origin: *,
-    Cache-Control: max-age=300,
+    Access-Control-Allow-Credentials: true,
+    Alt-Svc: h3=":443",
+    cf-cache-status: DYNAMIC,
     Connection: keep-alive,
-    Cross-Origin-Resource-Policy: cross-origin,
-    Strict-Transport-Security: max-age=31536000,
-    Vary: Authorization,Accept-Encoding,
-    Via: 1.1 varnish,
-    X-Content-Type-Options: nosniff,
-    X-Frame-Options: deny,
-    X-XSS-Protection: 1; mode=block
+    Date: DateTime_1,
+    Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
+    Server: cloudflare,
+    Transfer-Encoding: chunked,
+    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,accept-encoding
   },
   Content: {
     Headers: {
-      Content-Type: text/plain; charset=utf-8,
-      Expires: DateTime_1
+      Content-Length: 4057,
+      Content-Type: text/html; charset=utf-8
     },
     Value:
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <title>New title!</title>
   </head>
   <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
-  </body>
+      <h1>New title</h1>
+
+      <div>
+        <p>
+          Availing himself of the mild, summer-cool weather that now reigned in these latitudes, and in preparation for the peculiarly active pursuits shortly to be anticipated, Perth, the begrimed, blistered old blacksmith, had not removed his portable forge to the hold again, after concluding his contributory work for Ahab's leg, but still retained it on deck, fast lashed to ringbolts by the foremast; being now almost incessantly invoked by the headsmen, and harpooneers, and bowsmen to do some little job for them; altering, or repairing, or new shaping their various weapons and boat furniture. Often he would be surrounded by an eager circle, all waiting to be served; holding boat-spades, pike-heads, harpoons, and lances, and jealously watching his every sooty movement, as he toiled. Nevertheless, this old man's was a patient hammer wielded by a patient arm. No murmur, no impatience, no petulance did come from him. Silent, slow, and solemn; bowing over still further his chronically broken back, he toiled away, as if toil were life itself, and the heavy beating of his hammer the heavy beating of his heart. And so it was.—Most miserable!
+        </p>
+        <p>
+          A peculiar walk in this old man, a certain slight but painful appearing yawing in his gait, had at an early period of the voyage excited the curiosity of the mariners. And to the importunity of their persisted questionings he had finally given in; and so it came to pass that every one now knew the shameful story of his wretched fate.
+        </p>
+        <p>
+          Belated, and not innocently, one bitter winter's midnight, on the road running between two country towns, the blacksmith half-stupidly felt the deadly numbness stealing over him, and sought refuge in a leaning, dilapidated barn. The issue was, the loss of the extremities of both feet. Out of this revelation, part by part, at last came out the four acts of the gladness, and the one long, and as yet uncatastrophied fifth act of the grief of his life's drama.
+        </p>
+        <p>
+          He was an old man, who, at the age of nearly sixty, had postponedly encountered that thing in sorrow's technicals called ruin. He had been an artisan of famed excellence, and with plenty to do; owned a house and garden; embraced a youthful, daughter-like, loving wife, and three blithe, ruddy children; every Sunday went to a cheerful-looking church, planted in a grove. But one night, under cover of darkness, and further concealed in a most cunning disguisement, a desperate burglar slid into his happy home, and robbed them all of everything. And darker yet to tell, the blacksmith himself did ignorantly conduct this burglar into his family's heart. It was the Bottle Conjuror! Upon the opening of that fatal cork, forth flew the fiend, and shrivelled up his home. Now, for prudent, most wise, and economic reasons, the blacksmith's shop was in the basement of his dwelling, but with a separate entrance to it; so that always had the young and loving healthy wife listened with no unhappy nervousness, but with vigorous pleasure, to the stout ringing of her young-armed old husband's hammer; whose reverberations, muffled by passing into her ears the sweet home sounds, came to her not ungratefully in the roarings of the forge; only before that, and after that, the forge was but an uncomfortable part of this old man's story.
+        </p>
+      </div>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"13dae3fae7df41c8b1cbee729c54b565","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
 </html>
   }
 }
