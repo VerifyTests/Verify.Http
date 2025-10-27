@@ -20,7 +20,6 @@
         Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
       },
       ContentHeaders: {
-        Content-Length: 251,
         Content-Type: application/json
       },
       ContentStringParsed: {

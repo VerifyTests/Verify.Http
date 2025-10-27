@@ -16,6 +16,7 @@ public class Tests
         await Verify(result)
             .IgnoreMembers(
                 "Server",
+                "Content-Length",
                 "Access-Control-Allow-Credentials");
     }
 
@@ -48,7 +49,8 @@ public class Tests
         };
         Recording.Start();
         var result = await client.GetAsync("https://httpcan.org/get");
-        await Verify();
+        await Verify()
+            .IgnoreMember("Content-Length");
     }
 
     [Test]
