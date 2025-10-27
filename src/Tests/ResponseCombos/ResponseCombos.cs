@@ -47,8 +47,10 @@ public class ResponseCombos
         };
         if (dateHeaders)
         {
+            // ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
             response.Content?.Headers.Expires = dateHeader;
             response.Content?.Headers.LastModified = dateHeader;
+            // ReSharper restore ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
         }
 
         AddHeaders(dupHeader, response.Headers);
@@ -84,7 +86,7 @@ public class ResponseCombos
                 Content = BuildContent(content)
             };
 
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("authScheme", "authParam");
+            requestMessage.Headers.Authorization = new("authScheme", "authParam");
             if (uri)
             {
                 requestMessage.RequestUri = new("https://site/path");
