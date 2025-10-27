@@ -1,0 +1,15 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Headers: {
+      Authorization: {Scrubbed}
+    },
+    Content: {
+      Headers: {
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}
