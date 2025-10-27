@@ -85,7 +85,7 @@ public class Tests
     {
         public Task MethodThatDoesHttp() =>
             // Some code that does some http calls
-            client.GetAsync("https://httpcan.org/get");
+            client.GetAsync("https://httpcan.org/status/200");
     }
 
     #endregion

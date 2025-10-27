@@ -192,7 +192,7 @@ public class MyService(HttpClient client)
 {
     public Task MethodThatDoesHttp() =>
         // Some code that does some http calls
-        client.GetAsync("https://httpcan.org/get");
+        client.GetAsync("https://httpcan.org/status/200");
 }
 ```
 <sup><a href='/src/Tests/Tests.cs#L80-L91' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
