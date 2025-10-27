@@ -15,7 +15,7 @@ public class ResponseCombos
         [Values] bool auth,
         [Values] bool cookie,
         [Values] bool request,
-        [Values] bool defvaultVersion,
+        [Values] bool version,
         [Values] bool trailing,
         [Values] ContentType content,
         [Values] bool dateHeaders,
@@ -33,11 +33,7 @@ public class ResponseCombos
             AddHeaders(dupHeader, dateHeaders, auth, cookie, response.TrailingHeaders);
         }
 
-        if (defvaultVersion)
-        {
-            response.Version = HttpExtensions.defaultRequestVersion;
-        }
-        else
+        if (version)
         {
             response.Version = new(0, 1);
         }

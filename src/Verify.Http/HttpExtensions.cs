@@ -35,7 +35,7 @@ static class HttpExtensions
         defaultRequestVersionPolicy = request.VersionPolicy;
     }
 
-    internal static Version defaultRequestVersion;
+    static Version defaultRequestVersion;
     static HttpVersionPolicy defaultRequestVersionPolicy;
 
     public static (string? content, object? prettyContent) TryReadStringContent(this HttpContent? content)
