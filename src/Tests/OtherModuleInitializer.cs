@@ -4,6 +4,7 @@
     public static void Initialize()
     {
         VerifierSettings.IgnoreMembers(
+            "Content-Security-Policy",
             "Content-Length",
             "traceparent",
             "Traceparent",
