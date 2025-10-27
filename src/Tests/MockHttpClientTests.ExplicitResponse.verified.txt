@@ -1,0 +1,10 @@
+﻿{
+  Status: 200 OK,
+  Content: {
+    Headers: {
+      Content-Length: 5,
+      Content-Type: text/plain; charset=utf-8
+    },
+    Value: Hello
+  }
+}

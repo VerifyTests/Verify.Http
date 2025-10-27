@@ -1,0 +1,16 @@
+﻿{
+  result: {
+    Status: 200 OK
+  },
+  client: {
+    Calls: [
+      {
+        Request: {
+          Method: POST,
+          Uri: https://fake/post
+        },
+        Response: 200 Ok
+      }
+    ]
+  }
+}

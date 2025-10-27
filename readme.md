@@ -266,7 +266,6 @@ await Verify(recording.Sends)
       Alt-Svc: h3=":443",
       cf-cache-status: DYNAMIC,
       Connection: keep-alive,
-      Date: Mon, 27 Oct 2025 09:54:27 GMT,
       Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
       Server: cloudflare,
       Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers
@@ -275,7 +274,7 @@ await Verify(recording.Sends)
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L17' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -408,7 +407,6 @@ The requests/response pairs will be appended to the verified file.
           Alt-Svc: h3=":443",
           cf-cache-status: DYNAMIC,
           Connection: keep-alive,
-          Date: DateTime_1,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
           Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
@@ -453,7 +451,6 @@ The requests/response pairs will be appended to the verified file.
           Alt-Svc: h3=":443",
           cf-cache-status: DYNAMIC,
           Connection: keep-alive,
-          Date: DateTime_1,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
           Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
@@ -506,7 +503,7 @@ The requests/response pairs will be appended to the verified file.
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L115' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L113' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -930,7 +927,7 @@ public async Task RecordingMockInteractions()
     await Verify();
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L314-L328' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L307-L321' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

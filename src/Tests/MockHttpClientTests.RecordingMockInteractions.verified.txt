@@ -1,0 +1,12 @@
+﻿{
+  httpCall: [
+    {
+      Request: https://fake/getOne,
+      Response: 200 Ok
+    },
+    {
+      Request: https://fake/getTwo,
+      Response: 200 Ok
+    }
+  ]
+}

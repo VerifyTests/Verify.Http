@@ -1,0 +1,11 @@
+﻿{
+  result: ,
+  client: {
+    Calls: [
+      {
+        Request: https://fake/get,
+        Response: 200 Ok
+      }
+    ]
+  }
+}
