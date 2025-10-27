@@ -1,6 +1,6 @@
 ﻿[
   {
-    RequestUri: https://httpcan.org/json,
+    RequestUri: https://httpcan.org/status/200,
     RequestMethod: GET,
     ResponseStatus: OK 200,
     ResponseHeaders: {
@@ -13,6 +13,6 @@
       Server: cloudflare,
       Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers
     },
-    ResponseContent: {"slideshow":{"author":"Yours Truly","date":"date of publication","slides":[{"title":"Wake up to WonderWidgets!","type":"all"},{"items":["Why <em>WonderWidgets</em> are great","Who <em>buys</em> WonderWidgets"],"title":"Overview","type":"all"}],"title":"Sample Slide Show"}}
+    ResponseContent: {"status":200}
   }
 ]
