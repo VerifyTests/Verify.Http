@@ -3,11 +3,15 @@
 public class MockHttpHandler :
     DelegatingHandler
 {
+    bool recording;
     ConcurrentQueue<HttpCall> calls = [];
     Func<HttpRequestMessage, HttpResponseMessage> builder;
 
-    public MockHttpHandler(Func<HttpRequestMessage, HttpResponseMessage> responseBuilder) =>
+    public MockHttpHandler(Func<HttpRequestMessage, HttpResponseMessage> responseBuilder, bool recording = false)
+    {
         builder = responseBuilder;
+        this.recording = recording;
+    }
 
     ConcurrentBag<IDisposable> disposables = [];
 
@@ -21,8 +25,9 @@ public class MockHttpHandler :
         base.Dispose(disposing);
     }
 
-    public MockHttpHandler(IEnumerable<HttpResponseMessage> responses)
+    public MockHttpHandler(IEnumerable<HttpResponseMessage> responses, bool recording = false)
     {
+        this.recording = recording;
         var enumerator = responses.GetEnumerator();
         disposables.Add(enumerator);
         builder = _ =>
@@ -37,24 +42,39 @@ public class MockHttpHandler :
         };
     }
 
-    public MockHttpHandler(HttpStatusCode status = HttpStatusCode.OK) =>
+    public MockHttpHandler(HttpStatusCode status = HttpStatusCode.OK, bool recording = false)
+    {
+        this.recording = recording;
         builder = _ => new(status);
+    }
 
-    public MockHttpHandler(HttpResponseMessage response) =>
+    public MockHttpHandler(HttpResponseMessage response, bool recording = false)
+    {
+        this.recording = recording;
         builder = _ => response;
+    }
 
-    public MockHttpHandler(string content, string mediaType) =>
+    public MockHttpHandler(string content, string mediaType, bool recording = false)
+    {
+        this.recording = recording;
         builder = _ =>
             new(HttpStatusCode.OK)
             {
                 Content = new StringContent(content, Encoding.UTF8, mediaType)
             };
+    }
 
     public IReadOnlyCollection<HttpCall> Calls => calls;
 
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancel cancel)
     {
         var response = Add(request);
+        if (recording && Recording.IsRecording())
+        {
+            Recording.Add(
+                "httpCall",
+                new HttpCall(request, response, TimeSpan.Zero));
+        }
         return Task.FromResult(response);
     }
 

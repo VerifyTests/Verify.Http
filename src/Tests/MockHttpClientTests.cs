@@ -48,10 +48,10 @@ public class MockHttpClientTests
 
     #endregion
 
-    #region RecordedCalls
+    #region TrackedCalls
 
     [Fact]
-    public async Task RecordedCalls()
+    public async Task TrackedCalls()
     {
         using var client = new MockHttpClient();
 
@@ -287,5 +287,15 @@ public class MockHttpClientTests
                     client
                 })
             .UniqueForRuntimeAndVersion();
+    }
+
+    [Fact]
+    public async Task RecordingMockInteractions()
+    {
+        using var client = new MockHttpClient(recording: true);
+
+        var result = await client.GetStringAsync("https://fake/get");
+
+        await Verify(result);
     }
 }

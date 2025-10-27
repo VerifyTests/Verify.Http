@@ -1,4 +1,5 @@
-﻿#pragma warning disable CA1822
+﻿// ReSharper disable UnusedParameter.Global
+#pragma warning disable CA1822
 class HttpListener :
     IObserver<DiagnosticListener>,
     IDisposable
