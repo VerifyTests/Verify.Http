@@ -111,7 +111,6 @@ public async Task HttpResponse()
     Access-Control-Allow-Origin: *,
     Cache-Control: max-age=300,
     Connection: keep-alive,
-    Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
     Cross-Origin-Resource-Policy: cross-origin,
     Strict-Transport-Security: max-age=31536000,
     Vary: Authorization,Accept-Encoding,
@@ -151,7 +150,7 @@ SOFTWARE.
   }
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L46' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L45' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -268,7 +267,6 @@ await Verify(recording.Sends);
       Access-Control-Allow-Origin: *,
       Cache-Control: max-age=300,
       Connection: keep-alive,
-      Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
       Cross-Origin-Resource-Policy: cross-origin,
       Strict-Transport-Security: max-age=31536000,
       Vary: Authorization|Accept-Encoding,
@@ -303,7 +301,7 @@ SOFTWARE.
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L44' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -432,7 +430,6 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Origin: ,
           Cache-Control: no-cache,
-          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com github.githubassets.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ productionresultssa5.blob.core.windows.net/ productionresultssa6.blob.core.windows.net/ productionresultssa7.blob.core.windows.net/ productionresultssa8.blob.core.windows.net/ productionresultssa9.blob.core.windows.net/ productionresultssa10.blob.core.windows.net/ productionresultssa11.blob.core.windows.net/ productionresultssa12.blob.core.windows.net/ productionresultssa13.blob.core.windows.net/ productionresultssa14.blob.core.windows.net/ productionresultssa15.blob.core.windows.net/ productionresultssa16.blob.core.windows.net/ productionresultssa17.blob.core.windows.net/ productionresultssa18.blob.core.windows.net/ productionresultssa19.blob.core.windows.net/ github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com wss://alive-staging.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com release-assets.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com marketplace-screenshots.githubusercontent.com/ copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com objects-origin.githubusercontent.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com github.githubassets.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/,
           Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/global.json,
           Referrer-Policy: no-referrer-when-downgrade,
           Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
@@ -460,7 +457,6 @@ The requests/response pairs will be appended to the verified file.
           Access-Control-Allow-Origin: *,
           Cache-Control: max-age=300,
           Connection: keep-alive,
-          Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
           Cross-Origin-Resource-Policy: cross-origin,
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,
@@ -492,7 +488,6 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Origin: ,
           Cache-Control: no-cache,
-          Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com github.githubassets.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ productionresultssa5.blob.core.windows.net/ productionresultssa6.blob.core.windows.net/ productionresultssa7.blob.core.windows.net/ productionresultssa8.blob.core.windows.net/ productionresultssa9.blob.core.windows.net/ productionresultssa10.blob.core.windows.net/ productionresultssa11.blob.core.windows.net/ productionresultssa12.blob.core.windows.net/ productionresultssa13.blob.core.windows.net/ productionresultssa14.blob.core.windows.net/ productionresultssa15.blob.core.windows.net/ productionresultssa16.blob.core.windows.net/ productionresultssa17.blob.core.windows.net/ productionresultssa18.blob.core.windows.net/ productionresultssa19.blob.core.windows.net/ github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com wss://alive-staging.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com release-assets.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com marketplace-screenshots.githubusercontent.com/ copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com objects-origin.githubusercontent.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com github.githubassets.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/,
           Location: https://raw.githubusercontent.com/VerifyTests/Verify.Http/main/src/appveyor.yml,
           Referrer-Policy: no-referrer-when-downgrade,
           Strict-Transport-Security: max-age=31536000; includeSubdomains; preload,
@@ -520,7 +515,6 @@ The requests/response pairs will be appended to the verified file.
           Access-Control-Allow-Origin: *,
           Cache-Control: max-age=300,
           Connection: keep-alive,
-          Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
           Cross-Origin-Resource-Policy: cross-origin,
           Strict-Transport-Security: max-age=31536000,
           Vary: Authorization,Accept-Encoding,
@@ -554,7 +548,7 @@ artifacts:
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L137' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L133' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -666,28 +660,29 @@ public async Task DefaultContent()
 
 Request-Response pairs can be verified using `MockHttpClient.Calls`
 
-<!-- snippet: RecordedCalls -->
-<a id='snippet-RecordedCalls'></a>
+<!-- snippet: ExplicitContent -->
+<a id='snippet-ExplicitContent'></a>
 ```cs
 [Fact]
-public async Task RecordedCalls()
+public async Task ExplicitContent()
 {
-    using var client = new MockHttpClient();
+    using var client = new MockHttpClient(
+        content: """{ "a": "b" }""",
+        mediaType: "application/json");
 
-    await client.GetAsync("https://fake/get1");
-    await client.GetAsync("https://fake/get2");
+    var result = await client.GetAsync("https://fake/get");
 
-    await Verify(client.Calls);
+    await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L51-L64' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordedCalls' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L21-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
 #### Resulting verified file
 
-<!-- snippet: MockHttpClientTests.RecordedCalls.verified.txt -->
-<a id='snippet-MockHttpClientTests.RecordedCalls.verified.txt'></a>
+<!-- snippet: MockHttpClientTests.TrackedCalls.verified.txt -->
+<a id='snippet-MockHttpClientTests.TrackedCalls.verified.txt'></a>
 ```txt
 [
   {
@@ -700,7 +695,7 @@ public async Task RecordedCalls()
   }
 ]
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.RecordedCalls.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.RecordedCalls.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.TrackedCalls.verified.txt#L1-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.TrackedCalls.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -837,16 +832,15 @@ Use custom code to create a `HttpResponseMessage` base on a `HttpRequestMessage`
 [Fact]
 public async Task ResponseBuilder()
 {
-    using var client = new MockHttpClient(
-        request =>
+    using var client = new MockHttpClient(request =>
+    {
+        var content = $"Hello to {request.RequestUri}";
+        var response = new HttpResponseMessage(HttpStatusCode.OK)
         {
-            var content = $"Hello to {request.RequestUri}";
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(content),
-            };
-            return response;
-        });
+            Content = new StringContent(content),
+        };
+        return response;
+    });
 
     var result1 = await client.GetAsync("https://fake/get1");
     var result2 = await client.GetAsync("https://fake/get2");
@@ -858,7 +852,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L125-L151' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L125-L150' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -953,6 +947,52 @@ public async Task EnumerableResponses()
 }
 ```
 <sup><a href='/src/Tests/MockHttpClientTests.EnumerableResponses.verified.txt#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.EnumerableResponses.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+
+### Recording Mock Interactions
+
+Interactions with MockHttpClient (in the form of Request and repsponse pairs) can optionally be included in [Recording](https://github.com/VerifyTests/Verify/blob/main/docs/recording.md). 
+
+<!-- snippet: RecordingMockInteractions -->
+<a id='snippet-RecordingMockInteractions'></a>
+```cs
+[Fact]
+public async Task RecordingMockInteractions()
+{
+    using var client = new MockHttpClient(recording: true);
+
+    Recording.Start();
+    await client.GetStringAsync("https://fake/getOne");
+    await client.GetStringAsync("https://fake/getTwo");
+
+    await Verify();
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L291-L305' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+#### Resulting verified file
+
+<!-- snippet: MockHttpClientTests.RecordingMockInteractions.verified.txt -->
+<a id='snippet-MockHttpClientTests.RecordingMockInteractions.verified.txt'></a>
+```txt
+{
+  httpCall: [
+    {
+      Request: https://fake/getOne,
+      Response: 200 Ok
+    },
+    {
+      Request: https://fake/getTwo,
+      Response: 200 Ok
+    }
+  ]
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.RecordingMockInteractions.verified.txt#L1-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.RecordingMockInteractions.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
