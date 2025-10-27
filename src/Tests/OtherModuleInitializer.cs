@@ -14,6 +14,7 @@
             "origin",
             "Source-Age",
             "X-Cache-Hits",
+            "X-Cache",
             "X-Timer",
             "ETag");
 }
