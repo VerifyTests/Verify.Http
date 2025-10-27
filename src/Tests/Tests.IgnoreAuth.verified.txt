@@ -14,7 +14,6 @@
         Access-Control-Allow-Origin: *,
         Cache-Control: max-age=300,
         Connection: keep-alive,
-        Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox,
         Cross-Origin-Resource-Policy: cross-origin,
         Strict-Transport-Security: max-age=31536000,
         Vary: Authorization,Accept-Encoding,
