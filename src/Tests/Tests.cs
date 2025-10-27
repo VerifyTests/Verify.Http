@@ -1,12 +1,12 @@
 // ReSharper disable UnusedVariable
+// ReSharper disable UnusedParameter.Global
 
-using Microsoft.Extensions.DiagnosticAdapter;
-
+[TestFixture]
 public class Tests
 {
     #region IgnoreHeader
 
-    [Fact]
+    [Test]
     public async Task IgnoreHeader()
     {
         using var client = new HttpClient();
@@ -21,7 +21,7 @@ public class Tests
 
     #region ScrubHttpTextResponse
 
-    [Fact]
+    [Test]
     public async Task ScrubHttpTextResponse()
     {
         using var client = new HttpClient();
@@ -34,7 +34,7 @@ public class Tests
 
     #endregion
 
-    [Fact]
+    [Test]
     public async Task IgnoreAuth()
     {
         using var client = new HttpClient
@@ -49,7 +49,7 @@ public class Tests
         await Verify();
     }
 
-    [Fact]
+    [Test]
     public async Task JsonGet()
     {
         Recording.Start();
@@ -62,7 +62,7 @@ public class Tests
             .ScrubLinesContaining("\"version\"");
     }
 
-    [Fact]
+    [Test]
     public async Task TestHttpRecordingWithResponse()
     {
         Recording.Start();
@@ -87,7 +87,7 @@ public class Tests
 
     #endregion
 
-    [Fact]
+    [Test]
     public async Task MediaTypePlainTextIsRecorded()
     {
         const string content = "string content 123";
@@ -99,12 +99,11 @@ public class Tests
 
         using var response = await client.GetAsync("https://dont-care.org/get");
 
-        Assert.Equal(content, handler.Sends.Single().ResponseContent);
+        AreEqual(content, handler.Sends.Single().ResponseContent);
     }
 
-    [Theory]
-    [InlineData("application/json")]
-    [InlineData("application/foo+json")]
+    [TestCase("application/json")]
+    [TestCase("application/foo+json")]
     public async Task MediaTypeApplicationJsonIsRecorded(string mediaType)
     {
         const string content = "{ \"age\": 1234 }";
@@ -116,13 +115,13 @@ public class Tests
 
         using var response = await client.GetAsync("https://dont-care.org/get");
 
-        Assert.Equal(content, handler.Sends.Single().ResponseContent);
+        AreEqual(content, handler.Sends.Single().ResponseContent);
     }
 #if DEBUG
 
     #region HttpRecording
 
-    [Fact]
+    [Test]
     public async Task TestHttpRecording()
     {
         Recording.Start();
@@ -151,7 +150,7 @@ public class Tests
 
     #region HttpRecordingExplicit
 
-    [Fact]
+    [Test]
     public async Task TestHttpRecordingExplicit()
     {
         Recording.Start();
@@ -167,7 +166,7 @@ public class Tests
         var threshold = TimeSpan.FromSeconds(5);
         foreach (var call in httpCalls)
         {
-            Assert.True(call.Duration < threshold);
+            IsTrue(call.Duration < threshold);
         }
 
         await Verify(
@@ -183,7 +182,7 @@ public class Tests
 
 #endif
 
-    [Fact]
+    [Test]
     public async Task HttpClientRecordingGlobal()
     {
         #region HttpClientRecordingGlobal
@@ -205,7 +204,7 @@ public class Tests
         #endregion
     }
 
-    [Fact]
+    [Test]
     public async Task HttpClientRecording()
     {
         #region HttpClientRecording
@@ -228,11 +227,11 @@ public class Tests
         #endregion
     }
 
-    [Fact]
+    [Test]
     public Task HttpResponseCombos() =>
         Verify(new HttpResponseMessage(HttpStatusCode.Accepted));
 
-    [Fact]
+    [Test]
     public Task Uri() =>
         Verify(
             new
@@ -249,7 +248,7 @@ public class Tests
                 uri10 = new Uri("/?name=", UriKind.Relative)
             });
 
-    [Fact]
+    [Test]
     public async Task ImageHttpResponse()
     {
         using var client = new HttpClient();
@@ -261,7 +260,7 @@ public class Tests
 
     #region HttpResponse
 
-    [Fact]
+    [Test]
     public async Task HttpResponse()
     {
         using var client = new HttpClient();
@@ -273,12 +272,12 @@ public class Tests
 
     #endregion
 
-    [Fact]
+    [Test]
     public Task HttpStatusCodeTest() =>
         Verify(HttpStatusCode.Ambiguous)
             .UniqueForRuntime();
 
-    [Fact]
+    [Test]
     public async Task PauseResume()
     {
         #region HttpClientPauseResume
@@ -307,7 +306,7 @@ public class Tests
         #endregion
     }
 
-    [Fact]
+    [Test]
     public async Task RecordingFullControl()
     {
         #region HttpClientRecordingExplicit
@@ -337,7 +336,7 @@ public class Tests
         #endregion
     }
 
-    [Fact]
+    [Test]
     public async Task WithOwnListener()
     {
         using var _ = DiagnosticListener.AllListeners.Subscribe(new MyListener());
