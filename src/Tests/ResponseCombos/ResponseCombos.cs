@@ -61,20 +61,19 @@ public class ResponseCombos
         return Verify(response);
     }
 
-    private static HttpContent? BuildContent(ContentType content)
+    static HttpContent? BuildContent(ContentType content)
     {
         switch (content)
         {
             case ContentType.Empty:
             {
-
                 return null;
             }
             case ContentType.String:
                 return new StringContent("the content");
             case ContentType.Image:
             {
-                using var stream = File.OpenRead(EmptyFiles.AllFiles.GetPathFor("png"));
+                var stream = File.OpenRead(EmptyFiles.AllFiles.GetPathFor("png"));
                 return new StreamContent(stream)
                 {
                     Headers =
