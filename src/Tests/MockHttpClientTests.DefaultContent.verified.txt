@@ -1,8 +1,5 @@
 ﻿{
   Response: {
-    Status: 200 OK,
-    Content: {
-      Headers: {}
-    }
+    Status: 200 OK
   }
 }

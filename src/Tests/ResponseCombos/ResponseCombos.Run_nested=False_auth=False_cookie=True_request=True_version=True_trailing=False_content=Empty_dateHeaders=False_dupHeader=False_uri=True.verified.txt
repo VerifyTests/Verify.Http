@@ -4,8 +4,7 @@
     Status: 202 Accepted,
     Cookies: {
       sessionId: abc123
-    },
-    Content: {}
+    }
   },
   Request: {
     Uri: https://site/path,

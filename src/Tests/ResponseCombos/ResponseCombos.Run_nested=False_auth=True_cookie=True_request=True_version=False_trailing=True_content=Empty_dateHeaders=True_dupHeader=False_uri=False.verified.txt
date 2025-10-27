@@ -5,13 +5,7 @@
     Cookies: {
       sessionId: abc123
     },
-    TrailingHeaders: {},
-    Content: {
-      Headers: {
-        Expires: DateTime_1,
-        Last-Modified: DateTime_1
-      }
-    }
+    TrailingHeaders: {}
   },
   Request: {
     Headers: {

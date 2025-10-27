@@ -6,12 +6,6 @@
     },
     Cookies: {
       sessionId: abc123
-    },
-    Content: {
-      Headers: {
-        Expires: DateTime_1,
-        Last-Modified: DateTime_1
-      }
     }
   },
   Request: {

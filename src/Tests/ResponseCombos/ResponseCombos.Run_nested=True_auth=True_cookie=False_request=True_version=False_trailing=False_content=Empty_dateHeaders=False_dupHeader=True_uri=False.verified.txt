@@ -3,7 +3,6 @@
     Status: 202 Accepted,
     Headers: {
       dupHeader: value1,value2
-    },
-    Content: {}
+    }
   }
 }

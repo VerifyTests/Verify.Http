@@ -3,8 +3,7 @@
     Status: 202 Accepted,
     Headers: {
       dupHeader: value1,value2
-    },
-    Content: {}
+    }
   },
   Request: {
     Uri: https://site/path,

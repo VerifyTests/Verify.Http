@@ -9,7 +9,6 @@
     },
     TrailingHeaders: {
       dupHeader: value1,value2
-    },
-    Content: {}
+    }
   }
 }

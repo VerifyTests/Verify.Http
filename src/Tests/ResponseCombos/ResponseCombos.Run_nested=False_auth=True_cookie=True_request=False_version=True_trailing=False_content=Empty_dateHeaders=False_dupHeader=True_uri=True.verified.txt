@@ -7,7 +7,6 @@
     },
     Cookies: {
       sessionId: abc123
-    },
-    Content: {}
+    }
   }
 }

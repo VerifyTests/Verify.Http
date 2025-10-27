@@ -1,7 +1,6 @@
 ﻿{
   Response: {
-    Status: 202 Accepted,
-    Content: {}
+    Status: 202 Accepted
   },
   Request: {
     Headers: {

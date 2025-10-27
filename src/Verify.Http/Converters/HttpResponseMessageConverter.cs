@@ -16,7 +16,10 @@
 
         WriteCookies(writer, response);
         WriteTrailingHeaders(writer, response);
-        writer.WriteMember(response, response.Content, "Content");
+        if (response.Content.Headers.ContentLength is not 0)
+        {
+            writer.WriteMember(response, response.Content, "Content");
+        }
 
         writer.WriteEndObject();
     }

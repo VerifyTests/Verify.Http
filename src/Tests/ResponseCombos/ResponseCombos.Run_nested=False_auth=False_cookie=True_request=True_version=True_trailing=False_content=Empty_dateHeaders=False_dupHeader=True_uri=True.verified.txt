@@ -7,8 +7,7 @@
     },
     Cookies: {
       sessionId: abc123
-    },
-    Content: {}
+    }
   },
   Request: {
     Uri: https://site/path,

@@ -1,8 +1,7 @@
 ﻿{
   Response: {
     Version: 0.1,
-    Status: 202 Accepted,
-    Content: {}
+    Status: 202 Accepted
   },
   Request: {
     Uri: https://site/path,

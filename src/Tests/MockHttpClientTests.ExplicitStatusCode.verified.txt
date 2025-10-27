@@ -1,8 +1,5 @@
 ﻿{
   Response: {
-    Status: 300 Multiple Choices,
-    Content: {
-      Headers: {}
-    }
+    Status: 300 Multiple Choices
   }
 }

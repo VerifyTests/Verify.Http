@@ -6,8 +6,7 @@
     },
     Cookies: {
       sessionId: abc123
-    },
-    Content: {}
+    }
   },
   Request: {
     Headers: {

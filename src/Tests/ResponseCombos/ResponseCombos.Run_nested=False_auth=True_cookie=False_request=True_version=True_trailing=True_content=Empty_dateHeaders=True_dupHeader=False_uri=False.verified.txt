@@ -3,13 +3,7 @@
     Version: 0.1,
     Status: 202 Accepted,
     Headers: {},
-    TrailingHeaders: {},
-    Content: {
-      Headers: {
-        Expires: DateTime_1,
-        Last-Modified: DateTime_1
-      }
-    }
+    TrailingHeaders: {}
   },
   Request: {
     Headers: {

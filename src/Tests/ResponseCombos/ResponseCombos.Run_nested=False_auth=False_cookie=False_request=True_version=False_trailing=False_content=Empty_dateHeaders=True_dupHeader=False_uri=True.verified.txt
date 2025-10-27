@@ -1,13 +1,7 @@
 ﻿{
   Response: {
     Status: 202 Accepted,
-    Headers: {},
-    Content: {
-      Headers: {
-        Expires: DateTime_1,
-        Last-Modified: DateTime_1
-      }
-    }
+    Headers: {}
   },
   Request: {
     Uri: https://site/path,
