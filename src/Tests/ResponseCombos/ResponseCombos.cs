@@ -9,55 +9,88 @@ public class ResponseCombos
         String,
         Image
     }
-    [Test]
-    public Task Run(
-        [Values] bool nested,
-        [Values] bool auth,
-        [Values] bool cookie,
-        [Values] bool request,
-        [Values] bool version,
-        [Values] bool trailing,
-        [Values] ContentType content,
-        [Values] bool dateHeaders,
-        [Values] bool dupHeader)
-    {
-        var response = new HttpResponseMessage(HttpStatusCode.Accepted)
-        {
-            Content = BuildContent(content)
-        };
+   static DateTimeOffset dateHeader = new DateTimeOffset(2020,10,9,8,7,6,TimeSpan.Zero);
 
-        AddHeaders(dupHeader, dateHeaders, auth, cookie, response.Headers);
+   [Test]
+   [Explicit]
+   public Task Purge()
+   {
+       var path = Path.Combine(AttributeReader.GetProjectDirectory(),@"ResponseCombos");
+       foreach (var file in Directory.EnumerateFiles(path,"*.txt"))
+       {
+           File.Delete(file);
+       }
+   }
+   [Test]
+   public Task Run(
+       [Values] bool nested,
+       [Values] bool auth,
+       [Values] bool cookie,
+       [Values] bool request,
+       [Values] bool version,
+       [Values] bool trailing,
+       [Values] ContentType content,
+       [Values] bool dateHeaders,
+       [Values] bool dupHeader)
+   {
+       var response = new HttpResponseMessage(HttpStatusCode.Accepted)
+       {
+           Content = BuildContent(content)
+       };
 
-        if (trailing)
-        {
-            AddHeaders(dupHeader, dateHeaders, auth, cookie, response.TrailingHeaders);
-        }
+       if (dateHeaders)
+       {
+           response.Content?.Headers.Expires = dateHeader;
+           response.Content?.Headers.LastModified = dateHeader;
+       }
 
-        if (version)
-        {
-            response.Version = new(0, 1);
-        }
+       AddHeaders(dupHeader, auth, cookie, response.Headers);
 
-        if (request)
-        {
-            var requestMessage = new HttpRequestMessage
-            {
-                Content = BuildContent(content)
-            };
+       if (dateHeaders)
+       {
+           response.Headers.Date = dateHeader;
+       }
 
-            AddHeaders(dupHeader, dateHeaders, auth, cookie, requestMessage.Headers);
-            response.RequestMessage = requestMessage;
-        }
+       if (trailing)
+       {
+           AddHeaders(dupHeader, auth, cookie, response.TrailingHeaders);
+           if (dateHeaders)
+           {
+               response.TrailingHeaders.Date = dateHeader;
+           }
+       }
 
-        if (nested)
-        {
-            return Verify(new {response});
-        }
+       if (version)
+       {
+           response.Version = new(0, 1);
+       }
 
-        return Verify(response);
-    }
+       if (request)
+       {
+           var requestMessage = new HttpRequestMessage
+           {
+               Content = BuildContent(content)
+           };
 
-    static HttpContent? BuildContent(ContentType content)
+           if (dateHeaders)
+           {
+               requestMessage.Content?.Headers.Expires = dateHeader;
+               requestMessage.Content?.Headers.LastModified = dateHeader;
+           }
+           AddHeaders(dupHeader, auth, cookie, requestMessage.Headers);
+           requestMessage.Headers.Date = dateHeader;
+           response.RequestMessage = requestMessage;
+       }
+
+       if (nested)
+       {
+           return Verify(new {response});
+       }
+
+       return Verify(response);
+   }
+
+   static HttpContent? BuildContent(ContentType content)
     {
         switch (content)
         {
@@ -83,18 +116,12 @@ public class ResponseCombos
         }
     }
 
-    static void AddHeaders(bool dupHeader, bool dateHeaders, bool auth, bool cookie, HttpHeaders headers)
+    static void AddHeaders(bool dupHeader, bool auth, bool cookie, HttpHeaders headers)
     {
         if (dupHeader)
         {
             headers.Add("dupHeader", "value1");
             headers.Add("dupHeader", "value2");
-        }
-        if (dateHeaders)
-        {
-            headers.Add("date", "2020/05/01");
-            headers.Add("expires", "2020/05/02");
-            headers.Add("last-modified", "2020/05/03");
         }
 
         if (auth)
