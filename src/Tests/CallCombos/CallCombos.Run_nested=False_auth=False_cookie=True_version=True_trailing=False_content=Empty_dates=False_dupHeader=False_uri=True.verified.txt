@@ -1,0 +1,13 @@
+﻿{
+  Request: {
+    Uri: https://site/path,
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact
+  },
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      Set-Cookie: sessionId=abc123; Max-Age=3600
+    }
+  }
+}

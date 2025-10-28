@@ -1,0 +1,27 @@
+﻿{
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      Authorization: {Scrubbed},
+      Date: DateTime_1
+    },
+    ContentHeaders: {
+      Content-Type: text/plain; charset=utf-8,
+      Expires: DateTime_1,
+      Last-Modified: DateTime_1
+    },
+    ContentString: the content
+  },
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      Date: DateTime_1
+    },
+    ContentHeaders: {
+      Content-Type: text/plain; charset=utf-8,
+      Expires: DateTime_1,
+      Last-Modified: DateTime_1
+    },
+    ContentString: the content
+  }
+}

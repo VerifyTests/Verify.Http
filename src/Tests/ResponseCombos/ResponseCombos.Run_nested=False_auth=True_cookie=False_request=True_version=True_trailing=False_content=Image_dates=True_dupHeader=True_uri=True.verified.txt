@@ -1,0 +1,36 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Headers: {
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    },
+    Content: {
+      Headers: {
+        Content-Length: 119,
+        Content-Type: image/png,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact,
+    Headers: {
+      Authorization: {Scrubbed},
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    },
+    Content: {
+      Headers: {
+        Content-Length: 119,
+        Content-Type: image/png,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

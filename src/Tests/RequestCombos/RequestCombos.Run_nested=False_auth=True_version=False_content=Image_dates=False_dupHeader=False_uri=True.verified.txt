@@ -1,0 +1,12 @@
+﻿{
+  Uri: https://site/path,
+  Headers: {
+    Authorization: {Scrubbed}
+  },
+  Content: {
+    Headers: {
+      Content-Length: 119,
+      Content-Type: image/png
+    }
+  }
+}

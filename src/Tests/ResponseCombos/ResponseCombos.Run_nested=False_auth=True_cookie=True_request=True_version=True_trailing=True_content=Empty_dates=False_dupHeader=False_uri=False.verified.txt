@@ -1,0 +1,16 @@
+﻿{
+  Response: {
+    Version: 0.1,
+    Status: 202 Accepted,
+    Cookies: {
+      sessionId: abc123
+    }
+  },
+  Request: {
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact,
+    Headers: {
+      Authorization: {Scrubbed}
+    }
+  }
+}

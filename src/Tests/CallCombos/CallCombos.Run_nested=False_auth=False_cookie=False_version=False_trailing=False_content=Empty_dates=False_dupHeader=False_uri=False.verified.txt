@@ -1,0 +1,6 @@
+﻿{
+  Request: {},
+  Response: {
+    Status: 202 Accepted
+  }
+}

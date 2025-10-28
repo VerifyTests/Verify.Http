@@ -1,0 +1,31 @@
+﻿{
+  call: {
+    Request: {
+      Version: 0.1,
+      VersionPolicy: RequestVersionExact,
+      Headers: {
+        Date: DateTime_1,
+        dupHeader: value1,value2
+      },
+      ContentHeaders: {
+        Content-Type: text/plain; charset=utf-8,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      },
+      ContentString: the content
+    },
+    Response: {
+      Status: 202 Accepted,
+      Headers: {
+        Date: DateTime_1,
+        dupHeader: value1,value2
+      },
+      ContentHeaders: {
+        Content-Type: text/plain; charset=utf-8,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      },
+      ContentString: the content
+    }
+  }
+}

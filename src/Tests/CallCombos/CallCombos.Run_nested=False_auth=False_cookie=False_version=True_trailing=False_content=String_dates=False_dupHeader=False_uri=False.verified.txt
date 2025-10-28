@@ -1,0 +1,17 @@
+﻿{
+  Request: {
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact,
+    ContentHeaders: {
+      Content-Type: text/plain; charset=utf-8
+    },
+    ContentString: the content
+  },
+  Response: {
+    Status: 202 Accepted,
+    ContentHeaders: {
+      Content-Type: text/plain; charset=utf-8
+    },
+    ContentString: the content
+  }
+}

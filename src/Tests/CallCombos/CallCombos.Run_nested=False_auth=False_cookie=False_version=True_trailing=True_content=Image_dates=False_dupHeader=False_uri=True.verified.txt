@@ -1,0 +1,16 @@
+﻿{
+  Request: {
+    Uri: https://site/path,
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact,
+    ContentHeaders: {
+      Content-Type: image/png
+    }
+  },
+  Response: {
+    Status: 202 Accepted,
+    ContentHeaders: {
+      Content-Type: image/png
+    }
+  }
+}

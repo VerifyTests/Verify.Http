@@ -1,0 +1,21 @@
+﻿{
+  Request: {
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact,
+    Headers: {
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    }
+  },
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    },
+    ContentHeaders: {
+      Expires: DateTime_1,
+      Last-Modified: DateTime_1
+    }
+  }
+}

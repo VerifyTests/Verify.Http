@@ -1,0 +1,6 @@
+﻿{
+  request: {
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact
+  }
+}

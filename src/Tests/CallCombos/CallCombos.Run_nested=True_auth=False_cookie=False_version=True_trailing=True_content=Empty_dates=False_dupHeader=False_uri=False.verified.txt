@@ -1,0 +1,11 @@
+﻿{
+  call: {
+    Request: {
+      Version: 0.1,
+      VersionPolicy: RequestVersionExact
+    },
+    Response: {
+      Status: 202 Accepted
+    }
+  }
+}

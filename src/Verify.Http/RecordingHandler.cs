@@ -19,6 +19,7 @@ public class RecordingHandler(bool recording = true) :
         {
             return await base.SendAsync(request, cancel);
         }
+
         string? requestText = null;
         var requestContent = request.Content;
         if (requestContent != null)

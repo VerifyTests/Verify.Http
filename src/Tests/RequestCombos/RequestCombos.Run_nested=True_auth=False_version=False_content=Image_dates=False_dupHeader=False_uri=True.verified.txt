@@ -1,0 +1,11 @@
+﻿{
+  request: {
+    Uri: https://site/path,
+    Content: {
+      Headers: {
+        Content-Length: 119,
+        Content-Type: image/png
+      }
+    }
+  }
+}

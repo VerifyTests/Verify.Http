@@ -1,0 +1,18 @@
+﻿{
+  request: {
+    Uri: https://site/path,
+    Headers: {
+      Date: DateTime_1,
+      dupHeader: value1,value2
+    },
+    Content: {
+      Headers: {
+        Content-Length: 11,
+        Content-Type: text/plain; charset=utf-8,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      },
+      Value: the content
+    }
+  }
+}
