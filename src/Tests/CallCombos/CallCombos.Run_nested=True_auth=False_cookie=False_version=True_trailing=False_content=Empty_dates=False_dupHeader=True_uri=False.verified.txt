@@ -1,0 +1,15 @@
+﻿{
+  call: {
+    Request: {
+      Headers: {
+        dupHeader: value1,value2
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      Headers: {
+        dupHeader: value1,value2
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+﻿{
+  call: {
+    Request: {
+      Headers: {
+        Date: DateTime_1
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      Headers: {
+        Date: DateTime_1,
+        Set-Cookie: sessionId=abc123; Max-Age=3600
+      },
+      ContentHeaders: {
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

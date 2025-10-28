@@ -1,0 +1,11 @@
+﻿{
+  call: {
+    Request: https://site/path,
+    Response: {
+      Status: 202 Accepted,
+      Headers: {
+        Set-Cookie: sessionId=abc123; Max-Age=3600
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+﻿{
+  call: {
+    Request: {
+      ContentHeaders: {
+        Content-Type: image/png
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      ContentHeaders: {
+        Content-Type: image/png
+      }
+    }
+  }
+}

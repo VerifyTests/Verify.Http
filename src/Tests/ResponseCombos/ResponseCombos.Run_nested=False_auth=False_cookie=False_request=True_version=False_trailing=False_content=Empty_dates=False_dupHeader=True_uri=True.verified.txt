@@ -1,0 +1,14 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      dupHeader: value1,value2
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      dupHeader: value1,value2
+    }
+  }
+}

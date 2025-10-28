@@ -1,0 +1,19 @@
+﻿{
+  call: {
+    Request: {
+      Uri: https://site/path,
+      Headers: {
+        Authorization: {Scrubbed}
+      },
+      ContentHeaders: {
+        Content-Type: image/png
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      ContentHeaders: {
+        Content-Type: image/png
+      }
+    }
+  }
+}

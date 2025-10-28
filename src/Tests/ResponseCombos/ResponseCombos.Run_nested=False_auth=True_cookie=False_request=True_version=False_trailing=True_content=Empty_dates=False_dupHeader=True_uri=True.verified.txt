@@ -1,0 +1,18 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      dupHeader: value1,value2
+    },
+    TrailingHeaders: {
+      dupHeader: value1,value2
+    }
+  },
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      Authorization: {Scrubbed},
+      dupHeader: value1,value2
+    }
+  }
+}

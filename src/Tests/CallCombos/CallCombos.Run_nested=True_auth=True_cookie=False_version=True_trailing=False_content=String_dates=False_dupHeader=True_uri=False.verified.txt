@@ -1,0 +1,26 @@
+﻿{
+  call: {
+    Request: {
+      Headers: {
+        Authorization: {Scrubbed},
+        dupHeader: value1,value2
+      },
+      ContentHeaders: {
+        Content-Length: 11,
+        Content-Type: text/plain; charset=utf-8
+      },
+      ContentString: the content
+    },
+    Response: {
+      Status: 202 Accepted,
+      Headers: {
+        dupHeader: value1,value2
+      },
+      ContentHeaders: {
+        Content-Length: 11,
+        Content-Type: text/plain; charset=utf-8
+      },
+      ContentString: the content
+    }
+  }
+}

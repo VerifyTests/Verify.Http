@@ -1,0 +1,20 @@
+﻿{
+  call: {
+    Request: {
+      Uri: https://site/path,
+      Headers: {
+        Date: DateTime_1
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      Headers: {
+        Date: DateTime_1
+      },
+      ContentHeaders: {
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

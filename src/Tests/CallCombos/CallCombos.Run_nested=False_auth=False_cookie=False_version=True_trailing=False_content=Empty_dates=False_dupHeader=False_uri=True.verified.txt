@@ -1,0 +1,6 @@
+﻿{
+  Request: https://site/path,
+  Response: {
+    Status: 202 Accepted
+  }
+}

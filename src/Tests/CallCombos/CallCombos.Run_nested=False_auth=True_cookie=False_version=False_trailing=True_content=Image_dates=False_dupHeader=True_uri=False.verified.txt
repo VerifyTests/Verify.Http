@@ -1,0 +1,20 @@
+﻿{
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed},
+      dupHeader: value1,value2
+    },
+    ContentHeaders: {
+      Content-Type: image/png
+    }
+  },
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      dupHeader: value1,value2
+    },
+    ContentHeaders: {
+      Content-Type: image/png
+    }
+  }
+}

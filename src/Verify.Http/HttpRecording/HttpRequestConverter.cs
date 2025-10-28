@@ -3,13 +3,13 @@
 {
     public override void Write(VerifyJsonWriter writer, HttpRequest request)
     {
-        if (request.Method == HttpMethod.Get &&
+        if (request.Uri != null &&
+            request.Method == HttpMethod.Get &&
             UriConverter.ShouldUseOriginalString(request.Uri) &&
             request.IsDefaultVersionPolicy() &&
             request.Headers == null &&
             request.ContentHeaders == null &&
-            request.ContentStringParsed == null
-           )
+            request.ContentStringParsed == null)
         {
             writer.WriteValue(request.Uri.OriginalString);
             return;

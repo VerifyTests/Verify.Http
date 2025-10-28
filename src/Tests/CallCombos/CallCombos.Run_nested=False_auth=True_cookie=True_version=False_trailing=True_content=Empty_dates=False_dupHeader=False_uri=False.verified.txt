@@ -1,0 +1,13 @@
+﻿{
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed}
+    }
+  },
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      Set-Cookie: sessionId=abc123; Max-Age=3600
+    }
+  }
+}

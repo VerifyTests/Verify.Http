@@ -1,0 +1,13 @@
+﻿{
+  call: {
+    Request: {
+      Uri: https://site/path,
+      Headers: {
+        Authorization: {Scrubbed}
+      }
+    },
+    Response: {
+      Status: 202 Accepted
+    }
+  }
+}

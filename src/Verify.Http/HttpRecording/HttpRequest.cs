@@ -4,11 +4,6 @@ public class HttpRequest
 {
     public HttpRequest(HttpRequestMessage request)
     {
-        if (request.RequestUri == null)
-        {
-            throw new ArgumentNullException("HttpRequestMessage.RequestUri");
-        }
-
         Uri = request.RequestUri;
         Method = request.Method;
         Method = request.Method;
@@ -36,7 +31,7 @@ public class HttpRequest
     public HttpVersionPolicy VersionPolicy { get; }
     public HttpMethod Method { get; }
     public Version Version { get; }
-    public Uri Uri { get; }
+    public Uri? Uri { get; }
     public HttpRequestHeaders? Headers { get; }
     public HttpContentHeaders? ContentHeaders { get; }
     public object? ContentStringParsed { get; }
