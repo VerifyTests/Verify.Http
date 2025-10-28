@@ -34,7 +34,7 @@ public class ResponseCombos
 
         if (request)
         {
-            response.RequestMessage = HttpBuilder.Request(auth, content, dates, dupHeader, uri);
+            response.RequestMessage = HttpBuilder.Request(auth, version, content, dates, dupHeader, uri);
         }
 
         if (nested)

@@ -1,0 +1,16 @@
+﻿{
+  request: {
+    Uri: https://site/path,
+    Headers: {
+      Date: DateTime_1
+    },
+    Content: {
+      Headers: {
+        Content-Length: 119,
+        Content-Type: image/png,
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

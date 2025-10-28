@@ -1,0 +1,8 @@
+﻿{
+  Version: 0.1,
+  VersionPolicy: RequestVersionExact,
+  Headers: {
+    Authorization: {Scrubbed},
+    dupHeader: value1,value2
+  }
+}

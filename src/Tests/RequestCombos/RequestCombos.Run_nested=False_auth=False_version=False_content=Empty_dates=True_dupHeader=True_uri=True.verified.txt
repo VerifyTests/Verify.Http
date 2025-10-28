@@ -1,0 +1,7 @@
+﻿{
+  Uri: https://site/path,
+  Headers: {
+    Date: DateTime_1,
+    dupHeader: value1,value2
+  }
+}

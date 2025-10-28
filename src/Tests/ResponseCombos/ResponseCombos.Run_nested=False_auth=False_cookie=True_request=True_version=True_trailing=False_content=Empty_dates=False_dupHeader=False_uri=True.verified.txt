@@ -6,5 +6,9 @@
       sessionId: abc123
     }
   },
-  Request: https://site/path
+  Request: {
+    Uri: https://site/path,
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact
+  }
 }

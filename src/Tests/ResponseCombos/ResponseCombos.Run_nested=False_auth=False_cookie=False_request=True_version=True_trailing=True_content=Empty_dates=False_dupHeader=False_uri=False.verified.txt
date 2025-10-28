@@ -3,5 +3,8 @@
     Version: 0.1,
     Status: 202 Accepted
   },
-  Request: {}
+  Request: {
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact
+  }
 }

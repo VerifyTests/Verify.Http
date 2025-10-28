@@ -1,0 +1,17 @@
+﻿{
+  request: {
+    Uri: https://site/path,
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact,
+    Headers: {
+      Authorization: {Scrubbed}
+    },
+    Content: {
+      Headers: {
+        Content-Length: 11,
+        Content-Type: text/plain; charset=utf-8
+      },
+      Value: the content
+    }
+  }
+}

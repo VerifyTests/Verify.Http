@@ -1,6 +1,10 @@
 ﻿{
   call: {
-    Request: https://site/path,
+    Request: {
+      Uri: https://site/path,
+      Version: 0.1,
+      VersionPolicy: RequestVersionExact
+    },
     Response: {
       Status: 202 Accepted
     }

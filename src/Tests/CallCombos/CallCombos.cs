@@ -31,7 +31,7 @@ public class CallCombos
     {
         var response = HttpBuilder.Response(cookie, version, trailing, content, dates, dupHeader);
 
-        var request = HttpBuilder.Request(auth, content, dates, dupHeader, uri);
+        var request = HttpBuilder.Request(auth, version, content, dates, dupHeader, uri);
 
         var call = new HttpCall(request, response);
         if (nested)

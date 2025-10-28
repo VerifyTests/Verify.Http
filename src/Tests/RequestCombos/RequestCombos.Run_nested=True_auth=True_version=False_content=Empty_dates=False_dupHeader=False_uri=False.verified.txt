@@ -1,0 +1,7 @@
+﻿{
+  request: {
+    Headers: {
+      Authorization: {Scrubbed}
+    }
+  }
+}

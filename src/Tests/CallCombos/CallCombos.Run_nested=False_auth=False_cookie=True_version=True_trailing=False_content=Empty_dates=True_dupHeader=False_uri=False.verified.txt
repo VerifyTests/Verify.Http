@@ -1,5 +1,7 @@
 ﻿{
   Request: {
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact,
     Headers: {
       Date: DateTime_1
     }

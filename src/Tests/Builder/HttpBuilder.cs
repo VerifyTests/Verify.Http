@@ -1,20 +1,8 @@
 static class HttpBuilder
 {
     static DateTimeOffset dateHeader = new(2020, 10, 9, 8, 7, 6, TimeSpan.Zero);
-    public static HttpResponseMessage Build(bool auth, bool cookie, bool request, bool version, bool trailing, ContentType content, bool dateHeaders, bool dupHeader, bool uri)
-    {
-        var response = Response(cookie, version, trailing, content, dateHeaders, dupHeader);
 
-        if (request)
-        {
-            var requestMessage = Request(auth, content, dateHeaders, dupHeader, uri);
-            response.RequestMessage = requestMessage;
-        }
-
-        return response;
-    }
-
-    public static HttpRequestMessage Request(bool auth, ContentType content, bool dateHeaders, bool dupHeader, bool uri)
+    public static HttpRequestMessage Request(bool auth, bool version, ContentType content, bool dateHeaders, bool dupHeader, bool uri)
     {
         var request = new HttpRequestMessage
         {
@@ -24,6 +12,12 @@ static class HttpBuilder
         if (auth)
         {
             request.Headers.Authorization = new("authScheme", "authParam");
+        }
+
+        if (version)
+        {
+            request.Version = new(0, 1);
+            request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
         }
 
         if (uri)

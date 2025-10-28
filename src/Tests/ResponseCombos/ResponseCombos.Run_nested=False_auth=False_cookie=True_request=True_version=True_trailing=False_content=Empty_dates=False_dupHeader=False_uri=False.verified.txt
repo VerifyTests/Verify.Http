@@ -6,5 +6,8 @@
       sessionId: abc123
     }
   },
-  Request: {}
+  Request: {
+    Version: 0.1,
+    VersionPolicy: RequestVersionExact
+  }
 }

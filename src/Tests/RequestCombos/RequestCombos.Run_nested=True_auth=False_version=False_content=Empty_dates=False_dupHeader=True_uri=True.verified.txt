@@ -1,0 +1,8 @@
+﻿{
+  request: {
+    Uri: https://site/path,
+    Headers: {
+      dupHeader: value1,value2
+    }
+  }
+}

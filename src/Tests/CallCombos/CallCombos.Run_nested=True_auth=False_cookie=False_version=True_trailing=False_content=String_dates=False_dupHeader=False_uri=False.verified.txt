@@ -1,6 +1,8 @@
 ﻿{
   call: {
     Request: {
+      Version: 0.1,
+      VersionPolicy: RequestVersionExact,
       ContentHeaders: {
         Content-Type: text/plain; charset=utf-8
       },
