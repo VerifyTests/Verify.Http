@@ -4,7 +4,6 @@
       Date: DateTime_1
     },
     ContentHeaders: {
-      Content-Length: 11,
       Content-Type: text/plain; charset=utf-8,
       Expires: DateTime_1,
       Last-Modified: DateTime_1
@@ -18,7 +17,6 @@
       Set-Cookie: sessionId=abc123; Max-Age=3600
     },
     ContentHeaders: {
-      Content-Length: 11,
       Content-Type: text/plain; charset=utf-8,
       Expires: DateTime_1,
       Last-Modified: DateTime_1

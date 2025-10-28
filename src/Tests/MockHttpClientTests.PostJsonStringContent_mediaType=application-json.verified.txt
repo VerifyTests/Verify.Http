@@ -9,7 +9,6 @@
           Method: POST,
           Uri: https://fake/post,
           ContentHeaders: {
-            Content-Length: 12,
             Content-Type: application/json; charset=utf-8
           },
           ContentStringParsed: {

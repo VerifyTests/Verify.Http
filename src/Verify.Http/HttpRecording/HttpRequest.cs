@@ -10,19 +10,22 @@ public class HttpRequest
         Version = request.Version;
         VersionPolicy = request.VersionPolicy;
 
-        if (request.Headers.Any())
+        var headers = request.Headers.Simplify();
+        if (headers.Count != 0)
         {
-            Headers = request.Headers;
+            Headers = headers;
         }
 
-        if (request.Content is not null)
+        var content = request.Content;
+        if (content is not null)
         {
-            if (request.Content.Headers.Any())
+            var contentHeaders = content.Headers.Simplify();
+            if (contentHeaders.Count != 0)
             {
-                ContentHeaders = request.Content.Headers;
+                ContentHeaders = contentHeaders;
             }
 
-            var stringContent = request.Content.TryReadStringContent();
+            var stringContent = content.TryReadStringContent();
             ContentStringParsed = stringContent.prettyContent;
             ContentString = stringContent.content;
         }
@@ -32,8 +35,8 @@ public class HttpRequest
     public HttpMethod Method { get; }
     public Version Version { get; }
     public Uri? Uri { get; }
-    public HttpRequestHeaders? Headers { get; }
-    public HttpContentHeaders? ContentHeaders { get; }
+    public Dictionary<string, object>? Headers { get; }
+    public Dictionary<string, object>? ContentHeaders { get; }
     public object? ContentStringParsed { get; }
     public string? ContentString { get; }
 }

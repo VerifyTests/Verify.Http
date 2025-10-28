@@ -5,20 +5,26 @@ public class HttpResponse
     public HttpResponse(HttpResponseMessage response)
     {
         Status = response.StatusCode;
-        if (response.Headers.Any())
+        var headers = response.Headers.Simplify();
+        if (headers.Count != 0)
         {
-            Headers = response.Headers;
+            Headers = headers;
         }
 
-        var content = (HttpContent?) response.Content;
-        if (content != null && content.Headers.Any())
+        var content = (HttpContent?)response.Content;
+        if (content != null)
         {
-            ContentHeaders = content.Headers;
+            var httpContentHeaders = content.Headers.Simplify();
+            if (httpContentHeaders.Count != 0)
+            {
+                ContentHeaders = httpContentHeaders;
+            }
         }
 
-        if (response.TrailingHeaders.Any())
+        var trailingHeaders = response.TrailingHeaders.Simplify();
+        if (trailingHeaders.Count != 0)
         {
-            TrailingHeaders = response.TrailingHeaders;
+            TrailingHeaders = trailingHeaders;
         }
 
         var stringContent = content.TryReadStringContent();
@@ -27,9 +33,11 @@ public class HttpResponse
     }
 
     public HttpStatusCode Status { get; }
-    public HttpResponseHeaders? Headers { get; }
-    public HttpResponseHeaders? TrailingHeaders { get; }
-    public HttpContentHeaders? ContentHeaders { get; }
+    public Dictionary<string, object>? Headers { get; }
+    public Dictionary<string, object>? TrailingHeaders { get; }
+    public Dictionary<string, object>? ContentHeaders { get; }
     public object? ContentStringParsed { get; }
-    [JsonIgnore] public string? ContentString { get; }
+
+    [JsonIgnore]
+    public string? ContentString { get; }
 }

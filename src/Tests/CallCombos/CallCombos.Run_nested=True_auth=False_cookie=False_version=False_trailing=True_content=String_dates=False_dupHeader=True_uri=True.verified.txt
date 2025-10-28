@@ -6,7 +6,6 @@
         dupHeader: value1,value2
       },
       ContentHeaders: {
-        Content-Length: 11,
         Content-Type: text/plain; charset=utf-8
       },
       ContentString: the content
@@ -17,7 +16,6 @@
         dupHeader: value1,value2
       },
       ContentHeaders: {
-        Content-Length: 11,
         Content-Type: text/plain; charset=utf-8
       },
       ContentString: the content

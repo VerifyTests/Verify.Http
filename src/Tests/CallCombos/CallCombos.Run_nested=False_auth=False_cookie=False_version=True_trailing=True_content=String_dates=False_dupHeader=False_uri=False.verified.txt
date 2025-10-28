@@ -1,7 +1,6 @@
 ﻿{
   Request: {
     ContentHeaders: {
-      Content-Length: 11,
       Content-Type: text/plain; charset=utf-8
     },
     ContentString: the content
@@ -9,7 +8,6 @@
   Response: {
     Status: 202 Accepted,
     ContentHeaders: {
-      Content-Length: 11,
       Content-Type: text/plain; charset=utf-8
     },
     ContentString: the content
