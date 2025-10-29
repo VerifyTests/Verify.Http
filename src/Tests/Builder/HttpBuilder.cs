@@ -106,25 +106,30 @@ static class HttpBuilder
                 return new MultipartContent
                 {
                     new StringContent("some text value"),
-                    new StringContent("some other value")
+                    BuildImageContent()
                 };
             }
             case ContentType.String:
                 return new StringContent("the content");
             case ContentType.Image:
             {
-                var stream = File.OpenRead(EmptyFiles.AllFiles.GetPathFor("png"));
-                return new StreamContent(stream)
-                {
-                    Headers =
-                    {
-                        ContentType = new("image/png")
-                    }
-                };
+                return BuildImageContent();
             }
             default:
                 throw new ArgumentOutOfRangeException(nameof(content), content, null);
         }
+    }
+
+    static StreamContent BuildImageContent()
+    {
+        var stream = File.OpenRead(EmptyFiles.AllFiles.GetPathFor("png"));
+        return new(stream)
+        {
+            Headers =
+            {
+                ContentType = new("image/png")
+            }
+        };
     }
 
     static void AddHeaders(bool dupHeader, HttpHeaders headers)
