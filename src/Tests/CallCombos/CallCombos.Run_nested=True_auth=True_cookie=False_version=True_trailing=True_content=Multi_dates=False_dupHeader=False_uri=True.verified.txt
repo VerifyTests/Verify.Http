@@ -1,0 +1,21 @@
+﻿{
+  call: {
+    Request: {
+      Uri: https://site/path,
+      Version: 0.1,
+      VersionPolicy: RequestVersionExact,
+      Headers: {
+        Authorization: {Scrubbed}
+      },
+      ContentHeaders: {
+        Content-Type: multipart/mixed; boundary="Guid_1"
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      ContentHeaders: {
+        Content-Type: multipart/mixed; boundary="Guid_2"
+      }
+    }
+  }
+}

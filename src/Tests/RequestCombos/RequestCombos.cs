@@ -3,19 +3,8 @@ public class RequestCombos
 {
     [Test]
     [Explicit]
-    public void Purge()
-    {
-        var path = Path.Combine(AttributeReader.GetProjectDirectory(), "RequestCombos");
-        foreach (var file in Directory.EnumerateFiles(path, "*.txt"))
-        {
-            File.Delete(file);
-        }
-
-        foreach (var file in Directory.EnumerateFiles(path, "*.png"))
-        {
-            File.Delete(file);
-        }
-    }
+    public void Purge() =>
+        HttpBuilder.Purge("RequestCombos");
 
     [Test]
     public Task Run(

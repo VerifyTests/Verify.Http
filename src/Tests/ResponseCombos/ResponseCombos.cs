@@ -3,19 +3,8 @@ public class ResponseCombos
 {
     [Test]
     [Explicit]
-    public void Purge()
-    {
-        var path = Path.Combine(AttributeReader.GetProjectDirectory(), "ResponseCombos");
-        foreach (var file in Directory.EnumerateFiles(path, "*.txt"))
-        {
-            File.Delete(file);
-        }
-
-        foreach (var file in Directory.EnumerateFiles(path, "*.png"))
-        {
-            File.Delete(file);
-        }
-    }
+    public void Purge() =>
+        HttpBuilder.Purge("ResponseCombos");
 
     [Test]
     public Task Run(

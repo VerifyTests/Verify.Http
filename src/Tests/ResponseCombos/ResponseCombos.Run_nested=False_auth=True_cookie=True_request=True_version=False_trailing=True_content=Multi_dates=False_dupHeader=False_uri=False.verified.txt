@@ -1,0 +1,25 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Cookies: {
+      sessionId: abc123
+    },
+    Content: {
+      Headers: {
+        Content-Length: 243,
+        Content-Type: multipart/mixed; boundary="Guid_1"
+      }
+    }
+  },
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed}
+    },
+    Content: {
+      Headers: {
+        Content-Length: 243,
+        Content-Type: multipart/mixed; boundary="Guid_2"
+      }
+    }
+  }
+}

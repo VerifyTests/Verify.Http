@@ -1,0 +1,11 @@
+﻿{
+  Uri: https://site/path,
+  Version: 0.1,
+  VersionPolicy: RequestVersionExact,
+  Content: {
+    Headers: {
+      Content-Length: 243,
+      Content-Type: multipart/mixed; boundary="Guid_1"
+    }
+  }
+}

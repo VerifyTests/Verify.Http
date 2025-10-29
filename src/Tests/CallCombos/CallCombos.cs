@@ -3,19 +3,8 @@ public class CallCombos
 {
     [Test]
     [Explicit]
-    public void Purge()
-    {
-        var path = Path.Combine(AttributeReader.GetProjectDirectory(), "CallCombos");
-        foreach (var file in Directory.EnumerateFiles(path, "*.txt"))
-        {
-            File.Delete(file);
-        }
-
-        foreach (var file in Directory.EnumerateFiles(path, "*.png"))
-        {
-            File.Delete(file);
-        }
-    }
+    public void Purge() =>
+        HttpBuilder.Purge("CallCombos");
 
     [Test]
     public Task Run(

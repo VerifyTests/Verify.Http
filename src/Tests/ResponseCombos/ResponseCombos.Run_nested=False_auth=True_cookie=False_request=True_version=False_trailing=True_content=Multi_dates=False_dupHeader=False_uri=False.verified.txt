@@ -1,0 +1,22 @@
+﻿{
+  Response: {
+    Status: 202 Accepted,
+    Content: {
+      Headers: {
+        Content-Length: 243,
+        Content-Type: multipart/mixed; boundary="Guid_1"
+      }
+    }
+  },
+  Request: {
+    Headers: {
+      Authorization: {Scrubbed}
+    },
+    Content: {
+      Headers: {
+        Content-Length: 243,
+        Content-Type: multipart/mixed; boundary="Guid_2"
+      }
+    }
+  }
+}

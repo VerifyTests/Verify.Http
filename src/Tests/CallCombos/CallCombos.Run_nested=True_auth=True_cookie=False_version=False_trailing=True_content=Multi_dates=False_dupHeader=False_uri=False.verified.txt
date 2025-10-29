@@ -1,0 +1,18 @@
+﻿{
+  call: {
+    Request: {
+      Headers: {
+        Authorization: {Scrubbed}
+      },
+      ContentHeaders: {
+        Content-Type: multipart/mixed; boundary="Guid_1"
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      ContentHeaders: {
+        Content-Type: multipart/mixed; boundary="Guid_2"
+      }
+    }
+  }
+}

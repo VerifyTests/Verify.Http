@@ -1,7 +1,9 @@
 ﻿public static class OtherModuleInitializer
 {
     [ModuleInitializer]
-    public static void Initialize() =>
+    public static void Initialize()
+    {
+        VerifierSettings.ScrubInlineGuids();
         VerifierSettings.IgnoreMembers(
             "X-Fastly-Request-ID",
             "X-GitHub-Request-Id",
@@ -17,4 +19,5 @@
             "X-Cache",
             "X-Timer",
             "ETag");
+    }
 }

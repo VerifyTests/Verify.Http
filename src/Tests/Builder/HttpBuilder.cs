@@ -2,6 +2,20 @@ static class HttpBuilder
 {
     static DateTimeOffset dateHeader = new(2020, 10, 9, 8, 7, 6, TimeSpan.Zero);
 
+    public static void Purge(string name)
+    {
+        var path = Path.Combine(AttributeReader.GetProjectDirectory(), name);
+        foreach (var file in Directory.EnumerateFiles(path, "*.txt"))
+        {
+            File.Delete(file);
+        }
+
+        foreach (var file in Directory.EnumerateFiles(path, "*.png"))
+        {
+            File.Delete(file);
+        }
+    }
+
     public static HttpRequestMessage Request(bool auth, bool version, ContentType content, bool dateHeaders, bool dupHeader, bool uri)
     {
         var request = new HttpRequestMessage
@@ -86,6 +100,14 @@ static class HttpBuilder
             case ContentType.Empty:
             {
                 return null;
+            }
+            case ContentType.Multi:
+            {
+                return new MultipartContent
+                {
+                    new StringContent("some text value"),
+                    new StringContent("some other value")
+                };
             }
             case ContentType.String:
                 return new StringContent("the content");

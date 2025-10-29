@@ -1,0 +1,9 @@
+﻿{
+  Uri: https://site/path,
+  Content: {
+    Headers: {
+      Content-Length: 243,
+      Content-Type: multipart/mixed; boundary="Guid_1"
+    }
+  }
+}

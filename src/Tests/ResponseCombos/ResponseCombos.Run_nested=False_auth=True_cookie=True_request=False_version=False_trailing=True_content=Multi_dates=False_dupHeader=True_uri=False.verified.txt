@@ -1,0 +1,18 @@
+﻿{
+  Status: 202 Accepted,
+  Headers: {
+    dupHeader: value1,value2
+  },
+  Cookies: {
+    sessionId: abc123
+  },
+  TrailingHeaders: {
+    dupHeader: value1,value2
+  },
+  Content: {
+    Headers: {
+      Content-Length: 243,
+      Content-Type: multipart/mixed; boundary="Guid_1"
+    }
+  }
+}

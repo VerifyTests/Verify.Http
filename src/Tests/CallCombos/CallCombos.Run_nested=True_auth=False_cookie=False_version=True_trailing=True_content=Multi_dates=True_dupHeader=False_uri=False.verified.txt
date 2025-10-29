@@ -1,0 +1,27 @@
+﻿{
+  call: {
+    Request: {
+      Version: 0.1,
+      VersionPolicy: RequestVersionExact,
+      Headers: {
+        Date: DateTime_1
+      },
+      ContentHeaders: {
+        Content-Type: multipart/mixed; boundary="Guid_1",
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    },
+    Response: {
+      Status: 202 Accepted,
+      Headers: {
+        Date: DateTime_1
+      },
+      ContentHeaders: {
+        Content-Type: multipart/mixed; boundary="Guid_2",
+        Expires: DateTime_1,
+        Last-Modified: DateTime_1
+      }
+    }
+  }
+}

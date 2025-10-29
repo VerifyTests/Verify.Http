@@ -1,0 +1,20 @@
+﻿{
+  Request: {
+    Uri: https://site/path,
+    Headers: {
+      dupHeader: value1,value2
+    },
+    ContentHeaders: {
+      Content-Type: multipart/mixed; boundary="Guid_1"
+    }
+  },
+  Response: {
+    Status: 202 Accepted,
+    Headers: {
+      dupHeader: value1,value2
+    },
+    ContentHeaders: {
+      Content-Type: multipart/mixed; boundary="Guid_2"
+    }
+  }
+}
