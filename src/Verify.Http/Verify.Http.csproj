@@ -9,7 +9,6 @@
     <PackageReference Include="Argon.Xml" />
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" />
     <PackageReference Include="Polyfill" PrivateAssets="all" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
     <PackageReference Include="ProjectDefaults" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Sbom.Targets" PrivateAssets="all" />
   </ItemGroup>

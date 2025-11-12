@@ -4,7 +4,7 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Argon.Xml" Version="0.32.0" />
+    <PackageVersion Include="Argon.Xml" Version="0.33.0" />
     <PackageVersion Include="MarkdownSnippets.MsBuild" Version="28.0.0-beta.7" />
     <PackageVersion Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.0" />
@@ -14,7 +14,6 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
     <PackageVersion Include="ProjectDefaults" Version="1.0.162" />
     <PackageVersion Include="Polyfill" Version="9.0.1" />
-    <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="10.0.0" />
     <PackageVersion Include="Verify" Version="31.6.0" />
     <PackageVersion Include="Verify.NUnit" Version="31.6.0" />
     <PackageVersion Include="Verify.AngleSharp" Version="4.7.0" />
