@@ -10,8 +10,18 @@ public class MockHttpClient :
     {
     }
 
+    public MockHttpClient(params IEnumerable<HttpResponseMessage> responses) :
+        this(responses, false)
+    {
+    }
+
     public MockHttpClient(IEnumerable<HttpResponseMessage> responses, bool recording = false) :
         this(new MockHttpHandler(responses, recording))
+    {
+    }
+
+    public MockHttpClient(params IEnumerable<HttpStatusCode> statuses) :
+        this(statuses, false)
     {
     }
 
@@ -19,9 +29,13 @@ public class MockHttpClient :
         this(new MockHttpHandler(statuses, recording))
     {
     }
+    public MockHttpClient(params IEnumerable<string> files) :
+        this(files, false)
+    {
+    }
 
-    public MockHttpClient(params HttpResponseMessage[] responses) :
-        this(new MockHttpHandler(responses))
+    public MockHttpClient(IEnumerable<string> files, bool recording = false) :
+        this(new MockHttpHandler(files, recording))
     {
     }
 

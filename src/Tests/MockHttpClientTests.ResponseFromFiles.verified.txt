@@ -1,0 +1,55 @@
+﻿{
+  content1: {
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 117,
+        Content-Type: text/html
+      },
+      Value:
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<p>My first paragraph.</p>
+
+</body>
+</html>
+
+
+    }
+  },
+  content2: {
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 52,
+        Content-Type: application/json
+      },
+      Value: {
+        name: John,
+        age: 30,
+        car: null
+      }
+    }
+  },
+  content3: {
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 133,
+        Content-Type: application/xml
+      },
+      Value: {
+        note: {
+          to: Tove,
+          from: Jani,
+          heading: Reminder,
+          body: Don't forget me this weekend!
+        }
+      }
+    }
+  }
+}

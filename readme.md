@@ -592,7 +592,7 @@ public async Task DefaultContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L37-L49' title='Snippet source file'>snippet source</a> | <a href='#snippet-DefaultContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L35-L47' title='Snippet source file'>snippet source</a> | <a href='#snippet-DefaultContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -628,7 +628,7 @@ public async Task ExplicitContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L21-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L19-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -671,7 +671,7 @@ public async Task ExplicitContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L21-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L19-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -714,7 +714,7 @@ public async Task ExplicitStatusCode()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L66-L78' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitStatusCode' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L64-L76' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitStatusCode' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -752,7 +752,7 @@ public async Task ExplicitResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L105-L121' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L128-L144' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -796,8 +796,8 @@ public async Task ResponseBuilder()
         return response;
     });
 
-    var result1 = await client.GetAsync("https://fake/get1");
-    var result2 = await client.GetAsync("https://fake/get2");
+    using var result1 = await client.GetAsync("https://fake/get1");
+    using var result2 = await client.GetAsync("https://fake/get2");
 
     await Verify(new
     {
@@ -806,7 +806,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L150-L175' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L173-L198' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -842,6 +842,116 @@ public async Task ResponseBuilder()
 <!-- endSnippet -->
 
 
+### Files as responses 
+
+It is often convenient to have files in a test project that can be returned as http responses.
+
+Files can be included in the test directory:
+
+<!-- snippet: IncludeResponseFiles -->
+<a id='snippet-IncludeResponseFiles'></a>
+```csproj
+<None Update="sample.*">
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+</None>
+```
+<sup><a href='/src/Tests/Tests.csproj#L23-L27' title='Snippet source file'>snippet source</a> | <a href='#snippet-IncludeResponseFiles' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+Using files in a mock:
+
+<!-- snippet: ResponseFromFiles -->
+<a id='snippet-ResponseFromFiles'></a>
+```cs
+[Test]
+public async Task ResponseFromFiles()
+{
+    using var client = new MockHttpClient(
+        "sample.html",
+        "sample.json",
+        "sample.xml");
+
+    using var content1 = await client.GetAsync("https://fake/get1");
+    using var content2 = await client.GetAsync("https://fake/get2");
+    using var content3 = await client.GetAsync("https://fake/get3");
+
+    await Verify(new
+    {
+        content1,
+        content2,
+        content3
+    });
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L104-L126' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseFromFiles' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+#### Resulting verified file
+
+<!-- snippet: MockHttpClientTests.ResponseFromFiles.verified.txt -->
+<a id='snippet-MockHttpClientTests.ResponseFromFiles.verified.txt'></a>
+```txt
+{
+  content1: {
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 117,
+        Content-Type: text/html
+      },
+      Value:
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<p>My first paragraph.</p>
+
+</body>
+</html>
+
+
+    }
+  },
+  content2: {
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 52,
+        Content-Type: application/json
+      },
+      Value: {
+        name: John,
+        age: 30,
+        car: null
+      }
+    }
+  },
+  content3: {
+    Status: 200 OK,
+    Content: {
+      Headers: {
+        Content-Length: 133,
+        Content-Type: application/xml
+      },
+      Value: {
+        note: {
+          to: Tove,
+          from: Jani,
+          heading: Reminder,
+          body: Don't forget me this weekend!
+        }
+      }
+    }
+  }
+}
+```
+<sup><a href='/src/Tests/MockHttpClientTests.ResponseFromFiles.verified.txt#L1-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseFromFiles.verified.txt' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
 ### Enumeration of HttpResponseMessage
 
 Use a sequence of `HttpResponseMessage` to return a sequence of requests:
@@ -862,8 +972,8 @@ public async Task EnumerableResponses()
             Content = new StringContent("World")
         });
 
-    var result1 = await client.GetAsync("https://fake/get1");
-    var result2 = await client.GetAsync("https://fake/get2");
+    using var result1 = await client.GetAsync("https://fake/get1");
+    using var result2 = await client.GetAsync("https://fake/get2");
 
     await Verify(new
     {
@@ -872,7 +982,7 @@ public async Task EnumerableResponses()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L123-L148' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L146-L171' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -928,7 +1038,7 @@ public async Task RecordingMockInteractions()
     await Verify();
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L306-L320' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L329-L343' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
