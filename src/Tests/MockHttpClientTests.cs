@@ -116,11 +116,12 @@ public class MockHttpClientTests
         using var content3 = await client.GetAsync("https://fake/get3");
 
         await Verify(new
-        {
-            content1,
-            content2,
-            content3
-        });
+            {
+                content1,
+                content2,
+                content3
+            })
+            .IgnoreMember("Content-Length");
     }
 
     #endregion

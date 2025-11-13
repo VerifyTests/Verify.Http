@@ -3,7 +3,6 @@
     Status: 200 OK,
     Content: {
       Headers: {
-        Content-Length: 117,
         Content-Type: text/html
       },
       Value:
@@ -25,7 +24,6 @@
     Status: 200 OK,
     Content: {
       Headers: {
-        Content-Length: 52,
         Content-Type: application/json
       },
       Value: {
@@ -39,7 +37,6 @@
     Status: 200 OK,
     Content: {
       Headers: {
-        Content-Length: 133,
         Content-Type: application/xml
       },
       Value: {

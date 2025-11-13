@@ -752,7 +752,7 @@ public async Task ExplicitResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L128-L144' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L129-L145' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -806,7 +806,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L173-L198' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L174-L199' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -876,14 +876,15 @@ public async Task ResponseFromFiles()
     using var content3 = await client.GetAsync("https://fake/get3");
 
     await Verify(new
-    {
-        content1,
-        content2,
-        content3
-    });
+        {
+            content1,
+            content2,
+            content3
+        })
+        .IgnoreMember("Content-Length");
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L104-L126' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseFromFiles' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L104-L127' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseFromFiles' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -982,7 +983,7 @@ public async Task EnumerableResponses()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L146-L171' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L147-L172' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1038,7 +1039,7 @@ public async Task RecordingMockInteractions()
     await Verify();
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L329-L343' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L330-L344' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
