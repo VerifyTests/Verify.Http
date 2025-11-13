@@ -20,8 +20,10 @@
     <None Update="target.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <!-- begin-snippet: IncludeResponseFiles -->
     <None Update="sample.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <!-- end-snippet -->
   </ItemGroup>
 </Project>

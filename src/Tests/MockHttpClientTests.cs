@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-
 [TestFixture]
 public class MockHttpClientTests
 {
