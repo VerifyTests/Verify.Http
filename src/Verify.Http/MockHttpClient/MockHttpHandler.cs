@@ -25,9 +25,41 @@ public class MockHttpHandler :
         base.Dispose(disposing);
     }
 
+    public MockHttpHandler(params IEnumerable<string> files) :
+        this(files, false)
+    {
+    }
+
+    public MockHttpHandler(IEnumerable<string> files, bool recording = false)
+    {
+        this.recording = recording;
+        // ReSharper disable once GenericEnumeratorNotDisposed
+        var enumerator = files.GetEnumerator();
+        disposables.Add(enumerator);
+        builder = _ =>
+        {
+            var hasNext = enumerator.MoveNext();
+            if (!hasNext)
+            {
+                throw new("Not enough responses provided");
+            }
+
+            var message = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new FileContent(enumerator.Current)
+            };
+            return message;
+        };
+    }
+    public MockHttpHandler(params IEnumerable<HttpResponseMessage> responses) :
+        this(responses, false)
+    {
+    }
+
     public MockHttpHandler(IEnumerable<HttpResponseMessage> responses, bool recording = false)
     {
         this.recording = recording;
+        // ReSharper disable once GenericEnumeratorNotDisposed
         var enumerator = responses.GetEnumerator();
         disposables.Add(enumerator);
         builder = _ =>
@@ -42,9 +74,16 @@ public class MockHttpHandler :
         };
     }
 
+    public MockHttpHandler(params IEnumerable<HttpStatusCode> statuses)
+        :
+        this(statuses, false)
+    {
+    }
+
     public MockHttpHandler(IEnumerable<HttpStatusCode> statuses, bool recording = false)
     {
         this.recording = recording;
+        // ReSharper disable once GenericEnumeratorNotDisposed
         var enumerator = statuses.GetEnumerator();
         disposables.Add(enumerator);
         builder = _ =>
@@ -86,12 +125,14 @@ public class MockHttpHandler :
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Cancel cancel)
     {
         var response = Add(request);
-        if (recording && Recording.IsRecording())
+        if (recording &&
+            Recording.IsRecording())
         {
             Recording.Add(
                 "httpCall",
                 new HttpCall(request, response, TimeSpan.Zero));
         }
+
         return Task.FromResult(response);
     }
 

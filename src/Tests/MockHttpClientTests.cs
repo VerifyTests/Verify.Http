@@ -76,6 +76,7 @@ public class MockHttpClientTests
     }
 
     #endregion
+
     #region ExplicitStatusCodes
 
     [Test]
@@ -98,6 +99,30 @@ public class MockHttpClientTests
         await client.GetAsync("https://fake/get4");
 
         await Verify();
+    }
+
+    #endregion
+
+    #region ResponseFromFiles
+
+    [Test]
+    public async Task ResponseFromFiles()
+    {
+        using var client = new MockHttpClient(
+            "sample.html",
+            "sample.json",
+            "sample.xml");
+
+        using var content1 = await client.GetAsync("https://fake/get1");
+        using var content2 = await client.GetAsync("https://fake/get2");
+        using var content3 = await client.GetAsync("https://fake/get3");
+
+        await Verify(new
+        {
+            content1,
+            content2,
+            content3
+        });
     }
 
     #endregion
@@ -135,8 +160,8 @@ public class MockHttpClientTests
                 Content = new StringContent("World")
             });
 
-        var result1 = await client.GetAsync("https://fake/get1");
-        var result2 = await client.GetAsync("https://fake/get2");
+        using var result1 = await client.GetAsync("https://fake/get1");
+        using var result2 = await client.GetAsync("https://fake/get2");
 
         await Verify(new
         {
@@ -162,8 +187,8 @@ public class MockHttpClientTests
             return response;
         });
 
-        var result1 = await client.GetAsync("https://fake/get1");
-        var result2 = await client.GetAsync("https://fake/get2");
+        using var result1 = await client.GetAsync("https://fake/get1");
+        using var result2 = await client.GetAsync("https://fake/get2");
 
         await Verify(new
         {
@@ -191,15 +216,15 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var content = new StringContent("the content");
-        var result = await client.PostAsync("https://fake/post", content);
+        using var content = new StringContent("the content");
+        using var result = await client.PostAsync("https://fake/post", content);
 
         await Verify(
-                new
-                {
-                    result,
-                    client
-                });
+            new
+            {
+                result,
+                client
+            });
     }
 
     [TestCase("application/json")]
@@ -208,12 +233,12 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var content = new StringContent(
+        using var content = new StringContent(
             content: """{ "a": "b" }""",
             encoding: Encoding.UTF8,
             mediaType: mediaType);
 
-        var result = await client.PostAsync("https://fake/post", content);
+        using var result = await client.PostAsync("https://fake/post", content);
 
         await Verify(
                 new
@@ -230,13 +255,13 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var content = JsonContent.Create(
+        using var content = JsonContent.Create(
             new
             {
                 a = "b"
             },
             mediaType: MediaTypeHeaderValue.Parse(mediaType));
-        var result = await client.PostAsync("https://fake/post", content);
+        using var result = await client.PostAsync("https://fake/post", content);
 
         await Verify(
                 new
@@ -252,16 +277,16 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var stream = new MemoryStream("the content"u8.ToArray());
-        var content = new StreamContent(stream);
-        var result = await client.PostAsync("https://fake/post", content);
+        await using var stream = new MemoryStream("the content"u8.ToArray());
+        using var content = new StreamContent(stream);
+        using var result = await client.PostAsync("https://fake/post", content);
 
         await Verify(
-                new
-                {
-                    result,
-                    client
-                });
+            new
+            {
+                result,
+                client
+            });
     }
 
     [Test]
@@ -269,22 +294,22 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var memoryStream = new MemoryStream("the content"u8.ToArray());
-        var streamContent = new StreamContent(memoryStream)
+        await using var memoryStream = new MemoryStream("the content"u8.ToArray());
+        using var streamContent = new StreamContent(memoryStream)
         {
             Headers =
             {
                 ContentType = new("application/json")
             }
         };
-        var result = await client.PostAsync("https://fake/post", streamContent);
+        using var result = await client.PostAsync("https://fake/post", streamContent);
 
         await Verify(
-                new
-                {
-                    result,
-                    client
-                });
+            new
+            {
+                result,
+                client
+            });
     }
 
     [Test]
@@ -292,15 +317,15 @@ public class MockHttpClientTests
     {
         using var client = new MockHttpClient();
 
-        var content = new FormUrlEncodedContent([new("a", "b"), new("c", "d")]);
-        var result = await client.PostAsync("https://fake/post", content);
+        using var content = new FormUrlEncodedContent([new("a", "b"), new("c", "d")]);
+        using var result = await client.PostAsync("https://fake/post", content);
 
         await Verify(
-                new
-                {
-                    result,
-                    client
-                });
+            new
+            {
+                result,
+                client
+            });
     }
 
     #region RecordingMockInteractions
