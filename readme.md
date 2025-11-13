@@ -898,7 +898,6 @@ public async Task ResponseFromFiles()
     Status: 200 OK,
     Content: {
       Headers: {
-        Content-Length: 117,
         Content-Type: text/html
       },
       Value:
@@ -920,7 +919,6 @@ public async Task ResponseFromFiles()
     Status: 200 OK,
     Content: {
       Headers: {
-        Content-Length: 52,
         Content-Type: application/json
       },
       Value: {
@@ -934,7 +932,6 @@ public async Task ResponseFromFiles()
     Status: 200 OK,
     Content: {
       Headers: {
-        Content-Length: 133,
         Content-Type: application/xml
       },
       Value: {
@@ -949,7 +946,7 @@ public async Task ResponseFromFiles()
   }
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.ResponseFromFiles.verified.txt#L1-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseFromFiles.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.ResponseFromFiles.verified.txt#L1-L52' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.ResponseFromFiles.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
