@@ -46,11 +46,12 @@ public class MockHttpHandler :
 
             var message = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new FileContent(enumerator.Current)
+                Content = new FileContent(enumerator.Current, SimulateNetworkStream)
             };
             return message;
         };
     }
+
     public MockHttpHandler(params IEnumerable<HttpResponseMessage> responses) :
         this(responses, false)
     {
@@ -74,8 +75,7 @@ public class MockHttpHandler :
         };
     }
 
-    public MockHttpHandler(params IEnumerable<HttpStatusCode> statuses)
-        :
+    public MockHttpHandler(params IEnumerable<HttpStatusCode> statuses) :
         this(statuses, false)
     {
     }
@@ -147,4 +147,6 @@ public class MockHttpHandler :
 
     protected override HttpResponseMessage Send(HttpRequestMessage request, Cancel cancel) =>
         Add(request);
+
+    public bool SimulateNetworkStream { get; set; }
 }
