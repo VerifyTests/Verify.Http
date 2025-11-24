@@ -30,6 +30,18 @@ class FileContent : HttpContent
         }
     }
 
+    protected override Task<Stream> CreateContentReadStreamAsync()
+    {
+        Stream stream = File.OpenRead(path);
+
+        if (simulateNetworkStream)
+        {
+            stream = new NonSeekableStreamWrapper(stream);
+        }
+
+        return Task.FromResult(stream);
+    }
+
     protected override bool TryComputeLength(out long length)
     {
         if (simulateNetworkStream)
@@ -41,4 +53,7 @@ class FileContent : HttpContent
         length = new FileInfo(path).Length;
         return true;
     }
+
+    public string ReadFileAsString() =>
+        File.ReadAllText(path);
 }
