@@ -2,8 +2,15 @@
 
 static class Extensions
 {
-    internal static string ReadAsString(this HttpContent content) =>
-        content.ReadAsStringAsync().GetAwaiter().GetResult();
+    internal static string ReadAsString(this HttpContent content)
+    {
+        if (content is FileContent fileContent)
+        {
+            return fileContent.ReadFileAsString();
+        }
+
+        return content.ReadAsStringAsync().GetAwaiter().GetResult();
+    }
 
     public static Dictionary<string, string> ToDictionary(this HttpHeaders headers) =>
         headers

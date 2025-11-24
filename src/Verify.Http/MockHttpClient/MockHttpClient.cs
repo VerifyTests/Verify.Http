@@ -29,6 +29,7 @@ public class MockHttpClient :
         this(new MockHttpHandler(statuses, recording))
     {
     }
+
     public MockHttpClient(params IEnumerable<string> files) :
         this(files, false)
     {
@@ -59,4 +60,10 @@ public class MockHttpClient :
         this.handler = handler;
 
     public IReadOnlyCollection<HttpCall> Calls => handler.Calls;
+
+    public bool SimulateNetworkStream
+    {
+        get => handler.SimulateNetworkStream;
+        set => handler.SimulateNetworkStream = value;
+    }
 }

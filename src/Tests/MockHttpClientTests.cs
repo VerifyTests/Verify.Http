@@ -342,4 +342,66 @@ public class MockHttpClientTests
     }
 
     #endregion
+
+    [Test]
+    public async Task ResponseHeadersRead_StreamIsNotSeekable()
+    {
+        using var client = new MockHttpClient();
+
+        var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        var content = result.Content;
+        var stream = await content.ReadAsStreamAsync();
+
+        Assert.Throws<NotSupportedException>(() => stream.Position = 1);
+    }
+
+    [Test]
+    public async Task ResponseHeadersRead_LengthIsNotAvaliable()
+    {
+        using var client = new MockHttpClient();
+
+        var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        var content = result.Content;
+        var stream = await content.ReadAsStreamAsync();
+
+        Assert.Throws<NotSupportedException>(() =>
+        {
+            // ReSharper disable once UnusedVariable
+            var x = stream.Length;
+        });
+    }
+
+    [Test]
+    public async Task ResponseHeadersRead_WithFile_StreamIsNotSeekable()
+    {
+        using var client = new MockHttpClient("sample.html")
+        {
+            SimulateNetworkStream = true
+        };
+
+        var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        var content = result.Content;
+        var stream = await content.ReadAsStreamAsync();
+
+        Assert.Throws<NotSupportedException>(() => stream.Position = 1);
+    }
+
+    [Test]
+    public async Task ResponseHeadersRead_WithFile_LengthIsNotAvaliable()
+    {
+        using var client = new MockHttpClient("sample.html")
+        {
+            SimulateNetworkStream = true
+        };
+
+        var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        var content = result.Content;
+        var stream = await content.ReadAsStreamAsync();
+
+        Assert.Throws<NotSupportedException>(() =>
+        {
+            // ReSharper disable once UnusedVariable
+            var x = stream.Length;
+        });
+    }
 }
