@@ -1173,14 +1173,11 @@ using (var reader = new StreamReader(stream))
 
 // Second read returns empty (stream already consumed)
 // Throws NotSupportedException
-Assert.Throws<NotSupportedException>(() =>
-{
-    stream.Position = 0;
-});
+Assert.Throws<NotSupportedException>(() => stream.Position = 0);
 // Returns empty
 var data2 = await response.Content.ReadAsStringAsync();
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L164-L190' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L164-L187' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
