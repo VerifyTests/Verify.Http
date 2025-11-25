@@ -7,7 +7,7 @@ public class SimulateNetworkStreamTests
     {
         #region WithoutSimulateNetworkStream
 
-        using var client = new MockHttpClient();
+        using var client = new MockHttpClient("sample.html");
         using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
         await using var stream = await result.Content.ReadAsStreamAsync();
 
@@ -24,7 +24,7 @@ public class SimulateNetworkStreamTests
     {
         #region WithSimulateNetworkStream
 
-        using var client = new MockHttpClient();
+        using var client = new MockHttpClient("sample.html");
         client.SimulateNetworkStream = true;
         var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
         var stream = await result.Content.ReadAsStreamAsync();
@@ -40,7 +40,7 @@ public class SimulateNetworkStreamTests
     [Test]
     public async Task ResponseHeadersRead_StreamIsNotSeekable()
     {
-        using var client = new MockHttpClient();
+        using var client = new MockHttpClient("sample.html");
 
         using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
         var content = result.Content;
@@ -52,7 +52,7 @@ public class SimulateNetworkStreamTests
     [Test]
     public async Task ResponseHeadersRead_LengthIsNotAvaliable()
     {
-        using var client = new MockHttpClient();
+        using var client = new MockHttpClient("sample.html");
 
         using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
         var content = result.Content;
@@ -100,7 +100,7 @@ public class SimulateNetworkStreamTests
     [Test]
     public async Task VerifyWithSimulateNetworkStream()
     {
-        using var client = new MockHttpClient();
+        using var client = new MockHttpClient("sample.html");
         client.SimulateNetworkStream = true;
 
         var response = await client.GetAsync(
@@ -117,7 +117,7 @@ public class SimulateNetworkStreamTests
     {
         #region ProgressiveReading
 
-        using var client = new MockHttpClient();
+        using var client = new MockHttpClient("sample.html");
         client.SimulateNetworkStream = true;
 
         var response = await client.GetAsync(
@@ -141,6 +141,7 @@ public class SimulateNetworkStreamTests
         #endregion
     }
 
+    // ReSharper disable once UnusedParameter.Local
     static void ProcessChunk(Span<byte> span)
     {
     }
@@ -150,7 +151,7 @@ public class SimulateNetworkStreamTests
     {
         #region ReadOnceBehavior
 
-        using var client = new MockHttpClient();
+        using var client = new MockHttpClient("sample.html");
         client.SimulateNetworkStream = true;
 
         using var response = await client.GetAsync(

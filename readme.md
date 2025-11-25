@@ -1082,7 +1082,7 @@ With `HttpCompletionOption.ResponseHeadersRead`:
 <!-- snippet: WithoutSimulateNetworkStream -->
 <a id='snippet-WithoutSimulateNetworkStream'></a>
 ```cs
-using var client = new MockHttpClient();
+using var client = new MockHttpClient("sample.html");
 using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
 await using var stream = await result.Content.ReadAsStreamAsync();
 
@@ -1100,7 +1100,7 @@ stream.Position = 0;
 <!-- snippet: WithSimulateNetworkStream -->
 <a id='snippet-WithSimulateNetworkStream'></a>
 ```cs
-using var client = new MockHttpClient();
+using var client = new MockHttpClient("sample.html");
 client.SimulateNetworkStream = true;
 var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
 var stream = await result.Content.ReadAsStreamAsync();
@@ -1122,7 +1122,7 @@ IsFalse(stream.CanSeek);
 <!-- snippet: ProgressiveReading -->
 <a id='snippet-ProgressiveReading'></a>
 ```cs
-using var client = new MockHttpClient();
+using var client = new MockHttpClient("sample.html");
 client.SimulateNetworkStream = true;
 
 var response = await client.GetAsync(
@@ -1152,7 +1152,7 @@ while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
 <!-- snippet: ReadOnceBehavior -->
 <a id='snippet-ReadOnceBehavior'></a>
 ```cs
-using var client = new MockHttpClient();
+using var client = new MockHttpClient("sample.html");
 client.SimulateNetworkStream = true;
 
 using var response = await client.GetAsync(
@@ -1176,7 +1176,7 @@ Assert.Throws<NotSupportedException>(() =>
 // Returns empty
 var data2 = await response.Content.ReadAsStringAsync();
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L151-L177' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L152-L178' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1204,7 +1204,7 @@ Use default behavior when:
 [Test]
 public async Task VerifyWithSimulateNetworkStream()
 {
-    using var client = new MockHttpClient();
+    using var client = new MockHttpClient("sample.html");
     client.SimulateNetworkStream = true;
 
     var response = await client.GetAsync(
