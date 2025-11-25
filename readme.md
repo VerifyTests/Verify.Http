@@ -1080,7 +1080,7 @@ With `HttpCompletionOption.ResponseHeadersRead`:
 ### Usage
 
 ```csharp
-var client = new HttpClient(new MockHttpClient())
+var client = new MockHttpClient()
 {
     SimulateNetworkStream = true
 };
@@ -1100,7 +1100,7 @@ Assert.Equal(0, stream.Position); // Cannot get position on network stream
 #### Without SimulateNetworkStream (default)
 
 ```csharp
-var client = new HttpClient(new MockHttpClient());
+var client = new MockHttpClient();
 var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
 var stream = await result.Content.ReadAsStreamAsync();
 
@@ -1113,7 +1113,7 @@ stream.Position = 0; // Can reset
 #### With SimulateNetworkStream=true
 
 ```csharp
-var client = new HttpClient(new MockHttpClient())
+var client = new MockHttpClient()
 {
     SimulateNetworkStream = true
 };
