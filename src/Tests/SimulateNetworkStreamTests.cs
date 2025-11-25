@@ -3,6 +3,41 @@
 public class SimulateNetworkStreamTests
 {
     [Test]
+    public async Task WithoutSimulateNetworkStream()
+    {
+        #region WithoutSimulateNetworkStream
+
+        using var client = new MockHttpClient();
+        using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        await using var stream = await result.Content.ReadAsStreamAsync();
+
+        // Stream is seekable (MemoryStream-like behavior)
+        IsTrue(stream.CanSeek);
+        // Can reset
+        stream.Position = 0;
+
+        #endregion
+    }
+
+    [Test]
+    public async Task WithSimulateNetworkStream()
+    {
+        #region WithSimulateNetworkStream
+
+        using var client = new MockHttpClient();
+        client.SimulateNetworkStream = true;
+        var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        var stream = await result.Content.ReadAsStreamAsync();
+
+        // Stream is non-seekable (real network stream behavior)
+        IsFalse(stream.CanSeek);
+        // stream.Position throws NotSupportedException
+        // Cannot reset or re-read the stream
+
+        #endregion
+    }
+
+    [Test]
     public async Task ResponseHeadersRead_StreamIsNotSeekable()
     {
         using var client = new MockHttpClient();
