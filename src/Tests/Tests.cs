@@ -40,13 +40,8 @@ public class Tests
     [Test]
     public async Task IgnoreAuth()
     {
-        using var client = new HttpClient
-        {
-            DefaultRequestHeaders =
-            {
-                Authorization = new("Basic", "key")
-            }
-        };
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Authorization = new("Basic", "key");
         Recording.Start();
         var result = await client.GetAsync("https://httpcan.org/get");
         await Verify()

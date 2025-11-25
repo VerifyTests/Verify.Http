@@ -95,7 +95,7 @@ public async Task HttpResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L262-L274' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L257-L269' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -195,7 +195,7 @@ public class MyService(HttpClient client)
         client.GetAsync("https://httpcan.org/status/200");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L80-L91' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L75-L86' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -222,7 +222,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L214-L232' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L209-L227' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -248,7 +248,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L191-L208' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L186-L203' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -305,7 +305,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L284-L308' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L279-L303' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -336,7 +336,7 @@ await client.GetAsync("https://httpcan.org/json");
 await Verify(recording.Sends)
     .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L314-L339' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L309-L334' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -379,7 +379,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L125-L152' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L120-L147' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -549,7 +549,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L154-L184' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L149-L179' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1036,7 +1036,7 @@ public async Task RecordingMockInteractions()
     await Verify();
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L330-L344' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L325-L339' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1060,6 +1060,177 @@ public async Task RecordingMockInteractions()
 ```
 <sup><a href='/src/Tests/MockHttpClientTests.RecordingMockInteractions.verified.txt#L1-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-MockHttpClientTests.RecordingMockInteractions.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
+
+## Simulating ResponseHeadersRead
+
+When using `HttpCompletionOption.ResponseHeadersRead` with `HttpClient`, the response content stream behaves differently than the default `ResponseContentRead` option. To properly test code that uses `ResponseHeadersRead`, use the `SimulateNetworkStream=true` setting in `MockHttpClient` or `MockHttpHandler`.
+
+
+### Why This Matters
+
+With `HttpCompletionOption.ResponseHeadersRead`:
+
+- **The stream is not seekable** - `CanSeek` returns `false`
+- **Content is not buffered** - Data is read directly from the network
+- **Single-read only** - The stream cannot be reset or re-read
+- **HttpClient timeout doesn't apply to content reading** - Only applies until headers are received
+
+
+### Usage
+
+```csharp
+var client = new HttpClient(new MockHttpClient())
+{
+    SimulateNetworkStream = true
+};
+
+var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+
+// The response stream will behave like a real network stream:
+var stream = await result.Content.ReadAsStreamAsync();
+Assert.False(stream.CanSeek); // Non-seekable
+Assert.Equal(0, stream.Position); // Cannot get position on network stream
+```
+
+
+### What Gets Simulated
+
+
+#### Without SimulateNetworkStream (default)
+
+```csharp
+var client = new HttpClient(new MockHttpClient());
+var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+var stream = await result.Content.ReadAsStreamAsync();
+
+// Stream is seekable (MemoryStream-like behavior)
+Assert.True(stream.CanSeek);
+stream.Position = 0; // Can reset
+```
+
+
+#### With SimulateNetworkStream=true
+
+```csharp
+var client = new HttpClient(new MockHttpClient())
+{
+    SimulateNetworkStream = true
+};
+var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+var stream = await result.Content.ReadAsStreamAsync();
+
+// Stream is non-seekable (real network stream behavior)
+Assert.False(stream.CanSeek);
+// stream.Position throws NotSupportedException
+// Cannot reset or re-read the stream
+```
+
+
+### Common Testing Scenarios
+
+
+#### Progressive Reading
+
+<!-- snippet: ProgressiveReading -->
+<a id='snippet-ProgressiveReading'></a>
+```cs
+using var client = new MockHttpClient();
+client.SimulateNetworkStream = true;
+
+var response = await client.GetAsync(
+    "https://fake/large-file",
+    HttpCompletionOption.ResponseHeadersRead);
+
+// Read headers first without loading entire content
+response.EnsureSuccessStatusCode();
+var contentLength = response.Content.Headers.ContentLength;
+
+// Then read content progressively
+using var stream = await response.Content.ReadAsStreamAsync();
+var buffer = new byte[8192];
+int bytesRead;
+while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+{
+    // Process chunks as they arrive
+    ProcessChunk(buffer.AsSpan(0, bytesRead));
+}
+```
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L82-L104' title='Snippet source file'>snippet source</a> | <a href='#snippet-ProgressiveReading' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+#### Read-Once Behavior
+
+<!-- snippet: ReadOnceBehavior -->
+<a id='snippet-ReadOnceBehavior'></a>
+```cs
+using var client = new MockHttpClient();
+client.SimulateNetworkStream = true;
+
+var response = await client.GetAsync(
+    "https://fake/data",
+    HttpCompletionOption.ResponseHeadersRead);
+
+var stream = await response.Content.ReadAsStreamAsync();
+
+// First read succeeds
+using (var reader = new StreamReader(stream))
+{
+    var data1 = await reader.ReadToEndAsync();
+}
+
+// Second read returns empty (stream already consumed)
+// Throws NotSupportedException
+Assert.Throws<NotSupportedException>(() =>
+{
+    stream.Position = 0;
+});
+// Returns empty
+var data2 = await response.Content.ReadAsStringAsync();
+```
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L114-L140' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+### When to Use SimulateNetworkStream
+
+Use `SimulateNetworkStream=true` when:
+
+- Testing code that explicitly uses `HttpCompletionOption.ResponseHeadersRead`
+- Testing streaming scenarios (large files, real-time data)
+- Ensuring code handles non-seekable streams correctly
+- Testing progressive download with progress reporting
+- Ensuring proper disposal/cleanup of streams
+
+Use default behavior when:
+
+- Testing standard request/response scenarios
+- Using `HttpCompletionOption.ResponseContentRead` (the default)
+- Testing with `GetStringAsync()`, `GetByteArrayAsync()`, etc.
+
+### Verification Example
+
+<!-- snippet: VerifyWithSimulateNetworkStream -->
+<a id='snippet-VerifyWithSimulateNetworkStream'></a>
+```cs
+[Test]
+public async Task VerifyWithSimulateNetworkStream()
+{
+    using var client = new MockHttpClient();
+    client.SimulateNetworkStream = true;
+
+    var response = await client.GetAsync(
+        "https://fake/api/data",
+        HttpCompletionOption.ResponseHeadersRead);
+
+    await Verify(response);
+}
+```
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L64-L77' title='Snippet source file'>snippet source</a> | <a href='#snippet-VerifyWithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+This ensures tests accurately reflect production behavior when using `ResponseHeadersRead`.
 
 
 ## Icon
