@@ -8,7 +8,9 @@ public class SimulateNetworkStreamTests
         #region WithoutSimulateNetworkStream
 
         using var client = new MockHttpClient("sample.html");
-        using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        using var result = await client.GetAsync(
+            "https://fake/get",
+            HttpCompletionOption.ResponseHeadersRead);
         await using var stream = await result.Content.ReadAsStreamAsync();
 
         // Stream is seekable (MemoryStream-like behavior)
@@ -26,7 +28,9 @@ public class SimulateNetworkStreamTests
 
         using var client = new MockHttpClient("sample.html");
         client.SimulateNetworkStream = true;
-        var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        var result = await client.GetAsync(
+            "https://fake/get",
+            HttpCompletionOption.ResponseHeadersRead);
         var stream = await result.Content.ReadAsStreamAsync();
 
         // Stream is non-seekable (real network stream behavior)
@@ -42,7 +46,9 @@ public class SimulateNetworkStreamTests
     {
         using var client = new MockHttpClient("sample.html");
 
-        using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        using var result = await client.GetAsync(
+            "https://fake/get",
+            HttpCompletionOption.ResponseHeadersRead);
         var content = result.Content;
         await using var stream = await content.ReadAsStreamAsync();
 
@@ -54,7 +60,9 @@ public class SimulateNetworkStreamTests
     {
         using var client = new MockHttpClient("sample.html");
 
-        using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        using var result = await client.GetAsync(
+            "https://fake/get",
+            HttpCompletionOption.ResponseHeadersRead);
         var content = result.Content;
         await using var stream = await content.ReadAsStreamAsync();
 
@@ -71,7 +79,9 @@ public class SimulateNetworkStreamTests
         using var client = new MockHttpClient("sample.html");
         client.SimulateNetworkStream = true;
 
-        using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        using var result = await client.GetAsync(
+            "https://fake/get",
+            HttpCompletionOption.ResponseHeadersRead);
         var content = result.Content;
         await using var stream = await content.ReadAsStreamAsync();
 
@@ -84,7 +94,9 @@ public class SimulateNetworkStreamTests
         using var client = new MockHttpClient("sample.html");
         client.SimulateNetworkStream = true;
 
-        using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+        using var result = await client.GetAsync(
+            "https://fake/get",
+            HttpCompletionOption.ResponseHeadersRead);
         var content = result.Content;
         var stream = await content.ReadAsStreamAsync();
 
@@ -168,10 +180,7 @@ public class SimulateNetworkStreamTests
 
         // Second read returns empty (stream already consumed)
         // Throws NotSupportedException
-        Assert.Throws<NotSupportedException>(() =>
-        {
-            stream.Position = 0;
-        });
+        Assert.Throws<NotSupportedException>(() => stream.Position = 0);
         // Returns empty
         var data2 = await response.Content.ReadAsStringAsync();
 

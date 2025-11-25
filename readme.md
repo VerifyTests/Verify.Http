@@ -1083,7 +1083,9 @@ With `HttpCompletionOption.ResponseHeadersRead`:
 <a id='snippet-WithoutSimulateNetworkStream'></a>
 ```cs
 using var client = new MockHttpClient("sample.html");
-using var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+using var result = await client.GetAsync(
+    "https://fake/get",
+    HttpCompletionOption.ResponseHeadersRead);
 await using var stream = await result.Content.ReadAsStreamAsync();
 
 // Stream is seekable (MemoryStream-like behavior)
@@ -1091,7 +1093,7 @@ IsTrue(stream.CanSeek);
 // Can reset
 stream.Position = 0;
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L8-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithoutSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L8-L21' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithoutSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1102,7 +1104,9 @@ stream.Position = 0;
 ```cs
 using var client = new MockHttpClient("sample.html");
 client.SimulateNetworkStream = true;
-var result = await client.GetAsync("https://fake/get", HttpCompletionOption.ResponseHeadersRead);
+var result = await client.GetAsync(
+    "https://fake/get",
+    HttpCompletionOption.ResponseHeadersRead);
 var stream = await result.Content.ReadAsStreamAsync();
 
 // Stream is non-seekable (real network stream behavior)
@@ -1110,7 +1114,7 @@ IsFalse(stream.CanSeek);
 // stream.Position throws NotSupportedException
 // Cannot reset or re-read the stream
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L25-L37' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L27-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1143,7 +1147,7 @@ while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
     ProcessChunk(buffer.AsSpan(0, bytesRead));
 }
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L118-L141' title='Snippet source file'>snippet source</a> | <a href='#snippet-ProgressiveReading' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L130-L153' title='Snippet source file'>snippet source</a> | <a href='#snippet-ProgressiveReading' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1176,7 +1180,7 @@ Assert.Throws<NotSupportedException>(() =>
 // Returns empty
 var data2 = await response.Content.ReadAsStringAsync();
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L152-L178' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L164-L190' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1214,7 +1218,7 @@ public async Task VerifyWithSimulateNetworkStream()
     await Verify(response);
 }
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L98-L113' title='Snippet source file'>snippet source</a> | <a href='#snippet-VerifyWithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L110-L125' title='Snippet source file'>snippet source</a> | <a href='#snippet-VerifyWithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 This ensures tests accurately reflect production behavior when using `ResponseHeadersRead`.
