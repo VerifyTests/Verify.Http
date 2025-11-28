@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="ProjectFiles" />
     <PackageReference Include="Verify.AngleSharp" />
     <PackageReference Include="Verify.DiffPlex" />
     <PackageReference Include="MarkdownSnippets.MsBuild" PrivateAssets="all" />
