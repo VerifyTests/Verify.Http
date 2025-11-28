@@ -5,7 +5,7 @@ public class RequestCombos
     [Explicit]
     public void Purge()
     {
-        var path = Path.Combine(AttributeReader.GetProjectDirectory(), "RequestCombos");
+        var path = Path.Combine(ProjectFiles.ProjectDirectory, "RequestCombos");
         foreach (var file in Directory.EnumerateFiles(path, "*.txt"))
         {
             File.Delete(file);

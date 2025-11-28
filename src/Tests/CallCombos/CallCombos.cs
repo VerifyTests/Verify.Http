@@ -5,7 +5,7 @@ public class CallCombos
     [Explicit]
     public void Purge()
     {
-        var path = Path.Combine(AttributeReader.GetProjectDirectory(), "CallCombos");
+        var path = Path.Combine(ProjectFiles.ProjectDirectory, "CallCombos");
         foreach (var file in Directory.EnumerateFiles(path, "*.txt"))
         {
             File.Delete(file);

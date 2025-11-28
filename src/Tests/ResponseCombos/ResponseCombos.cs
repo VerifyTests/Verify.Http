@@ -5,7 +5,7 @@ public class ResponseCombos
     [Explicit]
     public void Purge()
     {
-        var path = Path.Combine(AttributeReader.GetProjectDirectory(), "ResponseCombos");
+        var path = Path.Combine(ProjectFiles.ProjectDirectory, "ResponseCombos");
         foreach (var file in Directory.EnumerateFiles(path, "*.txt"))
         {
             File.Delete(file);
