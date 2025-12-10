@@ -18,11 +18,11 @@
     <ProjectReference Include="..\Verify.Http\Verify.Http.csproj" />
     <PackageReference Include="ProjectDefaults" PrivateAssets="all" />
     <Using Include="NUnit.Framework.Legacy.ClassicAssert" Static="True" />
-    <None Update="target.*">
+    <None Include="target.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <!-- begin-snippet: IncludeResponseFiles -->
-    <None Update="sample.*">
+    <None Include="sample.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <!-- end-snippet -->

@@ -851,7 +851,7 @@ Files can be included in the test directory:
 <!-- snippet: IncludeResponseFiles -->
 <a id='snippet-IncludeResponseFiles'></a>
 ```csproj
-<None Update="sample.*">
+<None Include="sample.*">
   <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 </None>
 ```
