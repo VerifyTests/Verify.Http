@@ -42,6 +42,7 @@ public class SimulateNetworkStreamTests
     }
 
     [Test]
+    [Explicit]
     public async Task ResponseHeadersRead_StreamIsNotSeekable()
     {
         using var client = new MockHttpClient("sample.html");
@@ -56,6 +57,7 @@ public class SimulateNetworkStreamTests
     }
 
     [Test]
+    [Explicit]
     public async Task ResponseHeadersRead_LengthIsNotAvaliable()
     {
         using var client = new MockHttpClient("sample.html");

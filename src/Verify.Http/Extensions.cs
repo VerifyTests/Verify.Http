@@ -20,7 +20,8 @@ static class Extensions
         headers
             .OrderBy(_ => _.Key.ToLowerInvariant())
             .ToDictionary(
-                _ => _.Key, object (_) =>
+                _ => _.Key,
+                object (_) =>
                 {
                     var values = _.Value.ToList();
                     var key = _.Key.ToLowerInvariant();
