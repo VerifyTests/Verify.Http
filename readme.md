@@ -855,7 +855,7 @@ Files can be included in the test directory:
   <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 </None>
 ```
-<sup><a href='/src/Tests/Tests.csproj#L24-L28' title='Snippet source file'>snippet source</a> | <a href='#snippet-IncludeResponseFiles' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.csproj#L29-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-IncludeResponseFiles' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Using files in a mock:
