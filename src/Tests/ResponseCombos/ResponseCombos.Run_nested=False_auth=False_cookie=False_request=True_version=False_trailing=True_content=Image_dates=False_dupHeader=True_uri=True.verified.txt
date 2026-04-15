@@ -9,7 +9,7 @@
     },
     Content: {
       Headers: {
-        Content-Length: 119,
+        Content-Length: 69,
         Content-Type: image/png
       }
     }
@@ -21,7 +21,7 @@
     },
     Content: {
       Headers: {
-        Content-Length: 119,
+        Content-Length: 69,
         Content-Type: image/png
       }
     }
