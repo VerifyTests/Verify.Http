@@ -10,7 +10,7 @@
     },
     Content: {
       Headers: {
-        Content-Length: 69,
+        Content-Length: 67,
         Content-Type: image/png,
         Expires: DateTime_1,
         Last-Modified: DateTime_1

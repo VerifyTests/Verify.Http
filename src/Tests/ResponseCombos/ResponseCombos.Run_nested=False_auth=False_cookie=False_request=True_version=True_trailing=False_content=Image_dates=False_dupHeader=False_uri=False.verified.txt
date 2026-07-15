@@ -4,7 +4,7 @@
     Status: 202 Accepted,
     Content: {
       Headers: {
-        Content-Length: 69,
+        Content-Length: 67,
         Content-Type: image/png
       }
     }
@@ -14,7 +14,7 @@
     VersionPolicy: RequestVersionExact,
     Content: {
       Headers: {
-        Content-Length: 69,
+        Content-Length: 67,
         Content-Type: image/png
       }
     }

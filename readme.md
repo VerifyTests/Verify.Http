@@ -113,7 +113,7 @@ public async Task HttpResponse()
   Headers: {
     Access-Control-Allow-Credentials: true,
     Alt-Svc: h3=":443",
-    cf-cache-status: DYNAMIC,
+    Cf-Cache-Status: DYNAMIC,
     Connection: keep-alive,
     Date: DateTime_1,
     Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
@@ -269,7 +269,7 @@ await Verify(recording.Sends)
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
       Alt-Svc: h3=":443",
-      cf-cache-status: DYNAMIC,
+      Cf-Cache-Status: DYNAMIC,
       Connection: keep-alive,
       Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
       Server: cloudflare,
@@ -410,7 +410,7 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Credentials: true,
           Alt-Svc: h3=":443",
-          cf-cache-status: DYNAMIC,
+          Cf-Cache-Status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
@@ -454,7 +454,7 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Credentials: true,
           Alt-Svc: h3=":443",
-          cf-cache-status: DYNAMIC,
+          Cf-Cache-Status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
@@ -472,8 +472,7 @@ The requests/response pairs will be appended to the verified file.
           slideshow: {
             @title: Sample Slide Show,
             @date: Date of publication,
-            @author: Yours Truly,
-            #comment: [],
+            @author: Yours Truly/* TITLE SLIDE *//* OVERVIEW */,
             slide: [
               {
                 @type: all,
@@ -508,7 +507,7 @@ The requests/response pairs will be appended to the verified file.
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L113' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L112' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

@@ -31,7 +31,7 @@
       Headers: {
         Access-Control-Allow-Credentials: true,
         Alt-Svc: h3=":443",
-        cf-cache-status: DYNAMIC,
+        Cf-Cache-Status: DYNAMIC,
         Connection: keep-alive,
         Date: DateTime_1,
         Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},

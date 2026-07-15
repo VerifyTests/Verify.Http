@@ -6,7 +6,7 @@
     },
     Content: {
       Headers: {
-        Content-Length: 69,
+        Content-Length: 67,
         Content-Type: image/png
       }
     }
@@ -15,7 +15,7 @@
     Uri: https://site/path,
     Content: {
       Headers: {
-        Content-Length: 69,
+        Content-Length: 67,
         Content-Type: image/png
       }
     }

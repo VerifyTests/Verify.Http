@@ -14,7 +14,7 @@
         Headers: {
           Access-Control-Allow-Credentials: true,
           Alt-Svc: h3=":443",
-          cf-cache-status: DYNAMIC,
+          Cf-Cache-Status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
@@ -58,7 +58,7 @@
         Headers: {
           Access-Control-Allow-Credentials: true,
           Alt-Svc: h3=":443",
-          cf-cache-status: DYNAMIC,
+          Cf-Cache-Status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
@@ -76,8 +76,7 @@
           slideshow: {
             @title: Sample Slide Show,
             @date: Date of publication,
-            @author: Yours Truly,
-            #comment: [],
+            @author: Yours Truly/* TITLE SLIDE *//* OVERVIEW */,
             slide: [
               {
                 @type: all,
