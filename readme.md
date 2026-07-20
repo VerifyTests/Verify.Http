@@ -113,7 +113,7 @@ public async Task HttpResponse()
   Headers: {
     Access-Control-Allow-Credentials: true,
     Alt-Svc: h3=":443",
-    Cf-Cache-Status: DYNAMIC,
+    cf-cache-status: DYNAMIC,
     Connection: keep-alive,
     Date: DateTime_1,
     Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
@@ -269,7 +269,7 @@ await Verify(recording.Sends)
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
       Alt-Svc: h3=":443",
-      Cf-Cache-Status: DYNAMIC,
+      cf-cache-status: DYNAMIC,
       Connection: keep-alive,
       Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
       Server: cloudflare,

@@ -2,7 +2,7 @@
   Status: 200 OK,
   Headers: {
     Alt-Svc: h3=":443",
-    Cf-Cache-Status: DYNAMIC,
+    cf-cache-status: DYNAMIC,
     Connection: keep-alive,
     Date: DateTime_1,
     Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
