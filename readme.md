@@ -410,7 +410,7 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Credentials: true,
           Alt-Svc: h3=":443",
-          Cf-Cache-Status: DYNAMIC,
+          cf-cache-status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
@@ -454,7 +454,7 @@ The requests/response pairs will be appended to the verified file.
         Headers: {
           Access-Control-Allow-Credentials: true,
           Alt-Svc: h3=":443",
-          Cf-Cache-Status: DYNAMIC,
+          cf-cache-status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
