@@ -14,6 +14,7 @@
       Via: 1.1 varnish,
       X-Content-Type-Options: nosniff,
       X-Frame-Options: deny,
+      x-github-edge-region: iad,
       X-XSS-Protection: 1; mode=block
     },
     Content: {
