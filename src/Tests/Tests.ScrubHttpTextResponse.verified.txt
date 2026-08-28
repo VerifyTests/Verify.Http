@@ -2,6 +2,7 @@
   Status: 200 OK,
   Headers: {
     Access-Control-Allow-Credentials: true,
+    Access-Control-Expose-Headers: www-authenticate,
     Alt-Svc: h3=":443",
     cf-cache-status: DYNAMIC,
     Connection: keep-alive,
@@ -9,7 +10,8 @@
     Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
     Server: cloudflare,
     Transfer-Encoding: chunked,
-    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,accept-encoding
+    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,accept-encoding,
+    x-httpcan-version: 0.8.1
   },
   Content: {
     Headers: {
@@ -38,7 +40,7 @@
           He was an old man, who, at the age of nearly sixty, had postponedly encountered that thing in sorrow's technicals called ruin. He had been an artisan of famed excellence, and with plenty to do; owned a house and garden; embraced a youthful, daughter-like, loving wife, and three blithe, ruddy children; every Sunday went to a cheerful-looking church, planted in a grove. But one night, under cover of darkness, and further concealed in a most cunning disguisement, a desperate burglar slid into his happy home, and robbed them all of everything. And darker yet to tell, the blacksmith himself did ignorantly conduct this burglar into his family's heart. It was the Bottle Conjuror! Upon the opening of that fatal cork, forth flew the fiend, and shrivelled up his home. Now, for prudent, most wise, and economic reasons, the blacksmith's shop was in the basement of his dwelling, but with a separate entrance to it; so that always had the young and loving healthy wife listened with no unhappy nervousness, but with vigorous pleasure, to the stout ringing of her young-armed old husband's hammer; whose reverberations, muffled by passing into her ears the sweet home sounds, came to her not ungratefully in the roarings of the forge; only before that, and after that, the forge was but an uncomfortable part of this old man's story.
         </p>
       </div>
-  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"13dae3fae7df41c8b1cbee729c54b565","r":1}' crossorigin="anonymous"></script>
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"13dae3fae7df41c8b1cbee729c54b565","r":1}' crossorigin="anonymous"></script>
 </body>
 </html>
   }
