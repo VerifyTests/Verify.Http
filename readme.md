@@ -112,13 +112,15 @@ public async Task HttpResponse()
   Status: 200 OK,
   Headers: {
     Access-Control-Allow-Credentials: true,
+    Access-Control-Expose-Headers: www-authenticate,
     Alt-Svc: h3=":443",
     cf-cache-status: DYNAMIC,
     Connection: keep-alive,
     Date: DateTime_1,
     Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
     Server: cloudflare,
-    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
+    x-httpcan-version: 0.8.1
   },
   Content: {
     Headers: {
@@ -149,7 +151,7 @@ public async Task HttpResponse()
   }
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -268,18 +270,20 @@ await Verify(recording.Sends)
     ResponseStatus: OK 200,
     ResponseHeaders: {
       Access-Control-Allow-Credentials: true,
+      Access-Control-Expose-Headers: www-authenticate,
       Alt-Svc: h3=":443",
       cf-cache-status: DYNAMIC,
       Connection: keep-alive,
       Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
       Server: cloudflare,
-      Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers
+      Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers,
+      x-httpcan-version: 0.8.1
     },
     ResponseContent: {"status":200}
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L17' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -409,12 +413,14 @@ The requests/response pairs will be appended to the verified file.
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
+          Access-Control-Expose-Headers: www-authenticate,
           Alt-Svc: h3=":443",
           cf-cache-status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
-          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
+          x-httpcan-version: 0.8.1
         },
         ContentHeaders: {
           Content-Length: 274,
@@ -453,12 +459,14 @@ The requests/response pairs will be appended to the verified file.
         Status: 200 OK,
         Headers: {
           Access-Control-Allow-Credentials: true,
+          Access-Control-Expose-Headers: www-authenticate,
           Alt-Svc: h3=":443",
           cf-cache-status: DYNAMIC,
           Connection: keep-alive,
           Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
           Server: cloudflare,
-          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
+          x-httpcan-version: 0.8.1
         },
         ContentHeaders: {
           Content-Length: 518,
@@ -507,7 +515,7 @@ The requests/response pairs will be appended to the verified file.
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L112' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
