@@ -13,12 +13,12 @@
     <PackageReference Include="Verify.AngleSharp" />
     <PackageReference Include="Verify.DiffPlex" />
     <PackageReference Include="MarkdownSnippets.MsBuild" PrivateAssets="all" />
-    <PackageReference Include="Verify.NUnit" />
+    <PackageReference Include="Verify.NUnit" VersionOverride="33.0.0-beta.3" />
     <PackageReference Include="Argon" />
     <PackageReference Include="DiffEngine" />
     <PackageReference Include="EmptyFiles" />
     <PackageReference Include="SimpleInfoName" />
-    <PackageReference Include="Verify" />
+    <PackageReference Include="Verify" VersionOverride="33.0.0-beta.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <ProjectReference Include="..\Verify.Http\Verify.Http.csproj" />
     <PackageReference Include="ProjectDefaults" PrivateAssets="all" />
