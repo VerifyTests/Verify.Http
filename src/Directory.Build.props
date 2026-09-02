@@ -1,7 +1,7 @@
 
 <Project>
   <PropertyGroup>
-    <NoWarn>CS1591;CS0649;CS8632;NU1608;NU1109</NoWarn>
+    <NoWarn>CS1591;CS0649;CS8632;NU1608;NU1109;SC023</NoWarn>
     <Version>7.5.1</Version>
     <LangVersion>preview</LangVersion>
     <AssemblyVersion>1.0.0</AssemblyVersion>
@@ -11,5 +11,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <Verify_SponsorshipLicenseIgnored>true</Verify_SponsorshipLicenseIgnored>
   </PropertyGroup>
 </Project>
