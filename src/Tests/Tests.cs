@@ -27,9 +27,9 @@ public class Tests
     [Test]
     public async Task ScrubHttpTextResponse()
     {
-        using var client = new HttpClient();
+        using var client = new MockHttpClient("sample.moby.html");
 
-        using var result = await client.GetAsync("https://httpcan.org/html");
+        using var result = await client.GetAsync("https://fake/html");
 
         await Verify(result)
             .ScrubHttpTextResponse(_ => _.Replace("Herman Melville - Moby-Dick", "New title"));
