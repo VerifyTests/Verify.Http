@@ -56,9 +56,9 @@ Or, if order of plugins is important, use `VerifyHttp.Initialize()` in a `[Modul
 [Test]
 public async Task ScrubHttpTextResponse()
 {
-    using var client = new HttpClient();
+    using var client = new MockHttpClient("sample.moby.html");
 
-    using var result = await client.GetAsync("https://httpcan.org/html");
+    using var result = await client.GetAsync("https://fake/html");
 
     await Verify(result)
         .ScrubHttpTextResponse(_ => _.Replace("Herman Melville - Moby-Dick", "New title"));
