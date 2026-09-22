@@ -4,7 +4,6 @@
   },
   httpCall: [
     {
-      Status: Created,
       Request: {
         Uri: https://httpcan.org/json,
         Headers: {}
@@ -50,7 +49,6 @@
       }
     },
     {
-      Status: Created,
       Request: {
         Uri: https://httpcan.org/xml,
         Headers: {}

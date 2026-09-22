@@ -21,7 +21,6 @@
     }
   },
   httpCall: {
-    Status: Created,
     Request: {
       Uri: https://httpcan.org/json,
       Headers: {}

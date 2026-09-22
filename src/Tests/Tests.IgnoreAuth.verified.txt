@@ -1,6 +1,5 @@
 ﻿{
   httpCall: {
-    Status: Created,
     Request: {
       Uri: https://httpcan.org/get,
       Headers: {

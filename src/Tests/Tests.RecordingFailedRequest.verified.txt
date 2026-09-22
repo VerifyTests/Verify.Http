@@ -1,0 +1,9 @@
+﻿{
+  httpCall: {
+    Status: Faulted,
+    Request: {
+      Uri: https://fake/get,
+      Headers: {}
+    }
+  }
+}

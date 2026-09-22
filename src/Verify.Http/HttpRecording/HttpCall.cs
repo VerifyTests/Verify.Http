@@ -2,10 +2,13 @@
 
 public class HttpCall
 {
-    public HttpCall(HttpRequestMessage request, HttpResponseMessage response, TimeSpan? duration = null, TaskStatus? status = null)
+    public HttpCall(HttpRequestMessage request, HttpResponseMessage? response, TimeSpan? duration = null, TaskStatus? status = null)
     {
         Request = new(request);
-        Response = new(response);
+        if (response != null)
+        {
+            Response = new(response);
+        }
 
         if (status != TaskStatus.RanToCompletion)
         {
@@ -21,5 +24,5 @@ public class HttpCall
 
     public HttpRequest Request { get; }
 
-    public HttpResponse Response { get; }
+    public HttpResponse? Response { get; }
 }

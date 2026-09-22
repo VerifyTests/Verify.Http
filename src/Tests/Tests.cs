@@ -72,6 +72,25 @@ public class Tests
         await Verify(result);
     }
 
+    [Test]
+    public async Task RecordingFailedRequest()
+    {
+        var exception = new InvalidOperationException("connect failed");
+        using var client = new HttpClient(
+            new SocketsHttpHandler
+            {
+                ConnectCallback = (_, _) => throw exception
+            });
+
+        Recording.Start();
+
+        var thrown = Assert.ThrowsAsync<HttpRequestException>(
+            () => client.GetAsync("https://fake/get"));
+        AreSame(exception, thrown!.InnerException);
+
+        await Verify();
+    }
+
     #region ServiceThatDoesHttp
 
     // Resolve a HttpClient. All http calls done at any
@@ -385,7 +404,7 @@ public class Tests
         }
 
         [DiagnosticName("System.Net.Http.HttpRequestOut.Stop")]
-        public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage response, TaskStatus status)
+        public virtual void OnHttpRequestOutStop(HttpRequestMessage request, HttpResponseMessage? response, TaskStatus requestTaskStatus)
         {
         }
     }
