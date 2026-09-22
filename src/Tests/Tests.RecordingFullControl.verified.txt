@@ -1,20 +1,13 @@
 ﻿[
   {
-    RequestUri: https://httpcan.org/json,
+    RequestUri: https://fake/json,
     RequestMethod: GET,
     ResponseStatus: OK 200,
-    ResponseHeaders: {
-      Access-Control-Allow-Credentials: true,
-      Access-Control-Expose-Headers: www-authenticate,
-      Alt-Svc: h3=":443",
-      cf-cache-status: DYNAMIC,
-      Connection: keep-alive,
-      Date: DateTime_1,
-      Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
-      Server: cloudflare,
-      Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers,
-      x-httpcan-version: 0.8.1
-    },
-    ResponseContent: {"slideshow":{"author":"Yours Truly","date":"date of publication","slides":[{"title":"Wake up to WonderWidgets!","type":"all"},{"items":["Why <em>WonderWidgets</em> are great","Who <em>buys</em> WonderWidgets"],"title":"Overview","type":"all"}],"title":"Sample Slide Show"}}
+    ResponseContent:
+{
+  "name":"John",
+  "age":30,
+  "car":null
+}
   }
 ]

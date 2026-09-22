@@ -1,7 +1,7 @@
 ﻿{
-  responseSize: 792,
+  responseSize: 179,
   httpCalls: [
-    https://httpcan.org/json,
-    https://httpcan.org/xml
+    http://test-server/json,
+    http://test-server/xml
   ]
 }

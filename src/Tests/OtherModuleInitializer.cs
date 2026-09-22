@@ -1,7 +1,10 @@
 ﻿public static class OtherModuleInitializer
 {
     [ModuleInitializer]
-    public static void Initialize() =>
+    public static void Initialize()
+    {
+        // TestServer listens on a random port
+        VerifierSettings.AddScrubber(_ => _.Replace(TestServer.Root, "http://test-server"));
         VerifierSettings.IgnoreMembers(
             "X-Fastly-Request-ID",
             "X-GitHub-Request-Id",
@@ -17,4 +20,5 @@
             "X-Cache",
             "X-Timer",
             "ETag");
+    }
 }

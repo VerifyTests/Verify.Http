@@ -9,9 +9,16 @@ public class Tests
     [Test]
     public async Task IgnoreHeader()
     {
-        using var client = new HttpClient();
+        var response = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent("{\"status\":200}", Encoding.UTF8, "application/json")
+        };
+        response.Headers.Add("Server", "test-server");
+        response.Headers.Add("Access-Control-Allow-Credentials", "true");
+        response.Headers.Add("Vary", "Origin");
+        using var client = new MockHttpClient(response);
 
-        using var result = await client.GetAsync("https://httpcan.org/get");
+        using var result = await client.GetAsync("https://fake/get");
 
         await Verify(result)
             .IgnoreMembers(
@@ -43,7 +50,7 @@ public class Tests
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Authorization = new("Basic", "key");
         Recording.Start();
-        var result = await client.GetAsync("https://httpcan.org/get");
+        var result = await client.GetAsync($"{TestServer.Root}/get");
         await Verify()
             .IgnoreMember("Content-Length");
     }
@@ -55,7 +62,7 @@ public class Tests
 
         using var client = new HttpClient();
 
-        var result = await client.GetStringAsync("https://httpcan.org/json");
+        var result = await client.GetStringAsync($"{TestServer.Root}/json");
 
         await VerifyJson(result);
     }
@@ -67,7 +74,7 @@ public class Tests
 
         using var client = new HttpClient();
 
-        var result = await client.GetStringAsync("https://httpcan.org/json");
+        var result = await client.GetStringAsync($"{TestServer.Root}/json");
 
         await Verify(result);
     }
@@ -99,7 +106,7 @@ public class Tests
     {
         public Task MethodThatDoesHttp() =>
             // Some code that does some http calls
-            client.GetAsync("https://httpcan.org/status/200");
+            client.GetAsync("https://fake/status/200");
     }
 
     #endregion
@@ -158,8 +165,8 @@ public class Tests
     {
         using var client = new HttpClient();
 
-        var jsonResult = await client.GetStringAsync("https://httpcan.org/json");
-        var ymlResult = await client.GetStringAsync("https://httpcan.org/xml");
+        var jsonResult = await client.GetStringAsync($"{TestServer.Root}/json");
+        var ymlResult = await client.GetStringAsync($"{TestServer.Root}/xml");
         return jsonResult.Length + ymlResult.Length;
     }
 
@@ -202,9 +209,10 @@ public class Tests
     [Test]
     public async Task HttpClientRecordingGlobal()
     {
+        var collection = StatusCollection();
+
         #region HttpClientRecordingGlobal
 
-        var collection = new ServiceCollection();
         collection.AddScoped<MyService>();
 
         // Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
@@ -225,9 +233,10 @@ public class Tests
     [Test]
     public async Task HttpClientRecording()
     {
+        var collection = StatusCollection();
+
         #region HttpClientRecording
 
-        var collection = new ServiceCollection();
         collection.AddScoped<MyService>();
         var httpBuilder = collection.AddHttpClient<MyService>();
 
@@ -266,9 +275,9 @@ public class Tests
     [Test]
     public async Task ImageHttpResponse()
     {
-        using var client = new HttpClient();
+        using var client = new MockHttpClient("sample.png");
 
-        var result = await client.GetAsync("https://raw.githubusercontent.com/VerifyTests/Verify/main/src/icon.png");
+        var result = await client.GetAsync("https://fake/icon.png");
 
         await Verify(result);
     }
@@ -278,9 +287,9 @@ public class Tests
     [Test]
     public async Task HttpResponse()
     {
-        using var client = new HttpClient();
+        using var client = new MockHttpClient("sample.json");
 
-        var result = await client.GetAsync("https://httpcan.org/json");
+        var result = await client.GetAsync("https://fake/json");
 
         await Verify(result);
     }
@@ -295,9 +304,10 @@ public class Tests
     [Test]
     public async Task PauseResume()
     {
+        var collection = StatusCollection();
+
         #region HttpClientPauseResume
 
-        var collection = new ServiceCollection();
         collection.AddScoped<MyService>();
         var httpBuilder = collection.AddHttpClient<MyService>();
 
@@ -325,9 +335,9 @@ public class Tests
     [Test]
     public async Task RecordingFullControl()
     {
-        #region HttpClientRecordingExplicit
+        var collection = MockCollection(() => new MockHttpHandler(["sample.html", "sample.json"]));
 
-        var collection = new ServiceCollection();
+        #region HttpClientRecordingExplicit
 
         var builder = collection.AddHttpClient("name");
 
@@ -342,10 +352,10 @@ public class Tests
 
         var client = factory.CreateClient("name");
 
-        await client.GetAsync("https://httpcan.org/html");
+        await client.GetAsync("https://fake/html");
 
         recording.Resume();
-        await client.GetAsync("https://httpcan.org/json");
+        await client.GetAsync("https://fake/json");
 
         await Verify(recording.Sends)
             .ScrubInlineDateTimes("R");
@@ -353,12 +363,23 @@ public class Tests
         #endregion
     }
 
+    // Serve responses from a mock primary handler rather than the network
+    static ServiceCollection MockCollection(Func<HttpMessageHandler> primaryHandler)
+    {
+        var collection = new ServiceCollection();
+        collection.ConfigureHttpClientDefaults(_ => _.ConfigurePrimaryHttpMessageHandler(primaryHandler));
+        return collection;
+    }
+
+    static ServiceCollection StatusCollection() =>
+        MockCollection(() => new MockHttpHandler("{\"status\":200}", "application/json"));
+
     [Test]
     public async Task WithOwnListener()
     {
         using var _ = DiagnosticListener.AllListeners.Subscribe(new MyListener());
         using var client = new HttpClient();
-        using var response = await client.GetAsync("https://httpcan.org/json");
+        using var response = await client.GetAsync($"{TestServer.Root}/json");
         await Verify(response.StatusCode);
     }
 

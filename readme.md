@@ -64,7 +64,7 @@ public async Task ScrubHttpTextResponse()
         .ScrubHttpTextResponse(_ => _.Replace("Herman Melville - Moby-Dick", "New title"));
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L25-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L32-L45' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -92,14 +92,14 @@ For example:
 [Test]
 public async Task HttpResponse()
 {
-    using var client = new HttpClient();
+    using var client = new MockHttpClient("sample.json");
 
-    var result = await client.GetAsync("https://httpcan.org/json");
+    var result = await client.GetAsync("https://fake/json");
 
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L276-L288' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L285-L297' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -110,48 +110,20 @@ public async Task HttpResponse()
 ```txt
 {
   Status: 200 OK,
-  Headers: {
-    Access-Control-Allow-Credentials: true,
-    Access-Control-Expose-Headers: www-authenticate,
-    Alt-Svc: h3=":443",
-    cf-cache-status: DYNAMIC,
-    Connection: keep-alive,
-    Date: DateTime_1,
-    Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
-    Server: cloudflare,
-    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
-    x-httpcan-version: 0.8.1
-  },
   Content: {
     Headers: {
-      Content-Length: 274,
+      Content-Length: 52,
       Content-Type: application/json
     },
     Value: {
-      slideshow: {
-        author: Yours Truly,
-        date: date of publication,
-        slides: [
-          {
-            title: Wake up to WonderWidgets!,
-            type: all
-          },
-          {
-            items: [
-              Why <em>WonderWidgets</em> are great,
-              Who <em>buys</em> WonderWidgets
-            ],
-            title: Overview,
-            type: all
-          }
-        ],
-        title: Sample Slide Show
-      }
+      name: John,
+      age: 30,
+      car: null
     }
   }
 }
 ```
-<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpResponse.verified.txt#L1-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpResponse.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -165,9 +137,16 @@ Headers are treated as properties, and hence can be ignored using `IgnoreMember`
 [Test]
 public async Task IgnoreHeader()
 {
-    using var client = new HttpClient();
+    var response = new HttpResponseMessage(HttpStatusCode.OK)
+    {
+        Content = new StringContent("{\"status\":200}", Encoding.UTF8, "application/json")
+    };
+    response.Headers.Add("Server", "test-server");
+    response.Headers.Add("Access-Control-Allow-Credentials", "true");
+    response.Headers.Add("Vary", "Origin");
+    using var client = new MockHttpClient(response);
 
-    using var result = await client.GetAsync("https://httpcan.org/get");
+    using var result = await client.GetAsync("https://fake/get");
 
     await Verify(result)
         .IgnoreMembers(
@@ -176,7 +155,7 @@ public async Task IgnoreHeader()
             "Access-Control-Allow-Credentials");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L7-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-IgnoreHeader' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L7-L30' title='Snippet source file'>snippet source</a> | <a href='#snippet-IgnoreHeader' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -198,10 +177,10 @@ public class MyService(HttpClient client)
 {
     public Task MethodThatDoesHttp() =>
         // Some code that does some http calls
-        client.GetAsync("https://httpcan.org/status/200");
+        client.GetAsync("https://fake/status/200");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L94-L105' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L101-L112' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -212,7 +191,6 @@ Http recording can be added to a `IHttpClientBuilder`:
 <!-- snippet: HttpClientRecording -->
 <a id='snippet-HttpClientRecording'></a>
 ```cs
-var collection = new ServiceCollection();
 collection.AddScoped<MyService>();
 var httpBuilder = collection.AddHttpClient<MyService>();
 
@@ -228,7 +206,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L228-L246' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L238-L255' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -239,7 +217,6 @@ Http can also be added globally `IHttpClientBuilder`:
 <!-- snippet: HttpClientRecordingGlobal -->
 <a id='snippet-HttpClientRecordingGlobal'></a>
 ```cs
-var collection = new ServiceCollection();
 collection.AddScoped<MyService>();
 
 // Adds a AddHttpClient and adds a RecordingHandler using AddHttpMessageHandler
@@ -254,7 +231,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L205-L222' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L214-L230' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -265,25 +242,14 @@ await Verify(recording.Sends)
 ```txt
 [
   {
-    RequestUri: https://httpcan.org/status/200,
+    RequestUri: https://fake/status/200,
     RequestMethod: GET,
     ResponseStatus: OK 200,
-    ResponseHeaders: {
-      Access-Control-Allow-Credentials: true,
-      Access-Control-Expose-Headers: www-authenticate,
-      Alt-Svc: h3=":443",
-      cf-cache-status: DYNAMIC,
-      Connection: keep-alive,
-      Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
-      Server: cloudflare,
-      Vary: Origin|Access-Control-Request-Method|Access-Control-Request-Headers,
-      x-httpcan-version: 0.8.1
-    },
     ResponseContent: {"status":200}
   }
 ]
 ```
-<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.HttpClientRecording.verified.txt#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.HttpClientRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 There a Pause/Resume semantics:
@@ -291,7 +257,6 @@ There a Pause/Resume semantics:
 <!-- snippet: HttpClientPauseResume -->
 <a id='snippet-HttpClientPauseResume'></a>
 ```cs
-var collection = new ServiceCollection();
 collection.AddScoped<MyService>();
 var httpBuilder = collection.AddHttpClient<MyService>();
 
@@ -313,7 +278,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L298-L322' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L309-L332' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -321,8 +286,6 @@ If the `AddRecordingHttpClient` helper method does not meet requirements, the `R
 <!-- snippet: HttpClientRecordingExplicit -->
 <a id='snippet-HttpClientRecordingExplicit'></a>
 ```cs
-var collection = new ServiceCollection();
-
 var builder = collection.AddHttpClient("name");
 
 // Change to not recording at startup
@@ -336,15 +299,15 @@ var factory = provider.GetRequiredService<IHttpClientFactory>();
 
 var client = factory.CreateClient("name");
 
-await client.GetAsync("https://httpcan.org/html");
+await client.GetAsync("https://fake/html");
 
 recording.Resume();
-await client.GetAsync("https://httpcan.org/json");
+await client.GetAsync("https://fake/json");
 
 await Verify(recording.Sends)
     .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L328-L353' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L340-L363' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -382,12 +345,12 @@ static async Task<int> MethodThatDoesHttpCalls()
 {
     using var client = new HttpClient();
 
-    var jsonResult = await client.GetStringAsync("https://httpcan.org/json");
-    var ymlResult = await client.GetStringAsync("https://httpcan.org/xml");
+    var jsonResult = await client.GetStringAsync($"{TestServer.Root}/json");
+    var ymlResult = await client.GetStringAsync($"{TestServer.Root}/xml");
     return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L139-L166' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L146-L173' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -400,112 +363,50 @@ The requests/response pairs will be appended to the verified file.
 ```txt
 {
   target: {
-    sizeOfResponse: 792
+    sizeOfResponse: 179
   },
   httpCall: [
     {
       Request: {
-        Uri: https://httpcan.org/json,
+        Uri: http://test-server/json,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Access-Control-Allow-Credentials: true,
-          Access-Control-Expose-Headers: www-authenticate,
-          Alt-Svc: h3=":443",
-          cf-cache-status: DYNAMIC,
-          Connection: keep-alive,
-          Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
-          Server: cloudflare,
-          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
-          x-httpcan-version: 0.8.1
+          Connection: close
         },
         ContentHeaders: {
-          Content-Length: 274,
+          Content-Length: 52,
           Content-Type: application/json
         },
         ContentStringParsed: {
-          slideshow: {
-            author: Yours Truly,
-            date: date of publication,
-            slides: [
-              {
-                title: Wake up to WonderWidgets!,
-                type: all
-              },
-              {
-                items: [
-                  Why <em>WonderWidgets</em> are great,
-                  Who <em>buys</em> WonderWidgets
-                ],
-                title: Overview,
-                type: all
-              }
-            ],
-            title: Sample Slide Show
-          }
+          name: John,
+          age: 30,
+          car: null
         }
       }
     },
     {
       Request: {
-        Uri: https://httpcan.org/xml,
+        Uri: http://test-server/xml,
         Headers: {}
       },
       Response: {
         Status: 200 OK,
         Headers: {
-          Access-Control-Allow-Credentials: true,
-          Access-Control-Expose-Headers: www-authenticate,
-          Alt-Svc: h3=":443",
-          cf-cache-status: DYNAMIC,
-          Connection: keep-alive,
-          Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800},
-          Server: cloudflare,
-          Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
-          x-httpcan-version: 0.8.1
+          Connection: close
         },
         ContentHeaders: {
-          Content-Length: 518,
+          Content-Length: 133,
           Content-Type: application/xml
         },
         ContentStringParsed: {
-          ?xml: {
-            @version: 1.0,
-            @encoding: us-ascii
-          }/*  A SAMPLE set of slides  */,
-          slideshow: {
-            @title: Sample Slide Show,
-            @date: Date of publication,
-            @author: Yours Truly/* TITLE SLIDE *//* OVERVIEW */,
-            slide: [
-              {
-                @type: all,
-                title: Wake up to WonderWidgets!
-              },
-              {
-                @type: all,
-                title: Overview,
-                item: [
-                  {
-                    #text: [
-                      Why ,
-                       are great
-                    ],
-                    em: WonderWidgets
-                  },
-                  null,
-                  {
-                    #text: [
-                      Who ,
-                       WonderWidgets
-                    ],
-                    em: buys
-                  }
-                ]
-              }
-            ]
+          note: {
+            to: Tove,
+            from: Jani,
+            heading: Reminder,
+            body: Don't forget me this weekend!
           }
         }
       }
@@ -513,7 +414,7 @@ The requests/response pairs will be appended to the verified file.
   ]
 }
 ```
-<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L114' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.TestHttpRecording.verified.txt#L1-L52' title='Snippet source file'>snippet source</a> | <a href='#snippet-Tests.TestHttpRecording.verified.txt' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -558,7 +459,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L168-L198' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L175-L205' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -568,10 +469,10 @@ public async Task TestHttpRecordingExplicit()
 <a id='snippet-Tests.TestHttpRecordingExplicit.verified.txt'></a>
 ```txt
 {
-  responseSize: 792,
+  responseSize: 179,
   httpCalls: [
-    https://httpcan.org/json,
-    https://httpcan.org/xml
+    http://test-server/json,
+    http://test-server/xml
   ]
 }
 ```
