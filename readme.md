@@ -1,7 +1,7 @@
 # <img src="/src/icon.png" height="30px"> Verify.Http
 
 [![Discussions](https://img.shields.io/badge/Verify-Discussions-yellow?svg=true&label=)](https://github.com/orgs/VerifyTests/discussions)
-[![Build status](https://img.shields.io/appveyor/build/SimonCropp/verify-http)](https://ci.appveyor.com/project/SimonCropp/verify-http)
+[![Build status](https://github.com/VerifyTests/Verify.Http/actions/workflows/build.yml/badge.svg)](https://github.com/VerifyTests/Verify.Http/actions/workflows/build.yml)
 [![NuGet Status](https://img.shields.io/nuget/v/Verify.Http.svg)](https://www.nuget.org/packages/Verify.Http/)
 
 Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of Http bits.<!-- singleLineInclude: intro. path: /docs/intro.include.md -->
