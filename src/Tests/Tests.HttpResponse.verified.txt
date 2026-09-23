@@ -2,7 +2,7 @@
   Status: 200 OK,
   Content: {
     Headers: {
-      Content-Length: 52,
+      Content-Length: 48,
       Content-Type: application/json
     },
     Value: {

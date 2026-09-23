@@ -112,7 +112,7 @@ public async Task HttpResponse()
   Status: 200 OK,
   Content: {
     Headers: {
-      Content-Length: 52,
+      Content-Length: 48,
       Content-Type: application/json
     },
     Value: {
@@ -363,7 +363,7 @@ The requests/response pairs will be appended to the verified file.
 ```txt
 {
   target: {
-    sizeOfResponse: 179
+    sizeOfResponse: 170
   },
   httpCall: [
     {
@@ -377,7 +377,7 @@ The requests/response pairs will be appended to the verified file.
           Connection: close
         },
         ContentHeaders: {
-          Content-Length: 52,
+          Content-Length: 48,
           Content-Type: application/json
         },
         ContentStringParsed: {
@@ -398,7 +398,7 @@ The requests/response pairs will be appended to the verified file.
           Connection: close
         },
         ContentHeaders: {
-          Content-Length: 133,
+          Content-Length: 128,
           Content-Type: application/xml
         },
         ContentStringParsed: {
@@ -469,7 +469,7 @@ public async Task TestHttpRecordingExplicit()
 <a id='snippet-Tests.TestHttpRecordingExplicit.verified.txt'></a>
 ```txt
 {
-  responseSize: 179,
+  responseSize: 170,
   httpCalls: [
     http://test-server/json,
     http://test-server/xml

@@ -60,6 +60,10 @@ static class TestServer
             _ => ("404 Not Found", "text/plain", "Not Found"u8.ToArray())
         };
 
+    // Normalize line endings so the served bytes (and hence Content-Length)
+    // do not depend on how git checked the file out
     static byte[] Read(string file) =>
-        File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, file));
+        File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, file))
+            .Where(_ => _ != (byte) '\r')
+            .ToArray();
 }

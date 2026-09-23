@@ -1,5 +1,5 @@
 ﻿{
-  responseSize: 179,
+  responseSize: 170,
   httpCalls: [
     http://test-server/json,
     http://test-server/xml

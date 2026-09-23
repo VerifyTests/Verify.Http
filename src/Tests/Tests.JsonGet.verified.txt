@@ -15,7 +15,7 @@
         Connection: close
       },
       ContentHeaders: {
-        Content-Length: 52,
+        Content-Length: 48,
         Content-Type: application/json
       },
       ContentStringParsed: {

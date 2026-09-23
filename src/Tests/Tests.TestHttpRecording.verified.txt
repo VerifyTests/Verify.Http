@@ -1,6 +1,6 @@
 ﻿{
   target: {
-    sizeOfResponse: 179
+    sizeOfResponse: 170
   },
   httpCall: [
     {
@@ -14,7 +14,7 @@
           Connection: close
         },
         ContentHeaders: {
-          Content-Length: 52,
+          Content-Length: 48,
           Content-Type: application/json
         },
         ContentStringParsed: {
@@ -35,7 +35,7 @@
           Connection: close
         },
         ContentHeaders: {
-          Content-Length: 133,
+          Content-Length: 128,
           Content-Type: application/xml
         },
         ContentStringParsed: {
