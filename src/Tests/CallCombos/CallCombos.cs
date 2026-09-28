@@ -1,4 +1,3 @@
-[TestFixture]
 public class CallCombos
 {
     [Test]
@@ -18,16 +17,17 @@ public class CallCombos
     }
 
     [Test]
+    [MatrixDataSource]
     public Task Run(
-        [Values] bool nested,
-        [Values] bool auth,
-        [Values] bool cookie,
-        [Values] bool version,
-        [Values] bool trailing,
-        [Values] ContentType content,
-        [Values] bool dates,
-        [Values] bool dupHeader,
-        [Values] bool uri)
+        [Matrix] bool nested,
+        [Matrix] bool auth,
+        [Matrix] bool cookie,
+        [Matrix] bool version,
+        [Matrix] bool trailing,
+        [Matrix(ContentType.Empty, ContentType.String, ContentType.Image)] ContentType content,
+        [Matrix] bool dates,
+        [Matrix] bool dupHeader,
+        [Matrix] bool uri)
     {
         var response = HttpBuilder.Response(cookie, version, trailing, content, dates, dupHeader);
 

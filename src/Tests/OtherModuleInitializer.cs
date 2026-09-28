@@ -14,6 +14,8 @@
             "Server-Timing",
             "Report-To",
             "traceparent",
+            // TUnit runs tests inside an Activity with baggage, which HttpClient propagates
+            "baggage",
             "origin",
             "Source-Age",
             "X-Cache-Hits",

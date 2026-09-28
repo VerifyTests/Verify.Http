@@ -1,4 +1,3 @@
-[TestFixture]
 public class RequestCombos
 {
     [Test]
@@ -18,14 +17,15 @@ public class RequestCombos
     }
 
     [Test]
+    [MatrixDataSource]
     public Task Run(
-        [Values] bool nested,
-        [Values] bool auth,
-        [Values] bool version,
-        [Values] ContentType content,
-        [Values] bool dates,
-        [Values] bool dupHeader,
-        [Values] bool uri)
+        [Matrix] bool nested,
+        [Matrix] bool auth,
+        [Matrix] bool version,
+        [Matrix(ContentType.Empty, ContentType.String, ContentType.Image)] ContentType content,
+        [Matrix] bool dates,
+        [Matrix] bool dupHeader,
+        [Matrix] bool uri)
     {
         var request = HttpBuilder.Request(auth, version, content, dates, dupHeader, uri);
 

@@ -1,4 +1,3 @@
-[TestFixture]
 public class MockHttpClientTests
 {
     [Test]
@@ -198,8 +197,9 @@ public class MockHttpClientTests
 
     #endregion
 
-    [TestCase("application/json")]
-    [TestCase("application/foo+json")]
+    [Arguments("application/json")]
+    [Test]
+    [Arguments("application/foo+json")]
     public async Task GetJsonContent(string mediaType)
     {
         using var client = new MockHttpClient(content: """{ "a": "b" }""", mediaType);
@@ -226,8 +226,9 @@ public class MockHttpClientTests
             });
     }
 
-    [TestCase("application/json")]
-    [TestCase("application/foo+json")]
+    [Arguments("application/json")]
+    [Test]
+    [Arguments("application/foo+json")]
     public async Task PostJsonStringContent(string mediaType)
     {
         using var client = new MockHttpClient();
@@ -248,8 +249,9 @@ public class MockHttpClientTests
             .UseParameters(mediaType);
     }
 
-    [TestCase("application/json")]
-    [TestCase("application/foo+json")]
+    [Arguments("application/json")]
+    [Test]
+    [Arguments("application/foo+json")]
     public async Task PostJsonContent(string mediaType)
     {
         using var client = new MockHttpClient();

@@ -1,5 +1,4 @@
 ﻿// ReSharper disable UnusedVariable
-[TestFixture]
 public class SimulateNetworkStreamTests
 {
     [Test]
@@ -14,7 +13,7 @@ public class SimulateNetworkStreamTests
         await using var stream = await result.Content.ReadAsStreamAsync();
 
         // Stream is seekable (MemoryStream-like behavior)
-        IsTrue(stream.CanSeek);
+        await Assert.That(stream.CanSeek).IsTrue();
         // Can reset
         stream.Position = 0;
 
@@ -34,7 +33,7 @@ public class SimulateNetworkStreamTests
         var stream = await result.Content.ReadAsStreamAsync();
 
         // Stream is non-seekable (real network stream behavior)
-        IsFalse(stream.CanSeek);
+        await Assert.That(stream.CanSeek).IsFalse();
         // stream.Position throws NotSupportedException
         // Cannot reset or re-read the stream
 
@@ -53,7 +52,7 @@ public class SimulateNetworkStreamTests
         var content = result.Content;
         await using var stream = await content.ReadAsStreamAsync();
 
-        Assert.Throws<NotSupportedException>(() => stream.Position = 1);
+        await Assert.That(() => stream.Position = 1).ThrowsExactly<NotSupportedException>();
     }
 
     [Test]
@@ -68,11 +67,11 @@ public class SimulateNetworkStreamTests
         var content = result.Content;
         await using var stream = await content.ReadAsStreamAsync();
 
-        Assert.Throws<NotSupportedException>(() =>
+        await Assert.That(() =>
         {
             // ReSharper disable once UnusedVariable
             var x = stream.Length;
-        });
+        }).ThrowsExactly<NotSupportedException>();
     }
 
     [Test]
@@ -87,7 +86,7 @@ public class SimulateNetworkStreamTests
         var content = result.Content;
         await using var stream = await content.ReadAsStreamAsync();
 
-        Assert.Throws<NotSupportedException>(() => stream.Position = 1);
+        await Assert.That(() => stream.Position = 1).ThrowsExactly<NotSupportedException>();
     }
 
     [Test]
@@ -102,11 +101,11 @@ public class SimulateNetworkStreamTests
         var content = result.Content;
         var stream = await content.ReadAsStreamAsync();
 
-        Assert.Throws<NotSupportedException>(() =>
+        await Assert.That(() =>
         {
             // ReSharper disable once UnusedVariable
             var x = stream.Length;
-        });
+        }).ThrowsExactly<NotSupportedException>();
     }
 
     #region VerifyWithSimulateNetworkStream
@@ -182,7 +181,7 @@ public class SimulateNetworkStreamTests
 
         // Second read returns empty (stream already consumed)
         // Throws NotSupportedException
-        Assert.Throws<NotSupportedException>(() => stream.Position = 0);
+        await Assert.That(() => stream.Position = 0).ThrowsExactly<NotSupportedException>();
         // Returns empty
         var data2 = await response.Content.ReadAsStringAsync();
 

@@ -1,7 +1,6 @@
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedParameter.Global
 
-[TestFixture]
 public class Tests
 {
     #region IgnoreHeader
@@ -91,9 +90,8 @@ public class Tests
 
         Recording.Start();
 
-        var thrown = Assert.ThrowsAsync<HttpRequestException>(
-            () => client.GetAsync("https://fake/get"));
-        AreSame(exception, thrown!.InnerException);
+        var thrown = await Assert.That(async () => { await client.GetAsync("https://fake/get"); }).ThrowsExactly<HttpRequestException>();
+        await Assert.That(thrown!.InnerException).IsSameReferenceAs(exception);
 
         await Verify();
     }
@@ -123,11 +121,12 @@ public class Tests
 
         using var response = await client.GetAsync("https://dont-care.org/get");
 
-        AreEqual(content, handler.Sends.Single().ResponseContent);
+        await Assert.That(handler.Sends.Single().ResponseContent).IsEqualTo(content);
     }
 
-    [TestCase("application/json")]
-    [TestCase("application/foo+json")]
+    [Arguments("application/json")]
+    [Test]
+    [Arguments("application/foo+json")]
     public async Task MediaTypeApplicationJsonIsRecorded(string mediaType)
     {
         const string content = "{ \"age\": 1234 }";
@@ -139,7 +138,7 @@ public class Tests
 
         using var response = await client.GetAsync("https://dont-care.org/get");
 
-        AreEqual(content, handler.Sends.Single().ResponseContent);
+        await Assert.That(handler.Sends.Single().ResponseContent).IsEqualTo(content);
     }
 #if DEBUG
 
@@ -190,7 +189,7 @@ public class Tests
         var threshold = TimeSpan.FromSeconds(5);
         foreach (var call in httpCalls)
         {
-            IsTrue(call.Duration < threshold);
+            await Assert.That(call.Duration < threshold).IsTrue();
         }
 
         await Verify(

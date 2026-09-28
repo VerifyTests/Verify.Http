@@ -64,7 +64,7 @@ public async Task ScrubHttpTextResponse()
         .ScrubHttpTextResponse(_ => _.Replace("Herman Melville - Moby-Dick", "New title"));
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L32-L45' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L31-L44' title='Snippet source file'>snippet source</a> | <a href='#snippet-ScrubHttpTextResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -99,7 +99,7 @@ public async Task HttpResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L285-L297' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L284-L296' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -155,7 +155,7 @@ public async Task IgnoreHeader()
             "Access-Control-Allow-Credentials");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L7-L30' title='Snippet source file'>snippet source</a> | <a href='#snippet-IgnoreHeader' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L6-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-IgnoreHeader' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -180,7 +180,7 @@ public class MyService(HttpClient client)
         client.GetAsync("https://fake/status/200");
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L101-L112' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L99-L110' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceThatDoesHttp' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -206,7 +206,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L238-L255' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L237-L254' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -231,7 +231,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .IgnoreMember("Date");
 ```
-<sup><a href='/src/Tests/Tests.cs#L214-L230' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L213-L229' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingGlobal' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -278,7 +278,7 @@ await myService.MethodThatDoesHttp();
 await Verify(recording.Sends)
     .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L309-L332' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L308-L331' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientPauseResume' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 If the `AddRecordingHttpClient` helper method does not meet requirements, the `RecordingHandler` can be explicitly added:
@@ -307,7 +307,7 @@ await client.GetAsync("https://fake/json");
 await Verify(recording.Sends)
     .ScrubInlineDateTimes("R");
 ```
-<sup><a href='/src/Tests/Tests.cs#L340-L363' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L339-L362' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpClientRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -350,7 +350,7 @@ static async Task<int> MethodThatDoesHttpCalls()
     return jsonResult.Length + ymlResult.Length;
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L146-L173' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L145-L172' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecording' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -447,7 +447,7 @@ public async Task TestHttpRecordingExplicit()
     var threshold = TimeSpan.FromSeconds(5);
     foreach (var call in httpCalls)
     {
-        IsTrue(call.Duration < threshold);
+        await Assert.That(call.Duration < threshold).IsTrue();
     }
 
     await Verify(
@@ -459,7 +459,7 @@ public async Task TestHttpRecordingExplicit()
         });
 }
 ```
-<sup><a href='/src/Tests/Tests.cs#L175-L205' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.cs#L174-L204' title='Snippet source file'>snippet source</a> | <a href='#snippet-HttpRecordingExplicit' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -502,7 +502,7 @@ public async Task DefaultContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L35-L47' title='Snippet source file'>snippet source</a> | <a href='#snippet-DefaultContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L34-L46' title='Snippet source file'>snippet source</a> | <a href='#snippet-DefaultContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -538,7 +538,7 @@ public async Task ExplicitContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L19-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L18-L32' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -581,7 +581,7 @@ public async Task ExplicitContent()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L19-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L18-L32' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitContent' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -624,7 +624,7 @@ public async Task ExplicitStatusCode()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L64-L76' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitStatusCode' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L63-L75' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitStatusCode' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -662,7 +662,7 @@ public async Task ExplicitResponse()
     await Verify(result);
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L129-L145' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L128-L144' title='Snippet source file'>snippet source</a> | <a href='#snippet-ExplicitResponse' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -716,7 +716,7 @@ public async Task ResponseBuilder()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L174-L199' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L173-L198' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseBuilder' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -765,7 +765,7 @@ Files can be included in the test directory:
   <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 </None>
 ```
-<sup><a href='/src/Tests/Tests.csproj#L29-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-IncludeResponseFiles' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Tests.csproj#L25-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-IncludeResponseFiles' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Using files in a mock:
@@ -794,7 +794,7 @@ public async Task ResponseFromFiles()
         .IgnoreMember("Content-Length");
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L104-L127' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseFromFiles' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L103-L126' title='Snippet source file'>snippet source</a> | <a href='#snippet-ResponseFromFiles' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -890,7 +890,7 @@ public async Task EnumerableResponses()
     });
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L147-L172' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L146-L171' title='Snippet source file'>snippet source</a> | <a href='#snippet-EnumerableResponses' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -946,7 +946,7 @@ public async Task RecordingMockInteractions()
     await Verify();
 }
 ```
-<sup><a href='/src/Tests/MockHttpClientTests.cs#L325-L339' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/MockHttpClientTests.cs#L327-L341' title='Snippet source file'>snippet source</a> | <a href='#snippet-RecordingMockInteractions' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -999,11 +999,11 @@ using var result = await client.GetAsync(
 await using var stream = await result.Content.ReadAsStreamAsync();
 
 // Stream is seekable (MemoryStream-like behavior)
-IsTrue(stream.CanSeek);
+await Assert.That(stream.CanSeek).IsTrue();
 // Can reset
 stream.Position = 0;
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L8-L21' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithoutSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L7-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithoutSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1020,11 +1020,11 @@ var result = await client.GetAsync(
 var stream = await result.Content.ReadAsStreamAsync();
 
 // Stream is non-seekable (real network stream behavior)
-IsFalse(stream.CanSeek);
+await Assert.That(stream.CanSeek).IsFalse();
 // stream.Position throws NotSupportedException
 // Cannot reset or re-read the stream
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L27-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L26-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-WithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1057,7 +1057,7 @@ while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
     ProcessChunk(buffer.AsSpan(0, bytesRead));
 }
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L132-L155' title='Snippet source file'>snippet source</a> | <a href='#snippet-ProgressiveReading' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L131-L154' title='Snippet source file'>snippet source</a> | <a href='#snippet-ProgressiveReading' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1083,11 +1083,11 @@ using (var reader = new StreamReader(stream))
 
 // Second read returns empty (stream already consumed)
 // Throws NotSupportedException
-Assert.Throws<NotSupportedException>(() => stream.Position = 0);
+await Assert.That(() => stream.Position = 0).ThrowsExactly<NotSupportedException>();
 // Returns empty
 var data2 = await response.Content.ReadAsStringAsync();
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L166-L189' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L165-L188' title='Snippet source file'>snippet source</a> | <a href='#snippet-ReadOnceBehavior' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -1125,7 +1125,7 @@ public async Task VerifyWithSimulateNetworkStream()
     await Verify(response);
 }
 ```
-<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L112-L127' title='Snippet source file'>snippet source</a> | <a href='#snippet-VerifyWithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/SimulateNetworkStreamTests.cs#L111-L126' title='Snippet source file'>snippet source</a> | <a href='#snippet-VerifyWithSimulateNetworkStream' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 This ensures tests accurately reflect production behavior when using `ResponseHeadersRead`.
