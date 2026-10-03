@@ -54,9 +54,9 @@ static class TestServer
     static (string status, string contentType, byte[] body) Content(string path) =>
         path switch
         {
-            "/get" or "/json" => ("200 OK", "application/json", Read("sample.json")),
-            "/xml" => ("200 OK", "application/xml", Read("sample.xml")),
-            "/html" => ("200 OK", "text/html", Read("sample.html")),
+            "/get" or "/json" => ("200 OK", "application/json", Read(ProjectFiles.sample_json)),
+            "/xml" => ("200 OK", "application/xml", Read(ProjectFiles.sample_xml)),
+            "/html" => ("200 OK", "text/html", Read(ProjectFiles.sample_html)),
             _ => ("404 Not Found", "text/plain", "Not Found"u8.ToArray())
         };
 
