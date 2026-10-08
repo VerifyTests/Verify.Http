@@ -11,6 +11,7 @@ public class HttpResponse
             Headers = headers;
         }
 
+        // ReSharper disable once CanReplaceCastWithVariableType
         var content = (HttpContent?)response.Content;
         if (content != null)
         {
