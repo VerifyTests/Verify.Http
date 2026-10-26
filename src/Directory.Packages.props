@@ -7,7 +7,7 @@
     <PackageVersion Include="Argon.Xml" Version="0.38.2" />
     <PackageVersion Include="MarkdownSnippets.MsBuild" Version="28.5.1" />
     <PackageVersion Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.13" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.14" />
     <PackageVersion Include="Microsoft.Net.Http.Headers" Version="10.0.13" />
     <PackageVersion Include="TUnit" Version="1.76.0" />
     <PackageVersion Include="ProjectDefaults" Version="1.0.184" />
