@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-using Microsoft.Net.Http.Headers;
 using MediaTypeHeaderValue = System.Net.Http.Headers.MediaTypeHeaderValue;
 
 static class HttpExtensions
